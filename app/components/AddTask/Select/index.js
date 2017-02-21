@@ -4,7 +4,7 @@ import 'rc-select/assets/index.css';
 import './RcSelect.css';
 
 const children = [];
-for (let i = 10; i < 36; i++) {
+for (let i = 10; i < 36; i += 1) {
   children.push(
     <Option key={i.toString(36) + i} disabled={i === 10} title={`${i}`}>
       SeasonBoy{i}

@@ -17,17 +17,43 @@ export default function createRoutes(store) {
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
   return [
-    {
+     {
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/HomePage'),
+          System.import('containers/HomePage/reducer'),
+          System.import('containers/HomePage/sagas'),
+          System.import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('home', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+      {
+      path: '/franchise',
+      name: 'franchise',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Franchise/reducer'),
+          import('containers/Franchise/sagas'),
+          import('containers/Franchise'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('franchise', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 
@@ -50,6 +76,23 @@ export default function createRoutes(store) {
           injectReducer('auth', reducer.default);
           injectSagas(sagas.default);
 
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
+      path: '/order/order-status/:slug',
+      name: 'webhook',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/WebhookPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 

@@ -1,0 +1,550 @@
+h6, h3 {
+  color: #fff;
+}
+.margin .marginTop {
+  margin-top: 0.3em;
+}
+
+.marginBottom {
+  margin-bottom: 0.6em;
+}
+.block-background {
+  background-color: #394264;
+}
+.boxShadow {
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.second-boxShadow {
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  box-shadow: 0 1px 4px rgba(0,0,0,.07);
+}
+.third-boxShadow {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -webkit-transition: all .2s;
+	transition: all .2s;
+}
+.third-boxShadow:hover {
+  -webkit-box-shadow: 0 1px 4px rgb(245, 37, 151);
+  -moz-box-shadow: 0 1px 4px rgb(245, 37, 151);
+  box-shadow: 0 1px 4px rgb(245, 37, 151);
+}
+.pilot-boxShadow {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -webkit-transition: all .2s;
+	transition: all .2s;
+}
+.pilot-boxShadow:hover {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(81, 212, 255, 0.33), 0 0 0 1px rgba(81, 212, 255, 0.55);
+  -moz-box-shadow: 0 2px 2px 0 rgba(81, 212, 255, 0.33), 0 0 0 1px rgba(81, 212, 255, 0.55);
+  box-shadow: 0 2px 2px 0 rgba(81, 212, 255, 0.33), 0 0 0 1px rgba(81, 212, 255, 0.55);
+}
+.pilot-feed-boxShadow {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -webkit-transition: all .2s;
+	transition: all .2s;
+}
+.pilot-feed-boxShadow:hover {
+  -webkit-box-shadow: 0 1px 4px rgb(81, 212, 255);
+  -moz-box-shadow: 0 1px 4px rgb(81, 212, 255);
+  box-shadow: 0 1px 4px rgb(81, 212, 255);
+}
+.task-feed-boxShadow {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -webkit-transition: all .2s;
+	transition: all .2s;
+}
+.task-feed-boxShadow:hover {
+  -webkit-box-shadow: 0 1px 4px rgb(245, 37, 151);
+  -moz-box-shadow: 0 1px 4px rgb(245, 37, 151);
+  box-shadow: 0 1px 4px rgb(245, 37, 151);
+}
+.third-boxShadow:focus {
+  -webkit-box-shadow: 0 1px 4px rgb(81, 212, 255);
+  -moz-box-shadow: 0 1px 4px rgb(81, 212, 255);
+  box-shadow: 0 1px 4px rgb(81, 212, 255);
+}
+.line-boxShadow {
+  -webkit-box-shadow:   0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -moz-box-shadow:   0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  box-shadow:   0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+.liner, .PilotLiner, .player-line{
+  position: relative;
+}
+
+.liner::after{
+ content : "";
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 42px;
+ width: 10%;  /* or 100px */
+ border-left: 0.2em solid rgb(245, 37, 151);
+}
+.progressLiner::before{
+ content : "";
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 42px;
+ width: 100%;  /* or 100px */
+ border-bottom: 0.2em solid #F06292;
+}
+.PilotLiner::after{
+ content : "";
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 42px;
+ width: 10%;  /* or 100px */
+ border-left: 0.2em solid rgb(81, 212, 255);
+}
+.pilotProgress::before{
+ content : "";
+ position: absolute;
+ top: 7px;
+ left: 0;
+ height: 35px;
+ width: 100%;  /* or 100px */
+ border-bottom: 0.2em solid rgb(81, 212, 255);
+}
+.player {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+.player-list{
+  display: block;
+  line-height: 2.8em;
+  background: #394264;
+  transform: translateY(0);
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  box-shadow: 1px 2px 3px #394264;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+  padding-right: 1em;
+}
+.player-list:hover{
+  background: #50597b;
+  transform: translateY(-2px);
+	text-decoration: none;
+
+}
+.player-line::before{
+ content : "";
+ position: absolute;
+ top: 10px;
+ left: 0;
+ height: 19px;
+ width: 4px;  /* or 100px */
+}
+
+.line:before,
+.line:after {
+  content: "";
+  display: table;
+}
+.line:after {
+  clear: both;
+}
+.line {
+  *zoom: 1;
+}
+
+.wrapper {
+    padding:0;
+    margin:0;
+    position: absolute;
+}
+.wrapper input {
+    height:20px;
+    margin:0;
+    padding-left: 30px;
+    color: #9099b7;
+}
+.wrapper input::-webkit-input-placeholder {
+color: #9099b7 !important;
+}
+
+.wrapper input:-moz-placeholder { /* Firefox 18- */
+color: #9099b7 !important;
+}
+
+.wrapper input::-moz-placeholder {  /* Firefox 19+ */
+color: #9099b7 !important;
+}
+
+.wrapper input:-ms-input-placeholder {
+color: #9099b7 !important;
+}
+
+.wrapper .fa-search {
+    position:absolute;
+    bottom:0.65em;
+    left:0;
+    width:10px;
+    height:10px;
+    color: #9099b7;
+}
+
+.user-info > div{
+  margin-bottom: 0.8em;
+}
+
+.profile-timeline {
+  border: 1px solid rgb(81, 212, 255);
+}
+
+.first-row{
+  border-bottom: 1px solid rgba(144, 153, 183, 0.35);
+}
+.profile-timeline .first-row {
+  border-bottom: 1px solid rgb(81, 212, 255);
+}
+
+.right-border {
+  border-right: 1px solid rgb(81, 212, 255);
+}
+
+.sub-title{
+  font-size: 0.65rem;
+  color: #9099b7;
+}
+
+.profile-tasks, .profile-ontime, .profile-time, .profile-distance, .profile-data{
+  padding: 0.5em;
+}
+
+.divider {
+  margin: 0 0.7em;
+  color: rgb(81, 212, 255);
+}
+
+a:hover{
+  color: inherit;
+}
+
+.user-scroll {
+   overflow-y: scroll;
+}
+
+.user-scroll::-webkit-scrollbar {
+    width: 3px;
+}
+
+.user-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(144, 153, 183, 0.35);
+    border-radius: 10px;
+}
+
+.user-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(144, 153, 183, 0.35);
+}
+
+.button-Bottom {
+  position: absolute;
+  bottom: 0;
+}
+.orders-block, .pilot-block, .team-block {
+  background: rgba(22, 24, 45, 0.47);
+}
+
+.highlight {
+  transition: all 0.2s;
+  border-bottom:2px solid white;
+  position: absolute;
+  top:0;
+  background:white;
+  left:0;
+  z-index: -1;
+  border-radius:20px;
+  display: block;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2)
+}
+
+.time-length, .player {
+  margin: 0;
+  padding: 0;
+}
+
+.time-length-btn {
+    display: block;
+    width: 70px;
+    line-height: 21px;
+    background: #50597b;
+    font-size: 14px;
+    text-align: center;
+    margin-right: 5px;
+    -webkit-transition: background .3s;
+    transition: background .3s
+}
+
+.time-length-btn:hover {
+							text-decoration: none;
+							background: #e64c65;
+						}
+
+.recharts-wrapper {
+  height: 194px !important;
+}
+
+.top-group-list .title, .group-name{
+  color: #9099b7;
+}
+.top-group-list{
+  font-size: 0.8rem;
+}
+
+.recharts-layer .recharts-cartesian-axis-tick text{
+  font-size: 0.6em;
+}
+.custom-chart .recharts-wrapper {
+  right: 7.3em;
+  top: 1em;
+}
+.recharts-legend-wrapper{
+  bottom: 12px !important;
+}
+.second-chart .recharts-wrapper {
+  right: 0;
+  top: 0;
+  left: 9.5em;
+}
+
+.list-scroll {
+   overflow-y: scroll;
+   height: 63vh;
+   padding: 0.1em;
+}
+
+.list-scroll::-webkit-scrollbar {
+    width: 3px;
+}
+
+.list-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(144, 153, 183, 0.35);
+    border-radius: 10px;
+}
+
+.list-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+.listShow {
+   overflow-y: scroll;
+   height: 64vh;
+   padding: 0.2em;
+}
+
+.listShow::-webkit-scrollbar {
+    width: 3px;
+}
+
+.listShow::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(144, 153, 183, 0.35);
+    border-radius: 10px;
+}
+
+.listShow::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+.top-group-list {
+  padding: 0.8em;
+  height: 54vh;
+  overflow-y: scroll;
+}
+
+.top-group-list::-webkit-scrollbar {
+    width: 3px;
+}
+
+.top-group-list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(144, 153, 183, 0.35);
+    border-radius: 10px;
+}
+
+.top-group-list::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+.fa.fa-battery-three-quarters{
+  color: rgb(81, 212, 255);
+}
+
+.team-block{
+  position: relative;
+}
+
+.team-block::before{
+  content : "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 42px;
+  width: 10%;  /* or 100px */
+  border-left: 0.2em solid #18FFFF;
+}
+.team-search > input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    text-decoration: none;
+    outline: none;
+}
+
+.team-search > input[type=text]:focus {
+
+}
+
+.closeFeed {
+  background: rgb(245, 37, 151);
+  height: 20px;
+  width: 100%;
+  border-bottom-right-radius:0.2em;
+  border-bottom-left-radius:0.2em;
+  font-size: 0.65em;
+  padding: 0.2em 0.8em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.closeTag {
+margin: 0 1em;
+position: relative;
+top: -2px;
+}
+
+.closeTag a{
+  text-decoration: none;
+}
+.closeTag a:hover{
+  background: rgb(235, 37, 151);
+}
+
+
+.progressLiner::before{
+ content : "";
+ position: absolute;
+ top: 7px;
+ left: 0;
+ height: 35px;
+ width: 100%;  /* or 100px */
+ border-bottom: 0.2em solid #F06292;
+}
+.pilotProgress::before{
+ content : "";
+ position: absolute;
+ top: 7px;
+ left: 0;
+ height: 35px;
+ width: 100%;  /* or 100px */
+ border-bottom: 0.2em solid rgb(81, 212, 255);
+}
+.indeterminate{
+  overflow: hidden;
+}
+/* Progress Bar */
+    .indeterminate:before {
+      content : "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      height: 35px;
+      border-bottom: 0.2em solid rgb(245, 37, 151);
+      will-change: left, right;
+      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+              animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; }
+    .indeterminate:after {
+      content : "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      height: 35px;
+      border-bottom: 0.2em solid rgb(245, 37, 151);
+      will-change: left, right;
+      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+              animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      -webkit-animation-delay: 1.15s;
+              animation-delay: 1.15s; }
+
+/* Pilot Progress Bar */
+    .pilotIndeterminate:before {
+      content : "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      bottom: 0;
+      height: 35px;
+      border-bottom: 0.2em solid #2196F3;
+      will-change: left, right;
+      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+              animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; }
+    .pilotIndeterminate:after {
+      content : "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      bottom: 0;
+      height: 35px;
+      border-bottom: 0.2em solid #2196F3;
+      will-change: left, right;
+      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+              animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      -webkit-animation-delay: 1s;
+              animation-delay: 1s; }
+
+
+  @-webkit-keyframes indeterminate {
+    0% {
+      left: -35%;
+      right: 100%; }
+    60% {
+      left: 100%;
+      right: -90%; }
+    100% {
+      left: 100%;
+      right: -90%; } }
+  @keyframes indeterminate {
+    0% {
+      left: -35%;
+      right: 100%; }
+    60% {
+      left: 100%;
+      right: -90%; }
+    100% {
+      left: 100%;
+      right: -90%; } }
+  @-webkit-keyframes indeterminate-short {
+    0% {
+      left: -200%;
+      right: 100%; }
+    60% {
+      left: 107%;
+      right: -8%; }
+    100% {
+      left: 107%;
+      right: -8%; } }
+  @keyframes indeterminate-short {
+    0% {
+      left: -200%;
+      right: 100%; }
+    60% {
+      left: 107%;
+      right: -8%; }
+    100% {
+      left: 107%;
+      right: -8%; } }

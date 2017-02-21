@@ -4,7 +4,7 @@ const AuthStyle = styled.section`
 position: relative;
 margin: 10em auto;
 background: #fff;
-height: 48vh;
+height: 326px;
 padding: 2em 0;
 box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);
 width: 300px;

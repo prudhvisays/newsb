@@ -52,20 +52,9 @@ export default class TaskMap extends React.Component { //eslint-disable-line
   }
 
   marker(pLat, pLng) {
-    const markerIcon1 = L.Icon.extend({
-    options: {
-        shadowUrl: 'FlagShadow',
-        iconSize:     [38, 95],
-        shadowSize:   [50, 64],
-        iconAnchor:   [22, 94],
-        shadowAnchor: [4, 62],
-        popupAnchor:  [-3, -76]
-    }
-});
-    const FlagIcon = new markerIcon1({iconUrl: 'Flag'});
     map.panTo(new L.LatLng(pLat, pLng), { animate: true, duration: 4.0 });
        if (typeof (newMarkerOne) === 'undefined') {
-         newMarkerOne = new L.marker([pLat, pLng],{ icon: FlagIcon });
+         newMarkerOne = new L.marker([pLat, pLng]);
          newMarkerOne.addTo(map);
          latlngs[0] = [pLat, pLng];
        } else {

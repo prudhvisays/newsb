@@ -61,7 +61,12 @@ export function injectAsyncSagas(store, isValid) {
       '(app/utils...) injectAsyncSagas: Received an empty `sagas` array'
     );
 
-    sagas.map(store.runSaga);
+    sagas.forEach((saga) => {
+      if (!Reflect.has(store.asyncSagas, saga) || saga.runAlways === true) {
+        store.runSaga(saga);
+        store.asyncSagas[saga] = true;
+      }
+    });
   };
 }
 
