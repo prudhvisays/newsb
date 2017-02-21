@@ -1,0 +1,49 @@
+.timeline .timeline-list {
+  margin-top: 1em;
+}
+.timeline .timeline-bar .pipe {
+  border-right: 8px solid #fff;
+}
+.timeline-bar .pipe.bar{
+  height: 100%;
+}
+
+.timeline-bar {
+  margin-left: 1.5em;
+}
+.timeline-date {
+  padding-bottom: 3em;
+  font-size: 0.8em
+}
+.timeline-info{
+  position: relative;
+  padding-bottom: 1em !important;
+}
+.timeline .timeline-info .dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      border: 5px solid rgb(236, 24, 79);
+      position: absolute;
+      top: -3%;
+      right: 0;
+      left: -14px;
+}
+
+.timeline-info {
+  padding: 0 2em;
+  font-size: 0.8em;
+}
+
+.timeline-info .timeline-box {
+  background: #fff;
+  color: #333;
+  padding: 0.3em 0.3em;
+  min-width: 70%;
+  width:198px;
+  word-wrap: break-word;
+}
+.timeline-info .timeline-sub {
+  color: rgb(241, 82, 123);
+}

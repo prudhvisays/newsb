@@ -1,0 +1,22 @@
+/* Style the tab content */
+.task-content {
+    display: none;
+    border-top: none;
+}
+
+.tab-first-row, .tab-second-row {
+  padding: 0.8em;
+  margin-bottom: 0.3em;
+}
+
+/*.title-desc {
+ border: 1px solid #51d4ff;
+}*/
+.title-desc input{
+ /*border-bottom: 1px solid #51d4ff;*/
+ color: #fff;
+ font-size: 0.8rem;
+}
+.title-desc input, textarea{
+ padding-left: 0.60em !important;
+}

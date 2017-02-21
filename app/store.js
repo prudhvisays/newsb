@@ -7,6 +7,12 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
+import createLogger from 'redux-logger';
+
+const logger = createLogger({
+  // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
+  predicate: (getState, action) => action.type !== 'CHANGE_FORM',
+});
 
 const sagaMiddleware = createSagaMiddleware();
 

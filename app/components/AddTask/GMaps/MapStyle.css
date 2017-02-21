@@ -1,0 +1,14 @@
+#locationField, #controls {
+        width: 100%;
+      }
+      #places-search {
+        width: 100%;
+      }
+      .pac-container{
+        height: 21%;
+        overflow-y: scroll;
+        background: rgb(31, 37, 61);
+      }
+      .pac-item:hover{
+        background: #394264;
+      }

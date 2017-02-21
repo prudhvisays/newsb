@@ -1,0 +1,20 @@
+.formStyle {
+ margin: 8em 3em 0 3em;
+ background: #fafafa;
+ color: #394264;
+ border-radius: 2px;
+ padding: 1em 1em;
+ font-size: 15px;
+}
+
+.Bottom-margin {
+  margin-bottom: 1em;
+  width: 100%;
+  .area{
+    width: 100%;
+  }
+};
+.Bottom-margin input, .Bottom-margin textarea {
+  width: 100%;
+  padding-left: 0.2em;
+};
