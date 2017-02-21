@@ -10,7 +10,7 @@ export default class PilotCard extends React.Component { //eslint-disable-line
             <div className="all-50 ink-flex push-left">
               <div className="trip-image">
                 <div className="trip-pic" style={{ width: '30px', height: '30px', borderRadius: '50%', overflow: 'hidden', margin: 0 }}>
-                  <img src="http://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '30px', width: '100%' }}></img>
+                  <img src="https://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '30px', width: '100%' }}></img>
                 </div>
               </div>
               <div className="trip-info ink-flex vertical" style={{ marginLeft: '0.7em' }}>

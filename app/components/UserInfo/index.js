@@ -10,7 +10,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
           <div className="ProfilePic">
             <div className="ink-flex push-center">
               <div className="profile-pic" style={{ width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', margin: 0, border: '6px double #51d4ff' }}>
-                <img src="http://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '100px', width: '100%' }}></img>
+                <img src="https://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '100px', width: '100%' }}></img>
               </div>
             </div>
           </div>
