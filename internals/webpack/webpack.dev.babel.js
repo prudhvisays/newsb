@@ -147,6 +147,7 @@ function templateContent() {
   body.append('<script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js"></script>');
   body.append('<script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/autoload.js"></script>');
   body.append('<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>');
+  body.append('<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>');
   dllNames.forEach((dllName) => body.append(`<script data-dll='true' src='/${dllName}.dll.js'></script>`));
 
   return doc.toString();
