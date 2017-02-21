@@ -42,6 +42,8 @@ import { translationMessages } from './i18n';
 // import './global-styles';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
+import './Morris/morris.min';
+import './Morris/morris.css';
 
 // Import root routes
 import createRoutes from './routes';
