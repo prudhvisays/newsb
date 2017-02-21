@@ -29,4 +29,4 @@ cache:
 deploy:
   provider: heroku
   api_key: 986dce4f-759e-40f7-8cb8-2ba058b4a19c
-  app: new-season-boy
+  app: season-boy
