@@ -142,12 +142,6 @@ function templateContent() {
   const body = doc.find('body');
   const dllNames = !dllPlugin.dlls ? ['reactBoilerplateDeps'] : Object.keys(dllPlugin.dlls);
 
-  body.append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2jlDRTovbD3Pfpz_MkD1wre8yNqcA7AA&libraries=places"></script>');
-  body.append('<script src="https//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>');
-  body.append('<script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js"></script>');
-  body.append('<script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/autoload.js"></script>');
-  body.append('<script src="https//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>');
-  body.append('<script src="https//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>');
   dllNames.forEach((dllName) => body.append(`<script data-dll='true' src='/${dllName}.dll.js'></script>`));
 
   return doc.toString();
