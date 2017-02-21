@@ -142,7 +142,6 @@ function templateContent() {
   const body = doc.find('body');
   const dllNames = !dllPlugin.dlls ? ['reactBoilerplateDeps'] : Object.keys(dllPlugin.dlls);
 
-  body.append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2jlDRTovbD3Pfpz_MkD1wre8yNqcA7AA&libraries=places"></script>');
   dllNames.forEach((dllName) => body.append(`<script data-dll='true' src='/${dllName}.dll.js'></script>`));
 
   return doc.toString();
