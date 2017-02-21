@@ -1,9 +1,10 @@
 import React from 'react';
 import './Donut.css';
+import { Donut } from '../../../Morris/morris.min';
 
 class DonutChart extends React.Component { //eslint-disable-line
   componentDidMount() {
-    Morris.Donut({ //eslint-disable-line
+    Donut({ //eslint-disable-line
       element: 'chart',
       data: [
           { label: 'Target', value: 100 },
