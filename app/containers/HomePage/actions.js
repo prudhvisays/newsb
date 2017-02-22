@@ -174,3 +174,10 @@ export function clearForm() {
     type: 'CLEAR_FORM',
   };
 }
+
+export function setSelection(data) {
+  return {
+    type: 'SET_SELECTION',
+    payload: data,
+  };
+}

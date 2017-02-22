@@ -96,6 +96,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                     deliveryChange={this.props.deliveryChange}
                     postAddTask={this.props.postAddTask}
                     clearForm={this.props.clearForm}
+                    stateAuto={this.props.auto}
+                    setSelection={this.props.setSelection}
                   />
                 </div>}
                 {compressed && <div className="all-40 marginTop">{ pilotState && <UserInfo />}</div>}
@@ -117,7 +119,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
 }
 
 function mapStateToProps(state) {
-  const { orderexpand, pickupcord, deliverycord, stats, searchText, addTask } = state.get('home');
+  const { orderexpand, pickupcord, deliverycord, stats, searchText, addTask, auto } = state.get('home');
   const homeData = state.get('home');
 //   const ordersGet = () => {
 //       getOrders();
@@ -157,6 +159,7 @@ function mapStateToProps(state) {
     searchText,
     homeData,
     addTask,
+    auto,
   };
 }
 
@@ -175,6 +178,7 @@ export function mapDispatchToProps(dispatch) {
     addTaskInfo: (data) => { dispatch(actions.addTaskInfo(data)); },
     postAddTask: (data) => { dispatch(actions.postAddTask(data)); },
     clearForm: () => { dispatch(actions.clearForm()); },
+    setSelection: (data) => { dispatch(actions.setSelection(data)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

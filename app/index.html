@@ -6,6 +6,19 @@
     <!-- Make the page mobile compatible -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Allow installing the app to the homescreen -->
+    <link rel="manifest" href="./OneSignalSDKFiles/manifest.json">
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+         var OneSignal = window.OneSignal || [];
+         OneSignal.push(["init", {
+           appId: "092a0af4-0df5-4e86-aebc-f42e4a8d383e",
+           autoRegister: false,
+           notifyButton: {
+             enable: true /* Set to false to hide */
+           },
+           persistNotification: false
+         }]);
+ </script>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/css/ink.css">
     <link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/css/ink-ie.css">
@@ -19,7 +32,7 @@
     <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
     <script src="https://use.fontawesome.com/06743b8bb7.js"></script>
     <meta name="mobile-web-app-capable" content="yes">
-    <title>React.js Boilerplate</title>
+    <title>SeasonBoy</title>
   </head>
   <body>
     <!-- Display a message if JS has been disabled on the browser. -->

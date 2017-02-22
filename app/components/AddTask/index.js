@@ -15,6 +15,7 @@ constructor(props) {
   this.emitChange = this.emitChange.bind(this);
   this.submitOrder = this.submitOrder.bind(this);
   this.clearForm = this.clearForm.bind(this);
+  this.setSelection = this.setSelection.bind(this);
 }
 titleChange(e) {
   const { addTaskInfo } = this.props.stateAddTask;
@@ -36,8 +37,20 @@ clearForm(e) {
   e.preventDefault();
   this.props.clearForm();
 }
+  setSelection(e) {
+    this.props.setSelection(e.target.value);
+  }
   render() {
-    const { pickupCord, deliveryCord, pCord, dCord, pickupChange, stateAddTask, deliveryChange } = this.props;
+    const {
+     pickupCord,
+     deliveryCord,
+     pCord,
+     dCord,
+     pickupChange,
+     stateAddTask,
+     deliveryChange,
+     stateAuto,
+    } = this.props;
     return (
       <div className="boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
         {!stateAddTask.request ? (<form onSubmit={this.submitOrder}>
@@ -83,14 +96,14 @@ clearForm(e) {
                 </div>
                 <div className="all-100">
                   <div className="ink-flex" style={{ marginLeft: '1em' }}>
-                    <ul className="control unstyled ink-flex" style={{ margin: '0' }}>
-                      <li style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="Ace of Spades" /><label htmlFor="rb1" style={{ color: '#9099b7' }}>Auto</label></li>
-                      <li><input type="radio" id="rb2" name="rb" value="Queen of Diamonds" /><label htmlFor="rb2" style={{ color: '#9099b7' }}>Manual</label></li>
-                    </ul>
+                    <div className="control unstyled ink-flex" style={{ marginBottom: '0.8em' }} onChange={this.setSelection}>
+                      <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="auto" checked={stateAuto == 'auto'} /><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Auto</label></div>
+                      <div><input type="radio" id="rb2" name="rb" value="manual" checked={stateAuto == 'manual'} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manual</label></div>
+                    </div>
                   </div>
                   <div className="ink-flex vertical">
                     <div style={{ margin: '0 0.3em' }}><TeamSelect /></div>
-                    <div style={{ margin: '0.2em 0.3em' }}><Select /></div>
+                    { !(stateAuto === 'auto') && <div style={{ margin: '0.2em 0.3em' }}><Select /></div> }
                   </div>
                 </div>
               </div>

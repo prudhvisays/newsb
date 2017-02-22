@@ -37,6 +37,7 @@ const initialState = {
   },
   request: false,
   },
+  auto: 'auto',
 };
 
 function homeReducer(state = initialState, action) {
@@ -149,12 +150,16 @@ function homeReducer(state = initialState, action) {
       addTask: {
         ...state.addTask,
         request: action.payload,
-      }
-    }
+      },
+    };
     case 'CLEAR_FORM':
     return { ...state,
       addTask: initialState.addTask,
-    }
+    };
+    case 'SET_SELECTION':
+    return { ...state,
+      auto: action.payload,
+    };
     default:
       return state;
   }
