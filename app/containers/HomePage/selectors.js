@@ -1,21 +1,21 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 
-const  teamsPanel = () => (state) => state.teamsPanel;
-const  { teams } = () => (state) => state.teamsPanel;
-const 
+const  teamPanel = () => (state) => state.teamsPanel;
+const  teams  = () => (state) => state.teamsPanel.teams;
+const  sales = () => (state) => state.teamsPanel.teamSales;
+const customers = () => (state) => state.teamsPanel.teamCustomers;
 const mergeTeamsInfo = () => createSelector(
-  orderData(),
-    (ordersData) => {
-      _.filter(ordersData, (data) => data.status === 'ASSIGNED');
-    },
+  [teams, sales, customers],
+    (teamFilter, salesFilter, customersFilter) => ({
+        teamFilter
+  }),
 );
 
 export {
-  homeState,
-  orderData,
-  getAssignedData,
-  ordExpand,
-  delCord,
-  pickCord,
+  teamPanel,
+  teams,
+  sales,
+  customers,
+  mergeTeamsInfo,
 };

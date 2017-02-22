@@ -26,6 +26,7 @@ import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
 import _ from 'lodash';
 import checkAuth from '../checkAuth';
+import { mergeTeamsInfo } from './selectors';
 
 class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor() {
@@ -66,6 +67,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     const { compressed, pilotState, orderDetails, groupDisplay, addTask } = this.state;
     const { stats } = this.props;
+    console.log(this.props.data);
     return (
       <section style={{ background: '#1f253d', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
@@ -160,6 +162,7 @@ function mapStateToProps(state) {
     homeData,
     addTask,
     auto,
+    data: mergeTeamsInfo(homeData),
   };
 }
 
