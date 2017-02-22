@@ -14,6 +14,7 @@ constructor(props) {
   this.desChange = this.desChange.bind(this);
   this.emitChange = this.emitChange.bind(this);
   this.submitOrder = this.submitOrder.bind(this);
+  this.clearForm = this.clearForm.bind(this);
 }
 titleChange(e) {
   const { addTaskInfo } = this.props.stateAddTask;
@@ -31,6 +32,10 @@ submitOrder(e) {
   const { stateAddTask, pCord, dCord } = this.props;
   this.props.postAddTask({ stateAddTask, pCord, dCord });
 }
+clearForm(e) {
+  e.preventDefault();
+  this.props.clearForm();
+}
   render() {
     const { pickupCord, deliveryCord, pCord, dCord, pickupChange, stateAddTask, deliveryChange } = this.props;
     return (
@@ -44,7 +49,7 @@ submitOrder(e) {
                 </div>
                 <div className="all-70" style={{ padding: '0.3em 0.5em' }}>
                   <div className="ink-flex push-right">
-                    <ButtonStyle cancel>Cancel</ButtonStyle>
+                    <ButtonStyle cancel onClick={this.clearForm}>Cancel</ButtonStyle>
                     <ButtonStyle type="submit">Save</ButtonStyle>
                   </div>
                 </div>
@@ -53,12 +58,13 @@ submitOrder(e) {
             <div className="all-40">
               <div className="ink-flex vertical">
                 <div className="title-desc ink-flex vertical">
-                  <input type="text" placeholder="Title" style={{ height: '5.9vh' }} onChange={this.titleChange}></input>
+                  <input type="text" placeholder="Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>
                   <textarea
                     type="text"
                     placeholder="Description"
                     style={{ height: '14.5vh', width: '100%', color: '#fff', fontSize: '0.8rem' }}
                     onChange={this.desChange}
+                    value={stateAddTask.taskInfo.description}
                   />
                 </div>
                 <TaskMap pCord={pCord} dCord={dCord} />

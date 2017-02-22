@@ -151,6 +151,10 @@ function homeReducer(state = initialState, action) {
         request: action.payload,
       }
     }
+    case 'CLEAR_FORM':
+    return { ...state,
+      addTask: initialState.addTask,
+    }
     default:
       return state;
   }

@@ -168,3 +168,9 @@ export function postAddTaskFailure(data) {
     payload: data,
   };
 }
+
+export function clearForm() {
+  return {
+    type: 'CLEAR_FORM',
+  };
+}

@@ -150,10 +150,13 @@ export function* postAddTask(taskData) {
   }
 }
 export function* postAddTaskFlow() {
-  while(true) {
+  while (true) {
     const request = yield take('POST_ADD_TASK');
     const taskData = request.data;
-    yield call(postAddTask, taskData);
+    const res = yield call(postAddTask, taskData);
+    if (res) {
+      yield put(actions.clearForm());
+    }
   }
 }
 export function* postAddTaskWatch() {

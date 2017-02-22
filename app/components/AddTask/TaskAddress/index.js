@@ -39,9 +39,9 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
     const { pickupCord, pickupChange, stateAddTask } = this.props;
     return (
       <div className="ink-flex vertical task-address" style={{ padding: '0.8em 0.8em' }}>
-        <Input Name={'Name'} Holder={'Enter Name'} onChange={this.nameChange} />
-        <Input Name={'Phone'} Holder={'Enter Phone Number'} onChange={this.phoneChange} />
-        <Input Name={'Email'} Holder={'Enter Email'} onChange={this.emailChange} />
+        <Input Name={'Name'} Holder={'Enter Name'} onChange={this.nameChange} value={stateAddTask.pickup.from_name} />
+        <Input Name={'Phone'} Holder={'Enter Phone Number'} onChange={this.phoneChange} value={stateAddTask.pickup.from_phone} />
+        <Input Name={'Email'} Holder={'Enter Email'} onChange={this.emailChange} value={stateAddTask.pickup.from_email} />
         <div className="ink-flex vertical">
           {/* <div className="sub-title">Date</div> */}
           <div><Flatpickr data-enable-time placeholder={'Pickup Before'} onChange={this.calendarChange} /></div>
