@@ -43,11 +43,11 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
         <Input Name={'Phone'} Holder={'Enter Phone Number'} onChange={this.toPhone} />
         <Input Name={'Email'} Holder={'Enter Email'} onChange={this.toEmail} />
         <div className="ink-flex vertical">
-          <div className="sub-title">Date</div>
+          {/* <div className="sub-title">Date</div> */}
           <div><Flatpickr data-enable-time placeholder={'Deliver Before'} onChange={this.toDate} /></div>
         </div>
         <div className="ink-flex vertical">
-          <div className="sub-title">Address</div>
+          {/* <div className="sub-title">Address</div> */}
           <DMaps deliveryCord={deliveryCord} stateAddTask={stateAddTask} deliveryChange={deliveryChange} />
         </div>
       </div>
