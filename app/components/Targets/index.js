@@ -5,7 +5,7 @@ export default class Target extends React.Component { //eslint-disable-line
   render() {
     return (
       <div className="all-20 marginTop" style={{ height: '30vh' }}>
-        <div className="boxShadow" style={{ height: '30vh', background: '#fff' }}>
+        <div className="boxShadow" style={{ height: '30vh', background: 'rgb(57, 66, 100)' }}>
           <DonutChart />
         </div>
       </div>
