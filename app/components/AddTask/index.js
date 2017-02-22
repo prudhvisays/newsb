@@ -49,7 +49,7 @@ clearForm(e) {
                 </div>
                 <div className="all-70" style={{ padding: '0.3em 0.5em' }}>
                   <div className="ink-flex push-right">
-                    <ButtonStyle cancel onClick={this.clearForm}>Cancel</ButtonStyle>
+                    <ButtonStyle cancel onClick={this.clearForm}>Clear</ButtonStyle>
                     <ButtonStyle type="submit">Save</ButtonStyle>
                   </div>
                 </div>
@@ -58,10 +58,10 @@ clearForm(e) {
             <div className="all-40">
               <div className="ink-flex vertical">
                 <div className="title-desc ink-flex vertical">
-                  <input type="text" placeholder="Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>
+                  <input type="text" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>
                   <textarea
                     type="text"
-                    placeholder="Description"
+                    placeholder="Enter Description"
                     style={{ height: '14.5vh', width: '100%', color: '#fff', fontSize: '0.8rem' }}
                     onChange={this.desChange}
                     value={stateAddTask.taskInfo.description}

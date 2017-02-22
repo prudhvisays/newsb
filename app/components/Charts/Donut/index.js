@@ -9,6 +9,7 @@ class DonutChart extends React.Component { //eslint-disable-line
           { label: 'Target', value: 100 },
           { label: 'Completed', value: 800 },
       ],
+      labelColor: '#fafafa',
       size: true,
       colors: [
         '#1d233b', '#FFCA28',
