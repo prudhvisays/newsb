@@ -26,7 +26,8 @@ import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
 import _ from 'lodash';
 import checkAuth from '../checkAuth';
-import { mergeTeamsInfo } from './selectors';
+import { createStructuredSelector } from 'reselect';
+import * as selectors from './selectors';
 
 class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor() {
@@ -67,7 +68,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     const { compressed, pilotState, orderDetails, groupDisplay, addTask } = this.state;
     const { stats } = this.props;
-    console.log(this.props.data);
+    console.log(this.props.teamsInfo);
     return (
       <section style={{ background: '#1f253d', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
@@ -120,9 +121,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   }
 }
 
-function mapStateToProps(state) {
-  const { orderexpand, pickupcord, deliverycord, stats, searchText, addTask, auto } = state.get('home');
-  const homeData = state.get('home');
+const mapStateToProps = createStructuredSelector({
 //   const ordersGet = () => {
 //       getOrders();
 //   }
@@ -150,21 +149,63 @@ function mapStateToProps(state) {
   // console.log(assignedOrders());
   // console.log(unassignedOrders());
   // console.log(completedOrders());
-  return {
-    orderexpand,
-    pickupcord,
-    deliverycord,
+    orderexpand: selectors.orderExpand(),
+    pickupcord: selectors.pickupCord(),
+    deliverycord: selectors.deliveryCord(),
     // assignedOrders,
     // unassignedOrders,
     // completedOrders,
-    stats,
-    searchText,
-    homeData,
-    addTask,
-    auto,
-    data: mergeTeamsInfo(homeData),
-  };
-}
+    stats: selectors.getStats(),
+    searchText: selectors.searchText(),
+    addTask: selectors.addTask(),
+    auto: selectors.auto(),
+    teamsInfo: selectors.mergeTeamsInfo(),
+})
+// function mapStateToProps(state) {
+//   const { orderexpand, pickupcord, deliverycord, stats, searchText, addTask, auto } = state.get('home');
+//   const homeData = state.get('home');
+// //   const ordersGet = () => {
+// //       getOrders();
+// //   }
+// //   const assignedOrders = () => {
+// //     const ordersData = ordersGet();
+// //     const Data = data.ordersData;
+// //     _.filter(Data, (assign) => {
+// //     return assign.status === 'ASSIGNED';
+// //   });
+// // };
+// //   const unassignedOrders = () => {
+// //     const ordersData = ordersGet();
+// //     const Data = data.ordersData;
+// //     _.filter(Data, (assign) => {
+// //     return assign.status === 'UNASSIGNED';
+// //   });
+// // };
+// //   const completedOrders = () => {
+// //     const ordersData = ordersGet();
+// //     const Data = data.ordersData;
+// //     _.filter(Data, (assign) => {
+// //     return assign.status === 'COMPLETED';
+// //   });
+// // };
+//   // console.log(assignedOrders());
+//   // console.log(unassignedOrders());
+//   // console.log(completedOrders());
+//   return {
+//     orderexpand,
+//     pickupcord,
+//     deliverycord,
+//     // assignedOrders,
+//     // unassignedOrders,
+//     // completedOrders,
+//     stats,
+//     searchText,
+//     homeData,
+//     addTask,
+//     auto,
+//     data: mergeTeamsInfo(state),
+//   };
+// }
 
 export function mapDispatchToProps(dispatch) {
   return {
