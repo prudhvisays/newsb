@@ -1,5 +1,5 @@
-import { takeLatest, takeEvery } from 'redux-saga';
-import { take, call, put, select, fork, cancel, delay, race } from 'redux-saga/effects';
+import { takeLatest, takeEvery, delay } from 'redux-saga';
+import { take, call, put, select, fork, cancel, race } from 'redux-saga/effects';
 import realData from '../../Api';
 import * as actions from './actions';
 import moment from 'moment';
@@ -144,8 +144,8 @@ export function* postAddTask(taskData) {
     if (error.response) {
       yield put(actions.postAddTaskFailure(error.message));
     }
-    return false;
   } finally {
+    yield call(delay, 5000);
     yield put(actions.addingTask(false));
   }
 }

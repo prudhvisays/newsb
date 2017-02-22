@@ -145,7 +145,7 @@ export function addTaskInfo(data) {
 export function addingTask(data) {
   return {
     type: 'ADDING_TASK',
-    data,
+    payload: data,
   };
 }
 export function postAddTask(data) {

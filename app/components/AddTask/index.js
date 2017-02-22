@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingSpinner from './LoadingSpinner';
 import './AddStyle.css';
 import ButtonStyle from './ButtonStyle';
 import TaskTab from './TaskTab';
@@ -34,7 +35,7 @@ submitOrder(e) {
     const { pickupCord, deliveryCord, pCord, dCord, pickupChange, stateAddTask, deliveryChange } = this.props;
     return (
       <div className="boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
-        <form onSubmit={this.submitOrder}>
+        {!stateAddTask.request ? (<form onSubmit={this.submitOrder}>
           <div className="ink-flex">
             <div className="all-100 team-block">
               <div className="ink-flex">
@@ -89,7 +90,18 @@ submitOrder(e) {
               </div>
             </div>
           </div>
-        </form>
+        </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader">
+              <div className="cs-loader-inner">
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <div className="cs-note">
+                  <span>sending</span></div>
+              </div>
+              </LoadingSpinner>)}
       </div>
     );
   }

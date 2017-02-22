@@ -35,6 +35,7 @@ const initialState = {
     team: '',
     pilots: [],
   },
+  request: false,
   },
 };
 
@@ -143,6 +144,13 @@ function homeReducer(state = initialState, action) {
         taskInfo: action.payload,
       },
     };
+    case 'ADDING_TASK':
+    return { ...state,
+      addTask: {
+        ...state.addTask,
+        request: action.payload,
+      }
+    }
     default:
       return state;
   }
