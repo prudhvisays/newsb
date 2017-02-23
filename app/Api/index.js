@@ -16,7 +16,7 @@ const realData = {
   },
   getPilotStatsApi(statsDate) {
     const StatsDate = {
-      date: statsDate,
+      team: '*',
     };
     const GET_PILOT_STATS_API = `${API_URL}/pilots/stats`;
     return axios({

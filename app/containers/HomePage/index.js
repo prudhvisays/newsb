@@ -74,7 +74,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
           <div className="column-group quarter-horizontal-gutters">
             <div className="all-75">
               <div className="column-group quarter-horizontal-gutters margin">
-                <Targets />
+                <Targets stateOrderStats={this.props.stats.orderStats} />
                 <Tasks divTask={this.divTask}
                   orderDetails={this.orderDetails}
                   orderBlock={this.props.orderexpand}
