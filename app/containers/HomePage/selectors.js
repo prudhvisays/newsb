@@ -56,7 +56,7 @@ const mergeTeamSales = () => createSelector(
   })
 );
 
-  const mergeTeamsInfo = () => createSelector(
+const mergeTeamsInfo = () => createSelector(
     [mergeTeamSales(),
       teamCustomers()],
       (sales, customers) => _.map(sales, (sale) => {

@@ -48,6 +48,8 @@ export function* loginFlow() {
     if (winner.auth) {
       yield put({ type: 'SET_AUTH', newAuthState: true });
       yield put({ type: 'CHANGE_FORM', newFormState: { username: '', password: '' } });
+      const OneSignal = window.OneSignal || [];
+      OneSignal.push(['sendTags', { manager: 'Admin' }]);
       forwardTo('/');
     } else if (winner.logout) {
       yield put({ type: 'SET_AUTH', newAuthState: false });

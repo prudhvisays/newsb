@@ -4,6 +4,7 @@ const initialState = {
   orderexpand: false,
   pickupcord: {},
   deliverycord: {},
+  orderDisplay: '',
   stats: {
     orderStats: {},
     pilotStats: {},

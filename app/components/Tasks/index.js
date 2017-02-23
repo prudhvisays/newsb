@@ -90,7 +90,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     const { stats } = this.props;
     return (
       <div className="all-40 marginTop" style={{ height: '30vh' }}>
-        <div className={classNames('boxShadow liner tasksExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
+        <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
           <div className={classNames('orders-block', 'ink-flex', { indeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>
               <div className="ink-flex">
@@ -114,7 +114,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 </Sparklines>
               </div>
               <div className="all-100" style={{ position: 'relative', zIndex: '1', background: '#394264' }}>
-                <Feed tasksExpand={this.taskExpand} stats={stats}/>
+                <Feed stats={stats}/>
               </div>
               <div className="all-100 closeTag">
                 <a className="ink-flex push-right closeFeed" onClick={this.loadOrders}>Close</a>
