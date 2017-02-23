@@ -39,26 +39,26 @@ export default class FranchiseMap extends React.Component { //eslint-disable-lin
     this.drawMap();
   }
   drawMap() {
-    var LeafIcon = L.Icon.extend({
-        options: {
-          shadowUrl:
-              'http://leafletjs.com/docs/images/leaf-shadow.png',
-          iconSize:     [38, 95],
-          shadowSize:   [50, 64],
-          iconAnchor:   [22, 94],
-          shadowAnchor: [4, 62],
-          popupAnchor:  [-3, -76]
-        }
-      });
+    // var LeafIcon = L.Icon.extend({
+    //     options: {
+    //       shadowUrl:
+    //           'http://leafletjs.com/docs/images/leaf-shadow.png',
+    //       iconSize:     [38, 95],
+    //       shadowSize:   [50, 64],
+    //       iconAnchor:   [22, 94],
+    //       shadowAnchor: [4, 62],
+    //       popupAnchor:  [-3, -76]
+    //     }
+    //   });
 
-      var greenIcon = new LeafIcon({
-        iconUrl: 'http://leafletjs.com/docs/images/leaf-green.png'
-        });
+      // var greenIcon = new LeafIcon({
+      //   iconUrl: 'http://leafletjs.com/docs/images/leaf-green.png'
+      //   });
 
-      var drawnItems = new L.FeatureGroup();
+      const drawnItems = new L.FeatureGroup();
       map.addLayer(drawnItems);
 
-      var drawControl = new L.Control.Draw({
+      const drawControl = new L.Control.Draw({
         position: 'topright',
         draw: {
           polygon: {
@@ -74,24 +74,10 @@ export default class FranchiseMap extends React.Component { //eslint-disable-lin
             metric: false,
             repeatMode: true,
           },
-          polyline: {
-            shapeOptions: {
-              color: 'red',
-            },
-          },
-          rect: {
-            shapeOptions: {
-              color: 'green',
-            },
-          },
-          circle: {
-            shapeOptions: {
-              color: 'steelblue',
-            },
-          },
-          marker: {
-            icon: greenIcon,
-          },
+          polyline: false,
+          rectangle: false,
+          circle: false,
+          marker: false,
         },
         edit: {
           featureGroup: drawnItems,
