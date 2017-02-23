@@ -3,5 +3,5 @@
   "short_name": "http://season-boy.herokuapp.com",
   "start_url": "/",
   "display": "standalone",
-  "gcm_sender_id": "482941778795",
+  "gcm_sender_id": "482941778795"
 }
