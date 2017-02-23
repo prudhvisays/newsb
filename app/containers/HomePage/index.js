@@ -84,7 +84,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                   {...this.props}
                 />
                 <Pilots divPilot={this.divPilot} groupDisplay={this.groupDisplay} stats={stats} />
-                { addTask ? <div ref={(c) => { this.compress = c; }} className={classnames('marginTop', { 'all-60': !compressed, 'all-20': compressed })} style={{ height: '67vh' }}>
+                {/* { addTask ? <div ref={(c) => { this.compress = c; }} className={classnames('marginTop', { 'all-60': !compressed, 'all-20': compressed })} style={{ height: '67vh' }}>
                   <Ranking compressed={compressed} />
                 </div> : <div className="all-60 marginTop" style={{ height: '67vh' }}>
                   <AddTask
@@ -101,7 +101,23 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                     stateAuto={this.props.auto}
                     setSelection={this.props.setSelection}
                   />
-                </div>}
+                </div>} */}
+                { !addTask && (<div className={classnames('marginTop', { 'all-60': !compressed, 'all-20': compressed })} style={{ height: '67vh' }}>
+                  <AddTask
+                    pickupCord={this.props.pickupCord}
+                    deliveryCord={this.props.deliveryCord}
+                    pCord={this.props.pickupcord}
+                    dCord={this.props.deliverycord}
+                    pickupChange={this.props.pickupChange}
+                    stateAddTask={this.props.addTask}
+                    addTaskInfo={this.props.addTaskInfo}
+                    deliveryChange={this.props.deliveryChange}
+                    postAddTask={this.props.postAddTask}
+                    clearForm={this.props.clearForm}
+                    stateAuto={this.props.auto}
+                    setSelection={this.props.setSelection}
+                  />
+                </div>)}
                 {compressed && <div className="all-40 marginTop">{ pilotState && <UserInfo />}</div>}
                 <div className="all-40 marginTop" style={{ height: '67vh' }}>
                   {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>

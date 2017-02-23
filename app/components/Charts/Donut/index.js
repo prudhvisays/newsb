@@ -1,18 +1,20 @@
 import React from 'react';
 import './Donut.css';
 let donut;
+let Data =  [
+    { label: 'Target', value: 100 },
+    { label: 'Completed', value: 21 },
+];
 class DonutChart extends React.Component { //eslint-disable-line
   constructor(props) {
     super(props);
     this.targets = this.targets.bind(this);
   }
   componentDidMount() {
+    const { total } = this.props.stateOrderStats;
     donut = Morris.Donut({ //eslint-disable-line
       element: 'chart',
-      data: [
-          { label: 'Target', value: 0 },
-          { label: 'Completed', value: 0 },
-      ],
+      data: Data,
       labelColor: '#fafafa',
       size: true,
       colors: [
@@ -29,7 +31,7 @@ class DonutChart extends React.Component { //eslint-disable-line
     }
   }
   targets(total) {
-    const Data = [
+    Data = [
         { label: 'Target', value: 100 },
         { label: 'Completed', value: total },
     ];

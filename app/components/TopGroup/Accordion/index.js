@@ -63,7 +63,7 @@ constructor(props) {
           <div className={i.open
             ? "content-text content-text-open"
             : "content-text"}
-          > {i.createdAt}
+          > {'There are no merchants present for this team'}
           </div>
         </div>
       </div>
