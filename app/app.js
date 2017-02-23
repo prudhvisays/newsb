@@ -16,7 +16,7 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
 import 'sanitize.css/sanitize.css';
-
+import 'leaflet-draw/dist/leaflet.draw.css';
 // Import root app
 import App from 'containers/App';
 
@@ -41,7 +41,6 @@ import { translationMessages } from './i18n';
 // Import CSS reset and Global Styles
 // import './global-styles';
 // import 'leaflet/dist/leaflet.css';
-import 'leaflet-draw/dist/leaflet.draw.css';
 import './Morris/morris.min';
 import './Morris/morris.css';
 
