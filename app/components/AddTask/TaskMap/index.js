@@ -1,6 +1,5 @@
 import React from 'react';
 import MapStyle from './MapStyle';
-import L from 'leaflet';
 import { AntPath } from 'leaflet-ant-path';
 let map;
 let newMarkerOne;

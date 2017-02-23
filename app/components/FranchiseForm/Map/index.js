@@ -1,7 +1,6 @@
 import React from 'react';
 import { AntPath } from 'leaflet-ant-path';
 import FrancMapStyle from './FrancMapStyle';
-import L from 'leaflet';
 import { Control } from 'leaflet-draw';
 
 let map;
