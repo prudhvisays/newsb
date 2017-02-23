@@ -11,39 +11,49 @@ constructor(props) {
   }
   this.click = this.click.bind(this);
 }
-  componentWillMount () {
-  	let accordion = [];
+  // componentWillMount () {
+  // 	let accordion = [];
+  //
+  // 	this.props.data.forEach((i) => {
+  //     accordion.push({
+  //       title: i.title,
+  //       content: i.content,
+  //       open: false
+  //     });
+  //   });
+  //
+	// 	this.setState({
+  //     accordionItems: accordion,
+  //   });
+  // }
 
-  	this.props.data.forEach((i) => {
-      accordion.push({
-        title: i.title,
-        content: i.content,
-        open: false
-      });
-    });
+  // click (i) {
+  // 	const newAccordion = this.state.accordionItems.slice();
+  //   const index = newAccordion.indexOf(i)
+  //
+  //   newAccordion[index].open = !newAccordion[index].open;
+  //   this.setState({accordionItems: newAccordion});
+  // }
 
-		this.setState({
-      accordionItems: accordion,
-    });
-  }
-
-  click (i) {
-  	const newAccordion = this.state.accordionItems.slice();
-    const index = newAccordion.indexOf(i)
-
-    newAccordion[index].open = !newAccordion[index].open;
-    this.setState({accordionItems: newAccordion});
+  click(id) {
+    this.props.openAccordion(id);
   }
 
 	render () {
-    const sections = this.state.accordionItems.map((i) => (
-      <div key={this.state.accordionItems.indexOf(i)}>
+    const sections = this.props.data.map((i) => (
+      <div key={i._id}>
         <div
-          className="title"
-          onClick={this.click.bind(null, i)}
+          className="title ink-flex"
+          onClick={this.click.bind(null, i._id)}
         >
-         <span className="title-text">
-           {i.title}
+         <span className="all-70 title-text">
+           {i.name}
+         </span>
+         <span className="all-30">
+           <div className="ink-flex push-right">
+             <span className="sub-title">Sales</span>
+             <span>{i.sales}</span>
+           </div>
          </span>
        </div>
        <div className={i.open
@@ -53,7 +63,7 @@ constructor(props) {
           <div className={i.open
             ? "content-text content-text-open"
             : "content-text"}
-          > {i.content}
+          > {i.createdAt}
           </div>
         </div>
       </div>

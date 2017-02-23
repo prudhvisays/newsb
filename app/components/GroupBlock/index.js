@@ -3,14 +3,15 @@ import TopGroup from '../TopGroup';
 
 export default class Score extends React.Component { //eslint-disable-line
   render() {
+    const { stateTeamsInfo, openAccordion } = this.props;
     return (
       <div className="ink-flex">
         <div className="all-100 team-block" style={{ padding: '0.5em 0.8em', width: '100%' }}>
           <div className="ink-flex">
             <div className="all-100">
-                  <div className="team-search">
-                    <input type="text" placeholder="Search Teams" />
-                  </div>
+              <div className="team-search">
+                <input type="text" placeholder="Search Teams" />
+              </div>
             </div>
           </div>
         </div>
@@ -23,7 +24,7 @@ export default class Score extends React.Component { //eslint-disable-line
         </div>
         <div className="all-100">
           <div className="top-group-list" style={{ padding: '0.8em' }}>
-            <TopGroup />
+            <TopGroup stateTeamsInfo={stateTeamsInfo} openAccordion={openAccordion} />
           </div>
         </div>
       </div>

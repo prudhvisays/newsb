@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const initialState = {
   orderexpand: false,
   pickupcord: {},
@@ -86,7 +88,10 @@ function homeReducer(state = initialState, action) {
       return { ...state,
         teamsPanel: {
           ...state.teamsPanel,
-          teams: action.payload,
+          teams: action.payload.map((team) => {
+            team.open = false;
+            return team;
+          }),
         },
       };
     case 'GET_TEAMS_FAILURE':
@@ -160,9 +165,30 @@ function homeReducer(state = initialState, action) {
     return { ...state,
       auto: action.payload,
     };
+    case 'ACCORDION_OPEN':
+    return accordionOpen(state, action);
     default:
       return state;
   }
 }
 
+function accordionOpen(state, action) {
+  const index = _.findIndex(state.teamsPanel.teams, {
+    _id: action.payload
+  });
+  const newState = state.teamsPanel.teams.slice();
+  if (state.teamsPanel.teams[index]['open']) {
+    newState[index]['open'] = !state.teamsPanel.teams[index]['open'];
+  } else {
+    newState.forEach((team) => team.open = false);
+    newState[index]['open'] = true;
+  }
+  return {
+    ...state,
+    teamsPanel: {
+      ...state.teamsPanel,
+      teams: newState,
+    },
+  };
+}
 export default homeReducer;

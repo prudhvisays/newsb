@@ -34,7 +34,7 @@ const teamsPanel = () => createSelector(
   homeData(),
   (homeState) => homeState.teamsPanel,
 );
-const teams = () => createSelector(
+const getTeams = () => createSelector(
   teamsPanel(),
   (panel) => panel.teams,
 );
@@ -47,12 +47,23 @@ const teamCustomers = () => createSelector(
   (panel) => panel.teamCustomers,
 );
 
-const mergeTeamsInfo = () => createSelector(
-  [teams(),
-  teamSales(),
-  teamCustomers()],
-  (team, sales, customers) => sales,
+const mergeTeamSales = () => createSelector(
+  [getTeams(),
+    teamSales(),
+  ],
+  (teams, sales) => _.map(teams,(team) => {
+    return _.merge(team, _.find(sales, { _id: team._id}))
+  })
 );
+
+  const mergeTeamsInfo = () => createSelector(
+    [mergeTeamSales(),
+      teamCustomers()],
+      (sales, customers) => _.map(sales, (sale) => {
+        return _.merge(sale, _.find(customers, { _id: sale._id}))
+      })
+    );
+
 export {
   homeData,
   orderExpand,
@@ -63,8 +74,9 @@ export {
   addTask,
   auto,
   teamsPanel,
-  teams,
+  getTeams,
   teamSales,
   teamCustomers,
+  mergeTeamSales,
   mergeTeamsInfo,
 };

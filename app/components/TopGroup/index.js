@@ -62,6 +62,7 @@ const data = [
   ];
 export default class TopGroup extends React.Component { //eslint-disable-line
   render() {
+    const { stateTeamsInfo, openAccordion } = this.props
     return (
       // <ul className="player">
       //   <TopList groupName={'Madhapur'} groupSales={'230'} badgeColor={'rgb(245, 37, 151)'} />
@@ -74,7 +75,7 @@ export default class TopGroup extends React.Component { //eslint-disable-line
       //   <TopList groupName={'Banjara Hills'} groupSales={'70'} badgeColor={'#00BCD4'} />
       //   <TopList groupName={'Jubilee Hills'} groupSales={'60'} badgeColor={'#7E57C2'} />
       // </ul>
-      <Accordion data={data} />
+      <Accordion data={stateTeamsInfo} openAccordion={openAccordion}/>
     );
   }
 }

@@ -181,3 +181,10 @@ export function setSelection(data) {
     payload: data,
   };
 }
+
+export function openAccordion(data) {
+  return {
+    type: 'ACCORDION_OPEN',
+    payload: data,
+  };
+}

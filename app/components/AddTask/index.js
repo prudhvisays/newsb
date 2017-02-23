@@ -96,9 +96,9 @@ clearForm(e) {
                 </div>
                 <div className="all-100">
                   <div className="ink-flex" style={{ marginLeft: '1em' }}>
-                    <div className="control unstyled ink-flex" style={{ marginBottom: '0.8em' }} onChange={this.setSelection}>
-                      <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="auto" checked={stateAuto == 'auto'} /><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Auto</label></div>
-                      <div><input type="radio" id="rb2" name="rb" value="manual" checked={stateAuto == 'manual'} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manual</label></div>
+                    <div className="control unstyled ink-flex" style={{ marginBottom: '0.8em' }} >
+                      <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="auto" checked={stateAuto == 'auto'} onChange={this.setSelection}/><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Auto</label></div>
+                      <div><input type="radio" id="rb2" name="rb" value="manual" checked={stateAuto == 'manual'} onChange={this.setSelection}/><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manual</label></div>
                     </div>
                   </div>
                   <div className="ink-flex vertical">

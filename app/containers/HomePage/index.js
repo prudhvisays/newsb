@@ -11,22 +11,21 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
+import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import Map from '../../components/Map';
 import './HomeStyle.css';
-import Header from '../../components/Header';
 import Targets from '../../components/Targets';
 import Tasks from '../../components/Tasks';
 import Pilots from '../../components/Pilots';
 import Ranking from '../../components/Ranking';
-import classnames from 'classnames';
 import UserInfo from '../../components/UserInfo';
 import Tabs from '../../components/Tabs';
 import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
-import _ from 'lodash';
-import checkAuth from '../checkAuth';
-import { createStructuredSelector } from 'reselect';
+// import checkAuth from '../checkAuth';
+
 import * as selectors from './selectors';
 
 class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -106,7 +105,10 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                 {compressed && <div className="all-40 marginTop">{ pilotState && <UserInfo />}</div>}
                 <div className="all-40 marginTop" style={{ height: '67vh' }}>
                   {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>
-                    { !groupDisplay ? <GroupBlock /> : null }
+                    { !groupDisplay ? <GroupBlock
+                      stateTeamsInfo={this.props.teamsInfo}
+                      openAccordion={this.props.openAccordion}
+                    /> : null }
                   </div> : <Tabs /> }
                 </div>
               </div>
@@ -122,33 +124,6 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
 }
 
 const mapStateToProps = createStructuredSelector({
-//   const ordersGet = () => {
-//       getOrders();
-//   }
-//   const assignedOrders = () => {
-//     const ordersData = ordersGet();
-//     const Data = data.ordersData;
-//     _.filter(Data, (assign) => {
-//     return assign.status === 'ASSIGNED';
-//   });
-// };
-//   const unassignedOrders = () => {
-//     const ordersData = ordersGet();
-//     const Data = data.ordersData;
-//     _.filter(Data, (assign) => {
-//     return assign.status === 'UNASSIGNED';
-//   });
-// };
-//   const completedOrders = () => {
-//     const ordersData = ordersGet();
-//     const Data = data.ordersData;
-//     _.filter(Data, (assign) => {
-//     return assign.status === 'COMPLETED';
-//   });
-// };
-  // console.log(assignedOrders());
-  // console.log(unassignedOrders());
-  // console.log(completedOrders());
     orderexpand: selectors.orderExpand(),
     pickupcord: selectors.pickupCord(),
     deliverycord: selectors.deliveryCord(),
@@ -223,6 +198,7 @@ export function mapDispatchToProps(dispatch) {
     postAddTask: (data) => { dispatch(actions.postAddTask(data)); },
     clearForm: () => { dispatch(actions.clearForm()); },
     setSelection: (data) => { dispatch(actions.setSelection(data)); },
+    openAccordion: (data) => { dispatch(actions.openAccordion(data)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
