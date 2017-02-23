@@ -114,7 +114,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 </Sparklines>
               </div>
               <div className="all-100" style={{ position: 'relative', zIndex: '1', background: '#394264' }}>
-                <Feed stats={stats}/>
+                <Feed tasksExpand={this.taskExpand} stats={stats} />
               </div>
               <div className="all-100 closeTag">
                 <a className="ink-flex push-right closeFeed" onClick={this.loadOrders}>Close</a>
