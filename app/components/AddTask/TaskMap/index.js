@@ -1,11 +1,6 @@
 import React from 'react';
 import MapStyle from './MapStyle';
-import L from 'leaflet';
 import { AntPath } from 'leaflet-ant-path';
-import Flag from '../flag-map-marker.png';
-import FlagShadow from '../flag-map-marker-shadow.png';
-import Tool from '../placeholder-tool.png';
-import ToolShadow from '../placeholder-tool-shadow.png';
 let map;
 let newMarkerOne;
 let newMarkerTwo;
@@ -22,7 +17,7 @@ export default class TaskMap extends React.Component { //eslint-disable-line
   }
   componentDidMount() {
     this.leafletMap();
-  }
+}
   componentDidUpdate(prevProps){
     const { pLat, pLng } = this.props.pCord;
     const { dLat, dLng } = this.props.dCord;
