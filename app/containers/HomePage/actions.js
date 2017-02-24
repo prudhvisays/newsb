@@ -188,3 +188,10 @@ export function openAccordion(data) {
     payload: data,
   };
 }
+
+export function addTaskStatus(data) {
+  return {
+    type: 'ADD_TASK_STATUS',
+    payload: data,
+  };
+}

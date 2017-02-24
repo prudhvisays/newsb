@@ -3,7 +3,7 @@ import './Donut.css';
 let donut;
 let Data =  [
     { label: 'Target', value: 100 },
-    { label: 'Completed', value: 21 },
+    { label: 'Total', value: 21 },
 ];
 class DonutChart extends React.Component { //eslint-disable-line
   constructor(props) {
@@ -33,7 +33,7 @@ class DonutChart extends React.Component { //eslint-disable-line
   targets(total) {
     Data = [
         { label: 'Target', value: 100 },
-        { label: 'Completed', value: total },
+        { label: 'Total', value: total },
     ];
     donut.setData(Data);
   }

@@ -109,7 +109,7 @@ clearForm(e) {
               </div>
             </div>
           </div>
-        </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader">
+        </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader" color={stateAddTask.addTaskStatus.statusColor}>
               <div className="cs-loader-inner">
                 <label>	●</label>
                 <label>	●</label>
@@ -118,7 +118,7 @@ clearForm(e) {
                 <label>	●</label>
                 <label>	●</label>
                 <div className="cs-note">
-                  <span>sending</span></div>
+                  <span>{stateAddTask.addTaskStatus.statusText}</span></div>
               </div>
               </LoadingSpinner>)}
       </div>

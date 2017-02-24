@@ -39,6 +39,10 @@ const initialState = {
     pilots: [],
   },
   request: false,
+  addTaskStatus: {
+    statusText: 'Sending',
+    statusColor: '#fff',
+  },
   },
   auto: 'auto',
 };
@@ -168,6 +172,14 @@ function homeReducer(state = initialState, action) {
     };
     case 'ACCORDION_OPEN':
     return accordionOpen(state, action);
+    case 'ADD_TASK_STATUS':
+    return {
+      ...state,
+      addTask: {
+        ...state.addTask,
+        addTaskStatus: action.payload,
+      },
+    };
     default:
       return state;
   }

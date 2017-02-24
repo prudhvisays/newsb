@@ -139,13 +139,15 @@ export function* postAddTask(taskData) {
   try {
     const response = yield call(realData.postAddTaskApi, taskData);
     yield put(actions.postAddTaskSuccess(response));
+    yield put(actions.addTaskStatus({ statusText: 'Successful', statusColor: 'rgb(81, 212, 255)' }));
     return response;
   } catch (error) {
     if (error.response) {
       yield put(actions.postAddTaskFailure(error.message));
+      yield put(actions.addTaskStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
     }
   } finally {
-    yield call(delay, 5000);
+    yield call(delay, 4000);
     yield put(actions.addingTask(false));
   }
 }
@@ -156,6 +158,9 @@ export function* postAddTaskFlow() {
     const res = yield call(postAddTask, taskData);
     if (res) {
       yield put(actions.clearForm());
+      yield put(actions.addTaskStatus({ statusText: 'Sending', statusColor: '#fff' }));
+    } else {
+      yield put(actions.addTaskStatus({ statusText: 'Sending', statusColor: '#fff' }));
     }
   }
 }
