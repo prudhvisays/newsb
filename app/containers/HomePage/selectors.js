@@ -40,11 +40,11 @@ const getTeams = () => createSelector(
 );
 const teamSales = () => createSelector(
   teamsPanel(),
-  (panel) => panel.teamSales,
+  (panel) => panel.teamSales.sales,
 );
 const teamCustomers = () => createSelector(
   teamsPanel(),
-  (panel) => panel.teamCustomers,
+  (panel) => panel.teamCustomers.customers,
 );
 
 const mergeTeamSales = () => createSelector(
