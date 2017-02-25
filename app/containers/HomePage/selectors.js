@@ -60,7 +60,7 @@ const mergeTeamsInfo = () => createSelector(
     [mergeTeamSales(),
       teamCustomers()],
       (sales, customers) => _.map(sales, (sale) => {
-        return _.merge(sale, _.find(customers, { _id: sale._id}))
+        return _.merge(sale, _.find(customers, { _id: sale['_id'] }))
       })
     );
 
