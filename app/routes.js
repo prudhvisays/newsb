@@ -60,6 +60,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     },
+    /*{
+      path: '/user',
+      name: 'user',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+        import('containers/User/reducer'),
+        import('containers/User/sagas'),
+        import('containers/Use'),
+      ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('user', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },*/
       {
       path: '/login',
       name: 'login',
