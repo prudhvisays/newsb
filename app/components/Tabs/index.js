@@ -32,12 +32,14 @@ export default class Tabs extends React.Component { //eslint-disable-line
     evt.currentTarget.className += ' active';
   }
   render() {
+    const { closeOrderDetails } = this.props
     return (
       <div className="line-boxShadow block-background" style={{ height: '67vh' }}>
         <TabStyle className="tab ink-flex" style={{ margin: 0 }}>
           <li><a className="tablinks" id="defaultOpen" onClick={(event) => { this.customTabs(event, 'London'); }}>Task Details</a></li>
           <li><a className="tablinks" onClick={(event) => { this.customTabs(event, 'Paris'); }}>Activity Timeline</a></li>
           <li><a className="tablinks" onClick={(event) => { this.customTabs(event, 'Tokyo'); }}>Path History</a></li>
+          <li><a className="tablinks" onClick={closeOrderDetails}>Close</a></li>
         </TabStyle>
         <div id="London" className="tabcontent" style={{ fontSize: '0.7rem' }}>
           <div className="tab-scroll">

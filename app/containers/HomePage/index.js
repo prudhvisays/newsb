@@ -13,6 +13,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { createStructuredSelector } from 'reselect';
+import io from 'socket.io-client';
 import * as actions from './actions';
 import Map from '../../components/Map';
 import './HomeStyle.css';
@@ -25,7 +26,6 @@ import Tabs from '../../components/Tabs';
 import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
 // import checkAuth from '../checkAuth';
-import io from 'socket.io-client';
 
 const socket = io('https://season-boy-api.herokuapp.com').connect();
 
@@ -46,6 +46,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
     this.orderDetails = this.orderDetails.bind(this);
     this.groupDisplay = this.groupDisplay.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.closeOrderDetails = this.closeOrderDetails.bind(this);
   }
   componentDidMount() {
     this.props.getStats();
@@ -62,7 +63,14 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
     this.setState({ groupDisplay: !this.state.groupDisplay });
   }
   orderDetails() {
-    this.setState({ orderDetails: !this.state.orderDetails });
+    if(!this.state.orderDetails) {
+      this.setState({ orderDetails: !this.state.orderDetails });
+    };
+  }
+  closeOrderDetails() {
+    if (this.state.orderDetails) {
+      this.setState({ orderDetails: !this.state.orderDetails });
+    };
   }
   addTask() {
     this.setState({ addTask: !this.state.addTask });
@@ -86,6 +94,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getStats={this.props.getStats}
                         searchText={this.props.searchText}
                         stats={this.props.stats}
+                        closeOrderDetails={this.closeOrderDetails}
                         {...this.props}
                       />
                       { !addTask && (<div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
@@ -116,7 +125,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           stateTeamsInfo={this.props.teamsInfo}
                           openAccordion={this.props.openAccordion}
                         /> : null }
-                      </div> : <Tabs /> }
+                      </div> : <Tabs closeOrderDetails={this.closeOrderDetails} /> }
                     </div>
                   </div>
                 </div>

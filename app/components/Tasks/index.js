@@ -36,7 +36,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     };
     this.taskExpand = this.taskExpand.bind(this);
     this.detailedInfo = this.detailedInfo.bind(this);
-    this.loadOrders = this.loadOrders.bind(this);
+    this.closeOrders = this.closeOrders.bind(this);
     this.timer = this.timer.bind(this);
     this.searchText = this.searchText.bind(this);
     this.emitSearch = this.emitSearch.bind(this);
@@ -64,7 +64,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
       taskDiv.style.height = '98vh';
       listShow.style.opacity = '1';
       listShow.style.display = 'block';
-      closeTag.style.top= '-2px';
+      closeTag.style.top = '-2px';
       this.props.orderClose(true);
       this.props.divTask();
     }
@@ -72,7 +72,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
   detailedInfo() {
     this.props.orderDetails();
   }
-  loadOrders() {
+  closeOrders() {
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
     const closeTag = document.querySelector('.closeTag');
@@ -80,9 +80,10 @@ export default class Tasks extends React.Component { //eslint-disable-line
       taskDiv.style.height = '30vh';
       listShow.style.opacity = '0';
       listShow.style.display = 'none';
-      closeTag.style.top= '-20px';
+      closeTag.style.top = '-20px';
       this.props.orderExpand(false);
       this.props.divTask();
+      this.props.closeOrderDetails();
     }
   }
   searchText(e) {
@@ -123,7 +124,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 <Feed tasksExpand={this.taskExpand} stats={stats} />
               </div>
               <div className="all-100 closeTag">
-                <a className="ink-flex push-right closeFeed" onClick={this.loadOrders}>Close</a>
+                <a className="ink-flex push-right closeFeed" onClick={this.closeOrders}>Close</a>
               </div>
             </div>
             {/* <div className="search" style={{ marginTop: '14px', width: '20.90em' }}>
