@@ -1,6 +1,9 @@
 import axios from 'axios';
 const API_URL = 'https://season-boy-api.herokuapp.com/api';
 
+const localStorage = global.window.localStorage;
+const manager = JSON.parse(localStorage.getItem('sessionData'))['manager']['_id'];
+
 const realData = {
   getOrderStatsApi(statsDate) {
     const StatsDate = {
@@ -11,6 +14,19 @@ const realData = {
       method: 'POST',
       url: GET_ORDER_STATS_API,
       data: StatsDate,
+      responseType: 'json',
+    }).then((response) => response.data);
+  },
+  getOrders(date) {
+    const payload = {
+      date: date,
+      manager: manager
+    };
+    const GET_ORDERS_API = `${API_URL}/orders/list`;
+    return axios({
+      method: 'POST',
+      url: GET_ORDERS_API,
+      data: payload,
       responseType: 'json',
     }).then((response) => response.data);
   },

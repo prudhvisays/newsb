@@ -49,7 +49,7 @@ const auth = {
     const payload = {
       username: Username,
       password: Password,
-      userRole: 'PILOT',
+      userRole: 'MANAGER',
     };
     const POST_AUTH_API = `${API_URL}/auth/login`;
     if (auth.loggedIn()) {
@@ -64,8 +64,12 @@ const auth = {
       const { data } = response;
       localStorage.token = data.token;
       setAuthorizationToken(data.token);
-      const { username, pilotId } = data;
-      localStorage.setItem('sessionData', JSON.stringify({ username, pilotId }));
+      const { username, manager } = data;
+      localStorage.setItem('sessionData',
+        JSON.stringify({
+          username,
+          manager,
+        }));
       return Promise.resolve(true);
     });
   },
