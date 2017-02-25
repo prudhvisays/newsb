@@ -59,17 +59,13 @@ export default class Tasks extends React.Component { //eslint-disable-line
   taskExpand() {
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
+    const closeTag = document.querySelector('.closeTag');
     if (!this.props.orderBlock) {
       taskDiv.style.height = '98vh';
       listShow.style.opacity = '1';
       listShow.style.display = 'block';
+      closeTag.style.top= '-2px';
       this.props.orderClose(true);
-      this.props.divTask();
-    } else {
-      taskDiv.style.height = '30vh';
-      listShow.style.opacity = '0';
-      listShow.style.display = 'none';
-      this.props.orderExpand(false);
       this.props.divTask();
     }
   }
@@ -77,7 +73,17 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.props.orderDetails();
   }
   loadOrders() {
-    console.log(this.props.assignedOrders());
+    const taskDiv = document.querySelector('.taskExpand');
+    const listShow = document.querySelector('.listShow');
+    const closeTag = document.querySelector('.closeTag');
+    if (this.props.orderBlock) {
+      taskDiv.style.height = '30vh';
+      listShow.style.opacity = '0';
+      listShow.style.display = 'none';
+      closeTag.style.top= '-20px';
+      this.props.orderExpand(false);
+      this.props.divTask();
+    }
   }
   searchText(e) {
     this.emitSearch(e.target.value);
@@ -126,7 +132,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 <input type="text" placeholder="Search" style={{ width: '100%', outline: 'none' }} />
               </div>
             </div> */}
-            <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 0.1s cubic-bezier(0.600, -0.280, 0.735, 0.045)' }}>
+            <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750)' }}>
               <TripCard detailedInfo={this.detailedInfo} customerName={'Pablo Escobar'} orderStatus={'live'} orderAddress={'Malakpet'} orderPilot={'Tyson'} orderTime={'11:30'} />
               <TripCard customerName={'Vayu'} orderStatus={'Pending'} orderAddress={'Madhapur'} orderPilot={'Mark'} orderTime={'11:00'} />
               <TripCard customerName={'Plomo'} orderStatus={'success'} orderAddress={'Kondapur'} orderPilot={'Kalayug'} orderTime={'10:50'} />
