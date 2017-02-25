@@ -76,7 +76,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
     const { data } = this.state;
     const { stats } = this.props;
     return (
-      <div className="all-40 marginTop" style={{ height: '30vh' }}>
+      <div className="all-100 marginTop" style={{ height: '30vh' }}>
         <div className={classNames('boxShadow', 'TaskExpand', 'block-background', 'PilotLiner', { pilotProgress: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
           <div className={classNames('orders-block', 'ink-flex', { pilotIndeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>

@@ -89,7 +89,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     const { expand, data } = this.state;
     const { stats } = this.props;
     return (
-      <div className="all-40 marginTop" style={{ height: '30vh' }}>
+      <div className="all-65 marginTop" style={{ height: '30vh' }}>
         <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
           <div className={classNames('orders-block', 'ink-flex', { indeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>
@@ -126,7 +126,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 <input type="text" placeholder="Search" style={{ width: '100%', outline: 'none' }} />
               </div>
             </div> */}
-            <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 0.5s linear 0s' }}>
+            <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 0.1s cubic-bezier(0.600, -0.280, 0.735, 0.045)' }}>
               <TripCard detailedInfo={this.detailedInfo} customerName={'Pablo Escobar'} orderStatus={'live'} orderAddress={'Malakpet'} orderPilot={'Tyson'} orderTime={'11:30'} />
               <TripCard customerName={'Vayu'} orderStatus={'Pending'} orderAddress={'Madhapur'} orderPilot={'Mark'} orderTime={'11:00'} />
               <TripCard customerName={'Plomo'} orderStatus={'success'} orderAddress={'Kondapur'} orderPilot={'Kalayug'} orderTime={'10:50'} />
