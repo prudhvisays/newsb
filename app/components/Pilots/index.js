@@ -39,7 +39,6 @@ export default class Pilots extends React.Component { //eslint-disable-line
     this.timer = this.timer.bind(this);
   }
   componentDidMount() {
-    let Datepicker = new Ink.UI.DatePicker( '.ink-datepicker' ); //eslint-disable-line
     const intervalId = setInterval(() => this.timer, 3000);
     this.setState({ intervalId });
   }

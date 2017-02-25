@@ -4,6 +4,8 @@ import TripCard from '../TripCard';
 import Search from '../Search';
 import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 import classNames from 'classnames';
+import Flatpickr from 'react-flatpickr';
+import moment from 'moment';
 
 function boxMullerRandom() {
     let phase = false,
@@ -40,9 +42,9 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.timer = this.timer.bind(this);
     this.searchText = this.searchText.bind(this);
     this.emitSearch = this.emitSearch.bind(this);
+    this.pickDate = this.pickDate.bind(this);
   }
   componentDidMount() {
-    let datepicker = new Ink.UI.DatePicker( '.ink-datepicker' ); //eslint-disable-line
     const intervalId = setInterval(() => this.timer, 3000);
     this.setState({ intervalId });
   }
@@ -92,12 +94,16 @@ export default class Tasks extends React.Component { //eslint-disable-line
   emitSearch(newSearch) {
     this.props.onSearch(newSearch);
   }
+  pickDate(date) {
+    const Date = moment(date[0]).format('YYYYMMDD');
+    this.props.getTeamCustomers({fromDate: Date, toDate: Date });
+  }
   render() {
     const { expand, data } = this.state;
     const { stats } = this.props;
     return (
       <div className="all-65 marginTop" style={{ height: '30vh' }}>
-        <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
+        <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s' }}>
           <div className={classNames('orders-block', 'ink-flex', { indeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>
               <div className="ink-flex">
@@ -107,7 +113,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                   </div>
                 </div>
                 <div className="all-30" style={{ textAlign: 'right' }}>
-                  <input type="text" className="ink-datepicker" data-format="d-m-Y" style={{ width: '92px', color: '#fff' }} />
+                  <Flatpickr options={{ defaultDate: new Date() }} style={{ width: '92px', color: '#fff' }} onChange={this.pickDate} />
                 </div>
               </div>
             </div>

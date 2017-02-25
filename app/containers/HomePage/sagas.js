@@ -52,7 +52,7 @@ export function* fetchTeamsFlow() {
     yield call(fetchTeams);
   }
 }
-export const getProject = () => (state) => state.get('home');
+export const getState = () => (state) => state.get('home');
 export const getDate = () => {
   const nowDate = moment().format('YYYYMMDD');
   return {
@@ -60,27 +60,30 @@ export const getDate = () => {
     toDate: nowDate,
   };
 };
-export function* loadTeamSalesFlow() {
-  const salesDate = getDate();
-  try {
-    yield take('GET_TEAMS_SUCCESS');
-    const teamSales = yield call(realData.getTeamSalesApi, salesDate);
-    yield put(actions.getTeamSalesSuccess(teamSales));
-  } catch (error) {
-    if (error.response) {
-      yield put(actions.getTeamSalesFailure(error.response.data));
-    }
-  }
-}
+
 export function* loadTeamCustomersFlow() {
   const salesDate = getDate();
   try {
-    yield take('GET_TEAM_SALES_SUCCESS');
+    yield take('GET_TEAMS_SUCCESS');
     const teamCustomers = yield call(realData.getTeamCustomersApi, salesDate);
-    yield put(actions.getTeamCustomersSuccess(teamCustomers));
+    yield put(actions.getTeamCustomersSuccess({ response: teamCustomers, date: salesDate }));
   } catch (error) {
     if (error.response) {
       yield put(actions.getTeamCustomersFailure(error.response.data));
+    }
+  }
+}
+
+export function* loadTeamSalesFlow() {
+  try {
+    yield take('GET_TEAM_CUSTOMERS_SUCCESS');
+    const state = yield select(getState());
+    const { date } = state.teamsPanel.teamCustomers
+    const teamSales = yield call(realData.getTeamSalesApi, date);
+    yield put(actions.getTeamSalesSuccess({ response: teamSales, date}));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getTeamSalesFailure(error.response.data));
     }
   }
 }
@@ -105,33 +108,37 @@ export function* fetchTeamsRoot() {
   yield cancel(teamCustomers);
 }
 
-// TEAM SALES fromDate toDate
-export function* fetchTeamSales(salesDate) {
-  console.info(salesDate);
+// TEAM CUSTOMERS AND SALES fromDate toDate
+export function* fetchTeamCustomers(Date) {
+  console.info(Date);
   try {
-    const response = yield call(realData.getTeamSalesApi, salesDate);
-    yield put(actions.getTeamSalesSuccess(response));
+    const customers = yield call(realData.getTeamCustomersApi, Date);
+    yield put(actions.getTeamCustomersSuccess({ response: customers, date: Date }));
   } catch (error) {
     if (error.response) {
-      yield put(actions.getTeamSalesFailure(error.response.data));
+      yield put(actions.getTeamCustomersFailure(error.response.data));
     }
   }
 }
-export function* fetchTeamSalesFlow() {
+export function* fetchTeamCustomersFlow() {
   while(true) {
-    const request = yield take('GET_TEAM_SALES');
+    const request = yield take('GET_TEAM_CUSTOMERS');
     const salesDate = request.payload;
-    yield call(fetchTeamSales, salesDate);
+    yield call(fetchTeamCustomers, salesDate);
   }
 }
-export function* fetchTeamSalesWatch() {
-  yield fork(fetchTeamSalesFlow);
+export function* fetchTeamCustomersWatch() {
+  yield fork(fetchTeamCustomersFlow);
 }
-
-export function* fetchTeamSalesRoot() {
-  const salesRoot = yield fork(fetchTeamSalesWatch);
+export function* fetchTeamSalesWatch() {
+  yield fork(takeLatest, 'GET_TEAM_CUSTOMERS', loadTeamSalesFlow);
+}
+export function* fetchTeamCustomersRoot() {
+  const customersRoot = yield fork(fetchTeamCustomersWatch);
+  const salesWatch = yield fork(fetchTeamSalesWatch);
   yield take('LOCATION_CHANGE');
-  yield cancel(salesRoot);
+  yield cancel(customersRoot);
+  yield cancel(salesWatch);
 }
 // POST ADD TASK
 export function* postAddTask(taskData) {
@@ -176,6 +183,6 @@ export function* postAddTaskRoot() {
 export default [
   fetchOrderStatsWatch,
   fetchTeamsRoot,
-  fetchTeamSalesRoot,
+  fetchTeamCustomersRoot,
   postAddTaskRoot,
 ];

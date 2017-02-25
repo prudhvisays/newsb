@@ -94,6 +94,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getStats={this.props.getStats}
                         searchText={this.props.searchText}
                         stats={this.props.stats}
+                        getTeamCustomers={this.props.getTeamCustomers}
                         closeOrderDetails={this.closeOrderDetails}
                         {...this.props}
                       />
@@ -217,6 +218,7 @@ export function mapDispatchToProps(dispatch) {
     clearForm: () => { dispatch(actions.clearForm()); },
     setSelection: (data) => { dispatch(actions.setSelection(data)); },
     openAccordion: (data) => { dispatch(actions.openAccordion(data)); },
+    getTeamCustomers: (data) => { dispatch(actions.getTeamCustomers(data)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

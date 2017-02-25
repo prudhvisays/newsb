@@ -14,8 +14,14 @@ const initialState = {
   searchText: '',
   teamsPanel: {
     teams: {},
-    teamSales: {},
-    teamCustomers: {},
+    teamSales: {
+      sales: {},
+      date: '',
+    },
+    teamCustomers: {
+      customers: {},
+      date: '',
+    },
     error: '',
     request: false,
   },
@@ -110,7 +116,11 @@ function homeReducer(state = initialState, action) {
       return { ...state,
       teamsPanel: {
         ...state.teamsPanel,
-        teamSales: action.payload,
+        teamSales: {
+          ...state.teamSales,
+          sales: action.payload.response,
+          date: action.payload.date,
+        },
       },
     }
     case 'GET_TEAM_SALES_FAILURE':
@@ -124,7 +134,11 @@ function homeReducer(state = initialState, action) {
         return { ...state,
         teamsPanel: {
           ...state.teamsPanel,
-          teamCustomers: action.payload,
+          teamCustomers: {
+            ...state.teamCustomers,
+            customers: action.payload.response,
+            date: action.payload.date,
+          },
         },
       };
     case 'GET_TEAM_CUSTOMERS_FAILURE':
