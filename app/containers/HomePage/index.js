@@ -25,6 +25,9 @@ import Tabs from '../../components/Tabs';
 import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
 // import checkAuth from '../checkAuth';
+import io from 'socket.io-client';
+
+const socket = io('https://season-boy-api.herokuapp.com').connect();
 
 import * as selectors from './selectors';
 
