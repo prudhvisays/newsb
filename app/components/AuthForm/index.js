@@ -33,7 +33,7 @@ class AuthForm extends React.Component { // eslint-disable-line react/prefer-sta
             <div className="ink-flex push-middle vertical">
               <div className="input-div"><input type="text" placeholder="Username" onChange={this.changeUsername}></input></div>
               <div className="input-div"><input type="password" placeholder="Password" onChange={this.changePassword}></input></div>
-              <button type="submit">Logins</button>
+              <button type="submit">Login</button>
             </div>
           </form>
         </div>
