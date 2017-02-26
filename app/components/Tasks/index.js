@@ -71,8 +71,9 @@ export default class Tasks extends React.Component { //eslint-disable-line
       this.props.divTask();
     }
   }
-  detailedInfo() {
+  detailedInfo(data) {
     this.props.orderDetails();
+    this.props.getOrderDetail(data);
   }
   closeOrders() {
     const taskDiv = document.querySelector('.taskExpand');
@@ -100,10 +101,10 @@ export default class Tasks extends React.Component { //eslint-disable-line
   }
   render() {
     const { expand, data } = this.state;
-    const { stats } = this.props;
+    const { stats, stateOrders } = this.props;
     return (
       <div className="all-65 marginTop" style={{ height: '30vh' }}>
-        <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s' }}>
+        <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', overflow: 'hidden', transition: 'height 0.5s linear 0s' }}>
           <div className={classNames('orders-block', 'ink-flex', { indeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>
               <div className="ink-flex">
@@ -140,10 +141,12 @@ export default class Tasks extends React.Component { //eslint-disable-line
               </div>
             </div> */}
             <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750)' }}>
-              <TripCard detailedInfo={this.detailedInfo} customerName={'Pablo Escobar'} orderStatus={'live'} orderAddress={'Malakpet'} orderPilot={'Tyson'} orderTime={'11:30'} />
-              <TripCard customerName={'Vayu'} orderStatus={'Pending'} orderAddress={'Madhapur'} orderPilot={'Mark'} orderTime={'11:00'} />
-              <TripCard customerName={'Plomo'} orderStatus={'success'} orderAddress={'Kondapur'} orderPilot={'Kalayug'} orderTime={'10:50'} />
-              <TripCard customerName={'Ferry'} orderStatus={'success'} orderAddress={'Madhapur'} orderPilot={'Gustavo'} orderTime={'10:40'} />
+              { stateOrders.map((order) => {
+                const date = moment(order.createdAt).locale('en').format('YYYY-MM-DD HH:mm');
+                return (
+                  <TripCard key={order._id} detailedInfo={() => {this.detailedInfo(order._id)}} customerName={order.title} orderStatus={order.status} orderAddress={order.to_address} orderPilot={'Tyson'} orderTime={date} />
+                );
+              })}
             </div>
           </div>
         </div>

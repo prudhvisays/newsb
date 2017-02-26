@@ -51,6 +51,22 @@ const initialState = {
   },
   },
   auto: 'auto',
+  pilotList: {
+    pilots: [],
+    date: '',
+    error: '',
+  },
+  orderList: {
+    orders: [],
+    date: '',
+    error:'',
+  },
+  orderDetails: {
+    orderId: '',
+    orderInfo: {},
+    error: '',
+    request: false,
+  },
 };
 
 function homeReducer(state = initialState, action) {
@@ -194,6 +210,64 @@ function homeReducer(state = initialState, action) {
         addTaskStatus: action.payload,
       },
     };
+    case 'GET_PILOT_SUCCESS':
+      return {
+        ...state,
+        pilotList: {
+          ...state.pilotList,
+          pilots: action.payload,
+        },
+      };
+    case 'GET_PILOT_FAILURE':
+      return {
+        ...state,
+        pilotList: {
+          ...state.pilotList,
+          error: action.payload,
+        },
+      };
+    case 'GET_ORDER_SUCCESS':
+      return {
+        ...state,
+        orderList: {
+          ...state.orderList,
+          orders: action.payload.response,
+          date: action.payload.date,
+        },
+      };
+    case 'GET_ORDER_FAILURE':
+      return {
+        ...state,
+        orderList: {
+          ...state.orderList,
+          error: action.payload.error,
+          date: action.payload.date,
+        },
+      };
+    case 'GET_ORDER_DETAILS':
+      return {
+        ...state,
+        orderDetails: {
+          ...state.orderDetails,
+          orderId: action.payload,
+          },
+      };
+    case 'GET_ORDER_DETAILS_SUCCESS':
+      return {
+        ...state,
+        orderDetails: {
+          ...state.orderDetails,
+          orderInfo: action.payload,
+        },
+      };
+    case 'REQUEST_ORDER_DETAILS':
+      return {
+        ...state,
+        orderDetails: {
+          ...state.orderDetails,
+          request: action.payload,
+        },
+      };
     default:
       return state;
   }

@@ -16,7 +16,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
           </div>
           <div className="Profile-title">
             <div className="ink-flex push-center">
-              <div className="title">
+              <div>
                 <h3 style={{ margin: 0 }}>Mark heisenberg</h3>
               </div>
             </div>

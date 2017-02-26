@@ -24,20 +24,20 @@ export default class PilotCard extends React.Component { //eslint-disable-line
               </div>
             </div>
           </div>
-          <div className="second-row ink-flex">
-            <div className="all-50 ink-flex push-left">
-              <div className="trip-info ink-flex vertical">
-                <div className="sub-title">Tasks Completed</div>
-                <div>{completedTask} of {totalTask}</div>
-              </div>
-            </div>
-            <div className="all-50 ink-flex push-right">
-              <div className="trip-info ink-flex vertical" style={{ textAlign: 'right' }}>
-                <div className="sub-title">Travelled so far</div>
-                <div>{pilotDistance}</div>
-              </div>
-            </div>
-          </div>
+          {/*<div className="second-row ink-flex">*/}
+            {/*<div className="all-50 ink-flex push-left">*/}
+              {/*<div className="trip-info ink-flex vertical">*/}
+                {/*<div className="sub-title">Tasks Completed</div>*/}
+                {/*<div>{completedTask} of {totalTask}</div>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+            {/*<div className="all-50 ink-flex push-right">*/}
+              {/*<div className="trip-info ink-flex vertical" style={{ textAlign: 'right' }}>*/}
+                {/*<div className="sub-title">Travelled so far</div>*/}
+                {/*<div>{pilotDistance}</div>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
         </div>
       </a>
     );

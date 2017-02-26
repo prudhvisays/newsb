@@ -51,6 +51,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   componentDidMount() {
     this.props.getStats();
     this.props.getTeams();
+    this.props.getPilot();
+    this.props.getOrder();
   }
   divTask() {
     this.setState({ compressed: !this.state.compressed });
@@ -96,6 +98,9 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         stats={this.props.stats}
                         getTeamCustomers={this.props.getTeamCustomers}
                         closeOrderDetails={this.closeOrderDetails}
+                        stateOrders={this.props.orderList}
+                        getOrders={this.props.getOrders}
+                        getOrderDetail={this.props.getOrderDetail}
                         {...this.props}
                       />
                       { !addTask && (<div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
@@ -114,19 +119,27 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           setSelection={this.props.setSelection}
                         />)}
                       </div>)}
-                      {compressed && <div className="all-60 marginTop">{ pilotState && <UserInfo />}</div>}
+                      {compressed && <div className="all-65 marginTop">{ pilotState && <UserInfo />}</div>}
                   </div>
                 </div>
                 <div className="all-40">
                   <div className="column-group">
-                    <Pilots divPilot={this.divPilot} groupDisplay={this.groupDisplay} stats={stats} />
+                    <Pilots
+                      divPilot={this.divPilot}
+                      groupDisplay={this.groupDisplay}
+                      stats={stats}
+                      statePilots={this.props.pilotList}
+                    />
                     <div className="all-100 marginTop" style={{ height: '67vh' }}>
                       {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>
                         { !groupDisplay ? <GroupBlock
                           stateTeamsInfo={this.props.teamsInfo}
                           openAccordion={this.props.openAccordion}
                         /> : null }
-                      </div> : <Tabs closeOrderDetails={this.closeOrderDetails} /> }
+                      </div> : <Tabs
+                          closeOrderDetails={this.closeOrderDetails}
+                          stateOrderInfo={this.props.orderInfo}
+                          stateOrderStatus={this.props.orderInfoStatus} /> }
                     </div>
                   </div>
                 </div>
@@ -146,60 +159,16 @@ const mapStateToProps = createStructuredSelector({
     orderexpand: selectors.orderExpand(),
     pickupcord: selectors.pickupCord(),
     deliverycord: selectors.deliveryCord(),
-    // assignedOrders,
-    // unassignedOrders,
-    // completedOrders,
     stats: selectors.getStats(),
     searchText: selectors.searchText(),
     addTask: selectors.addTask(),
     auto: selectors.auto(),
     teamsInfo: selectors.mergeTeamsInfo(),
-})
-// function mapStateToProps(state) {
-//   const { orderexpand, pickupcord, deliverycord, stats, searchText, addTask, auto } = state.get('home');
-//   const homeData = state.get('home');
-// //   const ordersGet = () => {
-// //       getOrders();
-// //   }
-// //   const assignedOrders = () => {
-// //     const ordersData = ordersGet();
-// //     const Data = data.ordersData;
-// //     _.filter(Data, (assign) => {
-// //     return assign.status === 'ASSIGNED';
-// //   });
-// // };
-// //   const unassignedOrders = () => {
-// //     const ordersData = ordersGet();
-// //     const Data = data.ordersData;
-// //     _.filter(Data, (assign) => {
-// //     return assign.status === 'UNASSIGNED';
-// //   });
-// // };
-// //   const completedOrders = () => {
-// //     const ordersData = ordersGet();
-// //     const Data = data.ordersData;
-// //     _.filter(Data, (assign) => {
-// //     return assign.status === 'COMPLETED';
-// //   });
-// // };
-//   // console.log(assignedOrders());
-//   // console.log(unassignedOrders());
-//   // console.log(completedOrders());
-//   return {
-//     orderexpand,
-//     pickupcord,
-//     deliverycord,
-//     // assignedOrders,
-//     // unassignedOrders,
-//     // completedOrders,
-//     stats,
-//     searchText,
-//     homeData,
-//     addTask,
-//     auto,
-//     data: mergeTeamsInfo(state),
-//   };
-// }
+    pilotList: selectors.pilotList(),
+    orderList: selectors.orderList(),
+    orderInfo: selectors.orderInfo(),
+    orderInfoStatus: selectors.orderInfoStatus(),
+});
 
 export function mapDispatchToProps(dispatch) {
   return {
@@ -219,6 +188,9 @@ export function mapDispatchToProps(dispatch) {
     setSelection: (data) => { dispatch(actions.setSelection(data)); },
     openAccordion: (data) => { dispatch(actions.openAccordion(data)); },
     getTeamCustomers: (data) => { dispatch(actions.getTeamCustomers(data)); },
+    getPilot: (team) => { dispatch(actions.getPilot(team)); },
+    getOrder: (data) => { dispatch(actions.getOrder(data)); },
+    getOrderDetail: (id) => { dispatch(actions.getOrderDetail(id)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

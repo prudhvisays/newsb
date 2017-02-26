@@ -26,13 +26,13 @@ export default class TripCard extends React.Component { //eslint-disable-line
               </div>
             </div>
             <div className="second-row ink-flex">
-              <div className="all-50 ink-flex push-left">
+              <div className="all-70 ink-flex push-left">
                 <div className="trip-info ink-flex vertical">
                   <div className="sub-title">Address</div>
                   <div>{orderAddress}</div>
                 </div>
               </div>
-              <div className="all-50 ink-flex push-right">
+              <div className="all-30 ink-flex push-right">
                 <div className="trip-info ink-flex vertical" style={{ textAlign: 'right' }}>
                   <div className="sub-title">Pilot</div>
                   <div>{orderPilot}</div>
@@ -40,7 +40,7 @@ export default class TripCard extends React.Component { //eslint-disable-line
               </div>
             </div>
           </div>
-          <div className="ink-flex push-center"><div className="sub-title">{ this.props.orderStatus !== 'success' ? `Started At` : `Finished At` } {orderTime}</div></div>
+          <div className="ink-flex push-center"><div className="sub-title">{ this.props.orderStatus !== 'success' ? `Created At` : `Finished At` } {orderTime}</div></div>
         </div>
       </a>
     );

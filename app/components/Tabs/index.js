@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import AddressBlock from './AddressBlock';
 import Timeline from './Timeline';
 import TabStyle from './TabStyle';
@@ -8,6 +9,7 @@ export default class Tabs extends React.Component { //eslint-disable-line
   constructor() {
     super();
     this.customTabs = this.customTabs.bind(this);
+    this.formatTime = this.formatTime.bind(this);
   }
   componentDidMount() {
     document.getElementById('defaultOpen').click();
@@ -31,10 +33,13 @@ export default class Tabs extends React.Component { //eslint-disable-line
     document.getElementById(cityName).style.display = 'block';
     evt.currentTarget.className += ' active';
   }
+  formatTime(time) {
+    return  moment(time).locale('en').format('YYYY-MM-DD HH:mm');
+  }
   render() {
-    const { closeOrderDetails } = this.props
+    const { closeOrderDetails, stateOrderInfo, stateOrderStatus } = this.props
     return (
-      <div className="line-boxShadow block-background" style={{ height: '67vh' }}>
+      <div className="line-boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
         <TabStyle className="tab ink-flex" style={{ margin: 0 }}>
           <li><a className="tablinks" id="defaultOpen" onClick={(event) => { this.customTabs(event, 'London'); }}>Task Details</a></li>
           <li><a className="tablinks" onClick={(event) => { this.customTabs(event, 'Paris'); }}>Activity Timeline</a></li>
@@ -42,54 +47,64 @@ export default class Tabs extends React.Component { //eslint-disable-line
           <li><a className="tablinks" onClick={closeOrderDetails}><i className="fa fa-times-circle" aria-hidden="true"></i></a></li>
         </TabStyle>
         <div id="London" className="tabcontent" style={{ fontSize: '0.7rem' }}>
-          <div className="tab-scroll">
-            <div className="ink-flex second-boxShadow tab-first-row">
-              <div className="all-50">
-                <div className="fw-700 sub-title">TaskId</div>
-                <div>#277ID8</div>
+            <div className="tab-scroll">
+              <div className="ink-flex second-boxShadow tab-first-row">
+                <div className="all-50">
+                  <div className="fw-700 sub-title">TaskId</div>
+                  <div>#277ID8</div>
+                </div>
+                <div className="all-50">
+                  <div className="fw-700 sub-title">Progress</div>
+                  <div><span style={{ color: 'green' }}>{stateOrderInfo.status}</span></div>
+                </div>
               </div>
-              <div className="all-50">
-                <div className="fw-700 sub-title">Progress</div>
-                <div><span style={{ color: 'green' }}>Started</span></div>
+              <div className="ink-flex second-boxShadow tab-second-row">
+                <div className="all-50">
+                  <div className="tab-block ink-flex vertical">
+                    <div className="fw-700 sub-title">Team</div>
+                    <div>{stateOrderInfo.team}</div>
+                  </div>
+                </div>
+                <div className="all-50">
+                  <div className="tab-block ink-flex vertical">
+                    <div className="fw-700 sub-title">Pilot</div>
+                    <div>{stateOrderInfo.pilot}</div>
+                  </div>
+                </div>
               </div>
+              <div className="ink-flex second-boxShadow tab-second-row">
+                <div className="all-50">
+                  <div className="tab-block ink-flex vertical">
+                    <div className="fw-700 sub-title">Start Time</div>
+                    <div>{this.formatTime(stateOrderInfo.pilot_start_date_time)}</div>
+                  </div>
+                </div>
+                <div className="all-50">
+                  <div className="tab-block ink-flex vertical">
+                    <div className="fw-700 sub-title">End Time</div>
+                    <div>{this.formatTime(stateOrderInfo.pilot_start_date_time)}</div>
+                  </div>
+                </div>
+              </div>
+              <AddressBlock Title={'Pickup'}
+                            name={stateOrderInfo.from_name}
+                            phone={stateOrderInfo.from_phone}
+                            email={stateOrderInfo.from_email}
+                            address={stateOrderInfo.from_address}
+              />
+              <AddressBlock Title={'Delivery'}
+                            name={stateOrderInfo.to_name}
+                            phone={stateOrderInfo.to_phone}
+                            email={stateOrderInfo.to_email}
+                            address={stateOrderInfo.to_address}
+              />
             </div>
-            <div className="ink-flex second-boxShadow tab-second-row">
-              <div className="all-50">
-                <div className="tab-block ink-flex vertical">
-                  <div className="fw-700 sub-title">Team</div>
-                  <div>Madhapur</div>
-                </div>
-              </div>
-              <div className="all-50">
-                <div className="tab-block ink-flex vertical">
-                  <div className="fw-700 sub-title">Pilot</div>
-                  <div>Mark Tyson</div>
-                </div>
-              </div>
-            </div>
-            <div className="ink-flex second-boxShadow tab-second-row">
-              <div className="all-50">
-                <div className="tab-block ink-flex vertical">
-                  <div className="fw-700 sub-title">Start Time</div>
-                  <div>7:30pm 12/13/1994</div>
-                </div>
-              </div>
-              <div className="all-50">
-                <div className="tab-block ink-flex vertical">
-                  <div className="fw-700 sub-title">End Time</div>
-                  <div>7:30pm 12/13/1994</div>
-                </div>
-              </div>
-            </div>
-            <AddressBlock Title={'Pickup'} />
-            <AddressBlock Title={'Delivery'} />
           </div>
-        </div>
-        <div id="Paris" className="tabcontent">
-          <Timeline />
-        </div>
-        <div id="Tokyo" className="tabcontent">
-        </div>
+          <div id="Paris" className="tabcontent">
+          <Timeline timeLine={stateOrderInfo.timeline} />
+          </div>
+          <div id="Tokyo" className="tabcontent">
+          </div>
       </div>
     );
   }

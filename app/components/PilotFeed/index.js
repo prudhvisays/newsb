@@ -7,13 +7,13 @@ export default class PilotFeed extends React.Component { //eslint-disable-line
     const { pilotStats } = stats;
     return (
       <div className="ink-flex pilot-feed-boxShadow" style={{ fontSize: '1rem', position: 'relative' }}>
-        <div className="all-33">
+        <div className="all-33" onClick={tasksExpand}>
           <Score score={pilotStats.available} subTitle={'Active'} />
         </div>
-        <div className="all-33">
+        <div className="all-33" onClick={tasksExpand}>
           <Score score={pilotStats.offline} subTitle={'Offline'} />
         </div>
-        <div className="all-33">
+        <div className="all-33" onClick={tasksExpand}>
           <Score score={pilotStats.total} subTitle={'Total'} />
         </div>
       </div>

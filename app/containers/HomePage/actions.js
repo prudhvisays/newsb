@@ -195,3 +195,77 @@ export function addTaskStatus(data) {
     payload: data,
   };
 }
+
+// GET PILOTS
+
+export function getPilot(data) {
+  return {
+    type: 'GET_PILOT',
+    payload: data,
+  };
+}
+
+export function getPilotSuccess(data) {
+  return {
+    type: 'GET_PILOT_SUCCESS',
+    payload: data,
+  };
+}
+
+export function getPilotFailure(data) {
+  return {
+    type: 'GET_PILOT_FAILURE',
+    payload: data,
+  };
+}
+
+// GET ORDERS
+
+export function getOrder(data) {
+  return {
+    type: 'GET_ORDER',
+    payload: data,
+  }
+}
+
+export function getOrderSuccess(data) {
+  return {
+    type: 'GET_ORDER_SUCCESS',
+    payload: data,
+  };
+}
+
+export function getOrderFailure(data) {
+  return {
+    type: 'GET_ORDER_FAILURE',
+    payload: data,
+  };
+}// GET ORDER DETAILS
+export function requestOrderDetail(data) {
+  return {
+    type: 'REQUEST_ORDER_DETAILS',
+    payload: data,
+  };
+}
+
+export function getOrderDetail(data) {
+  return {
+    type: 'GET_ORDER_DETAILS',
+    payload: data,
+  };
+}
+
+export function getOrderDetailSuccess(data) {
+  return {
+    type: 'GET_ORDER_DETAILS_SUCCESS',
+    payload: data,
+  };
+}
+
+export function getOrderDetailFailure(data) {
+  return {
+    type: 'GET_ORDER_DETAILS_FAILURE',
+    payload: data,
+  };
+}
+

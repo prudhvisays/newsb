@@ -37,6 +37,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
     this.taskExpand = this.taskExpand.bind(this);
     this.detailedInfo = this.detailedInfo.bind(this);
     this.timer = this.timer.bind(this);
+    this.closePilot = this.closePilot.bind(this);
   }
   componentDidMount() {
     const intervalId = setInterval(() => this.timer, 3000);
@@ -54,18 +55,27 @@ export default class Pilots extends React.Component { //eslint-disable-line
   taskExpand() {
     const taskDiv = document.querySelector('.TaskExpand');
     const listShow = document.querySelector('.ListShow');
+    const closeTag = document.querySelector('.closePilotTag');
     if (!this.state.expand) {
       this.props.groupDisplay();
       taskDiv.style.height = '98vh';
       listShow.style.opacity = '1';
       listShow.style.display = 'block';
+      closeTag.style.top = '-2px'
       this.setState({ expand: true });
-    } else {
-      this.props.groupDisplay();
-      taskDiv.style.height = '30vh';
-      listShow.style.opacity = '0';
-      listShow.style.display = 'none';
-      this.setState({ expand: false });
+    }
+  }
+  closePilot() {
+    const taskDiv = document.querySelector('.TaskExpand');
+    const listShow = document.querySelector('.ListShow');
+    const closeTag = document.querySelector('.closePilotTag');
+    if(this.state.expand) {
+        this.props.groupDisplay();
+        taskDiv.style.height = '30vh';
+        listShow.style.opacity = '0';
+        listShow.style.display = 'none';
+        closeTag.style.top = '-20px';
+        this.setState({ expand: false });
     }
   }
   detailedInfo() {
@@ -73,7 +83,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
   }
   render() {
     const { data } = this.state;
-    const { stats } = this.props;
+    const { stats, statePilots } = this.props;
     return (
       <div className="all-100 marginTop" style={{ height: '30vh' }}>
         <div className={classNames('boxShadow', 'TaskExpand', 'block-background', 'PilotLiner', { pilotProgress: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
@@ -89,15 +99,18 @@ export default class Pilots extends React.Component { //eslint-disable-line
             </div>
           </div>
           <div style={{ padding: '0.6em 0.8em' }}>
-            <div className="ink-flex">
+            <div className="ink-flex" style={{ position: 'relative' }}>
               <div className="all-100">
                 <Sparklines data={data} limit={20} width={100} height={10} margin={0}>
                   <SparklinesLine style={{ stroke: '#51d4ff', strokeWidth: '0.5', fill: 'none' }} />
                   <SparklinesSpots size={1} />
                 </Sparklines>
               </div>
-              <div className="all-100">
+              <div className="all-100" style={{ position: 'relative', zIndex: '1', background: '#394264' }}>
                 <PilotFeed tasksExpand={this.taskExpand} stats={stats} />
+              </div>
+              <div className="all-100 closePilotTag">
+                <a className="ink-flex push-right closePilotFeed" onClick={this.closePilot}>Close</a>
               </div>
             </div>
             {/* <div className="search" style={{ marginTop: '14px', width: '20.90em' }}>
@@ -108,11 +121,11 @@ export default class Pilots extends React.Component { //eslint-disable-line
             </div> */}
             <div className="ListShow" style={{ marginTop: '2.5em', display: 'none', opacity: '0', transition: 'all 0.5s linear 0s' }}>
               <div className="list-scroll">
-                <PilotCard detailedInfo={this.detailedInfo} pilotName={'Mark Heisenberg'} pilotStatus={'Online'} totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
-                <PilotCard pilotName={'Kalayug'} pilotStatus={'Online'} totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
-                <PilotCard pilotName={'Gustavo'} pilotStatus={'Offline'} totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
-                <PilotCard pilotName={'Nortan'} pilotStatus={'Connection Lost'} totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
-                <PilotCard pilotName={'Ferry'} pilotStatus={'Poor Connection'} totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
+                { statePilots.map((pilot) => {
+                  return(
+                    <PilotCard detailedInfo={this.detailedInfo} key={pilot._id} pilotName={`${pilot.user.firstName} ${pilot.user.lastName}`} pilotStatus={pilot.isActive ? 'Active' : 'Offline' } totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
+                  )
+                })}
               </div>
             </div>
           </div>

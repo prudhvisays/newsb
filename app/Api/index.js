@@ -17,19 +17,6 @@ const realData = {
       responseType: 'json',
     }).then((response) => response.data);
   },
-  getOrders(date) {
-    const payload = {
-      date: date,
-      manager: manager
-    };
-    const GET_ORDERS_API = `${API_URL}/orders/list`;
-    return axios({
-      method: 'POST',
-      url: GET_ORDERS_API,
-      data: payload,
-      responseType: 'json',
-    }).then((response) => response.data);
-  },
   getPilotStatsApi(statsDate) {
     const StatsDate = {
       team: '*',

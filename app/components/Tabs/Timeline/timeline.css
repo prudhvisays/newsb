@@ -43,6 +43,7 @@
   min-width: 70%;
   width:198px;
   word-wrap: break-word;
+  margin-top: 1em;
 }
 .timeline-info .timeline-sub {
   color: rgb(241, 82, 123);

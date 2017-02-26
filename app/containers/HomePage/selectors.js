@@ -64,6 +64,30 @@ const mergeTeamsInfo = () => createSelector(
       })
     );
 
+const pilotList = () => createSelector(
+  homeData(),
+  (state) => state.pilotList.pilots,
+);
+
+const orderList = () => createSelector(
+  homeData(),
+  (state) => state.orderList.orders,
+);
+
+const orderId = () => createSelector(
+  homeData(),
+  (state) => state.orderDetails.orderId,
+);
+
+const orderInfo = () => createSelector(
+  homeData(),
+  (state) => state.orderDetails.orderInfo,
+);
+const orderInfoStatus = () => createSelector(
+  homeData(),
+  (state) => state.orderDetails.request,
+);
+
 export {
   homeData,
   orderExpand,
@@ -79,4 +103,9 @@ export {
   teamCustomers,
   mergeTeamSales,
   mergeTeamsInfo,
+  pilotList,
+  orderList,
+  orderId,
+  orderInfo,
+  orderInfoStatus,
 };

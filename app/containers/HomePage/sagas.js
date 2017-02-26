@@ -1,8 +1,11 @@
-import { takeLatest, takeEvery, delay } from 'redux-saga';
-import { take, call, put, select, fork, cancel, race } from 'redux-saga/effects';
-import realData from '../../Api';
-import * as actions from './actions';
+import { delay } from 'redux-saga';
+import { take, call, put, select, fork, cancel, race, takeLatest, takeEvery, } from 'redux-saga/effects';
 import moment from 'moment';
+import realData from '../../Api';
+import pilotApi from '../../Api/Pilot';
+import orderApi from '../../Api/Order';
+import * as actions from './actions';
+import { orderId } from './selectors';
 
 export function* fetchOrderStats() {
   const statsDate = moment().format('YYYYMMDD');
@@ -180,9 +183,97 @@ export function* postAddTaskRoot() {
   yield take('LOCATION_CHANGE');
   yield cancel(postTaskWatcher);
 }
+// End of Post Add Task
+
+// GET PILOTS
+export function* fetchPilots(team) {
+  console.log("fecth pilots" + team);
+  try {
+    const response = yield call(pilotApi.getPilots, team);
+    yield put(actions.getPilotSuccess(response));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getPilotFailure(error.message));
+    }
+  }
+}
+
+export function* fetchPilotsFlow() {
+  while(true){
+   const req = yield take('GET_PILOT');
+   const team = req.payload;
+    yield call(fetchPilots, team);
+  }
+}
+export function* fetchPilotsWatch() {
+  yield fork(fetchPilotsFlow);
+}
+
+export function* fetchPilotsRoot() {
+const pilotsWatcher = yield fork(fetchPilotsWatch);
+yield take('LOCATION_CHANGE');
+yield cancel(pilotsWatcher);
+}
+
+export function* fetchOrders(date) {
+  try {
+    const response = yield call(orderApi.getOrders, date);
+    yield put(actions.getOrderSuccess({ response, date }));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getOrderFailure({ error: error.message, date }));
+    }
+  }
+}
+export function* fetchOrdersFlow() {
+  while (true) {
+    const req = yield take('GET_ORDER');
+    const date = req.payload ? req.payload : moment().format('YYYYMMDD');
+    console.log(date);
+    yield call(fetchOrders, date);
+  }
+}
+export function* fetchOrdersWatch() {
+  yield fork(fetchOrdersFlow);
+}
+export function* fetchOrdersRoot() {
+  const ordersWatcher = yield fork(fetchOrdersWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(ordersWatcher);
+}
+
+export function* fetchOrderDetails(id) {
+  yield put(actions.requestOrderDetail(true));
+  try {
+    const response = yield call(orderApi.getOrderDetails, id);
+    yield put(actions.getOrderDetailSuccess(response));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getOrderDetailFailure(error.message));
+    }
+  } finally {
+    yield call(delay,2000);
+    yield put(actions.requestOrderDetail(false));
+  }
+}
+export function* fetchOrderDetailsFlow() {
+  const id = yield select(orderId());
+  yield call(fetchOrderDetails, id);
+}
+export function* fetchOrderDetailsWatch() {
+  yield fork(takeLatest,'GET_ORDER_DETAILS', fetchOrderDetailsFlow);
+}
+export function* fetchOrderDetailsRoot(){
+  const detailWatcher = yield fork(fetchOrderDetailsWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(detailWatcher);
+}
 export default [
   fetchOrderStatsWatch,
   fetchTeamsRoot,
   fetchTeamCustomersRoot,
   postAddTaskRoot,
+  fetchPilotsRoot,
+  fetchOrdersRoot,
+  fetchOrderDetailsRoot,
 ];
