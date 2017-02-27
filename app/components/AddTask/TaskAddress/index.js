@@ -29,7 +29,7 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
   }
   calendarChange(date) {
     const { pickup } = this.props.stateAddTask;
-    const Date = moment(date[0]).format()
+    const Date = moment(date[0]).utc().format();
     this.emitChanges({ ...pickup, from_date: Date });
   }
   emitChanges(newFormState) {

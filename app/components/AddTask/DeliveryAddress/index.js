@@ -29,7 +29,7 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
   }
   toDate(date) {
     const { delivery } = this.props.stateAddTask;
-    const Date = moment(date[0]).format();
+    const Date = moment(date[0]).utc().format();
     this.emitChanges({ ...delivery, to_date: Date });
   }
   emitChanges(newFormState) {
