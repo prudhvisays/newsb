@@ -30,7 +30,7 @@ export default class Timeline extends React.Component { //eslint-disable-line
             <div className="dot"></div>
             <div className="ink-flex vertical">
               <div>{time[0]}</div>
-              <div className="timeline-box">Madhapur malakpet narcos street kondapur 50004</div>
+              {/*<div className="timeline-box">Madhapur malakpet narcos street kondapur 50004</div>*/}
             </div>
           </div>
         </div>)

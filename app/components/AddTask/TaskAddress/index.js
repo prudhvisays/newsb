@@ -5,6 +5,7 @@ import '../../../../node_modules/flatpickr/dist/themes/dark.css';
 import GMaps from '../GMaps';
 import './taskAddress.css';
 import moment from 'moment';
+import tz from 'moment-timezone';
 
 export default class TaskAddress extends React.Component { //eslint-disable-line
   constructor(props) {
@@ -29,7 +30,7 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
   }
   calendarChange(date) {
     const { pickup } = this.props.stateAddTask;
-    const Date = moment(date[0]).format();
+    const Date = moment(date[0]).format()
     this.emitChanges({ ...pickup, from_date: Date });
   }
   emitChanges(newFormState) {
