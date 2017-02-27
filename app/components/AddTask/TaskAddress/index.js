@@ -5,7 +5,6 @@ import '../../../../node_modules/flatpickr/dist/themes/dark.css';
 import GMaps from '../GMaps';
 import './taskAddress.css';
 import moment from 'moment';
-import tz from 'moment-timezone';
 
 export default class TaskAddress extends React.Component { //eslint-disable-line
   constructor(props) {
