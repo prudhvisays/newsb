@@ -29,7 +29,7 @@ export default class TripCard extends React.Component { //eslint-disable-line
               <div className="all-70 ink-flex push-left">
                 <div className="trip-info ink-flex vertical">
                   <div className="sub-title">Address</div>
-                  <div>{orderAddress}</div>
+                  <div>{`${orderAddress.substring(0, 70)}...`}</div>
                 </div>
               </div>
               <div className="all-30 ink-flex push-right">

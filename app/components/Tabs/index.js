@@ -51,7 +51,7 @@ export default class Tabs extends React.Component { //eslint-disable-line
               <div className="ink-flex second-boxShadow tab-first-row">
                 <div className="all-50">
                   <div className="fw-700 sub-title">TaskId</div>
-                  <div>#277ID8</div>
+                  <div>{stateOrderInfo._id}</div>
                 </div>
                 <div className="all-50">
                   <div className="fw-700 sub-title">Progress</div>
