@@ -11,10 +11,20 @@ export default class TeamSelect extends React.Component { //eslint-disable-line
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(value) {
-    console.log(`selected ${value}`);
+  onChange(e) {
+    let value;
+    if (e && e.target) {
+      value = e.target.value;
+    } else {
+      value = e;
+    }
+    this.props.teamSelect(value);
   }
+
   render() {
+    const select = this.props.stateTeamList && this.props.stateTeamList.map((team) => (
+        <Option key={team._id}  text={team._id}>{team.name}</Option>
+      ));
     return (
       <Select
         allowClear
@@ -22,20 +32,11 @@ export default class TeamSelect extends React.Component { //eslint-disable-line
         style={{ width: '100%' }}
         animation="slide-up"
         showSearch={false}
-        onChange={(val) => { this.onChange(val); }}
+        optionLabelProp="children"
+        optionFilterProp="text"
+        onChange={this.onChange}
       >
-        <Option value="Kondapur">
-          <b
-            style={{
-              color: 'red',
-            }}
-          >
-            Kondapur
-          </b>
-        </Option>
-        <Option value="Madhapur">Madhapur</Option>
-        <Option value="disabled" disabled>disabled</Option>
-        <Option value="Gachibowli">Gachibowli</Option>
+        {select}
       </Select>
     );
   }

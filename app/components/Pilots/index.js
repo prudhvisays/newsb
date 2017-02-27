@@ -76,10 +76,12 @@ export default class Pilots extends React.Component { //eslint-disable-line
         listShow.style.display = 'none';
         closeTag.style.top = '-20px';
         this.setState({ expand: false });
+        this.props.closeDivPilot();
     }
   }
-  detailedInfo() {
+  detailedInfo(id) {
     this.props.divPilot();
+    this.props.getPilotDetail(id);
   }
   render() {
     const { data } = this.state;
@@ -122,8 +124,8 @@ export default class Pilots extends React.Component { //eslint-disable-line
             <div className="ListShow" style={{ marginTop: '2.5em', display: 'none', opacity: '0', transition: 'all 0.5s linear 0s' }}>
               <div className="list-scroll">
                 { statePilots.map((pilot) => {
-                  return(
-                    <PilotCard detailedInfo={this.detailedInfo} key={pilot._id} pilotName={`${pilot.user.firstName} ${pilot.user.lastName}`} pilotStatus={pilot.isActive ? 'Active' : 'Offline' } totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
+                  return (
+                    <PilotCard detailedInfo={() => { this.detailedInfo(pilot._id) }} key={pilot._id} pilotName={`${pilot.user.firstName} ${pilot.user.lastName}`} pilotStatus={pilot.isActive ? 'Active' : 'Offline' } totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
                   )
                 })}
               </div>

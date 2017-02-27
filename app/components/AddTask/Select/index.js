@@ -3,21 +3,6 @@ import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import './RcSelect.css';
 
-const children = [];
-for (let i = 10; i < 36; i += 1) {
-  children.push(
-    <Option key={i.toString(36) + i} disabled={i === 10} title={`${i}`}>
-      SeasonBoy{i}
-    </Option>
-  );
-}
-function onSelect() {
-  console.log(arguments);
-}
-
-function onDeselect() {
-  console.log(arguments);
-}
 export default class AddSelect extends React.Component { //eslint-disable-line
   constructor(props) {
     super(props);
@@ -31,9 +16,7 @@ export default class AddSelect extends React.Component { //eslint-disable-line
 
   onChange(value) {
     console.log('onChange', value);
-    this.setState({
-      value,
-    });
+    this.props.pilotSelect(value);
   }
   useAnim(e) {
     this.setState({
@@ -41,29 +24,21 @@ export default class AddSelect extends React.Component { //eslint-disable-line
     });
   }
   render() {
-    const dropdownMenuStyle = {
-      maxHeight: 200,
-      overflow: 'auto',
-      borderRadius: 0,
-      fontSize: '0.8rem',
-    };
+    const filteredPilots = this.props.selectedPilots && this.props.selectedPilots.map((pilot) => (
+        <Option key={pilot._id} text={pilot.user.firstName}>{pilot.user.firstName}</Option>
+      ));
     return (
       <Select
-          value={this.state.value}
-          animation={this.state.useAnim ? 'slide-up' : null}
-          choiceTransitionName="rc-select-selection__choice-zoom"
-          dropdownMenuStyle={dropdownMenuStyle}
-          style={{ width: '100%' }}
-          multiple
-          optionFilterProp="children"
-          optionLabelProp="children"
-          onSelect={onSelect}
-          onDeselect={onDeselect}
-          placeholder="Select Pilots"
-          onChange={this.onChange}
-          tokenSeparators={[' ', ',']}
+        allowClear
+        placeholder="Select Pilot"
+        style={{ width: '100%' }}
+        animation="slide-up"
+        showSearch={false}
+        optionLabelProp="children"
+        optionFilterProp="text"
+        onChange={this.onChange}
         >
-          {children}
+          {filteredPilots}
         </Select>
     );
   }

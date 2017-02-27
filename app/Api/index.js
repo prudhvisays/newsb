@@ -8,6 +8,7 @@ const realData = {
   getOrderStatsApi(statsDate) {
     const StatsDate = {
       date: statsDate,
+      timeZone : 'Asia/Kolkata'
     };
     const GET_ORDER_STATS_API = `${API_URL}/orders/stats`;
     return axios({
@@ -56,7 +57,7 @@ const realData = {
     }).then((response) => response.data);
   },
   postAddTaskApi(data) {
-    const { pickup, delivery, taskInfo } = data.stateAddTask;
+    const { pickup, delivery, taskInfo, selection } = data.stateAddTask;
     const payload = {
       title: taskInfo.title,
       description: taskInfo.description,
@@ -80,7 +81,8 @@ const realData = {
         coordinates: [data.pCord.pLng, data.pCord.pLat],
         type: 'Point',
       },
-      pilot: '',
+      pilot: selection.pilots ? selection.pilots : '',
+      team: selection.teamSelect,
     };
     const POST_ADD_TASK_API = `${API_URL}/orders`;
     return axios({

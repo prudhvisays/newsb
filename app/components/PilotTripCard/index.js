@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class PilotTripCard extends React.Component { //eslint-disable-line
   render() {
-    const { detailedInfo, pilotStatus, totalTask, completedTask, pilotDistance } = this.props;
+    const { detailedInfo, pilotStatus, customer, pilotDistance } = this.props;
     return (
       <a onClick={detailedInfo} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="trip-card pilot-boxShadow block-background marginBottom" style={{ fontSize: '0.7rem', padding: '1em' }}>
@@ -16,8 +16,8 @@ export default class PilotTripCard extends React.Component { //eslint-disable-li
           <div className="second-row ink-flex">
             <div className="all-50 ink-flex push-left">
               <div className="trip-info ink-flex vertical">
-                <div className="sub-title">Tasks Completed</div>
-                <div>{completedTask} of {totalTask}</div>
+                <div className="sub-title">Customer</div>
+                <div>{customer}</div>
               </div>
             </div>
             <div className="all-50 ink-flex push-right">

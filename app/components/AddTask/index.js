@@ -50,6 +50,11 @@ clearForm(e) {
      stateAddTask,
      deliveryChange,
      stateAuto,
+     stateTeamList,
+     teamSelect,
+     stateSelectedPilots,
+     stateOptedPilot,
+     pilotSelect,
     } = this.props;
     return (
       <div className="boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
@@ -102,8 +107,10 @@ clearForm(e) {
                     </div>
                   </div>
                   <div className="ink-flex vertical">
-                    <div style={{ margin: '0 0.3em' }}><TeamSelect /></div>
-                    { !(stateAuto === 'auto') && <div style={{ margin: '0.2em 0.3em' }}><Select /></div> }
+                    <div style={{ margin: '0 0.3em' }}><TeamSelect stateTeamList={stateTeamList} teamSelect={teamSelect} /></div>
+                    { !(stateAuto === 'auto') && <div style={{ margin: '0.2em 0.3em' }}>
+                      <Select selectedPilots={stateSelectedPilots} stateOptedPilot={stateOptedPilot} pilotSelect={pilotSelect} />
+                    </div> }
                   </div>
                 </div>
               </div>

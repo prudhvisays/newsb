@@ -269,3 +269,46 @@ export function getOrderDetailFailure(data) {
   };
 }
 
+// GET PILOT DETAILS
+export function requestPilotDetail(data) {
+  return {
+    type: 'REQUEST_PILOT_DETAILS',
+    payload: data,
+  };
+}
+
+export function getPilotDetail(data) {
+  return {
+    type: 'GET_PILOT_DETAILS',
+    payload: data,
+  };
+}
+
+export function getPilotDetailSuccess(data) {
+  return {
+    type: 'GET_PILOT_DETAILS_SUCCESS',
+    payload: data,
+  };
+}
+
+export function getPilotDetailFailure(data) {
+  return {
+    type: 'GET_PILOT_DETAILS_FAILURE',
+    payload: data,
+  };
+}
+
+// ADD TASK TEAM SELECTION
+export function teamSelect(id) {
+  return {
+    type: 'TEAM_SELECT',
+    payload: id,
+  };
+}
+export function pilotSelect(data) {
+  return {
+    type: 'PILOT_SELECT',
+    payload: data,
+  };
+}
+

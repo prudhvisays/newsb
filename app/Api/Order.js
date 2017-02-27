@@ -11,7 +11,8 @@ const orderApi = {
   getOrders(date) {
     const payload = {
       date: date,
-      manager: manager
+      manager: manager,
+      timeZone : 'Asia/Kolkata'
     };
     const GET_ORDERS_API = `${API_URL}/orders/list`;
     return axios({

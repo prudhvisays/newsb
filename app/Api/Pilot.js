@@ -28,6 +28,19 @@ const PilotApi = {
       responseType: 'json',
     }).then((response) => response.data);
   },
+  getPilotDetails(date, id) {
+    const payload = {
+      date: date,
+      timeZone: 'Asia/Kolkata',
+    };
+    const GET_PILOT_DETAILS_API = `${API_URL}/pilots/activity/${id}`;
+    return axios({
+      method: 'POST',
+      url: GET_PILOT_DETAILS_API,
+      data: payload,
+      responseType: 'json',
+    }).then((response) => response.data);
+  },
 };
 
 export default PilotApi;

@@ -42,11 +42,12 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
       addTask: false,
     };
     this.divTask = this.divTask.bind(this);
-    this.divPilot = this.divPilot.bind(this);
+    this.openDivPilot = this.openDivPilot.bind(this);
     this.orderDetails = this.orderDetails.bind(this);
     this.groupDisplay = this.groupDisplay.bind(this);
     this.addTask = this.addTask.bind(this);
     this.closeOrderDetails = this.closeOrderDetails.bind(this);
+    this.closeDivPilot = this.closeDivPilot.bind(this);
   }
   componentDidMount() {
     this.props.getStats();
@@ -57,9 +58,17 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   divTask() {
     this.setState({ compressed: !this.state.compressed });
   }
-  divPilot() {
-    this.setState({ compressed: !this.state.compressed });
-    this.setState({ pilotState: !this.state.pilotState });
+  openDivPilot() {
+    if(!this.state.compressed && !this.state.pilotState) {
+      this.setState({ compressed: !this.state.compressed });
+      this.setState({ pilotState: !this.state.pilotState });
+    }
+  }
+  closeDivPilot() {
+    if(this.state.compressed && this.state.pilotState) {
+      this.setState({ compressed: !this.state.compressed });
+      this.setState({ pilotState: !this.state.pilotState });
+    }
   }
   groupDisplay() {
     this.setState({ groupDisplay: !this.state.groupDisplay });
@@ -80,7 +89,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     const { compressed, pilotState, orderDetails, groupDisplay, addTask } = this.state;
     const { stats } = this.props;
-    console.log(this.props.teamsInfo);
+    console.log(this.props.selectedPilots);
     return (
       <section style={{ background: '#1f253d', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
@@ -117,18 +126,30 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           clearForm={this.props.clearForm}
                           stateAuto={this.props.auto}
                           setSelection={this.props.setSelection}
+                          stateTeamList={this.props.teamsList}
+                          statePilots={this.props.pilotList}
+                          teamSelect={this.props.teamSelect}
+                          stateSelectedPilots={this.props.selectedPilots}
+                          stateOptedPilot={this.props.optedPilot}
+                          pilotSelect={this.props.pilotSelect}
                         />)}
                       </div>)}
-                      {compressed && <div className="all-65 marginTop">{ pilotState && <UserInfo />}</div>}
+                      {compressed && <div className="all-65 marginTop">{ pilotState && <UserInfo
+                        statePilotInfo={this.props.pilotInfo}
+                        statePilotStatus={this.props.pilotDetailStatus}
+                        closeDivPilot={this.closeDivPilot}
+                      />}</div>}
                   </div>
                 </div>
                 <div className="all-40">
                   <div className="column-group">
                     <Pilots
-                      divPilot={this.divPilot}
+                      divPilot={this.openDivPilot}
                       groupDisplay={this.groupDisplay}
                       stats={stats}
                       statePilots={this.props.pilotList}
+                      getPilotDetail={this.props.getPilotDetail}
+                      closeDivPilot={this.closeDivPilot}
                     />
                     <div className="all-100 marginTop" style={{ height: '67vh' }}>
                       {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>
@@ -168,6 +189,11 @@ const mapStateToProps = createStructuredSelector({
     orderList: selectors.orderList(),
     orderInfo: selectors.orderInfo(),
     orderInfoStatus: selectors.orderInfoStatus(),
+    teamsList: selectors.getTeams(),
+    selectedPilots: selectors.selectedPilots(),
+    optedPilot: selectors.optedPilot(),
+    pilotInfo: selectors.pilotInfo(),
+    pilotDetailStatus: selectors.pilotDetailStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -191,6 +217,9 @@ export function mapDispatchToProps(dispatch) {
     getPilot: (team) => { dispatch(actions.getPilot(team)); },
     getOrder: (data) => { dispatch(actions.getOrder(data)); },
     getOrderDetail: (id) => { dispatch(actions.getOrderDetail(id)); },
+    teamSelect: (id) => { dispatch(actions.teamSelect(id)); },
+    pilotSelect: (data) => { dispatch(actions.pilotSelect(data)); },
+    getPilotDetail: (id) => { dispatch(actions.getPilotDetail(id)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

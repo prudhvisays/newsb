@@ -34,6 +34,7 @@ const teamsPanel = () => createSelector(
   homeData(),
   (homeState) => homeState.teamsPanel,
 );
+
 const getTeams = () => createSelector(
   teamsPanel(),
   (panel) => panel.teams,
@@ -88,6 +89,47 @@ const orderInfoStatus = () => createSelector(
   (state) => state.orderDetails.request,
 );
 
+const selectedTeam = () => createSelector(
+  addTask(),
+  (addtask) => addtask.selection.teamSelect,
+);
+
+const selectedPilots = () => createSelector(
+  [
+    selectedTeam(),
+    pilotList(),
+  ],
+  (teamId, pilots) => _.filter(pilots, (pilot) => {
+    let pilotId = ''
+    pilot.teams.map((pilotid) => pilotId = pilotid)
+    return teamId === pilotId
+  }),
+);
+
+const optedPilot = () => createSelector(
+  addTask(),
+  (task) => task.selection.pilots,
+)
+const pilotDetails = () => createSelector(
+  homeData(),
+  (state) => state.pilotDetails,
+)
+const pilotId = () => createSelector(
+  pilotDetails(),
+  (pilot) => pilot.pilotId,
+);
+
+const pilotInfo = () => createSelector(
+  pilotId(),
+  pilotDetails(),
+  (id, pilot) => pilot.pilotInfo,
+);
+
+const pilotDetailStatus = () => createSelector(
+  pilotDetails(),
+  (pilot) => pilot.request,
+);
+
 export {
   homeData,
   orderExpand,
@@ -108,4 +150,11 @@ export {
   orderId,
   orderInfo,
   orderInfoStatus,
+  selectedTeam,
+  selectedPilots,
+  optedPilot,
+  pilotId,
+  pilotDetails,
+  pilotInfo,
+  pilotDetailStatus,
 };

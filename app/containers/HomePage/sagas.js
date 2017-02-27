@@ -5,7 +5,7 @@ import realData from '../../Api';
 import pilotApi from '../../Api/Pilot';
 import orderApi from '../../Api/Order';
 import * as actions from './actions';
-import { orderId } from './selectors';
+import { orderId, pilotId } from './selectors';
 
 export function* fetchOrderStats() {
   const statsDate = moment().format('YYYYMMDD');
@@ -268,6 +268,33 @@ export function* fetchOrderDetailsRoot(){
   yield take('LOCATION_CHANGE');
   yield cancel(detailWatcher);
 }
+export function* fetchPilotDetails(Date, id) {
+  yield put(actions.requestPilotDetail(true));
+  try {
+    const response = yield call(pilotApi.getPilotDetails, Date, id);
+    yield put(actions.getPilotDetailSuccess(response));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getPilotDetailFailure(error.message));
+    }
+  } finally {
+    yield call(delay,2000);
+    yield put(actions.requestPilotDetail(false));
+  }
+}
+export function* fetchPilotDetailsFlow() {
+  const Date = moment().format('YYYYMMDD');
+  const id = yield select(pilotId());
+  yield call(fetchPilotDetails, Date, id);
+}
+export function* fetchPilotDetailsWatch() {
+  yield fork(takeLatest,'GET_PILOT_DETAILS', fetchPilotDetailsFlow);
+}
+export function* fetchPilotDetailsRoot(){
+  const pilotDetailWatcher = yield fork(fetchPilotDetailsWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(pilotDetailWatcher);
+}
 export default [
   fetchOrderStatsWatch,
   fetchTeamsRoot,
@@ -276,4 +303,5 @@ export default [
   fetchPilotsRoot,
   fetchOrdersRoot,
   fetchOrderDetailsRoot,
+  fetchPilotDetailsRoot,
 ];

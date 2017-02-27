@@ -13,7 +13,7 @@ const initialState = {
   },
   searchText: '',
   teamsPanel: {
-    teams: {},
+    teams: [],
     teamSales: {
       sales: {},
       date: '',
@@ -49,6 +49,10 @@ const initialState = {
     statusText: 'Sending',
     statusColor: '#fff',
   },
+   selection: {
+     teamSelect: '',
+     pilots: '',
+   } ,
   },
   auto: 'auto',
   pilotList: {
@@ -67,6 +71,12 @@ const initialState = {
     error: '',
     request: false,
   },
+  pilotDetails: {
+    pilotId: '',
+    pilotInfo: {},
+    error: '',
+    request: false,
+  }
 };
 
 function homeReducer(state = initialState, action) {
@@ -268,6 +278,52 @@ function homeReducer(state = initialState, action) {
           request: action.payload,
         },
       };
+      case 'GET_PILOT_DETAILS':
+      return {
+        ...state,
+        pilotDetails: {
+          ...state.pilotDetails,
+          pilotId: action.payload,
+          },
+      };
+    case 'GET_PILOT_DETAILS_SUCCESS':
+      return {
+        ...state,
+        pilotDetails: {
+          ...state.pilotDetails,
+          pilotInfo: action.payload,
+        },
+      };
+    case 'REQUEST_PILOT_DETAILS':
+      return {
+        ...state,
+        pilotDetails: {
+          ...state.pilotDetails,
+          request: action.payload,
+        },
+      };
+    case 'TEAM_SELECT':
+      return {
+        ...state,
+        addTask: {
+          ...state.addTask,
+          selection: {
+            ...state.addTask.selection,
+            teamSelect: action.payload,
+          },
+        },
+      };
+    case 'PILOT_SELECT':
+      return {
+        ...state,
+        addTask: {
+          ...state.addTask,
+          selection: {
+            ...state.addTask.selection,
+            pilots: action.payload,
+          },
+        },
+      }
     default:
       return state;
   }
