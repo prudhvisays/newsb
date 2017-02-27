@@ -142,7 +142,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
             </div> */}
             <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750)' }}>
               { stateOrders.map((order) => {
-                const date = moment(order.createdAt).locale('en').format('YYYY-MM-DD HH:mm');
+                const date = moment(order.createdAt).local().format('YYYY-MM-DD HH:mm');
                 return (
                   <TripCard key={order._id} detailedInfo={() => {this.detailedInfo(order._id)}} customerName={order.title} orderStatus={order.status} orderAddress={order.to_address} orderPilot={'-'} orderTime={date} />
                 );

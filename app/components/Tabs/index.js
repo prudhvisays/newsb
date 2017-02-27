@@ -82,7 +82,7 @@ export default class Tabs extends React.Component { //eslint-disable-line
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
                     <div className="fw-700 sub-title">End Time</div>
-                    <div>{this.formatTime(stateOrderInfo.pilot_start_date_time)}</div>
+                    <div>{this.formatTime(stateOrderInfo.pilot_to_date_time)}</div>
                   </div>
                 </div>
               </div>
