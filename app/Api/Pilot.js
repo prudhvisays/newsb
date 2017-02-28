@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { API_URL } from './ApiConstants';
+import { API_URL, manager } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
-const manager = JSON.parse(localStorage.getItem('sessionData'))['manager']['_id'];
 
 const PilotApi = {
   getPilots(team) {

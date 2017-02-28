@@ -62,34 +62,23 @@ export function* loginFlow() {
 export function* logoutFlow() {
   while (true) {
     yield take('LOGOUT');
-    yield put({ type: 'SET_AUTH', newAuthState: false });
     yield call(logout);
+    yield put({ type: 'SET_AUTH', newAuthState: false });
     forwardTo('/login');
   }
 }
 
 export function* loginRoot() {
   yield fork(loginFlow);
-}
-
-export function* logoutRoot() {
   yield fork(logoutFlow);
 }
 
-export function* mainRoot() {
-  const main = yield fork(loginRoot);
-  yield take('LOCATION_CHANGE');
-  yield cancel(main);
-}
-export function* watcherRoot() {
-  const watcher2 = yield fork(logoutRoot);
-  yield take('LOCATION_CHANGE');
-  yield cancel(watcher2);
+export function* logoutRoot() {
+
 }
 
 export default [
-  mainRoot,
-  watcherRoot,
+  loginRoot,
 ];
 
 function forwardTo(location) {

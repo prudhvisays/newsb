@@ -14,10 +14,11 @@ const loadModule = (cb) => (componentModule) => {
 
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
-  const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
+  const { injectReducer, injectSagas, redirectToLogin, redirectToDashboard } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
   return [
      {
+      onEnter: redirectToLogin,
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
@@ -40,6 +41,7 @@ export default function createRoutes(store) {
       },
     },
       {
+      onEnter: redirectToLogin,
       path: '/franchise',
       name: 'franchise',
       getComponent(nextState, cb) {
@@ -82,6 +84,7 @@ export default function createRoutes(store) {
       },
     },*/
       {
+      onEnter: redirectToDashboard,
       path: '/login',
       name: 'login',
       getComponent(nextState, cb) {

@@ -6,6 +6,8 @@ import isString from 'lodash/isString';
 import invariant from 'invariant';
 import warning from 'warning';
 import createReducer from 'reducers';
+import { authData, isLoggedIn } from '../containers/AuthPage/selectors';
+import auth from '../Api/Auth';
 
 /**
  * Validate the shape of redux store
@@ -71,6 +73,26 @@ export function injectAsyncSagas(store, isValid) {
 }
 
 /**
+  * Route Protection
+  */
+function redirectToLogin(store, isValid) {
+  return (nextState, replace) => {
+    if (!auth.loggedIn()) {
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      });
+    }
+  };
+}
+function redirectToDashboard(store, isValid) {
+  return (nextState, replace) => {
+    if (auth.loggedIn()) {
+      replace('/');
+    }
+  };
+}
+/**
  * Helper for creating injectors
  */
 export function getAsyncInjectors(store) {
@@ -79,5 +101,7 @@ export function getAsyncInjectors(store) {
   return {
     injectReducer: injectAsyncReducer(store, true),
     injectSagas: injectAsyncSagas(store, true),
+    redirectToLogin: redirectToLogin(store),
+    redirectToDashboard: redirectToDashboard(store),
   };
 }

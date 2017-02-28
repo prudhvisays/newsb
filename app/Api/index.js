@@ -1,8 +1,6 @@
 import axios from 'axios';
-const API_URL = 'https://season-boy-api.herokuapp.com/api';
-
+import { API_URL, manager } from './ApiConstants';
 const localStorage = global.window.localStorage;
-const manager = JSON.parse(localStorage.getItem('sessionData'))['manager']['_id'];
 
 const realData = {
   getOrderStatsApi(statsDate) {

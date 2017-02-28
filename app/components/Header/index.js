@@ -5,6 +5,13 @@ import { Link } from 'react-router';
 import { logout } from '../../containers/AuthPage/actions';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+  logout() {
+    this.props.Logout();
+  }
   render() {
     const { addTask } = this.props;
     return (
@@ -18,7 +25,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <a><i className="fa fa-credit-card" aria-hidden="true"></i></a>
           <a><i className="fa fa-toggle-on" aria-hidden="true"></i></a>
           <Link to="/franchise"><i className="fa fa-toggle-on" aria-hidden="true"></i></Link>
-          <a onClick={this.props.Logout}><i className="fa fa-power-off" aria-hidden="true"></i></a>
+          <a onClick={this.logout}><i className="fa fa-power-off" aria-hidden="true"></i></a>
         </div>
       </HeaderStyle>
     );
@@ -27,7 +34,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
 
 function mapDispatchToProps(dispatch) {
   return {
-    Logout: () => { dispatch(logout()); }
+    Logout: () => { dispatch(logout()); },
   };
 }
 

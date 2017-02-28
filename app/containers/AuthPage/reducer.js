@@ -1,13 +1,13 @@
 import auth from '../../Api/Auth';
 
-const initialState = {
+let initialState = {
   formState: {
     username: '',
     password: '',
   },
   error: '',
   currentlySending: false,
-  loggedIn: auth.loggedIn(),
+  loggedIn: auth.loggedIn,
 };
 
 function authReducer(state = initialState, action) {
