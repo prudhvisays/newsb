@@ -74,13 +74,25 @@ const orderList = () => createSelector(
   homeData(),
   (state) => state.orderList.orders,
 );
+const statsLength = (lists, value) => {
+  if(lists.length > 0) {
+    return lists.filter((list) => {
+      return list.status === value
+    }).length
+  }
+  return true
+}
+const orderStats = () => createSelector(
+  orderList(),
+  (oList) => {
+    return {
+     assigned: statsLength(oList, 'ASSIGNED'),
+     unassigned: statsLength(oList, ('UNASSIGNED' || 'FAILED')),
+     completed: statsLength(oList, 'COMPLETED'),
+    }
+  }
+);
 
-// const orderStats = () => createSelector(
-//   orderList(),
-//   (oList) => ()=> {
-//     return ()
-//   }
-// )
 const orderId = () => createSelector(
   homeData(),
   (state) => state.orderDetails.orderId,
@@ -163,4 +175,5 @@ export {
   pilotDetails,
   pilotInfo,
   pilotDetailStatus,
+  orderStats,
 };

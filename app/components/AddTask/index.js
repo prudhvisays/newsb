@@ -100,20 +100,20 @@ clearForm(e) {
                     deliveryChange={deliveryChange}
                   />
                 </div>
-                <div className="all-100">
+                { isAdmin() && (<div className="all-100">
                   <div className="ink-flex" style={{ marginLeft: '1em' }}>
                     <div className="control unstyled ink-flex" style={{ marginBottom: '0.8em' }} >
                       <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="auto" checked={stateAuto == 'auto'} onChange={this.setSelection}/><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Auto</label></div>
                       <div><input type="radio" id="rb2" name="rb" value="manual" checked={stateAuto == 'manual'} onChange={this.setSelection}/><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manual</label></div>
                     </div>
                   </div>
-                  { isAdmin() && (<div className="ink-flex vertical">
+                   <div className="ink-flex vertical">
                     <div style={{ margin: '0 0.3em' }}><TeamSelect stateTeamList={stateTeamList} teamSelect={teamSelect} /></div>
                     { !(stateAuto === 'auto') && <div style={{ margin: '0.2em 0.3em' }}>
                       <Select selectedPilots={stateSelectedPilots} stateOptedPilot={stateOptedPilot} pilotSelect={pilotSelect} />
                     </div> }
-                  </div>) }
-                </div>
+                  </div>
+                </div>)}
               </div>
             </div>
           </div>

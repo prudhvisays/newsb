@@ -6,8 +6,7 @@ const localStorage = global.window.localStorage;
 const PilotApi = {
   getPilots(team) {
     const user = Object.keys(userRole())[0];
-    const userId = Object.values(userRole())[0]
-    console.log(user);
+    const userId = Object.values(userRole())[0];
     const payload = {
       [user]: userId,
       team: team ? team : ''

@@ -102,7 +102,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
   }
   render() {
     const { expand, data } = this.state;
-    const { stats, stateOrders, isAdmin } = this.props;
+    const { stats, stateOrders, isAdmin, orderStats } = this.props;
     const orderUser = {
       marginTop: '2.65em',
       display: isAdmin() ? 'none': 'block',
@@ -135,7 +135,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 </Sparklines>
               </div>
               <div className="all-100" style={{ position: 'relative', zIndex: '1', background: '#394264' }}>
-                <Feed tasksExpand={this.taskExpand} stats={stats} />
+                <Feed tasksExpand={this.taskExpand} stats={stats} orderStats={orderStats}/>
               </div>
               <div className="all-100 closeTag">
                 <a className="ink-flex push-right closeFeed" onClick={this.closeOrders}>Close</a>

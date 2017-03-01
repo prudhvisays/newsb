@@ -109,6 +109,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     const { compressed, pilotState, orderDetails, groupDisplay, addTask } = this.state;
     const { stats } = this.props;
+    console.log(this.props.orderAssignedStats);
     return (
       <section style={{ background: '#1f253d', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
@@ -130,7 +131,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getOrders={this.props.getOrders}
                         getOrderDetail={this.props.getOrderDetail}
                         isAdmin={isAdmin}
-                        {...this.props}
+                        orderStats={this.props.orderStats}
+                                             {...this.props}
                       />)}
                       { !addTask && (<div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
                         { !compressed && (<AddTask
@@ -228,6 +230,7 @@ const mapStateToProps = createStructuredSelector({
     optedPilot: selectors.optedPilot(),
     pilotInfo: selectors.pilotInfo(),
     pilotDetailStatus: selectors.pilotDetailStatus(),
+    orderStats: selectors.orderStats(),
 });
 
 export function mapDispatchToProps(dispatch) {
