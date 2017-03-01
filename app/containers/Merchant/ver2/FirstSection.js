@@ -6,11 +6,9 @@ const FirstSection = styled.section`
  bottom: 0;
  right: 0;
  left: 0;
- width: 100%;
+ width: calc(100% - 795px);
  height: 100%;
- background: #6bc9c5;
- transform: skewY(221deg);
- transform-origin: bottom right
+ // background: #6bc9c5;
 `;
 
 export default FirstSection;

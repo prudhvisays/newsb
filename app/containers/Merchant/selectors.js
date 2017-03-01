@@ -6,12 +6,8 @@ const isLoggedIn = () => createSelector(
   authData(),
   (state) => state.loggedIn,
 );
-const userRole = () => createSelector(
-  authData(),
-  (state) => state.userType
-)
+
 export {
   authData,
   isLoggedIn,
-  userRole,
 };

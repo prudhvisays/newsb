@@ -25,10 +25,26 @@ import UserInfo from '../../components/UserInfo';
 import Tabs from '../../components/Tabs';
 import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
-// import checkAuth from '../checkAuth';
+import auth from '../../Api/Auth';
 
 const socket = io('https://season-boy-api.herokuapp.com').connect();
-
+// const userRole = () => {
+//   if(localStorage.getItem('sessionData')['manager']) {
+//     return {
+//
+//     }
+//   }
+// }
+const isAdmin = () => {
+  if (auth.loggedIn()) {
+    const session = JSON.parse(localStorage.getItem('sessionData'));
+    if (session.username === 'admin') {
+      return true;
+    } else if (session.username === 'merchant') {
+      return false;
+    }
+  }
+}
 import * as selectors from './selectors';
 
 class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -50,10 +66,14 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
     this.closeDivPilot = this.closeDivPilot.bind(this);
   }
   componentDidMount() {
-    this.props.getStats();
-    this.props.getTeams();
-    this.props.getPilot();
-    this.props.getOrder();
+    if(isAdmin()) {
+      this.props.getStats();
+      this.props.getTeams();
+      this.props.getPilot();
+      this.props.getOrder();
+    } else {
+      this.props.getOrder();
+    }
   }
   divTask() {
     this.setState({ compressed: !this.state.compressed });
@@ -89,7 +109,6 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     const { compressed, pilotState, orderDetails, groupDisplay, addTask } = this.state;
     const { stats } = this.props;
-    console.log(this.props.selectedPilots);
     return (
       <section style={{ background: '#1f253d', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
@@ -98,8 +117,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
               <div className="column-group quarter-horizontal-gutters margin">
                 <div className="all-60">
                   <div className="column-group quarter-horizontal-gutters">
-                      <Targets stateOrderStats={this.props.stats.orderStats} />
-                      <Tasks divTask={this.divTask}
+                      { isAdmin() && (<Targets stateOrderStats={this.props.stats.orderStats} />)}
+                      { isAdmin() && (<Tasks divTask={this.divTask}
                         orderDetails={this.orderDetails}
                         orderBlock={this.props.orderexpand}
                         getStats={this.props.getStats}
@@ -110,8 +129,9 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         stateOrders={this.props.orderList}
                         getOrders={this.props.getOrders}
                         getOrderDetail={this.props.getOrderDetail}
+                        isAdmin={isAdmin}
                         {...this.props}
-                      />
+                      />)}
                       { !addTask && (<div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
                         { !compressed && (<AddTask
                           pickupCord={this.props.pickupCord}
@@ -132,26 +152,40 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           stateSelectedPilots={this.props.selectedPilots}
                           stateOptedPilot={this.props.optedPilot}
                           pilotSelect={this.props.pilotSelect}
+                          isAdmin={isAdmin}
                         />)}
                       </div>)}
-                      {compressed && <div className="all-65 marginTop">{ pilotState && <UserInfo
+                    { isAdmin() ? (compressed ? (<div className="all-65 marginTop">{ pilotState ? <UserInfo
                         statePilotInfo={this.props.pilotInfo}
                         statePilotStatus={this.props.pilotDetailStatus}
                         closeDivPilot={this.closeDivPilot}
-                      />}</div>}
+                      /> : null }</div>) : null ) : null}
                   </div>
                 </div>
                 <div className="all-40">
                   <div className="column-group">
-                    <Pilots
-                      divPilot={this.openDivPilot}
-                      groupDisplay={this.groupDisplay}
-                      stats={stats}
-                      statePilots={this.props.pilotList}
-                      getPilotDetail={this.props.getPilotDetail}
-                      closeDivPilot={this.closeDivPilot}
-                    />
-                    <div className="all-100 marginTop" style={{ height: '67vh' }}>
+                    { isAdmin() ? (<Pilots
+                        divPilot={this.openDivPilot}
+                        groupDisplay={this.groupDisplay}
+                        stats={stats}
+                        statePilots={this.props.pilotList}
+                        getPilotDetail={this.props.getPilotDetail}
+                        closeDivPilot={this.closeDivPilot}
+                        />) : (<Tasks divTask={this.divTask}
+                                        orderDetails={this.orderDetails}
+                                        orderBlock={this.props.orderexpand}
+                                        getStats={this.props.getStats}
+                                        searchText={this.props.searchText}
+                                        stats={this.props.stats}
+                                        getTeamCustomers={this.props.getTeamCustomers}
+                                        closeOrderDetails={this.closeOrderDetails}
+                                        stateOrders={this.props.orderList}
+                                        getOrders={this.props.getOrders}
+                                        getOrderDetail={this.props.getOrderDetail}
+                                        isAdmin={isAdmin}
+                                        {...this.props}
+                      />)}
+                    { isAdmin() && (<div className="all-100 marginTop" style={{ height: '67vh' }}>
                       {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>
                         { !groupDisplay ? <GroupBlock
                           stateTeamsInfo={this.props.teamsInfo}
@@ -161,14 +195,14 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           closeOrderDetails={this.closeOrderDetails}
                           stateOrderInfo={this.props.orderInfo}
                           stateOrderStatus={this.props.orderInfoStatus} /> }
-                    </div>
+                    </div>)}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="all-25" style={{ height: '100vh' }}>
+            { isAdmin() && <div className="all-25" style={{ height: '100vh' }}>
               <Map></Map>
-            </div>
+            </div> }
           </div>
         </div>
       </section>

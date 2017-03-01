@@ -1,12 +1,15 @@
 import axios from 'axios';
-import { API_URL, manager } from './ApiConstants';
+import { API_URL, userRole } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
 
 const PilotApi = {
   getPilots(team) {
+    const user = Object.keys(userRole())[0];
+    const userId = Object.values(userRole())[0]
+    console.log(user);
     const payload = {
-      manager : manager,
+      [user]: userId,
       team: team ? team : ''
     };
     const GET_PILOTS_API = `${API_URL}/pilots/list`;

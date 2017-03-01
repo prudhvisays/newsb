@@ -1,40 +1,47 @@
 import React from 'react';
-import FirstSection from './FirstSection';
-import SecondSection from './SecondSection';
-import MainSection from './MainSection';
-import CardStyle from './CardStyle';
+import { connect } from 'react-redux';
+import AuthStyle from './AuthStyle';
+import BackgrndStyle from './BackgrndStyle';
+import AuthForm from '../../components/AuthForm';
+import CurveStyle from './CurveStyle';
+import LogoStyles from './LogoStyles';
+import LoadingStyle from './LoadingStyle';
+import { loginRequest } from '../AuthPage/actions';
+import Logo from './logo.png';
+import Loading from './loading.gif';
 
 class MerchantPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const { formState, currentlySending, error } = this.props.data;
     return (
-    <MainSection>
-      {/* <CardStyle>
-        <div className="ink-flex">
-          <div className="all-100">
-            <div className="ink-flex">
-              <div className="all-60 card-login">
-                <div className="ink-flex push-center">
-                  <div className="all-100">
-                    <div className="ink-flex push-center">
-                      <h3>MERCHANT LOGIN</h3>
-                    </div>
-                  </div>
-                  <div className="all-100">
-                    <p>ALL RIGHTS RESERVED</p>
-                  </div>
-                </div>
-              </div>
-              <div className="card-logo"></div>
-            </div>
-          </div>
-        </div>
-      </CardStyle> */}
-      <FirstSection>
-        <SecondSection></SecondSection>
-      </FirstSection>
-    </MainSection>
+      <BackgrndStyle>
+        <CurveStyle>
+          { !currentlySending ? <div className="ink-flex push-center">
+            <AuthStyle className="all-50">
+              <LogoStyles className="ink-flex push-center">
+                <img src={Logo} className="logo" alt="logo" />
+              </LogoStyles>
+              <AuthForm data={formState} onSubmit={this.props.login} stateError={error} userRole={'CUSTOMER'} />
+            </AuthStyle>
+          </div> : <LoadingStyle className="ink-flex push-center">
+            <img src={Loading} alt="loading" />
+          </LoadingStyle>}
+        </CurveStyle>
+      </BackgrndStyle>
     );
   }
 }
 
-export default MerchantPage;
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (username, password, userRole) => { dispatch(loginRequest({ username, password, userRole })); }
+  };
+}
+
+function mapStateToProps(state) {
+  const data = state.get('auth');
+  return {
+    data,
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MerchantPage);

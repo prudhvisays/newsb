@@ -21,7 +21,7 @@ class LoginPage extends React.Component { // eslint-disable-line react/prefer-st
               <LogoStyles className="ink-flex push-center">
                 <img src={Logo} className="logo" alt="logo" />
               </LogoStyles>
-              <AuthForm data={formState} onSubmit={this.props.login} stateError={error} />
+              <AuthForm data={formState} onSubmit={this.props.login} stateError={error} userRole={'MANAGER'} />
             </AuthStyle>
           </div> : <LoadingStyle className="ink-flex push-center">
             <img src={Loading} alt="loading" />
@@ -34,7 +34,7 @@ class LoginPage extends React.Component { // eslint-disable-line react/prefer-st
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: (username, password) => { dispatch(loginRequest({ username, password })); }
+    login: (username, password, userRole) => { dispatch(loginRequest({ username, password, userRole })); }
   };
 }
 

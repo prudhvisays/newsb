@@ -55,6 +55,7 @@ clearForm(e) {
      stateSelectedPilots,
      stateOptedPilot,
      pilotSelect,
+     isAdmin,
     } = this.props;
     return (
       <div className="boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
@@ -106,12 +107,12 @@ clearForm(e) {
                       <div><input type="radio" id="rb2" name="rb" value="manual" checked={stateAuto == 'manual'} onChange={this.setSelection}/><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manual</label></div>
                     </div>
                   </div>
-                  <div className="ink-flex vertical">
+                  { isAdmin() && (<div className="ink-flex vertical">
                     <div style={{ margin: '0 0.3em' }}><TeamSelect stateTeamList={stateTeamList} teamSelect={teamSelect} /></div>
                     { !(stateAuto === 'auto') && <div style={{ margin: '0.2em 0.3em' }}>
                       <Select selectedPilots={stateSelectedPilots} stateOptedPilot={stateOptedPilot} pilotSelect={pilotSelect} />
                     </div> }
-                  </div>
+                  </div>) }
                 </div>
               </div>
             </div>

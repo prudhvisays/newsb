@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 
 const initialState = {
   orderexpand: false,
@@ -31,12 +32,14 @@ const initialState = {
       from_phone: '',
       from_email: '',
       from_address: '',
+      from_date: moment().format('YYYYMMDD HH:mm'),
     },
     delivery: {
       to_name: '',
       to_phone: '',
       to_email: '',
       to_address: '',
+      to_date: '',
     },
     taskInfo:{
     title: '',

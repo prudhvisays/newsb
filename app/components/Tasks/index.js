@@ -6,6 +6,7 @@ import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 import classNames from 'classnames';
 import Flatpickr from 'react-flatpickr';
 import moment from 'moment';
+import OrderStyle from './OrderStyle';
 
 function boxMullerRandom() {
     let phase = false,
@@ -62,7 +63,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
     const closeTag = document.querySelector('.closeTag');
-    if (!this.props.orderBlock) {
+    if (!this.props.orderBlock && this.props.isAdmin()) {
       taskDiv.style.height = '98vh';
       listShow.style.opacity = '1';
       listShow.style.display = 'block';
@@ -79,7 +80,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
     const closeTag = document.querySelector('.closeTag');
-    if (this.props.orderBlock) {
+    if (this.props.orderBlock && this.props.isAdmin()) {
       taskDiv.style.height = '30vh';
       listShow.style.opacity = '0';
       listShow.style.display = 'none';
@@ -101,10 +102,16 @@ export default class Tasks extends React.Component { //eslint-disable-line
   }
   render() {
     const { expand, data } = this.state;
-    const { stats, stateOrders } = this.props;
+    const { stats, stateOrders, isAdmin } = this.props;
+    const orderUser = {
+      marginTop: '2.65em',
+      display: isAdmin() ? 'none': 'block',
+      opacity: isAdmin() ? '0' : '1',
+      transition: 'all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750)',
+    }
     return (
-      <div className="all-65 marginTop" style={{ height: '30vh' }}>
-        <div className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} style={{ height: '30vh', position: 'relative', overflow: 'hidden', transition: 'height 0.5s linear 0s' }}>
+      <div className={ isAdmin() ? 'all-65 marginTop' : 'all-100 marginTop'} style={{ height: '30vh' }}>
+        <OrderStyle className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} manager={isAdmin()} >
           <div className={classNames('orders-block', 'ink-flex', { indeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>
               <div className="ink-flex">
@@ -140,7 +147,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                 <input type="text" placeholder="Search" style={{ width: '100%', outline: 'none' }} />
               </div>
             </div> */}
-            <div className="listShow" style={{ marginTop: '2.65em', display: 'none', opacity: '0', transition: 'all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750)' }}>
+            <div className="listShow" style={orderUser}>
               { stateOrders.map((order) => {
                 const date = moment(order.createdAt).local().format('YYYY-MM-DD HH:mm');
                 return (
@@ -149,7 +156,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
               })}
             </div>
           </div>
-        </div>
+        </OrderStyle>
       </div>
     );
   }

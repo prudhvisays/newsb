@@ -107,6 +107,7 @@ export default function createRoutes(store) {
       },
     },
     {
+      onEnter: redirectToDashboard,
       path: '/order/order-status/:slug',
       name: 'webhook',
       getComponent(nextState, cb) {
@@ -124,16 +125,22 @@ export default function createRoutes(store) {
       },
     },
     {
-      path: '/merchant',
+      onEnter: redirectToDashboard,
+      path: '/merchant/login',
       name: 'merchant',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          import('containers/AuthPage/reducer'),
+          import('containers/AuthPage/sagas'),
           import('containers/Merchant'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('auth', reducer.default);
+          injectSagas(sagas.default);
+
           renderRoute(component);
         });
 

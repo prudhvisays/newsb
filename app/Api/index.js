@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, manager } from './ApiConstants';
+import { API_URL, userRole } from './ApiConstants';
 const localStorage = global.window.localStorage;
 
 const realData = {
@@ -81,6 +81,7 @@ const realData = {
       },
       pilot: selection.pilots ? selection.pilots : '',
       team: selection.teamSelect,
+      createdBy: Object.values(userRole())[0],
     };
     const POST_ADD_TASK_API = `${API_URL}/orders`;
     return axios({

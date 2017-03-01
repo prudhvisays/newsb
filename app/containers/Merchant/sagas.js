@@ -4,12 +4,12 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import auth from '../../Api/Auth';
 
-export function* authorize({ username, password, userRole }) {
+export function* authorize({ username, password, isRegistering }) {
   yield put({ type: 'SENDING_REQUEST', sending: true });
 
   try {
-    const response = yield call(auth.login, username, password, userRole);
-    yield put({ type: 'USER_TYPE', userType: response.data });
+    const response = yield call(auth.login, username, password);
+    console.log(response);
     return response;
   } catch (error) {
     console.log('error bhaiya');
@@ -38,10 +38,10 @@ export function* logout() {
 export function* loginFlow() {
   while (true) {
     const request = yield take('LOGIN_REQUEST');
-    const { username, password, userRole } = request.data;
+    const { username, password } = request.data;
 
     const winner = yield race({
-      auth: call(authorize, { username, password, userRole }),
+      auth: call(authorize, { username, password, isRegistering: false }),
       logout: take('LOGOUT'),
     });
 
@@ -78,7 +78,6 @@ export function* logoutRoot() {
 
 export default [
   loginRoot,
-  logoutRoot,
 ];
 
 function forwardTo(location) {

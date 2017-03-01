@@ -44,7 +44,12 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
         <Input Name={'Email'} Holder={'Enter Email'} onChange={this.emailChange} value={stateAddTask.pickup.from_email} />
         <div className="ink-flex vertical">
           {/* <div className="sub-title">Date</div> */}
-          <div><Flatpickr data-enable-time placeholder={'Pickup Before'} onChange={this.calendarChange} /></div>
+          <div><Flatpickr
+            data-enable-time
+            placeholder={'Pickup Before'}
+            onChange={this.calendarChange}
+            options={{ defaultDate: 1477697199863, enableTime: true }}
+          /></div>
         </div>
         <div className="ink-flex vertical">
           {/* <div className="sub-title">Address</div> */}

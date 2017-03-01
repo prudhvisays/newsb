@@ -4,11 +4,11 @@ const API_URL = 'https://season-boy-api.herokuapp.com/api';
 let localStorage = global.window.localStorage;
 
 const auth = {
-  login(Username, Password) {
+  login(Username, Password, userRole) {
     const payload = {
       username: Username,
       password: Password,
-      userRole: 'MANAGER',
+      userRole,
     };
     const POST_AUTH_API = `${API_URL}/auth/login`;
     if (auth.loggedIn()) {
@@ -23,13 +23,23 @@ const auth = {
       const { data } = response;
       localStorage.token = data.token;
       setAuthorizationToken(data.token);
-      const { username, manager } = data;
-      localStorage.setItem('sessionData',
-        JSON.stringify({
-          username,
-          manager,
-        }));
-      return Promise.resolve(true);
+      if(data.manager) {
+        const { username, manager } = data;
+        localStorage.setItem('sessionData',
+          JSON.stringify({
+            username,
+            manager,
+          }));
+      } else if(data.customer) {
+        const { username, customer } = data;
+        localStorage.setItem('sessionData',
+          JSON.stringify({
+            username,
+            customer,
+          }));
+      }
+
+      return response;
     });
   },
   logout() {

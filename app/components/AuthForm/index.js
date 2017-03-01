@@ -22,7 +22,7 @@ class AuthForm extends React.Component { // eslint-disable-line react/prefer-sta
   }
   onSubmit(e){
     e.preventDefault();
-    this.props.onSubmit(this.props.data.username, this.props.data.password);
+    this.props.onSubmit(this.props.data.username, this.props.data.password, this.props.userRole);
   }
   render() {
     return (

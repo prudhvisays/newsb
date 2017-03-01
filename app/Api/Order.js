@@ -2,15 +2,17 @@
  * Created by akira on 26-02-2017.
  */
 import axios from 'axios';
-import { API_URL, manager } from './ApiConstants';
+import { API_URL, userRole } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
 
 const orderApi = {
   getOrders(date) {
+    const user = Object.keys(userRole())[0];
+    const userId = Object.values(userRole())[0]
     const payload = {
       date: date,
-      manager: manager,
+      [user]: userId,
       timeZone : 'Asia/Kolkata'
     };
     const GET_ORDERS_API = `${API_URL}/orders/list`;

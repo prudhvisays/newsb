@@ -42,10 +42,3 @@ export function cleanError() {
     type: 'CLEAR_ERROR',
   };
 }
-
-export function userType(data) {
-  return {
-    type: 'USER_TYPE',
-    userType: data,
-  };
-}

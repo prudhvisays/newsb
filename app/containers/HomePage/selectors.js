@@ -75,6 +75,12 @@ const orderList = () => createSelector(
   (state) => state.orderList.orders,
 );
 
+// const orderStats = () => createSelector(
+//   orderList(),
+//   (oList) => ()=> {
+//     return ()
+//   }
+// )
 const orderId = () => createSelector(
   homeData(),
   (state) => state.orderDetails.orderId,

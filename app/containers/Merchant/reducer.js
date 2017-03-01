@@ -4,12 +4,10 @@ let initialState = {
   formState: {
     username: '',
     password: '',
-    userRole: '',
   },
   error: '',
   currentlySending: false,
   loggedIn: auth.loggedIn,
-  userType: {},
 };
 
 function authReducer(state = initialState, action) {
@@ -38,11 +36,6 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         error: '',
-      };
-    case 'USER_TYPE':
-      return {
-        ...state,
-        userType: action.userType,
       };
     default:
       return state;
