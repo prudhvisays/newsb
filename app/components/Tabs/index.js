@@ -50,24 +50,24 @@ export default class Tabs extends React.Component { //eslint-disable-line
             <div className="tab-scroll">
               <div className="ink-flex second-boxShadow tab-first-row">
                 <div className="all-50">
-                  <div className="fw-700 sub-title">TaskId</div>
+                  <div className="fw-500 sub-title">TaskId</div>
                   <div>{stateOrderInfo._id}</div>
                 </div>
                 <div className="all-50">
-                  <div className="fw-700 sub-title">Progress</div>
+                  <div className="fw-500 sub-title">Progress</div>
                   <div><span style={{ color: 'green' }}>{stateOrderInfo.status}</span></div>
                 </div>
               </div>
               <div className="ink-flex second-boxShadow tab-second-row">
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
-                    <div className="fw-700 sub-title">Team</div>
+                    <div className="fw-500 sub-title">Team</div>
                     <div>{stateOrderInfo.team}</div>
                   </div>
                 </div>
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
-                    <div className="fw-700 sub-title">Pilot</div>
+                    <div className="fw-500 sub-title">Pilot</div>
                     <div>{stateOrderInfo.pilot}</div>
                   </div>
                 </div>
@@ -75,13 +75,13 @@ export default class Tabs extends React.Component { //eslint-disable-line
               <div className="ink-flex second-boxShadow tab-second-row">
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
-                    <div className="fw-700 sub-title">Start Time</div>
+                    <div className="fw-500 sub-title">Start Time</div>
                     <div>{this.formatTime(stateOrderInfo.pilot_start_date_time)}</div>
                   </div>
                 </div>
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
-                    <div className="fw-700 sub-title">End Time</div>
+                    <div className="fw-500 sub-title">End Time</div>
                     <div>{this.formatTime(stateOrderInfo.pilot_to_date_time)}</div>
                   </div>
                 </div>
