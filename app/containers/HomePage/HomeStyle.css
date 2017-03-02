@@ -14,6 +14,10 @@ h6, h3 {
 .block-card-background {
   background-color: #fff;
 }
+.block-stats-background {
+  background: #ffffff;
+  color: #6bc9c5;
+}
 .boxShadow {
   -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.04);
   -moz-box-shadow: 0 1px 4px rgba(0,0,0,.04);
@@ -32,14 +36,14 @@ h6, h3 {
 	transition: all .2s;
 }
 .third-boxShadow:hover {
-  -webkit-box-shadow: 0 1px 4px rgb(245, 37, 151);
-  -moz-box-shadow: 0 1px 4px rgb(245, 37, 151);
-  box-shadow: 0 1px 4px rgb(245, 37, 151);
+  -webkit-box-shadow: 0 1px 4px #ded64d;
+  -moz-box-shadow: 0 1px 4px #ded64d;
+  box-shadow: 0 1px 4px #ded64d;
 }
 .pilot-boxShadow {
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-  -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  box-shadow: 0 1px 4px rgba(0,0,0,.07);
   -webkit-transition: all .2s;
 	transition: all .2s;
 }
@@ -68,9 +72,9 @@ h6, h3 {
 	transition: all .2s;
 }
 .task-feed-boxShadow:hover {
-  -webkit-box-shadow: 0 1px 4px rgb(245, 37, 151);
-  -moz-box-shadow: 0 1px 4px rgb(245, 37, 151);
-  box-shadow: 0 1px 4px rgb(245, 37, 151);
+  -webkit-box-shadow: 0 1px 4px #ded64d;
+  -moz-box-shadow: 0 1px 4px #ded64d;
+  box-shadow: 0 1px 4px #ded64d;
 }
 .third-boxShadow:focus {
   -webkit-box-shadow: 0 1px 4px rgb(81, 212, 255);
@@ -93,7 +97,7 @@ h6, h3 {
  left: 0;
  height: 42px;
  width: 10%;  /* or 100px */
- border-left: 0.2em solid rgb(245, 37, 151);
+ border-left: 0.2em solid #ded64d;
 }
 .progressLiner::before{
  content : "";
@@ -227,7 +231,7 @@ color: #9099b7 !important;
 
 .sub-title{
   font-size: 0.65rem;
-  color: #9099b7;
+  color: #6bc9c5;
 }
 
 .profile-tasks, .profile-ontime, .profile-time, .profile-distance, .profile-data{
@@ -426,7 +430,7 @@ a:hover{
   color: #fff;
 }
 .closeFeed {
-  background: rgb(245, 37, 151);
+  background: #ded64d;
 }
 .closePilotFeed {
   background: rgb(81, 212, 255);
@@ -443,7 +447,8 @@ transition: top 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
   text-decoration: none;
 }
 .closeTag a:hover{
-  background: rgb(235, 37, 151);
+  background: #c1b944;
+  color: #fff;
 }
 
 .closePilotTag a:hover{

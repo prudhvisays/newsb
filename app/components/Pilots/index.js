@@ -101,7 +101,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
                   <SparklinesSpots size={1} />
                 </Sparklines>
               </div>
-              <div className="all-100 block-background" style={{ position: 'relative', zIndex: '1' }}>
+              <div className="all-100 block-stats-background" style={{ position: 'relative', zIndex: '1' }}>
                 <PilotFeed tasksExpand={this.taskExpand} stats={stats} />
               </div>
               <div className="all-100 closePilotTag">

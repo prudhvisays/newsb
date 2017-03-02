@@ -24,7 +24,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
         { !statePilotStatus ? ( <div className="user-info" style={{ padding: '1em' }}>
             <div className="ProfilePic">
               <div className="ink-flex push-center">
-                <div className="profile-pic" style={{ width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', margin: 0, border: '6px double #51d4ff' }}>
+                <div className="profile-pic" style={{ width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', margin: 0, border: '6px double #6bc9c5' }}>
                   <img src={profileImage} alt="default-card" style={{ height: '100px', width: '100%' }}></img>
                 </div>
               </div>

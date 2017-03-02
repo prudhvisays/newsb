@@ -126,7 +126,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                   <SparklinesSpots size={1} />
                 </Sparklines>
               </div>
-              <div className="all-100 block-background" style={{ position: 'relative', zIndex: '1' }}>
+              <div className="all-100 block-stats-background" style={{ position: 'relative', zIndex: '1' }}>
                 <Feed tasksExpand={this.taskExpand} stats={stats} orderStats={orderStats}/>
               </div>
               <div className="all-100 closeTag">

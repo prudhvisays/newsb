@@ -27,10 +27,10 @@ const TaskStyle = styled.ul`
 }
 
 /* Change background color of links on hover */
-&.task-tab li a:hover {border-bottom: 2px solid rgba(243, 49, 99, 0.86);}
+&.task-tab li a:hover {border-bottom: 2px solid #6bc9c5;}
 
 /* Create an active/current tablink class */
-&.task-tab li a:focus, .active {border-bottom: 2px solid rgba(243, 49, 99, 0.86);}
+&.task-tab li a:focus, .active {border-bottom: 2px solid #6bc9c5;}
 `;
 
 export default TaskStyle;

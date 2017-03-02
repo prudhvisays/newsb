@@ -6,7 +6,7 @@ const TabStyle = styled.ul`
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(236, 24, 79);
+    background-color: #ded64d; /* rgb(236, 24, 79)*/
 }
 /* Float the list items side by side */
 &.tab li {
@@ -27,10 +27,10 @@ const TabStyle = styled.ul`
 }
 
 /* Change background color of links on hover */
-&.tab li a:hover {background-color: rgba(243, 49, 99, 0.86);}
+&.tab li a:hover {background-color: rgb(210, 201, 59);}
 
 /* Create an active/current tablink class */
-&.tab li a:focus, .active {background-color: rgba(243, 49, 99, 0.86);}
+&.tab li a:focus, .active {background-color: rgb(210, 201, 59);}
 `;
 
 export default TabStyle;
