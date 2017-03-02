@@ -88,7 +88,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
                 customerName={statePilotInfo.activeOrder.from_name}
                 orderStatus={statePilotInfo.activeOrder.status}
                 orderAddress={statePilotInfo.activeOrder.to_address}
-                orderTime={() => { this.formatTime(statePilotInfo.activeOrder.createdAt); }} />
+                orderTime={this.formatTime(statePilotInfo.activeOrder.createdAt)} />
               {orders}
             </div>
           </div>)
