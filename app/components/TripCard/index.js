@@ -16,7 +16,7 @@ export default class TripCard extends React.Component { //eslint-disable-line
                   </div>
                 </div>
                 <div className="trip-info ink-flex vertical" style={{ marginLeft: '0.7em' }}>
-                  <div className="sub-title">customer</div>
+                  <div className="sub-title">title</div>
                   <div>{customerName}</div>
                 </div>
               </div>
