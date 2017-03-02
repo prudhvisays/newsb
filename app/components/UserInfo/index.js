@@ -16,7 +16,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
   render() {
     const { statePilotInfo, statePilotStatus, closeDivPilot } = this.props
     const orders = this.props.statePilotInfo.orders && this.props.statePilotInfo.orders.map((order) => (
-        <PilotTripCard key={order._id} pilotStatus={`Ended on ${this.formatTime(order.pilot_completed_date_time)}`} customer={order.from_name} pilotDistance={23}/>
+        <PilotTripCard key={order._id} pilotStatus={`Ended on ${this.formatTime(order.pilot_completed_date_time)}`} customer={order.from_name} pilotDistance={order.distance_in_meters}/>
       ));
     return (
       <div className="boxShadow user-scroll block-background" style={{ height: '67vh', position: 'relative' }}>

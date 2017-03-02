@@ -278,7 +278,7 @@ export function* fetchPilotDetails(Date, id) {
       yield put(actions.getPilotDetailFailure(error.message));
     }
   } finally {
-    yield call(delay,2000);
+    yield call(delay, 1000);
     yield put(actions.requestPilotDetail(false));
   }
 }

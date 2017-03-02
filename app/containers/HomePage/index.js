@@ -114,7 +114,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
       <section style={{ background: '#eee', color: '#333' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
           <div className="column-group quarter-horizontal-gutters">
-            <div className="all-75">
+            <div className={ isAdmin() ? 'all-75' : 'all-100'}>
               <div className="column-group quarter-horizontal-gutters margin">
                 <div className="all-60">
                   <div className="column-group quarter-horizontal-gutters">

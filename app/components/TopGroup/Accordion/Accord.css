@@ -63,6 +63,7 @@
 .content-text-open {
   visibility: visible;
   opacity: 1;
+  color: #333;
   transition: all .8s ease-in;
 }
 

@@ -9,12 +9,13 @@ const ButtonStyle = styled.button`
   outline: none;
   color: #fff;
   background-color: ${(props) => (props.cancel ? 'transparent' : 'rgb(81, 212, 255)')};
-  border: 1px solid ${(props) => (props.cancel ? 'rgb(245, 37, 151)' : 'none')};
+  border: 1px solid ${(props) => (props.cancel ? '#fff' : 'none')};
   border-radius: 0;
   margin-right: 5px;
   &:hover {
-  background-color: ${(props) => (props.cancel ? 'rgb(245, 37, 151)' : 'transparent')};
+  background-color: ${(props) => (props.cancel ? '#fff' : 'transparent')};
   border: 1px solid ${(props) => (props.cancel ? 'none' : 'rgb(81, 212, 255)')};
+  color: ${(props) => (props.cancel ? '#333' : '#fff')};
 }
   &:active {
     background-color: ${(props) => (props.cancel ? 'rgb(245, 37, 151)' : 'transparent')};

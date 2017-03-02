@@ -68,7 +68,7 @@ clearForm(e) {
             <div className="all-100 team-block">
               <div className="ink-flex">
                 <div className="all-30" style={{ padding: '0.5em 0.8em' }}>
-                  <div style={{ color: '#fff', fontWeight:'700' }}>Add Task</div>
+                  <div className="condensed-400" style={{ color: '#333' }}>Add Task</div>
                 </div>
                 <div className="all-70" style={{ padding: '0.3em 0.5em' }}>
                   <div className="ink-flex push-right">

@@ -51,8 +51,7 @@ constructor(props) {
          </span>
          <span className="all-30">
            <div className="ink-flex push-right">
-             <span className="sub-title">Sales</span>
-             <span>{i.sales}</span>
+             <span className="sub-title">Sales {i.sales}</span>
            </div>
          </span>
        </div>

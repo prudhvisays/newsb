@@ -74,7 +74,7 @@ export default class TaskMap extends React.Component { //eslint-disable-line
   }
   render() {
     const heightStyle = {
-      height: this.props.isAdmin() ? '40vh' : '60vh',
+      height: this.props.isAdmin() ? '40vh' : '91vh',
     };
     return (
       <MapStyle id="mapid" style={ heightStyle }></MapStyle>

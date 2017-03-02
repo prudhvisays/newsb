@@ -6,7 +6,7 @@ const TaskStyle = styled.ul`
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #fafafa;
+    background-color: #fff;
 }
 /* Float the list items side by side */
 &.task-tab li {
