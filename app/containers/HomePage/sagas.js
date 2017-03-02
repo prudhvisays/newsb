@@ -168,9 +168,9 @@ export function* postAddTaskFlow() {
     const res = yield call(postAddTask, taskData);
     if (res) {
       yield put(actions.clearForm());
-      yield put(actions.addTaskStatus({ statusText: 'Sending', statusColor: '#fff' }));
+      yield put(actions.addTaskStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
     } else {
-      yield put(actions.addTaskStatus({ statusText: 'Sending', statusColor: '#fff' }));
+      yield put(actions.addTaskStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
     }
   }
 }
