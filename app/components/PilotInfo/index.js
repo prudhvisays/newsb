@@ -1,6 +1,7 @@
 import React from 'react';
+import profileImage from '../../Assets/profile-image.gif';
 
-export default class TripCard extends React.Component { //eslint-disable-line
+export default class PilotInfo extends React.Component { //eslint-disable-line
   render() {
     const { detailedInfo } = this.props;
     return (
@@ -10,7 +11,7 @@ export default class TripCard extends React.Component { //eslint-disable-line
             <div className="all-50 ink-flex push-left">
               <div className="trip-image">
                 <div className="trip-pic" style={{ width: '30px', height: '30px', borderRadius: '50%', overflow: 'hidden', margin: 0 }}>
-                  <img src="https://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '30px', width: '100%' }}></img>
+                  <img src={profileImage} alt="default-card" style={{ height: '30px', width: '100%' }} />
                 </div>
               </div>
               <div className="trip-info ink-flex vertical" style={{ marginLeft: '0.7em' }}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import profileImage from '../../Assets/profile-image.gif';
 
 export default class TripCard extends React.Component { //eslint-disable-line
   render() {
@@ -6,12 +7,12 @@ export default class TripCard extends React.Component { //eslint-disable-line
     return (
       <a onClick={detailedInfo} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="marginBottom">
-          <div className="trip-card third-boxShadow block-background" style={{ fontSize: '0.7rem', padding: '1em' }}>
+          <div className="trip-card third-boxShadow block-card-background" style={{ fontSize: '0.7rem', padding: '1em' }}>
             <div className="first-row ink-flex" style={{ paddingBottom: '0.3em' }}>
               <div className="all-70 ink-flex push-left">
                 <div className="trip-image">
                   <div className="trip-pic" style={{ width: '30px', height: '30px', borderRadius: '50%', overflow: 'hidden', margin: 0 }}>
-                    <img src="https://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '30px', width: '100%' }}></img>
+                    <img src={profileImage} alt="default-card" style={{ height: '30px', width: '100%' }} />
                   </div>
                 </div>
                 <div className="trip-info ink-flex vertical" style={{ marginLeft: '0.7em' }}>

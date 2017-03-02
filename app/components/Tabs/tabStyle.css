@@ -9,6 +9,10 @@
   margin-bottom: 0.3em;
 }
 
+.tab-first-row, .tab-second-row {
+  background: #fff;
+}
+
 .tab-scroll {
   height: 58vh;
   overflow-y: scroll;

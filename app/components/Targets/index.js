@@ -6,7 +6,7 @@ export default class Target extends React.Component { //eslint-disable-line
     const { stateOrderStats } = this.props;
     return (
       <div className="all-35 marginTop" style={{ height: '30vh' }}>
-        <div className="boxShadow" style={{ height: '30vh', background: 'rgb(57, 66, 100)' }}>
+        <div className="boxShadow block-background" style={{ height: '30vh' }}>
           <DonutChart stateOrderStats={stateOrderStats} />
         </div>
       </div>

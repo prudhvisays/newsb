@@ -57,14 +57,18 @@ clearForm(e) {
      pilotSelect,
      isAdmin,
     } = this.props;
+    const addtaskStyle = {
+      height: isAdmin() ? '67vh' : '98vh',
+      position: 'relative',
+    }
     return (
-      <div className="boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
+      <div className="boxShadow block-background" style={addtaskStyle}>
         {!stateAddTask.request ? (<form onSubmit={this.submitOrder}>
           <div className="ink-flex">
             <div className="all-100 team-block">
               <div className="ink-flex">
                 <div className="all-30" style={{ padding: '0.5em 0.8em' }}>
-                  <div>Add Task</div>
+                  <div style={{ color: '#fff', fontWeight:'700' }}>Add Task</div>
                 </div>
                 <div className="all-70" style={{ padding: '0.3em 0.5em' }}>
                   <div className="ink-flex push-right">
@@ -77,20 +81,30 @@ clearForm(e) {
             <div className="all-40">
               <div className="ink-flex vertical">
                 <div className="title-desc ink-flex vertical">
-                  <input type="text" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>
-                  <textarea
+                  { isAdmin() && (<input type="text" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>)}
+                  { isAdmin() && (<textarea
                     type="text"
                     placeholder="Enter Description"
-                    style={{ height: '14.5vh', width: '100%', color: '#fff', fontSize: '0.8rem' }}
+                    style={{ height: '14.5vh', width: '100%', fontSize: '0.8rem' }}
                     onChange={this.desChange}
                     value={stateAddTask.taskInfo.description}
-                  />
+                  />)}
                 </div>
-                <TaskMap pCord={pCord} dCord={dCord} />
+                <TaskMap pCord={pCord} dCord={dCord} isAdmin={isAdmin}/>
               </div>
             </div>
             <div className="all-60" style={{ height: '40vh' }}>
               <div className="ink-flex">
+                <div className="all-100">
+                  { !isAdmin() && (<input type="text" placeholder="Enter Title" style={{ fontSize: '0.8rem', height: '5.9vh', width: '98%', paddingLeft: '0.6em' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>)}
+                  { !isAdmin() && (<textarea
+                    type="text"
+                    placeholder="Enter Description"
+                    style={{ height: '14.5vh', width: '100%', fontSize: '0.8rem' }}
+                    onChange={this.desChange}
+                    value={stateAddTask.taskInfo.description}
+                  />)}
+                </div>
                 <div className="all-100">
                   <TaskTab
                     pickupCord={pickupCord}

@@ -45,14 +45,6 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.emitSearch = this.emitSearch.bind(this);
     this.pickDate = this.pickDate.bind(this);
   }
-  componentDidMount() {
-    const intervalId = setInterval(() => this.timer, 3000);
-    this.setState({ intervalId });
-  }
-  componentWillUnmount() {
-    clearInterval(this.state.intervalId);
-  }
-
   timer() {
     this.setState({
       data: this.state.data.concat([boxMullerRandom()])
@@ -117,7 +109,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
               <div className="ink-flex">
                 <div className="all-70">
                   <div className="team-search" style={{ width: '100%' }}>
-                    <Search placeHolder={'search Orders'} searchText={this.searchText} />
+                    <Search placeHolder={'Search Orders'} searchText={this.searchText} />
                   </div>
                 </div>
                 <div className="all-30" style={{ textAlign: 'right' }}>
@@ -134,7 +126,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                   <SparklinesSpots size={1} />
                 </Sparklines>
               </div>
-              <div className="all-100" style={{ position: 'relative', zIndex: '1', background: '#394264' }}>
+              <div className="all-100 block-background" style={{ position: 'relative', zIndex: '1' }}>
                 <Feed tasksExpand={this.taskExpand} stats={stats} orderStats={orderStats}/>
               </div>
               <div className="all-100 closeTag">

@@ -7,8 +7,8 @@
       .pac-container{
         height: 21%;
         overflow-y: scroll;
-        background: rgb(31, 37, 61);
+        /*background: rgb(31, 37, 61);*/
       }
-      .pac-item:hover{
-        background: #394264;
-      }
+      /*.pac-item:hover{*/
+        /*background: #fff;*/
+      /*}*/

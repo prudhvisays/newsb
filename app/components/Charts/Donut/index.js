@@ -15,10 +15,10 @@ class DonutChart extends React.Component { //eslint-disable-line
     donut = Morris.Donut({ //eslint-disable-line
       element: 'chart',
       data: Data,
-      labelColor: '#fafafa',
+      labelColor: '#333',
       size: true,
       colors: [
-        '#1d233b', '#FFCA28',
+        '#6bc9c5', '#FFCA28',
       ],
     });
   }

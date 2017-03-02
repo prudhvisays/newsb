@@ -10,7 +10,7 @@ class Franchise extends React.Component { // eslint-disable-line react/prefer-st
   }
   render() {
     return (
-      <section style={{ background: '#1f253d', color: '#fff' }}>
+      <section style={{ background: '#eee', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
           <div className="column-group quarter-horizontal-gutters">
             <div className="all-50">

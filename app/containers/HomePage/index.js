@@ -111,7 +111,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
     const { stats } = this.props;
     console.log(this.props.orderAssignedStats);
     return (
-      <section style={{ background: '#1f253d', color: '#fff' }}>
+      <section style={{ background: '#eee', color: '#333' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
           <div className="column-group quarter-horizontal-gutters">
             <div className="all-75">

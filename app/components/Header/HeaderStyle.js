@@ -4,7 +4,7 @@ const HeaderStyle = styled.div`
   height: 100%;
   position: fixed;
   width: 50px;
-  background-color: #394264;
+  background-color: #333;
   -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.04);
   -moz-box-shadow: 0 1px 4px rgba(0,0,0,.04);
   box-shadow: 0 1px 4px rgba(0,0,0,.04);

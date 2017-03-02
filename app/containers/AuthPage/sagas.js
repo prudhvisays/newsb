@@ -1,6 +1,6 @@
 import { takeLatest, takeEvery } from 'redux-saga';
 import { take, call, put, fork, race, cancel } from 'redux-saga/effects';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE, push } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import auth from '../../Api/Auth';
 
@@ -27,8 +27,6 @@ export function* logout() {
 
   try {
     let response = yield call(auth.logout);
-    localStorage.removeItem('token');
-    localStorage.removeItem('sessionData');
     yield put({ type: 'SENDING_REQUEST', sending: false });
   } catch (error) {
     yield put({ type: 'REQUEST_ERROR', error: error.message });
@@ -50,22 +48,19 @@ export function* loginFlow() {
       yield put({ type: 'CHANGE_FORM', newFormState: { username: '', password: '' } });
       const OneSignal = window.OneSignal || [];
       OneSignal.push(['sendTags', { manager: 'ADMIN' }]);
-      forwardTo('/');
+      yield put(push('/'));
     } else if (winner.logout) {
       yield put({ type: 'SET_AUTH', newAuthState: false });
       yield call(logout);
-      forwardTo('/login');
+      yield put(push('/login'));
     }
   }
 }
 
 export function* logoutFlow() {
-  while (true) {
-    yield take('LOGOUT');
     yield call(logout);
     yield put({ type: 'SET_AUTH', newAuthState: false });
-    forwardTo('/login');
-  }
+    yield put(push('/login'));
 }
 
 export function* loginRoot() {
@@ -73,7 +68,7 @@ export function* loginRoot() {
 }
 
 export function* logoutRoot() {
-  yield fork(logoutFlow);
+  yield fork(takeLatest,'LOGOUT', logoutFlow);
 }
 
 export default [

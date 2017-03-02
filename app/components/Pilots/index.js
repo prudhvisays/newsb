@@ -39,13 +39,6 @@ export default class Pilots extends React.Component { //eslint-disable-line
     this.timer = this.timer.bind(this);
     this.closePilot = this.closePilot.bind(this);
   }
-  componentDidMount() {
-    const intervalId = setInterval(() => this.timer, 3000);
-    this.setState({ intervalId });
-  }
-  componentWillUnmount() {
-    clearInterval(this.state.intervalId);
-  }
 
   timer() {
     this.setState({
@@ -108,7 +101,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
                   <SparklinesSpots size={1} />
                 </Sparklines>
               </div>
-              <div className="all-100" style={{ position: 'relative', zIndex: '1', background: '#394264' }}>
+              <div className="all-100 block-background" style={{ position: 'relative', zIndex: '1' }}>
                 <PilotFeed tasksExpand={this.taskExpand} stats={stats} />
               </div>
               <div className="all-100 closePilotTag">

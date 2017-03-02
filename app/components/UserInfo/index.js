@@ -3,6 +3,7 @@ import PilotTripCard from '../PilotTripCard';
 import TripCard from '../TripCard';
 import moment from 'moment';
 import CloseButton from './CloseButton';
+import profileImage from '../../Assets/profile-image.gif';
 
 export default class UserInfo extends React.Component { //eslint-disable-line
   constructor(props) {
@@ -24,14 +25,14 @@ export default class UserInfo extends React.Component { //eslint-disable-line
             <div className="ProfilePic">
               <div className="ink-flex push-center">
                 <div className="profile-pic" style={{ width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', margin: 0, border: '6px double #51d4ff' }}>
-                  <img src="https://www.heraldsquarecosmeticdental.com/files/2011/08/smile-man1.jpg" alt="card" style={{ height: '100px', width: '100%' }}></img>
+                  <img src={profileImage} alt="default-card" style={{ height: '100px', width: '100%' }}></img>
                 </div>
               </div>
             </div>
             <div className="Profile-title">
               <div className="ink-flex push-center">
                 <div>
-                  <h3 style={{ margin: 0 }}>{`${statePilotInfo.pilot.user.firstName} ${statePilotInfo.pilot.user.lastName}`}</h3>
+                  <h3 style={{ margin: 0, color: '#6bc9c5' }}>{`${statePilotInfo.pilot.user.firstName} ${statePilotInfo.pilot.user.lastName}`}</h3>
                 </div>
               </div>
             </div>

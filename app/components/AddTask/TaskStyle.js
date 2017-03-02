@@ -6,7 +6,7 @@ const TaskStyle = styled.ul`
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(57, 66, 100);
+    background-color: #fafafa;
 }
 /* Float the list items side by side */
 &.task-tab li {
@@ -16,7 +16,7 @@ const TaskStyle = styled.ul`
 /* Style the links inside the list items */
 &.task-tab li a {
     display: inline-block;
-    color: #fff;
+    color: #333;
     text-align: center;
     padding: 1em 1em;
     text-decoration: none;
