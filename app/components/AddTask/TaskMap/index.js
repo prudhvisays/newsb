@@ -1,6 +1,8 @@
 import React from 'react';
 import MapStyle from './MapStyle';
 import { AntPath } from 'leaflet-ant-path';
+import auth from '../../../Api/Auth';
+
 let map;
 let newMarkerOne;
 let newMarkerTwo;
@@ -17,8 +19,18 @@ export default class TaskMap extends React.Component { //eslint-disable-line
   }
   componentDidMount() {
     this.leafletMap();
+    if (auth.loggedIn() && JSON.parse(localStorage.getItem('sessionData')).username === 'merchant') {
+      const session = JSON.parse(localStorage.getItem('sessionData'));
+      const pLat = session.customer.location.coordinates[1];
+      const pLng = session.customer.location.coordinates[0];
+      const name = session.customer.name;
+      const phone = session.customer.user.mobileNumber;
+      const email = session.customer.user.emailAddress;
+      this.props.pickupCord({ pLat, pLng });
+      this.props.pickupChange({ ...this.props.stateAddTask.pickup, from_name: name, from_phone: phone, from_email: email });
+    }
 }
-  componentDidUpdate(prevProps){
+componentDidUpdate(prevProps){
     const { pLat, pLng } = this.props.pCord;
     const { dLat, dLng } = this.props.dCord;
     if (prevProps.pCord !== this.props.pCord) {

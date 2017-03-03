@@ -3,6 +3,7 @@ import { take, call, put, fork, race, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE, push } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import auth from '../../Api/Auth';
+import * as actions from '../HomePage/actions';
 
 export function* authorize({ username, password, userRole }) {
   yield put({ type: 'SENDING_REQUEST', sending: true });

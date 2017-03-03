@@ -32,7 +32,7 @@ const initialState = {
       from_phone: '',
       from_email: '',
       from_address: '',
-      from_date: moment().format('YYYYMMDD HH:mm'),
+      from_date: '',
     },
     delivery: {
       to_name: '',
@@ -50,7 +50,7 @@ const initialState = {
   request: false,
   addTaskStatus: {
     statusText: 'Sending',
-    statusColor: '#fff',
+    statusColor: '#6bc9c5',
   },
    selection: {
      teamSelect: '',

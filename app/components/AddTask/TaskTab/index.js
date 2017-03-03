@@ -2,6 +2,7 @@ import React from 'react';
 import TaskAddress from '../TaskAddress';
 import DeliveryAddress from '../DeliveryAddress';
 import TaskStyle from '../TaskStyle';
+import { userType } from '../../../Api/ApiConstants';
 
 export default class Tabs extends React.Component { //eslint-disable-line
   constructor() {
@@ -35,14 +36,14 @@ export default class Tabs extends React.Component { //eslint-disable-line
     return (
       <div className="block-background" style={{ height: '40vh' }}>
         <TaskStyle className="ink-flex task-tab" style={{ margin: 0 }}>
-          <li className="all-50"><a className="task-links" id="default-task" onClick={(event) => { this.taskTabs(event, 'add-pickup'); }}>Pickup Address</a></li>
-          <li className="all-50"><a className="task-links" onClick={(event) => { this.taskTabs(event, 'add-delivery'); }}>Delivery Address</a></li>
+          { userType() && <li className="all-50"><a className="task-links" id="default-task" onClick={(event) => { this.taskTabs(event, 'add-pickup'); }}>Pickup Address</a></li> }
+          <li className="all-50"><a className="task-links" id={!userType() ? 'default-task' : ''} onClick={(event) => { this.taskTabs(event, 'add-delivery'); }}>Delivery Address</a></li>
         </TaskStyle>
         <div id="add-pickup" className="task-content" style={{ fontSize: '1rem' }}>
           <TaskAddress pickupCord={pickupCord} deliveryCord={deliveryCord} pickupChange={pickupChange} stateAddTask={stateAddTask} />
         </div>
         <div id="add-delivery" className="task-content">
-          <DeliveryAddress deliveryCord={deliveryCord} stateAddTask={stateAddTask} deliveryChange={deliveryChange} />
+          <DeliveryAddress deliveryCord={deliveryCord} stateAddTask={stateAddTask} deliveryChange={deliveryChange} pickupChange={pickupChange} />
         </div>
       </div>
     );

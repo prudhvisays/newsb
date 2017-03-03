@@ -81,7 +81,7 @@ clearForm(e) {
             <div className="all-40">
               <div className="ink-flex vertical">
                 <div className="title-desc ink-flex vertical">
-                  { isAdmin() && (<input type="text" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>)}
+                  { isAdmin() && (<input type="text" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange} />)}
                   { isAdmin() && (<textarea
                     type="text"
                     placeholder="Enter Description"
@@ -90,13 +90,20 @@ clearForm(e) {
                     value={stateAddTask.taskInfo.description}
                   />)}
                 </div>
-                <TaskMap pCord={pCord} dCord={dCord} isAdmin={isAdmin}/>
+                <TaskMap
+                  pCord={pCord}
+                  dCord={dCord}
+                  isAdmin={isAdmin}
+                  pickupChange={pickupChange}
+                  pickupCord={pickupCord}
+                  stateAddTask={stateAddTask}
+                />
               </div>
             </div>
             <div className="all-60" style={{ height: '40vh' }}>
               <div className="ink-flex">
                 <div className="all-100">
-                  { !isAdmin() && (<input type="text" placeholder="Enter Title" style={{ fontSize: '0.8rem', height: '5.9vh', width: '98%', paddingLeft: '0.6em' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>)}
+                  { !isAdmin() && (<input type="text" placeholder="Enter Title" style={{ fontSize: '0.8rem', height: '5.9vh', width: '98%', paddingLeft: '0.6em' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange} />)}
                   { !isAdmin() && (<textarea
                     type="text"
                     placeholder="Enter Description"
@@ -114,7 +121,7 @@ clearForm(e) {
                     deliveryChange={deliveryChange}
                   />
                 </div>
-                { isAdmin() && (<div className="all-100">
+                { isAdmin() && (<div className="all-100" style={{ marginTop: '1em' }}>
                   <div className="ink-flex" style={{ marginLeft: '1em' }}>
                     <div className="control unstyled ink-flex" style={{ marginBottom: '0.8em' }} >
                       <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="auto" checked={stateAuto == 'auto'} onChange={this.setSelection}/><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Auto</label></div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Input from '../Input';
 import Flatpickr from 'react-flatpickr';
-import '../../../../node_modules/flatpickr/dist/themes/dark.css';
 import GMaps from '../GMaps';
 import './taskAddress.css';
 import moment from 'moment';
@@ -14,6 +13,7 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
     this.emailChange = this.emailChange.bind(this);
     this.calendarChange = this.calendarChange.bind(this);
     this.emitChanges = this.emitChanges.bind(this);
+    this.onOpen = this.onOpen.bind(this);
   }
   nameChange(e) {
     const { pickup } = this.props.stateAddTask;
@@ -35,6 +35,11 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
   emitChanges(newFormState) {
     this.props.pickupChange(newFormState);
   }
+  onOpen() {
+    const { pickup } = this.props.stateAddTask;
+    const Date = moment().add(15,'m').utc().format();
+    this.emitChanges({ ...pickup, from_date: Date });
+  }
   render() {
     const { pickupCord, pickupChange, stateAddTask } = this.props;
     return (
@@ -43,16 +48,17 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
         <Input Name={'Phone'} Holder={'Enter Phone Number'} onChange={this.phoneChange} value={stateAddTask.pickup.from_phone} />
         <Input Name={'Email'} Holder={'Enter Email'} onChange={this.emailChange} value={stateAddTask.pickup.from_email} />
         <div className="ink-flex vertical">
-          {/* <div className="sub-title">Date</div> */}
+          <div className="sub-title">Pickup Before</div>
           <div><Flatpickr
             data-enable-time
             placeholder={'Pickup Before'}
             onChange={this.calendarChange}
-            options={{ defaultDate: 1477697199863, enableTime: true }}
+            onBlur={this.onOpen}
+            value={ stateAddTask.pickup.from_date ? moment(stateAddTask.pickup.from_date).format() : ''}
           /></div>
         </div>
         <div className="ink-flex vertical">
-          {/* <div className="sub-title">Address</div> */}
+           <div className="sub-title">Address</div>
           <GMaps pickupCord={pickupCord} stateAddTask={stateAddTask} pickupChange={pickupChange} />
         </div>
       </div>
