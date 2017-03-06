@@ -20,6 +20,7 @@ export default class FranchiseMap extends React.Component { //eslint-disable-lin
     const { fLat, fLng } = this.props.statefranchiseCord;
     if(prevProps.statefranchiseCord !== this.props.statefranchiseCord) {
       this.setview(fLat, fLng);
+      this.setMaxBounds(fLat, fLng);
     }
   }
   leafletMap() {

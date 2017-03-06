@@ -2,7 +2,7 @@
   margin-top: 1em;
 }
 .timeline .timeline-bar .pipe {
-  border-right: 8px solid #fff;
+  border-right: 8px solid #eee;
 }
 .timeline-bar .pipe.bar{
   height: 100%;
@@ -24,7 +24,7 @@
       height: 20px;
       border-radius: 50%;
       background: #fff;
-      border: 5px solid rgb(236, 24, 79);
+      border: 5px solid #ded64d;
       position: absolute;
       top: -3%;
       right: 0;
