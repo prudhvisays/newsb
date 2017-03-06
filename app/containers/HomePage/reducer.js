@@ -55,7 +55,7 @@ const initialState = {
    selection: {
      teamSelect: '',
      pilots: '',
-   } ,
+   },
   },
   auto: 'auto',
   pilotList: {
@@ -212,6 +212,13 @@ function homeReducer(state = initialState, action) {
     case 'SET_SELECTION':
     return { ...state,
       auto: action.payload,
+      addTask: {
+        ...state.addTask,
+        selection: {
+          ...state.addTask.selection,
+          pilots: '',
+        },
+      },
     };
     case 'ACCORDION_OPEN':
     return accordionOpen(state, action);
