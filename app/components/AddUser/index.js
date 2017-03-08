@@ -50,7 +50,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 <div><input type="radio" id="rb3" name="isManager" value="isManager" checked={stateUserInfo.isManager} onChange={this.setSelection} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manager Admin</label></div>
               </div>
             </div> }
-            { stateUserInfo.isFranchiseAdmin && <div className="BottomMargin">
+            { ((!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin && !stateUserInfo.isPilot && !stateUserInfo.isMerchant) || stateUserInfo.isFranchiseAdmin) && <div className="BottomMargin">
               <div className="ink-flex">
                 <div className="all-100">
                   <FormInput
@@ -63,7 +63,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 </div>
               </div>
             </div> }
-            { (stateUserInfo.isMerchant || stateUserInfo.isFranchiseAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="BottomMargin">
+            { (stateUserInfo.isMerchant || (stateUserInfo.selectAdmin && stateUserInfo.isFranchiseAdmin)) && <div className="BottomMargin">
               <FormInput
                 name={'name'}
                 holder={'Enter Name'}
@@ -203,7 +203,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 {/*</div>*/}
               {/*</div>*/}
             {/*}*/}
-            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.isManager || stateUserInfo.isFranchiseAdmin) && <div className="ink-flex push-right"><button type="submit">Submit</button></div> }
+            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="ink-flex push-right"><button type="submit">Submit</button></div> }
           </div>
         </form>
       </CreateUserStyle>
