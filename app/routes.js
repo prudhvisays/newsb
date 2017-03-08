@@ -56,29 +56,29 @@ export default function createRoutes(store) {
           importModules.catch(errorLoading);
         },
       },
+      // {
+      //   onEnter: redirectToLogin,
+      //   path: '/franchise',
+      //   name: 'franchise',
+      //   getComponent(nextState, cb) {
+      //     const importModules = Promise.all([
+      //     import('containers/Franchise/reducer'),
+      //     import('containers/Franchise/sagas'),
+      //     import('containers/Franchise'),
+      //   ]);
+      //
+      //     const renderRoute = loadModule(cb);
+      //
+      //     importModules.then(([reducer, sagas, component]) => {
+      //       injectReducer('franchise', reducer.default);
+      //       injectSagas(sagas.default);
+      //       renderRoute(component);
+      //     });
+      //
+      //     importModules.catch(errorLoading);
+      //   },
+      // },
       {
-        onEnter: redirectToLogin,
-        path: '/franchise',
-        name: 'franchise',
-        getComponent(nextState, cb) {
-          const importModules = Promise.all([
-          import('containers/Franchise/reducer'),
-          import('containers/Franchise/sagas'),
-          import('containers/Franchise'),
-        ]);
-
-          const renderRoute = loadModule(cb);
-
-          importModules.then(([reducer, sagas, component]) => {
-            injectReducer('franchise', reducer.default);
-            injectSagas(sagas.default);
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
-        },
-      },
-      /*{
        path: '/user',
        name: 'user',
        getComponent(nextState, cb) {
@@ -93,12 +93,13 @@ export default function createRoutes(store) {
        importModules.then(([reducer, sagas, component]) => {
        injectReducer('user', reducer.default);
        injectSagas(sagas.default);
+
        renderRoute(component);
        });
 
        importModules.catch(errorLoading);
-       },
-       },*/
+        },
+      },
       {
         onEnter: redirectToDashboard,
         path: '/login',

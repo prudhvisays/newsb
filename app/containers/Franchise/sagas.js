@@ -1,7 +1,7 @@
 import { takeLatest, takeEvery } from 'redux-saga';
 import { take, call, put, select, fork, cancel, delay, race } from 'redux-saga/effects';
 import * as actions from './actions';
-import  franchiseApi from '../../Api/franchiseApi';
+import  franchiseApi from '../../Api/userApi';
 
 export function* fetchPilots(salesDate) {
   console.info(salesDate);

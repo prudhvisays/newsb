@@ -141,7 +141,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
             </div> */}
             <div className="listShow" style={orderUser}>
               { stateOrders.map((order) => {
-                const date = moment(order.createdAt).local().format('YYYY-MM-DD HH:mm');
+                const date = moment(order.createdAt).format('YYYY-MM-DD HH:mm');
                 return (
                   <TripCard key={order._id} detailedInfo={() => {this.detailedInfo(order._id)}} customerName={order.title} orderStatus={order.status} orderAddress={order.to_address} orderPilot={order.pilot ? 'new' : '-'} orderTime={date} />
                 );

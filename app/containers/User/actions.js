@@ -1,49 +1,66 @@
-export function onFormChange(data) {
+export function getUserTeam() {
   return {
-    type: 'ON_FORM_CHANGE',
+    type: 'GET_USER_TEAM',
+  };
+}
+
+export function getUserTeamSuccess(data) {
+  return {
+    type: 'GET_USER_TEAM_SUCCESS',
     payload: data,
   };
 }
 
-
-export function submitingRequest(data) {
+export function getUserTeamFailure(err) {
   return {
-    type: 'POST_REQUEST',
+    type: 'GET_USER_TEAM_FAILURE',
+    payload: err,
+  };
+}
+
+export function onUserFormChange(data) {
+  return {
+    type: 'ON_USER_FORM_CHANGE',
     payload: data,
   };
 }
 
-export function submitUserData(data) {
+export function userCordsChange(data) {
   return {
-    type: 'SUBMIT_USER_DATA',
+    type: 'USER_CORDS_CHANGE',
     payload: data,
   };
 }
 
-export function getUserResponse(data) {
+export function userGeoFence(data) {
   return {
-    type: 'GET_USER_RESPONSE',
+    type: 'USER_GEO_FENCE',
     payload: data,
   };
 }
 
-export function resetUserData(data) {
+export function reqCreateuser(data) {
   return {
-    type: 'RESET_USER_DATA',
+    type: 'REQ_CREATE_USER',
+    payload: data,
+  };
+}
+export function createUser() {
+  return {
+    type: 'CREATE_USER',
+  };
+}
+
+export function createUserSuccess(data) {
+  return {
+    type: 'CREATE_USER_SUCCESS',
     payload: data,
   };
 }
 
-export function getFranchises(data) {
+export function createUserFailure(data) {
   return {
-    type: 'GET_USER_RESPONSE',
-    payload: data,
-  };
-}
-
-export function getTeams(data) {
-  return {
-    type: 'GET_USER_RESPONSE',
+    type: 'CREATE_USER_FAILURE',
     payload: data,
   };
 }

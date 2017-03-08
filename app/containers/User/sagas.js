@@ -1,64 +1,77 @@
-import { takeLatest, takeEvery } from 'redux-saga';
-import { take, call, put, select, fork, cancel, delay, race } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { take, call, put, select, fork, cancel, race, takeLatest, takeEvery, } from 'redux-saga/effects';
 import * as actions from './actions';
-import  franchiseApi from '../../Api/franchiseApi';
+import  realData from '../../Api';
+import  userApi from '../../Api/userApi';
+import * as selectors from './selectors';
 
-export function* fetchTeams(franchise) {
-  console.info(franchise);
+export function* fetchTeams() {
   try {
-    const response = yield call(franchiseApi.getPilotsApi);
-    yield put(actions.getPilotsSuccess(response));
+    const response = yield call(realData.getTeamsApi);
+    yield put(actions.getUserTeamSuccess(response));
   } catch (error) {
     if (error.response) {
-      yield put(actions.getPilotsFailure(error.response.data));
+      yield put(actions.getUserTeamFailure(error.message));
     }
   }
 }
-export function* fetchPilotsFlow() {
+export function* fetchTeamsFlow() {
   while(true) {
-    const request = yield take('GET_PILOTS');
-    const salesDate = request.payload;
-    yield call(fetchPilots, salesDate);
+    const request = yield take('GET_USER_TEAM');
+    yield call(fetchTeams);
   }
 }
-export function* fetchPilotsWatch() {
-  yield fork(fetchPilotsFlow);
+export function* fetchTeamsWatch() {
+  yield fork(fetchTeamsFlow);
 }
 
-export function* fetchPilotsRoot() {
-  const pilotsWatcher = yield fork(fetchPilotsWatch);
+export function* fetchTeamsRoot() {
+  const teamsWatcher = yield fork(fetchTeamsWatch);
   yield take('LOCATION_CHANGE');
-  yield cancel(pilotsWatcher);
+  yield cancel(teamsWatcher);
 }
-// Post Franchise
-export function* postFranchise(data) {
-  console.log(data);
+// Post Franchise || Create User
+export function* postCreateUser(res, usertype) {
+  console.log(res);
+  yield put(actions.reqCreateuser(true));
   try {
-    const response = yield call(franchiseApi.postFranchiseApi, data);
-    yield put(actions.getFranchiseResponse(response));
+    const response = yield call(userApi.postCreateUserApi, res, usertype);
+    yield put(actions.createUserSuccess(response));
   } catch (error) {
     if (error.response) {
-      yield put(actions.getPilotsFailure(error.response.data));
+      yield put(actions.createUserFailure(error.message));
     }
+  } finally {
+    yield call(delay, 500);
+    yield put(actions.reqCreateuser(false));
   }
 }
-export function* postFranchiseFlow() {
-  while(true) {
-    const request = yield take('SUBMIT_FRANCHISE_DATA');
-    const { newFormState, statefranchiseCord, stateFranchiseGeoFence } = request.payload;
-    yield call(postFranchise, { newFormState, stateFranchiseGeoFence, statefranchiseCord });
-  }
+export function* postCreateUserFlow() {
+ const res = yield select(selectors.userInfo());
+ let usertype;
+ if(res.isFranchiseAdmin){
+   usertype = 'franchises';
+   yield call(postCreateUser, res, usertype);
+ } else if(res.isManager) {
+   usertype = 'managers';
+   yield call(postCreateUser, res, usertype);
+ } else if(res.isPilot) {
+   usertype = 'pilots';
+   yield call(postCreateUser, res, usertype);
+ } else if(res.isMerchant) {
+   usertype = 'merchants';
+   yield call(postCreateUser, res, usertype);
+ }
 }
-export function* postFranchiseWatch() {
-  yield fork(postFranchiseFlow);
+export function* postCreateUserWatch() {
+  yield fork(takeLatest, 'CREATE_USER', postCreateUserFlow);
 }
-
-export function* postFranchiseRoot() {
-  const franchiseWatcher = yield fork(postFranchiseWatch);
+export function* postCreateUserRoot() {
+  const userWatcher = yield fork(postCreateUserWatch);
   yield take('LOCATION_CHANGE');
-  yield cancel(franchiseWatcher);
+  yield cancel(userWatcher);
 }
 export default[
-  fetchPilotsRoot,
-  postFranchiseRoot,
+  fetchTeamsRoot,
+  postCreateUserRoot,
 ];

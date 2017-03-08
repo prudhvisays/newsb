@@ -1,151 +1,212 @@
 import React from 'react';
-import LoadingSpinner from './LoadingSpinner';
-import './AddStyle.css';
+import CreateUserStyle from './CreateUserStyle';
+import UserSelect from './UserSelect';
+import TeamSelect from './TeamSelect';
+import UserMaps from './UserMaps';
+import FormInput from './FormInput';
+import './user.css';
 
-export default class AddTask extends React.Component { //eslint-disable-line
+export default class UserForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.usernameChange = this.usernameChange.bind(this);
-    this.passwordChange = this.passwordChange.bind(this);
-    this.confirmPasswordChange = this.confirmPasswordChange.bind(this);
-    this.firstNameChange = this.firstNameChange.bind(this);
-    this.lastNameChange = this.lastNameChange.bind(this);
-    this.mobileNumberChange = this.mobileNumberChange.bind(this);
-    this.emailAddressChange = this.emailAddressChange.bind(this);
-    this.licenseChange = this.licenseChange.bind(this);
-    this.nameChange = this.nameChange.bind(this);
-
-    this.emitChange = this.emitChange.bind(this);
-    this.submitOrder = this.submitOrder.bind(this);
-    this.clearForm = this.clearForm.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.emitChanges = this.emitChanges.bind(this);
+    this.submitFranchise = this.submitFranchise.bind(this);
     this.setSelection = this.setSelection.bind(this);
   }
-  usernameChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, username : e.target.value });
+  onChange(e) {
+    this.emitChanges({ ...this.props.stateUserInfo, [e.target.name]: e.target.value });
   }
-  passwordChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, password : e.target.value });
-  }
-  confirmPasswordChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, confirmPassword : e.target.value });
-  }
-  firstNameChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, firstName : e.target.value });
-  }
-  lastNameChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, lastName : e.target.value });
-  }
-  mobileNumberChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, mobileNumber : e.target.value });
-  }
-  emailAddressChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, emailAddress : e.target.value });
-  }
-  licenseChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, license : e.target.value });
-  }
-  nameChange(e) {
-    const { userInfo } = this.props.user;
-    this.emitChange({ ...userInfo, name : e.target.value });
-  }
-  emitChange(userInfo) {
-    this.props.userInfo(userInfo);
-  }
-  submitUser(e) {
-    e.preventDefault();
-    const { userInfo } = this.props.userInfo;
-    this.props.postAddTask({ stateAddTask, pCord, dCord });
-  }
-  clearForm(e) {
-    e.preventDefault();
-    this.props.clearForm();
+  emitChanges(newFormState) {
+    this.props.onUserFormChange(newFormState);
   }
   setSelection(e) {
-    this.props.setSelection(e.target.value);
+    if (e.target.value === 'isAdmin') {
+      this.props.onUserFormChange({ ...this.props.stateUserInfo, isAdmin: true, isFranchiseAdmin: false, isManager: false})
+    } else if (e.target.value === 'isFranchise') {
+      this.props.onUserFormChange({...this.props.stateUserInfo, isAdmin: false, isFranchiseAdmin: true, isManager: false});
+    } else if(e.target.value === 'isManager') {
+      this.props.onUserFormChange({ ...this.props.stateUserInfo, isAdmin: false, isFranchiseAdmin: false, isManager: true });
+    }
+  }
+  submitFranchise(e) {
+    e.preventDefault();
+    this.props.createUser();
   }
   render() {
-    const {
-      userInfo
-    } = this.props.user;
+    const { stateUserTeams, stateUserInfo, onUserFormChange, userCordsChange } = this.props
     return (
-      <div className="boxShadow block-background" style={{ height: '67vh', position: 'relative' }}>
-        {!stateAddTask.request ? (<form onSubmit={this.submitOrder}>
-            <div className="ink-flex">
-              <div className="all-100 team-block">
-                <div className="ink-flex">
-                  <div className="all-30" style={{ padding: '0.5em 0.8em' }}>
-                    <div>Add Task</div>
-                  </div>
-                  <div className="all-70" style={{ padding: '0.3em 0.5em' }}>
-                    <div className="ink-flex push-right">
-                      <ButtonStyle cancel onClick={this.clearForm}>Clear</ButtonStyle>
-                      <ButtonStyle type="submit">Save</ButtonStyle>
-                    </div>
-                  </div>
+      <CreateUserStyle className="formStyle">
+        <form onSubmit={this.submitFranchise}>
+          <div className="ink-flex vertical">
+            <div className="BottomMargin">
+              <div className="fw-700 sub-title">Create</div>
+              <div className="area"><UserSelect userInfo={stateUserInfo} onUserFormChange={onUserFormChange} /></div>
+            </div>
+            { stateUserInfo.selectAdmin && <div className="BottomMargin">
+              <div className="ink-flex">
+                <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="isAdmin" value="isAdmin" checked={stateUserInfo.isAdmin} onChange={this.setSelection} /><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Admin</label></div>
+                <div><input type="radio" id="rb2" name="isFranchiseAdmin" value="isFranchise" checked={stateUserInfo.isFranchiseAdmin} onChange={this.setSelection} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Franchise Admin</label></div>
+                <div><input type="radio" id="rb3" name="isManager" value="isManager" checked={stateUserInfo.isManager} onChange={this.setSelection} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manager Admin</label></div>
+              </div>
+            </div> }
+            { stateUserInfo.isFranchiseAdmin && <div className="BottomMargin">
+              <div className="ink-flex">
+                <div className="all-100">
+                  <FormInput
+                    name={'franchise'}
+                    holder={'Enter Franchise Name'}
+                    type={'text'} title={'Franchise'}
+                    change={this.onChange}
+                    value={stateUserInfo.franchise}
+                  />
                 </div>
               </div>
-              <div className="all-40">
-                <div className="ink-flex vertical">
-                  <div className="title-desc ink-flex vertical">
-                    <input type="text" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange}></input>
-                    <textarea
-                      type="text"
-                      placeholder="Enter Description"
-                      style={{ height: '14.5vh', width: '100%', color: '#fff', fontSize: '0.8rem' }}
-                      onChange={this.desChange}
-                      value={stateAddTask.taskInfo.description}
-                    />
-                  </div>
-                  <TaskMap pCord={pCord} dCord={dCord} />
+            </div> }
+            { (stateUserInfo.isMerchant || stateUserInfo.isFranchiseAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="BottomMargin">
+              <FormInput
+                name={'name'}
+                holder={'Enter Name'}
+                type={'text'}
+                title={'Name'}
+                change={this.onChange}
+                value={stateUserInfo.name}
+              />
+            </div> }
+            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.isManager || stateUserInfo.isAdmin || stateUserInfo.isFranchiseAdmin ) && ( <div> <div className="BottomMargin">
+              <div className="ink-flex">
+                <div className="all-50">
+                  <FormInput
+                    name={'firstName'}
+                    holder={'Enter First Name'}
+                    type={'text'}
+                    title={'First Name'}
+                    change={this.onChange}
+                    value={stateUserInfo.firstName}
+                  />
                 </div>
-              </div>
-              <div className="all-60" style={{ height: '40vh' }}>
-                <div className="ink-flex">
-                  <div className="all-100">
-                    <TaskTab
-                      pickupCord={pickupCord}
-                      deliveryCord={deliveryCord}
-                      pickupChange={pickupChange}
-                      stateAddTask={stateAddTask}
-                      deliveryChange={deliveryChange}
-                    />
-                  </div>
-                  <div className="all-100">
-                    <div className="ink-flex" style={{ marginLeft: '1em' }}>
-                      <div className="control unstyled ink-flex" style={{ marginBottom: '0.8em' }} >
-                        <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="rb" value="auto" checked={stateAuto == 'auto'} onChange={this.setSelection}/><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Auto</label></div>
-                        <div><input type="radio" id="rb2" name="rb" value="manual" checked={stateAuto == 'manual'} onChange={this.setSelection}/><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manual</label></div>
-                      </div>
-                    </div>
-                    <div className="ink-flex vertical">
-                      <div style={{ margin: '0 0.3em' }}><TeamSelect /></div>
-                      { !(stateAuto === 'auto') && <div style={{ margin: '0.2em 0.3em' }}><Select /></div> }
-                    </div>
-                  </div>
+                <div className="all-50">
+                  <FormInput
+                    name={'lastName'}
+                    holder={'Enter Last Name'}
+                    type={'text'}
+                    title={'Last Name'}
+                    change={this.onChange}
+                    value={stateUserInfo.lastName}
+                  />
                 </div>
               </div>
             </div>
-          </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader" color={stateAddTask.addTaskStatus.statusColor}>
-            <div className="cs-loader-inner">
-              <label>	●</label>
-              <label>	●</label>
-              <label>	●</label>
-              <label>	●</label>
-              <label>	●</label>
-              <label>	●</label>
-              <div className="cs-note">
-                <span>{stateAddTask.addTaskStatus.statusText}</span></div>
+            <div className="BottomMargin">
+              <div className="ink-flex">
+                <div className="all-100">
+                  <FormInput
+                    name={'username'}
+                    holder={'Enter User Name'}
+                    type={'text'}
+                    title={'User Name'}
+                    change={this.onChange}
+                    value={stateUserInfo.username}
+                  />
+                </div>
+              </div>
             </div>
-          </LoadingSpinner>)}
-      </div>
+            <div className="BottomMargin">
+              <div className="ink-flex">
+                <div className="all-50">
+                  <FormInput
+                    name={'password'}
+                    holder={'Enter Password'}
+                    type={'password'}
+                    title={'Password'}
+                    change={this.onChange}
+                    value={stateUserInfo.password}
+                  />
+                </div>
+                <div className="all-50">
+                  <FormInput
+                    name={'confirmPassword'}
+                    holder={'Confirm Password'}
+                    type={'password'}
+                    title={'Confirm Password'}
+                    change={this.onChange}
+                    value={stateUserInfo.confirmPassword}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="BottomMargin">
+              <div className="ink-flex">
+                <div className="all-50">
+                  <FormInput
+                    name={'mobileNumber'}
+                    holder={'Enter Mobile Number'}
+                    type={'text'}
+                    title={'Mobile Number'}
+                    change={this.onChange}
+                    value={stateUserInfo.mobileNumber}
+                  />
+                </div>
+                <div className="all-50">
+                  <FormInput
+                    name={'emailAddress'}
+                    holder={'Enter Email Address'}
+                    type={'text'}
+                    title={'Email Address'}
+                    change={this.onChange}
+                    value={stateUserInfo.emailAddress}
+                  />
+                </div>
+              </div>
+            </div> </div>)}
+            <div className="BottomMargin">
+              <div className="fw-700 sub-title">Location</div>
+              <div className="area"><UserMaps userCordsChange={userCordsChange} /></div>
+            </div>
+            { stateUserInfo.isManager && <div className="BottomMargin">
+              <div className="fw-700 sub-title">Teams</div>
+              <div className="area"><TeamSelect
+                userTeams={stateUserTeams}
+                userInfo={stateUserInfo}
+                onUserFormChange={onUserFormChange}
+              /></div>
+            </div> }
+            { stateUserInfo.isPilot && (<div><div className="BottomMargin">
+              <FormInput
+                name={'license'}
+                holder={'Enter License Number'}
+                type={'text'}
+                title={'License'}
+                change={this.onChange}
+                value={stateUserInfo.license}
+              />
+            </div>
+            <div className="BottomMargin">
+              <FormInput
+                name={'transportType'}
+                holder={'Enter Transport Type'}
+                type={'text'}
+                title={'Transport Type'}
+                change={this.onChange}
+                value={stateUserInfo.transportType}
+              />
+            </div></div>)}
+            {/*{ stateReqGeoFence &&*/}
+                {/*<div className="BottomMargin">*/}
+                {/*<div className="fw-700">Location</div>*/}
+                {/*<div className="area">{stateFranchiseGeoFence.map((fence) => {*/}
+                        {/*return (*/}
+                          {/*<span>{fence}</span>*/}
+                        {/*)*/}
+                {/*})*/}
+                {/*}*/}
+                {/*</div>*/}
+              {/*</div>*/}
+            {/*}*/}
+            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.isManager || stateUserInfo.isFranchiseAdmin) && <div className="ink-flex push-right"><button type="submit">Submit</button></div> }
+          </div>
+        </form>
+      </CreateUserStyle>
     );
   }
 }

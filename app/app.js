@@ -43,6 +43,8 @@ import { translationMessages } from './i18n';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import './Morris/morris.min';
 import './Morris/morris.css';
+import 'rc-select/assets/index.css';
+import './Assets/select.css';
 
 // Import root routes
 import createRoutes from './routes';
