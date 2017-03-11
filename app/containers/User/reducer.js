@@ -28,8 +28,11 @@ const initialState = {
       coordinates: [],
     },
     registration_status: true,
+    isOpen: false,
   },
   teams: [],
+  selectAdmin: false,
+  franchise: false,
 };
 
 function userReducer(state = initialState, action) {

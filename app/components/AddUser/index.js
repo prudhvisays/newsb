@@ -38,7 +38,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
     return (
       <CreateUserStyle className="formStyle">
         <form onSubmit={this.submitFranchise}>
-          <div className="ink-flex vertical">
+          { false && <div className="ink-flex vertical">
             <div className="BottomMargin">
               <div className="fw-700 sub-title">Create</div>
               <div className="area"><UserSelect userInfo={stateUserInfo} onUserFormChange={onUserFormChange} /></div>
@@ -204,7 +204,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
               {/*</div>*/}
             {/*}*/}
             { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="ink-flex push-right"><button type="submit">Submit</button></div> }
-          </div>
+          </div> }
         </form>
       </CreateUserStyle>
     );
