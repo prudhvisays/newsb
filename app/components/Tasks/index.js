@@ -2,32 +2,10 @@ import React from 'react';
 import Feed from '../Feed';
 import TripCard from '../TripCard';
 import Search from '../Search';
-import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 import classNames from 'classnames';
 import Flatpickr from 'react-flatpickr';
 import moment from 'moment';
 import OrderStyle from './OrderStyle';
-
-function boxMullerRandom() {
-    let phase = false,
-        x1, x2, w, z;
-
-    return (function() {
-
-        if (phase = !phase) {
-            do {
-                x1 = 2.0 * Math.random() - 1.0;
-                x2 = 2.0 * Math.random() - 1.0;
-                w = x1 * x1 + x2 * x2;
-            } while (w >= 1.0);
-
-            w = Math.sqrt((-2.0 * Math.log(w)) / w);
-            return x1 * w;
-        } else {
-            return x2 * w;
-        }
-    })();
-}
 
 export default class Tasks extends React.Component { //eslint-disable-line
   constructor() {
@@ -40,17 +18,11 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.taskExpand = this.taskExpand.bind(this);
     this.detailedInfo = this.detailedInfo.bind(this);
     this.closeOrders = this.closeOrders.bind(this);
-    this.timer = this.timer.bind(this);
     this.searchText = this.searchText.bind(this);
     this.emitSearch = this.emitSearch.bind(this);
     this.pickDate = this.pickDate.bind(this);
   }
-  timer() {
-    this.setState({
-      data: this.state.data.concat([boxMullerRandom()])
-    });
-  }
-
+ 
   taskExpand() {
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
@@ -120,12 +92,6 @@ export default class Tasks extends React.Component { //eslint-disable-line
           </div>
           <div style={{ padding: '0.6em 0.8em' }}>
             <div className="ink-flex" style={{ position: 'relative' }}>
-              <div className="all-100">
-                <Sparklines data={data} limit={20} width={100} height={10} margin={0}>
-                  <SparklinesLine style={{ stroke: 'rgb(245, 37, 151)', strokeWidth: '0.5', fill: 'none' }} />
-                  <SparklinesSpots size={1} />
-                </Sparklines>
-              </div>
               <div className="all-100 block-stats-background" style={{ position: 'relative', zIndex: '1' }}>
                 <Feed tasksExpand={this.taskExpand} stats={stats} orderStats={orderStats}/>
               </div>

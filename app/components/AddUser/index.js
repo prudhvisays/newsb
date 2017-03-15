@@ -163,7 +163,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
               <div className="fw-700 sub-title">Location</div>
               <div className="area"><UserMaps userCordsChange={userCordsChange} /></div>
             </div>
-            { stateUserInfo.isManager && <div className="BottomMargin">
+            { (stateUserInfo.isManager || stateUserInfo.isPilot) && <div className="BottomMargin">
               <div className="fw-700 sub-title">Teams</div>
               <div className="area"><TeamSelect
                 userTeams={stateUserTeams}

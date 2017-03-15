@@ -1,30 +1,7 @@
 import React from 'react';
 import PilotFeed from '../PilotFeed';
 import PilotCard from '../PilotCard';
-import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 import classNames from 'classnames';
-
-function boxMullerRandom() {
-    let phase = false,
-        x1, x2, w, z;
-
-    return (function() {
-
-        if (phase = !phase) {
-            do {
-                x1 = 2.0 * Math.random() - 1.0;
-                x2 = 2.0 * Math.random() - 1.0;
-                w = x1 * x1 + x2 * x2;
-            } while (w >= 1.0);
-
-            w = Math.sqrt((-2.0 * Math.log(w)) / w);
-            return x1 * w;
-        } else {
-            return x2 * w;
-        }
-    })();
-}
-
 
 export default class Pilots extends React.Component { //eslint-disable-line
   constructor() {
@@ -36,15 +13,9 @@ export default class Pilots extends React.Component { //eslint-disable-line
     };
     this.taskExpand = this.taskExpand.bind(this);
     this.detailedInfo = this.detailedInfo.bind(this);
-    this.timer = this.timer.bind(this);
     this.closePilot = this.closePilot.bind(this);
   }
 
-  timer() {
-    this.setState({
-      data: this.state.data.concat([boxMullerRandom()]),
-    });
-  }
   taskExpand() {
     const taskDiv = document.querySelector('.TaskExpand');
     const listShow = document.querySelector('.ListShow');
@@ -95,12 +66,6 @@ export default class Pilots extends React.Component { //eslint-disable-line
           </div>
           <div style={{ padding: '0.6em 0.8em' }}>
             <div className="ink-flex" style={{ position: 'relative' }}>
-              <div className="all-100">
-                <Sparklines data={data} limit={20} width={100} height={10} margin={0}>
-                  <SparklinesLine style={{ stroke: '#51d4ff', strokeWidth: '0.5', fill: 'none' }} />
-                  <SparklinesSpots size={1} />
-                </Sparklines>
-              </div>
               <div className="all-100 block-stats-background" style={{ position: 'relative', zIndex: '1' }}>
                 <PilotFeed tasksExpand={this.taskExpand} stats={stats} />
               </div>
