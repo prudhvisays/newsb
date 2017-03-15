@@ -4,6 +4,7 @@ import UserSelect from './UserSelect';
 import TeamSelect from './TeamSelect';
 import UserMaps from './UserMaps';
 import FormInput from './FormInput';
+import LoadingSpinner from '../LoadingSpinner'; 
 import './user.css';
 
 export default class UserForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -34,9 +35,10 @@ export default class UserForm extends React.Component { // eslint-disable-line r
     this.props.createUser();
   }
   render() {
-    const { stateUserTeams, stateUserInfo, onUserFormChange, userCordsChange } = this.props
+    const { stateUserRequest, stateUserStatus, stateUserTeams, stateUserInfo, onUserFormChange, userCordsChange } = this.props
     return (
       <CreateUserStyle className="formStyle">
+    { !stateUserRequest ? (
         <form onSubmit={this.submitFranchise}>
           { true && <div className="ink-flex vertical">
             <div className="BottomMargin">
@@ -203,10 +205,21 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 {/*</div>*/}
               {/*</div>*/}
             {/*}*/}
-            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="ink-flex push-right"><button type="submit">Submit</button></div> }
+            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="ink-flex push-right push-bottom"><button type="submit">Submit</button></div> }
           </div> }
-        </form>
-      </CreateUserStyle>
+        </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader" color={stateUserStatus.statusColor}>
+              <div className="cs-loader-inner">
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <label>	●</label>
+                <div className="cs-note">
+                  <span>{stateUserStatus.statusText}</span></div>
+              </div>
+              </LoadingSpinner>)}
+    </CreateUserStyle>
     );
   }
 }

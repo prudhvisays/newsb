@@ -64,3 +64,16 @@ export function createUserFailure(data) {
     payload: data,
   };
 }
+
+export function createUserStatus(data) {
+  return {
+    type: 'CREATE_USER_STATUS',
+    payload: data,
+  };
+}
+
+export function clearUserForm() {
+  return {
+    type: 'CLEAR_USER_FORM',
+  };
+}

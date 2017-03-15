@@ -10,8 +10,18 @@ const userInfo = () => createSelector(
   (state) => state.userInfo
 );
 
+const userRequest = () => createSelector (
+  userData(),
+  (state) => state.request
+)
+const userStatus = () => createSelector (
+  userData(),
+  (state) => state.createUserStatus
+)
 export {
   userData,
   userTeams,
   userInfo,
+  userRequest,
+  userStatus,
 };

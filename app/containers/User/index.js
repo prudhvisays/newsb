@@ -23,6 +23,8 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
                 onUserFormChange={this.props.onUserFormChange}
                 userCordsChange={this.props.userCordsChange}
                 createUser={this.props.createUser}
+                stateUserRequest={this.props.userRequest}
+                stateUserStatus={this.props.userStatus}
               />
             </div>
             <div className="all-50">
@@ -41,6 +43,8 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
 const mapStateToProps = createStructuredSelector({
   userTeams: selectors.userTeams(),
   userInfo: selectors.userInfo(),
+  userRequest: selectors.userRequest(),
+  userStatus: selectors.userStatus(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -37,9 +37,12 @@ export function* postCreateUser(res, usertype) {
   try {
     const response = yield call(userApi.postCreateUserApi, res, usertype);
     yield put(actions.createUserSuccess(response));
+    yield put(actions.createUserStatus({ statusText: 'Successful', statusColor: 'rgb(81, 212, 255)' }));
+    return response;
   } catch (error) {
     if (error.response) {
       yield put(actions.createUserFailure(error.message));
+      yield put(actions.createUserStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
     }
   } finally {
     yield call(delay, 500);
@@ -49,19 +52,26 @@ export function* postCreateUser(res, usertype) {
 export function* postCreateUserFlow() {
  const res = yield select(selectors.userInfo());
  let usertype;
+ let apires;
  if(res.isFranchiseAdmin){
    usertype = 'franchises';
-   yield call(postCreateUser, res, usertype);
+   apires = yield call(postCreateUser, res, usertype);
  } else if(res.isManager) {
    usertype = 'managers';
-   yield call(postCreateUser, res, usertype);
+   apires = yield call(postCreateUser, res, usertype);
  } else if(res.isPilot) {
    usertype = 'pilots';
-   yield call(postCreateUser, res, usertype);
+   apires = yield call(postCreateUser, res, usertype);
  } else if(res.isMerchant) {
    usertype = 'merchants';
-   yield call(postCreateUser, res, usertype);
+   apires = yield call(postCreateUser, res, usertype);
  }
+ if (apires) {
+      yield put(actions.clearUserForm());
+      yield put(actions.createUserStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+    } else {
+      yield put(actions.createUserStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+    }
 }
 export function* postCreateUserWatch() {
   yield fork(takeLatest, 'CREATE_USER', postCreateUserFlow);

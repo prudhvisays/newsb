@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   userInfo: {
     firstName: '',
     lastName: '',
@@ -33,6 +33,11 @@ const initialState = {
   teams: [],
   selectAdmin: false,
   franchise: false,
+  request: false,
+  createUserStatus: {
+    statusText: 'Sending',
+    statusColor: '#6bc9c5',
+  },
 };
 
 function userReducer(state = initialState, action) {
@@ -78,6 +83,18 @@ function userReducer(state = initialState, action) {
       };
     case 'USER_GEO_FENCE':
       return geoFence(state,action);
+    case 'REQ_CREATE_USER':
+    return {
+      ...state,
+      request: action.payload,
+    }
+    case 'CREATE_USER_STATUS':
+    return {
+      ...state,
+      createUserStatus: action.payload,
+    }
+    case 'CLEAR_USER_FORM':
+    return initialState;
     default:
       return state;
   }
