@@ -3,6 +3,7 @@ import moment from 'moment';
 import AddressBlock from './AddressBlock';
 import Timeline from './Timeline';
 import TabStyle from './TabStyle';
+import PathHistory from './PathHistory';
 import './tabStyle.css';
 
 export default class Tabs extends React.Component { //eslint-disable-line
@@ -104,6 +105,14 @@ export default class Tabs extends React.Component { //eslint-disable-line
           <Timeline timeLine={stateOrderInfo.timeline} />
           </div>
           <div id="Tokyo" className="tabcontent">
+              <div className="ink-flex vertical">
+                  <PathHistory stateOrderInfo={stateOrderInfo} />
+                  <div className="ink-flex">
+                      <div className="all-33">Start</div>
+                      <div className="all-33">Pause</div>
+                      <div className="all-33">Replay</div>
+                  </div>
+              </div>
           </div>
       </div>
     );

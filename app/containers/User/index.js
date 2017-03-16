@@ -25,6 +25,7 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
                 createUser={this.props.createUser}
                 stateUserRequest={this.props.userRequest}
                 stateUserStatus={this.props.userStatus}
+                getUserTeam={this.props.getUserTeam}
               />
             </div>
             <div className="all-50">

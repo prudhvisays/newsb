@@ -203,7 +203,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
               </div>
             </div>
             { isAdmin() && <div className="all-25" style={{ height: '100vh' }}>
-              <Map></Map>
+              <Map statePilotList={this.props.pilotList} />
             </div> }
           </div>
         </div>

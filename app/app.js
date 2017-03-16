@@ -45,7 +45,7 @@ import './Morris/morris.min';
 import './Morris/morris.css';
 import 'rc-select/assets/index.css';
 import './Assets/select.css';
-
+import './Assets/Leaflet.MovingMarker/MovingMarker';
 // Import root routes
 import createRoutes from './routes';
 

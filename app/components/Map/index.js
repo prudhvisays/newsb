@@ -8,17 +8,45 @@ export default class Map extends React.Component { // eslint-disable-line react/
     super(props);
     this.intiMap = this.intiMap.bind(this);
     this.geojsonFeature = this.geojsonFeature.bind(this);
+    this.geojsonMap = this.geojsonMap.bind(this);
   }
 
   componentDidMount() {
     this.intiMap();
-    this.geojsonFeature();
+    // this.geojsonFeature();
+    this.geojsonMap();
+
   }
 
-  geojsonFeature() {
-      return {
+  geojsonFeature(lat, lng) {
+    return {
+      'type': 'Feature',
+      'properties': {
+      'name': 'Coors Field',
+      'amenity': 'Baseball Stadium',
+      'popupContent': 'This is where the Rockies play!'
+      },
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [lng, lat],
+      },
+    }
+  }
 
-      }
+  geojsonMap() {
+    const geojsonMarkerOptions = {
+      radius: 8,
+      fillColor: "#ff7800",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8,
+    };
+    // this.props.statePilotList.map((pilot) => {
+    //   return () => {
+    //
+    //   }
+    // })
   }
 
   intiMap() {
