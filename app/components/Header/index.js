@@ -17,15 +17,15 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     return (
       <HeaderStyle className="icon-bar">
         <div>
-          <Link to="/"><i className="fa fa-tachometer" aria-hidden="true"></i></Link>
-          <a><i className="fa fa-map-o" aria-hidden="true"></i></a>
-          <a onClick={addTask}><i className="fa fa-puzzle-piece" aria-hidden="true"></i></a>
-          <a><i className="fa fa-users" aria-hidden="true"></i></a>
-          <a><i className="fa fa-address-card" aria-hidden="true"></i></a>
-          <a><i className="fa fa-credit-card" aria-hidden="true"></i></a>
-          <a><i className="fa fa-toggle-on" aria-hidden="true"></i></a>
-          <Link to="/franchise"><i className="fa fa-toggle-on" aria-hidden="true"></i></Link>
-          <a onClick={this.logout}><i className="fa fa-power-off" aria-hidden="true"></i></a>
+          <Link to="/"><i className="fa fa-tachometer" aria-hidden="true" /></Link>
+          <Link to="/user"><i className="fa fa-user-plus" aria-hidden="true" /></Link>
+          <a><i className="fa fa-map-o" aria-hidden="true" /></a>
+          <a onClick={addTask}><i className="fa fa-puzzle-piece" aria-hidden="true" /></a>
+          <a><i className="fa fa-users" aria-hidden="true" /></a>
+          <a><i className="fa fa-address-card" aria-hidden="true" /></a>
+          <a><i className="fa fa-credit-card" aria-hidden="true" /></a>
+          <a><i className="fa fa-toggle-on" aria-hidden="true" /></a>
+          <a onClick={this.logout}><i className="fa fa-power-off" aria-hidden="true" /></a>
         </div>
       </HeaderStyle>
     );

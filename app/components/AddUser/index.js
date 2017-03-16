@@ -37,10 +37,10 @@ export default class UserForm extends React.Component { // eslint-disable-line r
   render() {
     const { stateUserRequest, stateUserStatus, stateUserTeams, stateUserInfo, onUserFormChange, userCordsChange } = this.props
     return (
-      <CreateUserStyle className="formStyle">
+      <CreateUserStyle className="formStyle" style={{ height: '75vh', position: 'relative' }}>
     { !stateUserRequest ? (
         <form onSubmit={this.submitFranchise}>
-          { true && <div className="ink-flex vertical">
+          <div className="ink-flex vertical">
             <div className="BottomMargin">
               <div className="fw-700 sub-title">Create</div>
               <div className="area"><UserSelect userInfo={stateUserInfo} onUserFormChange={onUserFormChange} /></div>
@@ -206,7 +206,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
               {/*</div>*/}
             {/*}*/}
             { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="ink-flex push-right push-bottom"><button type="submit">Submit</button></div> }
-          </div> }
+          </div>
         </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader" color={stateUserStatus.statusColor}>
               <div className="cs-loader-inner">
                 <label>	●</label>

@@ -7,8 +7,6 @@ color: #394264;
 border-radius: 2px;
 padding: 1em 1em;
 font-size: 15px;
-height: 75vh;
-position: relative;
 .BottomMargin {
    margin-bottom: 0.6em;
    width: 100%;
