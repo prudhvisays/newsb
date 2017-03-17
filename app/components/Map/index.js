@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../Assets/Leaflet.MovingMarker/MovingMarker';
 import MapStyle from './MapStyle';
 
 let trackMap;
