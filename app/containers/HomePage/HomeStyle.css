@@ -579,3 +579,8 @@ transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
   .trip-card .trip-info{
     text-transform: lowercase;
   }
+
+  .pathMap {
+  height: 60vh;
+    width: 100%;
+  }

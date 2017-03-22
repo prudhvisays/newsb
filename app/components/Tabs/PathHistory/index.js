@@ -1,61 +1,78 @@
 import React from 'react';
+import { render } from 'react-dom';
+import { Map, Marker, Popup, TileLayer, Path, Polyline } from 'react-leaflet';
 
-let path;
-let pathArray = []
 export default class PathHistory extends React.Component { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
         super(props);
-        this.intiMap = this.intiMap.bind(this);
-        this.pathHistory = this.pathHistory.bind(this);
+      this.state = {
+        lat: 17.4622,
+        lng: 78.356,
+        zoom: 11,
+      };
+      this.handleLeafletLoad = this.handleLeafletLoad.bind(this);
+      this.polylinePos = this.polylinePos.bind(this);
+      this.fromLocation = this.fromLocation.bind(this);
+      this.toLocation = this.toLocation.bind(this);
+      this.centerPosition = this.centerPosition.bind(this);
     }
 
-    componentDidMount() {
-        this.intiMap();
+    handleLeafletLoad() {
+      if (this.pathMap) {
+        this.pathMap.leafletElement.invalidateSize();
+      }
     }
-
-    intiMap() {
-        path = L.map('path', {
-            center: [17.4622, 78.356],
-            zoom: 13,
-            zoomControl:false,
-        });
-
-        L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJ1ZGh2aXNheXMiLCJhIjoiY2l4aWxnM2xoMDAxMzJ3bzB2ajlpbzJ2eCJ9.L4CdTG9cSB-ADVYQXbH-hw', {
-            maxZoom: 18,
-        }).addTo(path);
-        console.log(this.props.stateOrderInfo.status);
-        if(this.props.stateOrderInfo.status == 'COMPLETED') {
-            const pathArray = [];
-            this.props.stateOrderInfo['pilot_movement'].coordinates.map((arr) => {
-                pathArray.push([arr[1],arr[0]]);
-            })
-            console.log(pathArray);
-            this.pathHistory(pathArray);
-            }
+    polylinePos() {
+      if(this.props.stateOrderInfo['pilot_movement']) {
+        if(this.props.stateOrderInfo['pilot_movement'].coordinates.length > 0) {
+          return this.props.stateOrderInfo['pilot_movement'].coordinates.map((cord) => {
+            return [cord[1],cord[0]];
+          })
+        }
+      }
     }
-    componentDidUpdate(prevProps){
-        if(this.props.stateOrderInfo.status !== prevProps.stateOrderInfo.status) {
-            if(this.props.stateOrderInfo.status == 'COMPLETED') {
-                this.props.stateOrderInfo['pilot_movement'].coordinates.map((arr) => {
-                    pathArray.push([arr[1],arr[0]]);
-                })
-                this.pathUpdate();
-            }
+    fromLocation(from) {
+        if(from && from.coordinates.length > 0) {
+          return [from.coordinates[1], from.coordinates[0]];
         }
     }
-    pathHistory(){
-        console.log("PATH HISTORY" + pathArray);
-        const polyline = L.polyline(pathArray, {color: 'red'}).addTo(path);
 
-// zoom the map to the polyline
-        path.fitBounds(polyline.getBounds());
+    toLocation(to) {
+      if(to && to.coordinates.length > 0) {
+        return [to.coordinates[1], to.coordinates[0]];
+      }
     }
-    pathUpdate() {
-        path.setLatLngs(pathArray)
+    centerPosition(from, to) {
+      if(from && to ) {
+        if(from.coordinates.length > 0 && to.coordinates.length > 0) {
+          return [from.coordinates[1], to.coordinates[0]];
+        }
+      }
     }
     render() {
+      const latlngs = this.polylinePos()
+      console.log("PATH MAP" + latlngs);
+      const position = this.centerPosition(this.props.stateOrderInfo.from_location, this.props.stateOrderInfo.to_location);
+      console.log("POSITION" + position);
+      const fromLocation = this.fromLocation(this.props.stateOrderInfo.from_location);
+      const toLocation = this.toLocation(this.props.stateOrderInfo.to_location);
         return (
-            <div id="path" style={{ height: '55vh' }}></div>
+          <Map ref={(map) => { this.pathMap = map; }} center={position ? position : [this.state.lat, this.state.lng]} zoom={this.state.zoom} zoomControl={false} className='pathMap' onLoad={this.handleLeafletLoad()}>
+            <TileLayer
+              url='https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJ1ZGh2aXNheXMiLCJhIjoiY2l4aWxnM2xoMDAxMzJ3bzB2ajlpbzJ2eCJ9.L4CdTG9cSB-ADVYQXbH-hw'
+            />
+            <Marker position={fromLocation ? fromLocation : [1,1]}>
+              <Popup>
+                <span>PICKUP POINT</span>
+              </Popup>
+            </Marker>
+            <Marker position={toLocation ? toLocation : [2,2]}>
+              <Popup>
+                <span>DESTINATION POINT</span>
+              </Popup>
+            </Marker>
+              <Polyline positions={latlngs ? latlngs : [[1,1]]} />
+          </Map>
         );
     }
 }
