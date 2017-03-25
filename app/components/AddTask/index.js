@@ -81,7 +81,7 @@ clearForm(e) {
             <div className="all-40">
               <div className="ink-flex vertical">
                 <div className="title-desc ink-flex vertical">
-                  { isAdmin() && (<input type="text" required="true" placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange} />)}
+                  { isAdmin() && (<input type="text" required maxLength={100} placeholder="Enter Title" style={{ height: '5.9vh' }} value={stateAddTask.taskInfo.title} onChange={this.titleChange} />)}
                   { isAdmin() && (<textarea
                     type="text"
                     placeholder="Enter Description"

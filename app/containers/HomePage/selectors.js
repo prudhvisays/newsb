@@ -76,11 +76,9 @@ const orderList = () => createSelector(
 );
 const statsLength = (lists, value) => {
   if(lists.length > 0) {
-    return lists.filter((list) => {
-      return list.status === value
-    }).length
+    return lists.filter((list) => list.status === value).length
   }
-  return true
+  return 0
 }
 const orderStats = () => createSelector(
   orderList(),

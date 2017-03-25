@@ -14,8 +14,6 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
     this.calendarChange = this.calendarChange.bind(this);
     this.emitChanges = this.emitChanges.bind(this);
     this.onOpen = this.onOpen.bind(this);
-
-    this.minDate = moment().format('YYYY-MM-DD');
   }
   nameChange(e) {
     const { pickup } = this.props.stateAddTask;
@@ -46,10 +44,11 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
     const { pickupCord, pickupChange, stateAddTask } = this.props;
     return (
       <div className="ink-flex vertical task-address" style={{ padding: '0.8em 0.8em' }}>
-        <Input Name={'Name'} Holder={'Enter Name'} onChange={this.nameChange} value={stateAddTask.pickup.from_name} />
+        <Input Name={'Name'} Holder={'Enter Name'}
+               maxLength={32}
+               onChange={this.nameChange} value={stateAddTask.pickup.from_name} />
         <Input Name={'Phone'} Holder={'Enter Phone Number'}
-               maxLength={10}
-               required
+               required maxLength={10}
                onChange={this.phoneChange} value={stateAddTask.pickup.from_phone} />
         <Input Name={'Email'} Holder={'Enter Email'} onChange={this.emailChange} value={stateAddTask.pickup.from_email} />
         <div className="ink-flex vertical">

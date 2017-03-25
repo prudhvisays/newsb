@@ -7,6 +7,7 @@ constructor(props) {
 }
   render() {
     const { tasksExpand, orderStats } = this.props;
+    console.info(orderStats);
     return (
       <div className="ink-flex task-feed-boxShadow" style={{ fontSize: '1rem', height: '66px' }}>
       <div className="all-33" onClick={tasksExpand} >
