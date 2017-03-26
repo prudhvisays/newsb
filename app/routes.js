@@ -79,6 +79,7 @@ export default function createRoutes(store) {
       //   },
       // },
       {
+        onEnter: redirectToLogin,
         path: '/user',
         name: 'user',
         getComponent(nextState, cb) {
