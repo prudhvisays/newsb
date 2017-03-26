@@ -15,9 +15,6 @@ export default class UserForm extends React.Component { // eslint-disable-line r
     this.submitFranchise = this.submitFranchise.bind(this);
     this.setSelection = this.setSelection.bind(this);
   }
-  componentWillUpdate() {
-    this.props.getUserTeam();
-  }
   onChange(e) {
     this.emitChanges({ ...this.props.stateUserInfo, [e.target.name]: e.target.value });
   }
