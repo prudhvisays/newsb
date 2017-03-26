@@ -64,6 +64,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
               </div>
             </div>
           </div>
+          <hr/>
           <div style={{ padding: '0.6em 0.8em' }}>
             <div className="ink-flex" style={{ position: 'relative' }}>
               <div className="all-100 block-stats-background" style={{ position: 'relative', zIndex: '1' }}>

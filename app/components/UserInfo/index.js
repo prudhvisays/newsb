@@ -43,7 +43,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
                 </div>
                 <div className="divider"><span> | </span></div>
                 <div className="battery-status">
-                  <span className="fab-100">52% <i className="fa fa-battery-three-quarters"></i></span>
+                  <span className="fab-100">{statePilotInfo.pilot.battery || 0} % <i className="fa fa-battery-three-quarters"></i></span>
                 </div>
               </div>
             </div>
@@ -92,7 +92,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
               {orders}
             </div>
           </div>)
-         : (<p>LOADING</p>)}
+         : (<p style={{ textAlign : 'center', top : '50%', left : '40%', position : 'absolute' }}>LOADING...</p>)}
       </div>
     );
   }

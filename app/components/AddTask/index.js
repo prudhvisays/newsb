@@ -68,7 +68,7 @@ clearForm(e) {
             <div className="all-100 team-block">
               <div className="ink-flex">
                 <div className="all-30" style={{ padding: '0.5em 0.8em' }}>
-                  <div className="condensed-400" style={{ color: '#333' }}>Add Task</div>
+                  <div className="condensed-400" style={{ color: '#333' }}>Add Order</div>
                 </div>
                 <div className="all-70" style={{ padding: '0.3em 0.5em' }}>
                   <div className="ink-flex push-right">
@@ -78,6 +78,7 @@ clearForm(e) {
                 </div>
               </div>
             </div>
+            <hr/>
             <div className="all-40">
               <div className="ink-flex vertical">
                 <div className="title-desc ink-flex vertical">
