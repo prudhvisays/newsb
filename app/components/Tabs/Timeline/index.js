@@ -16,7 +16,7 @@ export default class Timeline extends React.Component { //eslint-disable-line
   }
   render() {
     const timeline =  this.props.timeLine && this.props.timeLine.map((time, i) =>
-        (<div key={time[0]} className="ink-flex">
+        (<div key={i} className="ink-flex">
           <div className="timeline-date">
             <div className="ink-flex vertical">
               <div>{this.formatTime(time[1])}</div>

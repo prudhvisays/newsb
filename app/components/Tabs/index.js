@@ -63,13 +63,13 @@ export default class Tabs extends React.Component { //eslint-disable-line
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
                     <div className="fw-500 sub-title">Team</div>
-                    <div>{stateOrderInfo.team}</div>
+                    <div>{stateOrderInfo.team ? stateOrderInfo.team.name : ''}</div>
                   </div>
                 </div>
                 <div className="all-50">
                   <div className="tab-block ink-flex vertical">
                     <div className="fw-500 sub-title">Pilot</div>
-                    <div>{stateOrderInfo.pilot ? stateOrderInfo.pilot._id : null}</div>
+                    <div>{stateOrderInfo.pilot ? stateOrderInfo.pilot.user.firstName : ''}</div>
                   </div>
                 </div>
               </div>
@@ -101,7 +101,7 @@ export default class Tabs extends React.Component { //eslint-disable-line
               />
             </div>
           </div>
-          <div id="Paris" className="tabcontent">
+          <div id="Paris" className="tabcontent tab-scroll">
           <Timeline timeLine={stateOrderInfo.timeline} />
           </div>
           <div id="Tokyo" className="tabcontent" style={{ height: '60vh' }}>

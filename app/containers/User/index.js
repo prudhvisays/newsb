@@ -11,7 +11,6 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
     this.props.getUserTeam();
   }
   render() {
-    console.log(this.props.userTeams);
     return (
       <section style={{ background: '#eee', color: '#fff' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>

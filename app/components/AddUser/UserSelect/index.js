@@ -45,6 +45,7 @@ export default class UserSelect extends React.Component { //eslint-disable-line
         <Option key={'isCustomer'}  text={'Customer'}>{'Customer'}</Option>
         <Option key={'isPilot'}  text={'Pilot'}>{'Pilot'}</Option>
         <Option key={'isFranchise'}  text={'Franchise'}>{'Franchise'}</Option>
+        <Option key={'Team'}  text={''}>{'Franchise'}</Option>
       </Select>
     );
   }

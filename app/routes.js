@@ -19,14 +19,14 @@ export default function createRoutes(store) {
   return {
     getComponent(nextState, cb) {
       const importModules = Promise.all([
-        import('containers/App/sagas'),
-        import('containers/App'),
-      ]);
+      import('containers/App/sagas'),
+      import('containers/App'),
+    ]);
       const renderRoute = loadModule(cb);
 
       importModules.then(([sagas, component]) => {
         injectSagas(sagas.default);
-       renderRoute(component);
+        renderRoute(component);
       });
 
       importModules.catch(errorLoading);
@@ -79,25 +79,25 @@ export default function createRoutes(store) {
       //   },
       // },
       {
-       path: '/user',
-       name: 'user',
-       getComponent(nextState, cb) {
-       const importModules = Promise.all([
-       import('containers/User/reducer'),
-       import('containers/User/sagas'),
-       import('containers/User'),
-       ]);
+        path: '/user',
+        name: 'user',
+        getComponent(nextState, cb) {
+          const importModules = Promise.all([
+          import('containers/User/reducer'),
+          import('containers/User/sagas'),
+          import('containers/User'),
+        ]);
 
-       const renderRoute = loadModule(cb);
+          const renderRoute = loadModule(cb);
 
-       importModules.then(([reducer, sagas, component]) => {
-       injectReducer('user', reducer.default);
-       injectSagas(sagas.default);
+          importModules.then(([reducer, sagas, component]) => {
+            injectReducer('user', reducer.default);
+            injectSagas(sagas.default);
 
-       renderRoute(component);
-       });
+            renderRoute(component);
+          });
 
-       importModules.catch(errorLoading);
+          importModules.catch(errorLoading);
         },
       },
       {
