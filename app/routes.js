@@ -56,28 +56,6 @@ export default function createRoutes(store) {
           importModules.catch(errorLoading);
         },
       },
-      // {
-      //   onEnter: redirectToLogin,
-      //   path: '/franchise',
-      //   name: 'franchise',
-      //   getComponent(nextState, cb) {
-      //     const importModules = Promise.all([
-      //     import('containers/Franchise/reducer'),
-      //     import('containers/Franchise/sagas'),
-      //     import('containers/Franchise'),
-      //   ]);
-      //
-      //     const renderRoute = loadModule(cb);
-      //
-      //     importModules.then(([reducer, sagas, component]) => {
-      //       injectReducer('franchise', reducer.default);
-      //       injectSagas(sagas.default);
-      //       renderRoute(component);
-      //     });
-      //
-      //     importModules.catch(errorLoading);
-      //   },
-      // },
       {
         onEnter: redirectToLogin,
         path: '/user',
@@ -134,27 +112,6 @@ export default function createRoutes(store) {
           const renderRoute = loadModule(cb);
 
           importModules.then(([component]) => {
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
-        },
-      },
-      {
-        onEnter: redirectToDashboard,
-        path: '/merchant/login',
-        name: 'merchant',
-        getComponent(nextState, cb) {
-          const importModules = Promise.all([
-          import('containers/AuthPage/reducer'),
-          import('containers/Merchant'),
-        ]);
-
-          const renderRoute = loadModule(cb);
-
-          importModules.then(([reducer, component]) => {
-            injectReducer('auth', reducer.default);
-
             renderRoute(component);
           });
 
