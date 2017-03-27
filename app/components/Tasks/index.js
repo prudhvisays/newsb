@@ -22,7 +22,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.emitSearch = this.emitSearch.bind(this);
     this.pickDate = this.pickDate.bind(this);
   }
- 
+
   taskExpand() {
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
@@ -90,6 +90,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
               </div>
             </div>
           </div>
+          <hr/>
           <div style={{ padding: '0.6em 0.8em' }}>
             <div className="ink-flex" style={{ position: 'relative' }}>
               <div className="all-100 block-stats-background" style={{ position: 'relative', zIndex: '1' }}>

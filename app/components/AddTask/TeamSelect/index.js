@@ -23,7 +23,7 @@ export default class TeamSelect extends React.Component { //eslint-disable-line
 
   render() {
     const select = this.props.stateTeamList && this.props.stateTeamList.map((team) => (
-        <Option key={team._id}  text={team._id}>{team.name}</Option>
+        <Option key={team._id}  text={team.name}>{team.name}</Option>
       ));
     return (
       <Select
@@ -31,7 +31,7 @@ export default class TeamSelect extends React.Component { //eslint-disable-line
         placeholder="Select Team"
         style={{ width: '100%' }}
         animation="slide-up"
-        showSearch={false}
+        showSearch={true}
         optionLabelProp="children"
         optionFilterProp="text"
         onChange={this.onChange}

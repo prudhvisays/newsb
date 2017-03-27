@@ -65,6 +65,7 @@ export default class GMaps extends React.Component { //eslint-disable-line
           placeholder="Search address"
           onFocus={this.geolocate} type="text"
           onChange={this.onChange}
+          required
         />
       </div>
     );

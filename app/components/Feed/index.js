@@ -7,16 +7,17 @@ constructor(props) {
 }
   render() {
     const { tasksExpand, orderStats } = this.props;
+    console.info(orderStats);
     return (
       <div className="ink-flex task-feed-boxShadow" style={{ fontSize: '1rem', height: '66px' }}>
       <div className="all-33" onClick={tasksExpand} >
-        <Score score={orderStats.assigned} subTitle={'Assigned'} />
+        <Score score={orderStats.assigned || 0} subTitle={'Assigned'} />
       </div>
       <div className="all-33" onClick={tasksExpand}>
-        <Score score={orderStats.unassigned} subTitle={'Unassigned'} />
+        <Score score={orderStats.unassigned || 0} subTitle={'Unassigned'} />
       </div>
       <div className="all-33" onClick={tasksExpand}>
-        <Score score={orderStats.completed} subTitle={'Completed'} />
+        <Score score={orderStats.completed || 0} subTitle={'Completed'} />
       </div>
     </div>
     );
