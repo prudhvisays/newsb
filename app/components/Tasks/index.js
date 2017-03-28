@@ -23,6 +23,12 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.pickDate = this.pickDate.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.closeOrderExpand !== prevProps.closeOrderExpand) {
+      this.closeOrders();
+    }
+  }
+
   taskExpand() {
     const taskDiv = document.querySelector('.taskExpand');
     const listShow = document.querySelector('.listShow');
@@ -34,6 +40,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
       closeTag.style.top = '-2px';
       this.props.orderClose(true);
       this.props.divTask();
+      this.props.closeOrderDrop(false);
     }
   }
   detailedInfo(data) {
@@ -85,7 +92,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
                   </div>
                 </div>
                 <div className="all-30" style={{ textAlign: 'right' }}>
-                  <Flatpickr options={{ defaultDate: new Date() }} style={{ width: '92px', color: '#fff' }} onChange={this.pickDate} />
+                  <Flatpickr options={{ defaultDate: new Date() }} style={{ width: '92px', color: '#333' }} onChange={this.pickDate} />
                 </div>
               </div>
             </div>

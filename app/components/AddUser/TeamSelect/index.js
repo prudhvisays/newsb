@@ -21,7 +21,9 @@ export default class UserSelect extends React.Component { //eslint-disable-line
     this.emitChanges = this.emitChanges.bind(this);
   }
 
-
+  componentDidMount() {
+      this.props.getUserTeam();
+  }
   onChange(value) {
    const { userInfo } = this.props;
    this.emitChanges({ ...userInfo, teams: value });

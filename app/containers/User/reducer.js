@@ -1,3 +1,5 @@
+import { userRoleType } from '../../Api/ApiConstants';
+
 export const initialState = {
   userInfo: {
     firstName: '',
@@ -13,12 +15,15 @@ export const initialState = {
     isPilot: false, // Dropdown - Pilot
     isMerchant: false, // Dropdown - Customer - isMerchant : true
     isCustomer: false, // Dropdown - Customer - isMerchant : false
+    isTeam: false,
+    isFranchise: false,
     franchise: '', // isFranchiseAdmin - true
     teams: [], // isManager - true
     license: '', // isPilot - true
     transportType: '', // isPilot - true
     name: '', // isMerchant - true
     selectAdmin: false,
+    franchiseOption: userRoleType() === 'isFranchise',
     location: {
       type: 'Point',
       coordinates: [ 78.4867, 17.3850 ],
@@ -31,6 +36,7 @@ export const initialState = {
     isOpen: false,
   },
   teams: [],
+  franchises: [],
   selectAdmin: false,
   franchise: false,
   request: false,
@@ -64,6 +70,11 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         teams: action.payload,
+      };
+    case 'GET_FRANCHISE_SUCCESS':
+      return {
+        ...state,
+        franchises: action.payload,
       };
     case 'ON_USER_FORM_CHANGE':
       return {

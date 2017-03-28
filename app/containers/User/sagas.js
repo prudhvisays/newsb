@@ -30,6 +30,31 @@ export function* fetchTeamsRoot() {
   yield take('LOCATION_CHANGE');
   yield cancel(teamsWatcher);
 }
+export function* fetchFranchises() {
+  try {
+    const response = yield call(userApi.getFranchisesApi);
+    yield put(actions.getFranchiseSuccess(response));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getFranchiseFailure(error.message));
+    }
+  }
+}
+export function* fetchFranchisesFlow() {
+  while(true) {
+    const request = yield take('GET_FRANCHISE');
+    yield call(fetchFranchises);
+  }
+}
+export function* fetchFranchisesWatch() {
+  yield fork(fetchFranchisesFlow);
+}
+
+export function* fetchFranchisesRoot() {
+  const FrachisesWatcher = yield fork(fetchFranchisesWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(FrachisesWatcher);
+}
 // Post Franchise || Create User
 export function* postCreateUser(res, usertype) {
   console.log(res);
@@ -53,10 +78,10 @@ export function* postCreateUserFlow() {
  const res = yield select(selectors.userInfo());
  let usertype;
  let apires;
- if(res.isFranchiseAdmin){
+ if(res.isFranchise){
    usertype = 'franchises';
    apires = yield call(postCreateUser, res, usertype);
- } else if(res.isManager) {
+ } else if(res.selectAdmin) {
    usertype = 'managers';
    apires = yield call(postCreateUser, res, usertype);
  } else if(res.isPilot) {
@@ -64,6 +89,9 @@ export function* postCreateUserFlow() {
    apires = yield call(postCreateUser, res, usertype);
  } else if(res.isMerchant) {
    usertype = 'merchants';
+   apires = yield call(postCreateUser, res, usertype);
+ }else if(res.isTeam) {
+   usertype = 'teams';
    apires = yield call(postCreateUser, res, usertype);
  }
  if (apires) {
@@ -83,5 +111,6 @@ export function* postCreateUserRoot() {
 }
 export default[
   fetchTeamsRoot,
+  fetchFranchisesRoot,
   postCreateUserRoot,
 ];

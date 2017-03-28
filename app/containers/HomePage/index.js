@@ -38,9 +38,9 @@ const socket = io('https://season-boy-api.herokuapp.com').connect();
 const isAdmin = () => {
   if (auth.loggedIn()) {
     const session = JSON.parse(localStorage.getItem('sessionData'));
-    if (session.username === 'admin') {
+    if (session.manager) {
       return true;
-    } else if (session.username === 'merchant') {
+    } else {
       return false;
     }
   }
@@ -132,6 +132,10 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getOrderDetail={this.props.getOrderDetail}
                         isAdmin={isAdmin}
                         orderStats={this.props.orderStats}
+                        closeOrderExpand={this.props.closeOrderExpand}
+                        closePilotExpand={this.props.closePilotExpand}
+                        closeOrderDrop={this.props.closeOrderDrop}
+                        closePilotDrop={this.props.closePilotDrop}
                                              {...this.props}
                       />)}
                       { !addTask && (<div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
@@ -173,6 +177,10 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         statePilots={this.props.pilotList}
                         getPilotDetail={this.props.getPilotDetail}
                         closeDivPilot={this.closeDivPilot}
+                        closeOrderExpand={this.props.closeOrderExpand}
+                        closePilotExpand={this.props.closePilotExpand}
+                        closeOrderDrop={this.props.closeOrderDrop}
+                        closePilotDrop={this.props.closePilotDrop}
                         />) : (<Tasks divTask={this.divTask}
                                         orderDetails={this.orderDetails}
                                         orderBlock={this.props.orderexpand}
@@ -214,6 +222,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
 
 const mapStateToProps = createStructuredSelector({
     orderexpand: selectors.orderExpand(),
+    closeOrderExpand: selectors.closeOrderExpand(),
+    closePilotExpand: selectors.closepilotExpand(),
     pickupcord: selectors.pickupCord(),
     deliverycord: selectors.deliveryCord(),
     stats: selectors.getStats(),
@@ -236,6 +246,8 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     orderExpand: (value) => { dispatch(actions.orderExpand(value)); },
+    closeOrderDrop: (value) => { dispatch(actions.closeOrderDrop(value)); },
+    closePilotDrop: (value) => { dispatch(actions.closePilotDrop(value)); },
     orderClose: (value) => { dispatch(actions.orderClose(value)); },
     pickupCord: (value) => { dispatch(actions.pickupCord(value)); },
     deliveryCord: (value) => { dispatch(actions.deliveryCord(value)); },

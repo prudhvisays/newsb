@@ -36,8 +36,8 @@ export default class Tabs extends React.Component { //eslint-disable-line
     return (
       <div className="block-background" style={{ height: '40vh' }}>
         <TaskStyle className="ink-flex task-tab" style={{ margin: 0 }}>
-          { userType() && <li className="all-50"><a className="task-links" id="default-task" onClick={(event) => { this.taskTabs(event, 'add-pickup'); }}>Pickup Address</a></li> }
-          <li className="all-50"><a className="task-links" id={!userType() ? 'default-task' : ''} onClick={(event) => { this.taskTabs(event, 'add-delivery'); }}>Delivery Address</a></li>
+           <li className="all-50"><a className="task-links" id="default-task" onClick={(event) => { this.taskTabs(event, 'add-pickup'); }}>Pickup Address</a></li>
+          <li className="all-50"><a className="task-links" onClick={(event) => { this.taskTabs(event, 'add-delivery'); }}>Delivery Address</a></li>
         </TaskStyle>
         <div id="add-pickup" className="task-content" style={{ fontSize: '1rem' }}>
           <TaskAddress pickupCord={pickupCord} deliveryCord={deliveryCord} pickupChange={pickupChange} stateAddTask={stateAddTask} />

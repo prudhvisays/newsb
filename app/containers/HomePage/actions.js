@@ -4,6 +4,20 @@ export function orderExpand(value) {
     value,
   };
 }
+
+export function closeOrderDrop(value) {
+    return {
+      type: 'CLOSE_ORDER_DROP',
+      payload: value,
+    }
+}
+
+export function closePilotDrop(value) {
+    return {
+      type: 'CLOSE_PILOT_DROP',
+        payload: value,
+    }
+}
 export function orderClose(value) {
   return {
     type: 'ORDER_CLOSE',

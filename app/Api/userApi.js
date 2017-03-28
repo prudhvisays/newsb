@@ -10,6 +10,14 @@ const userApi = {
       responseType: 'json',
     }).then((response) => response.data);
   },
+   getFranchisesApi() {
+    const GET_FRANCHISES_API = `${API_URL}/franchises`;
+    return axios({
+      method: 'GET',
+      url: GET_FRANCHISES_API,
+      responseType: 'json',
+    }).then((response) => response.data);
+  },
   postCreateUserApi(Data, userType) {
     const POST_FRANCHISE_API = `${API_URL}/${userType}`;
     return axios({

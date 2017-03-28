@@ -6,6 +6,16 @@ const orderExpand = () => createSelector(
   homeData(),
     (homeState) => homeState.orderexpand,
 );
+
+const closeOrderExpand = () => createSelector(
+  homeData(),
+    (homeState) => homeState.closeOrderDrop,
+);
+const closepilotExpand = () => createSelector(
+  homeData(),
+    (homeState) => homeState.closePilotDrop,
+);
+
 const pickupCord = () => createSelector(
   homeData(),
     (homeState) => homeState.pickupcord,
@@ -74,21 +84,26 @@ const orderList = () => createSelector(
   homeData(),
   (state) => state.orderList.orders,
 );
-const statsLength = (lists, value) => {
-  if(lists.length > 0) {
-    return lists.filter((list) => list.status === value).length
-  }
-  return 0
+const statsLength = (lists, values, shouldNotMatch = false) => {
+    if(lists.length > 0) {
+        return lists.filter((list) => {
+            if (shouldNotMatch) {
+                return values.indexOf(list.status) < 0
+            }
+            return values.indexOf(list.status) > -1
+        }).length
+    }
+    return true
 }
 const orderStats = () => createSelector(
-  orderList(),
-  (oList) => {
-    return {
-     assigned: statsLength(oList, 'ASSIGNED'),
-     unassigned: statsLength(oList, ('UNASSIGNED' || 'FAILED')),
-     completed: statsLength(oList, 'COMPLETED'),
+    orderList(),
+    (oList) => {
+        return {
+            assigned: statsLength(oList, ['COMPLETED', 'PENDING', 'FAILED'], true),
+            unassigned: statsLength(oList, ['PENDING']),
+            completed: statsLength(oList, ['COMPLETED', 'FAILED']),
+        }
     }
-  }
 );
 
 const orderId = () => createSelector(
@@ -149,6 +164,8 @@ const pilotDetailStatus = () => createSelector(
 export {
   homeData,
   orderExpand,
+  closeOrderExpand,
+  closepilotExpand,
   pickupCord,
   deliveryCord,
   getStats,

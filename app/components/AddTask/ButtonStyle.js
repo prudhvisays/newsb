@@ -7,15 +7,15 @@ const ButtonStyle = styled.button`
   text-align: center;
   cursor: pointer;
   outline: none;
-  color: #fff;
+  color: ${(props) => (props.cancel ? '#333' : '#fff')};
   background-color: ${(props) => (props.cancel ? 'transparent' : 'rgb(81, 212, 255)')};
-  border: 1px solid ${(props) => (props.cancel ? '#fff' : 'none')};
+  border: 1px solid ${(props) => (props.cancel ? '#f0ad4e' : 'none')};
   border-radius: 0;
   margin-right: 5px;
   &:hover {
-  background-color: ${(props) => (props.cancel ? '#fff' : 'transparent')};
+  background-color: ${(props) => (props.cancel ? '#f0ad4e' : 'transparent')};
   border: 1px solid ${(props) => (props.cancel ? 'none' : 'rgb(81, 212, 255)')};
-  color: ${(props) => (props.cancel ? '#333' : '#fff')};
+  color: ${(props) => (props.cancel ? '#fff' : '#333')};
 }
   &:active {
     background-color: ${(props) => (props.cancel ? 'rgb(245, 37, 151)' : 'transparent')};

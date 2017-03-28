@@ -44,8 +44,7 @@ const auth = {
   },
   logout() {
     return new Promise((resolve) => {
-      delete localStorage.token
-      localStorage.removeItem('sessionData');
+      window.localStorage.clear();
       setAuthorizationToken(false);
       resolve(true);
     });

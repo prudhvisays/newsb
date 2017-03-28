@@ -5,11 +5,9 @@ import Map from '../../components/AddUser/Map';
 import UserForm from '../../components/AddUser';
 import * as actions from './actions';
 import * as selectors from './selectors';
+import { session } from '../../Api/ApiConstants';
 
 class User extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    this.props.getUserTeam();
-  }
   render() {
     return (
       <section style={{ background: '#eee', color: '#fff' }}>
@@ -25,6 +23,8 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
                 stateUserRequest={this.props.userRequest}
                 stateUserStatus={this.props.userStatus}
                 getUserTeam={this.props.getUserTeam}
+                getFranchise={this.props.getFranchise}
+                stateFranchiseList={this.props.franchisesList}
               />
             </div>
             <div className="all-50">
@@ -42,6 +42,7 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
 }
 const mapStateToProps = createStructuredSelector({
   userTeams: selectors.userTeams(),
+  franchisesList: selectors.franchisesList(),
   userInfo: selectors.userInfo(),
   userRequest: selectors.userRequest(),
   userStatus: selectors.userStatus(),
@@ -50,10 +51,12 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getUserTeam: () => { dispatch(actions.getUserTeam()); },
+    getFranchise: () => { dispatch(actions.getFranchise()); },
     onUserFormChange: (data) => { dispatch(actions.onUserFormChange(data)); },
     userCordsChange: (data) => { dispatch(actions.userCordsChange(data)); },
     userGeoFence: (data) => { dispatch(actions.userGeoFence(data)); },
     createUser: () => { dispatch(actions.createUser()); },
+    clearUserForm: () => { dispatch(actions.clearUserForm()); },
   };
 }
 

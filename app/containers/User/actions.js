@@ -17,6 +17,25 @@ export function getUserTeamFailure(err) {
     payload: err,
   };
 }
+export function getFranchise() {
+  return {
+    type: 'GET_FRANCHISE',
+  };
+}
+
+export function getFranchiseSuccess(data) {
+  return {
+    type: 'GET_FRANCHISE_SUCCESS',
+    payload: data,
+  };
+}
+
+export function getFranchiseFailure(err) {
+  return {
+    type: 'GET_FRANCHISE_FAILURE',
+    payload: err,
+  };
+}
 
 export function onUserFormChange(data) {
   return {

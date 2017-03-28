@@ -6,7 +6,7 @@ export default class Input extends React.Component { //eslint-disable-line
     return (
         <div className="ink-flex vertical">
            <div className="sub-title">{Name}</div>
-          <div><input type="text" placeholder={Holder} onChange={onChange} value={value} {...this.props}></input></div>
+          <div><input type="text" placeholder={Holder} onChange={onChange} value={value}  /></div>
         </div>
     );
   }

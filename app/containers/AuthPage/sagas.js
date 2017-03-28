@@ -67,11 +67,11 @@ export function* logoutFlow() {
 export function* loginRoot() {
   yield fork(loginFlow);
 }
-
+loginRoot.isDaemon = true;
 export function* logoutRoot() {
   yield fork(takeLatest,'LOGOUT', logoutFlow);
 }
-
+logoutRoot.isDaemon = true;
 export default [
   loginRoot,
   logoutRoot,

@@ -5,6 +5,11 @@ const userTeams = () => createSelector(
   userData(),
   (state) => state.teams
 );
+
+const franchisesList = () => createSelector(
+  userData(),
+  (state) => state.franchises
+);
 const userInfo = () => createSelector(
   userData(),
   (state) => state.userInfo
@@ -21,6 +26,7 @@ const userStatus = () => createSelector (
 export {
   userData,
   userTeams,
+  franchisesList,
   userInfo,
   userRequest,
   userStatus,

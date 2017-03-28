@@ -2,10 +2,12 @@ import React from 'react';
 import CreateUserStyle from './CreateUserStyle';
 import UserSelect from './UserSelect';
 import TeamSelect from './TeamSelect';
+import FranchiseSelect from './FranchiseSelect';
 import UserMaps from './UserMaps';
 import FormInput from './FormInput';
-import LoadingSpinner from '../LoadingSpinner'; 
+import LoadingSpinner from '../LoadingSpinner';
 import './user.css';
+import { userRoleType } from '../../Api/ApiConstants';
 
 export default class UserForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -15,6 +17,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
     this.submitFranchise = this.submitFranchise.bind(this);
     this.setSelection = this.setSelection.bind(this);
   }
+
   onChange(e) {
     this.emitChanges({ ...this.props.stateUserInfo, [e.target.name]: e.target.value });
   }
@@ -35,9 +38,19 @@ export default class UserForm extends React.Component { // eslint-disable-line r
     this.props.createUser();
   }
   render() {
-    const { stateUserRequest, stateUserStatus, stateUserTeams, stateUserInfo, onUserFormChange, userCordsChange } = this.props
+    const {
+        stateUserRequest,
+        stateUserStatus,
+        stateUserTeams,
+        stateUserInfo,
+        stateFranchiseList,
+        onUserFormChange,
+        userCordsChange,
+        getUserTeam,
+        getFranchise,
+    } = this.props
     return (
-      <CreateUserStyle className="formStyle" style={{ height: '75vh', position: 'relative' }}>
+      <CreateUserStyle className="formStyle" style={{ height: '78vh', position: 'relative' }}>
     { !stateUserRequest ? (
         <form onSubmit={this.submitFranchise}>
           <div className="ink-flex vertical">
@@ -45,30 +58,64 @@ export default class UserForm extends React.Component { // eslint-disable-line r
               <div className="fw-700 sub-title">Create</div>
               <div className="area"><UserSelect userInfo={stateUserInfo} onUserFormChange={onUserFormChange} /></div>
             </div>
-            { stateUserInfo.selectAdmin && <div className="BottomMargin">
-              <div className="ink-flex">
-                <div style={{ marginRight: '1em' }}><input type="radio" id="rb1" name="isAdmin" value="isAdmin" checked={stateUserInfo.isAdmin} onChange={this.setSelection} /><label htmlFor="rb1" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Admin</label></div>
-                <div><input type="radio" id="rb2" name="isFranchiseAdmin" value="isFranchise" checked={stateUserInfo.isFranchiseAdmin} onChange={this.setSelection} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Franchise Admin</label></div>
-                <div><input type="radio" id="rb3" name="isManager" value="isManager" checked={stateUserInfo.isManager} onChange={this.setSelection} /><label htmlFor="rb2" style={{ marginLeft: '0.3em', color: '#9099b7' }}>Manager Admin</label></div>
+            { stateUserInfo.selectAdmin && <div className="">
+              <div className="ink-form">
+              <div className="control-group" style={{ lineHeight: '0', marginBottom: '0' }}>
+                <ul className="control unstyled inline">
+                {!(userRoleType() === 'isFranchise') && <li>
+                  <input
+                    type="radio"
+                    id="rb1"
+                    name="isAdmin"
+                    value="isAdmin"
+                    checked={stateUserInfo.isAdmin}
+                    onChange={this.setSelection} style={{ width: 'initial'}} />
+                  <label htmlFor="rb1" style={{ color: '#9099b7' }}>Admin</label>
+                </li>}
+                <li>
+                  <input
+                    type="radio"
+                    id="rb2"
+                    name="isFranchiseAdmin"
+                    value="isFranchise"
+                    checked={stateUserInfo.isFranchiseAdmin}
+                    onChange={this.setSelection}
+                    style={{ width: 'initial'}}
+                  />
+                  <label htmlFor="rb2" style={{ color: '#9099b7' }}>Franchise Manager</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="rb3"
+                    name="isManager"
+                    value="isManager"
+                    checked={stateUserInfo.isManager}
+                    onChange={this.setSelection}
+                    style={{ width: 'initial'}}/>
+                  <label htmlFor="rb3" style={{ color: '#9099b7' }}>Team Manager</label>
+                </li>
+                </ul>
               </div>
+            </div>
             </div> }
-            { ((!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin && !stateUserInfo.isPilot && !stateUserInfo.isMerchant) || stateUserInfo.isFranchiseAdmin) && <div className="BottomMargin">
+            { ((stateUserInfo.isTeam || stateUserInfo.isFranchiseAdmin ) && !(userRoleType() === 'isFranchise'))  && <div className="BottomMargin">
               <div className="ink-flex">
                 <div className="all-100">
-                  <FormInput
-                    name={'franchise'}
-                    holder={'Enter Franchise Name'}
-                    type={'text'} title={'Franchise'}
-                    change={this.onChange}
-                    value={stateUserInfo.franchise}
+                  <div className="fw-700 sub-title">Select Franchise</div>
+                  <FranchiseSelect
+                      stateFranchiseList={stateFranchiseList}
+                      userInfo={stateUserInfo}
+                      onUserFormChange={onUserFormChange}
+                      getFranchise={getFranchise}
                   />
                 </div>
               </div>
             </div> }
-            { (stateUserInfo.isMerchant || (stateUserInfo.selectAdmin && stateUserInfo.isFranchiseAdmin)) && <div className="BottomMargin">
+            { (stateUserInfo.isMerchant || stateUserInfo.isTeam || stateUserInfo.selectAdmin || stateUserInfo.isFranchiseAdmin || stateUserInfo.isFranchise) && <div className="BottomMargin">
               <FormInput
                 name={'name'}
-                holder={'Enter Name'}
+                holder={stateUserInfo.isTeam ? 'Enter Team Name' : 'Enter Name'}
                 type={'text'}
                 title={'Name'}
                 change={this.onChange}
@@ -161,16 +208,17 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 </div>
               </div>
             </div> </div>)}
-            <div className="BottomMargin">
+              { !stateUserInfo.isTeam && <div className="BottomMargin">
               <div className="fw-700 sub-title">Location</div>
               <div className="area"><UserMaps userCordsChange={userCordsChange} /></div>
-            </div>
+            </div> }
             { (stateUserInfo.isManager || stateUserInfo.isPilot) && <div className="BottomMargin">
               <div className="fw-700 sub-title">Teams</div>
               <div className="area"><TeamSelect
                 userTeams={stateUserTeams}
                 userInfo={stateUserInfo}
                 onUserFormChange={onUserFormChange}
+                getUserTeam={getUserTeam}
               /></div>
             </div> }
             { stateUserInfo.isPilot && (<div><div className="BottomMargin">
@@ -205,7 +253,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 {/*</div>*/}
               {/*</div>*/}
             {/*}*/}
-            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin || (!stateUserInfo.selectAdmin && !stateUserInfo.isFranchiseAdmin)) && <div className="ink-flex push-right push-bottom"><button type="submit">Submit</button></div> }
+            { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.selectAdmin ||  stateUserInfo.isFranchise || stateUserInfo.isTeam) && <div className="ink-flex push-right push-bottom"><button type="submit">Submit</button></div> }
           </div>
         </form>) : (<LoadingSpinner className="ink-flex push-center cs-loader" color={stateUserStatus.statusColor}>
               <div className="cs-loader-inner">

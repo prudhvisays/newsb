@@ -50,10 +50,8 @@ export default class PathHistory extends React.Component { // eslint-disable-lin
       }
     }
     render() {
-      const latlngs = this.polylinePos()
-      console.log("PATH MAP" + latlngs);
+      const latlngs = this.polylinePos();
       const position = this.centerPosition(this.props.stateOrderInfo.from_location, this.props.stateOrderInfo.to_location);
-      console.log("POSITION" + position);
       const fromLocation = this.fromLocation(this.props.stateOrderInfo.from_location);
       const toLocation = this.toLocation(this.props.stateOrderInfo.to_location);
         return (

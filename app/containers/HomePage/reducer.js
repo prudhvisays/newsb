@@ -3,6 +3,8 @@ import moment from 'moment';
 
 const initialState = {
   orderexpand: false,
+  closeOrderDrop: false,
+  closePilotDrop: false,
   pickupcord: {},
   deliverycord: {},
   orderDisplay: '',
@@ -90,6 +92,14 @@ function homeReducer(state = initialState, action) {
     case 'ORDER_CLOSE':
       return { ...state,
         orderexpand: action.value };
+      case 'CLOSE_ORDER_DROP':
+        return { ...state,
+          closeOrderDrop: action.payload,
+        }
+      case  'CLOSE_PILOT_DROP':
+        return { ...state,
+          closePilotDrop: action.payload,
+        }
     case 'PICKUP_CORD':
       return { ...state,
         pickupcord: action.value };
