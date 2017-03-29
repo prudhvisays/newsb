@@ -35,11 +35,6 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
   }
   emitChanges(newFormState) {
     this.props.deliveryChange(newFormState);
-    if (!userType()) {
-      const { pickup } = this.props.stateAddTask;
-      const pickDate = moment().add(15, 'm').utc().format();
-      this.props.pickupChange({ ...pickup, from_date: pickDate });
-    };
   }
   onOpen() {
     const { delivery } = this.props.stateAddTask;

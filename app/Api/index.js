@@ -69,7 +69,7 @@ const realData = {
       to_address: delivery.to_address,
       paymentType: 'PREPAID',
       status: 'PENDING',
-      to_date_time: delivery.from_date,
+      to_date_time: delivery.to_date,
       to_location: {
         coordinates: [data.dCord.dLng, data.dCord.dLat],
         type: 'Point',
