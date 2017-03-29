@@ -55,6 +55,7 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
             placeholder={'Deliver Before'}
             onChange={this.toDate}
             onBlur={this.onOpen}
+            options={{minDate: 'today'}}
             value={stateAddTask.delivery.to_date ? moment(stateAddTask.delivery.to_date).format() : ''}
           /></div>
         </div>

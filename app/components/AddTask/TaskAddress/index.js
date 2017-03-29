@@ -58,6 +58,7 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
             placeholder={'Pickup Before'}
             onChange={this.calendarChange}
             onBlur={this.onOpen}
+            options={{minDate: 'today'}}
             value={ stateAddTask.pickup.from_date ? moment(stateAddTask.pickup.from_date).format() : ''}
           /></div>
         </div>
