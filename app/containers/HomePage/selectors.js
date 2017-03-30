@@ -93,7 +93,7 @@ const statsLength = (lists, values, shouldNotMatch = false) => {
             return values.indexOf(list.status) > -1
         }).length
     }
-    return true
+    return 0;
 }
 const orderStats = () => createSelector(
     orderList(),

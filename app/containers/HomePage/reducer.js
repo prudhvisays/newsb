@@ -87,9 +87,6 @@ const initialState = {
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case LOCATION_CHANGE: {
-      return initialState;
-    }
     case 'ORDER_EXPAND':
       return { ...state,
         orderexpand: action.value };

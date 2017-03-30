@@ -25,8 +25,7 @@ class DonutChart extends React.Component { //eslint-disable-line
 
   componentWillReceiveProps(nextProps) {
     const { total } = nextProps.stateOrderStats;
-    console.log(total);
-    if (nextProps.stateOrderStats.total !== this.props.total) {
+    if (nextProps.stateOrderStats.total !== this.props.stateOrderStats.total) {
       this.targets(total);
     }
   }

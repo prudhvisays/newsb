@@ -48,9 +48,6 @@ export const initialState = {
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
-    case LOCATION_CHANGE: {
-      return initialState;
-    }
     case 'POST_USER_CORD':
       return {
         ...state,
