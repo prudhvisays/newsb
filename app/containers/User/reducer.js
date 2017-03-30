@@ -1,4 +1,5 @@
 import { userRoleType } from '../../Api/ApiConstants';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
 export const initialState = {
   userInfo: {
@@ -23,7 +24,6 @@ export const initialState = {
     transportType: '', // isPilot - true
     name: '', // isMerchant - true
     selectAdmin: false,
-    franchiseOption: userRoleType() === 'isFranchise',
     location: {
       type: 'Point',
       coordinates: [ 78.4867, 17.3850 ],
@@ -48,6 +48,9 @@ export const initialState = {
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
+    case LOCATION_CHANGE: {
+      return initialState;
+    }
     case 'POST_USER_CORD':
       return {
         ...state,

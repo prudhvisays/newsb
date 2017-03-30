@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
 const initialState = {
   orderexpand: false,
@@ -86,6 +87,9 @@ const initialState = {
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
+    case LOCATION_CHANGE: {
+      return initialState;
+    }
     case 'ORDER_EXPAND':
       return { ...state,
         orderexpand: action.value };

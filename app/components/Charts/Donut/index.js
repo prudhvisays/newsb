@@ -23,10 +23,10 @@ class DonutChart extends React.Component { //eslint-disable-line
     });
   }
 
-  componentDidUpdate(prevProps) {
-    const { total } = this.props.stateOrderStats;
+  componentWillReceiveProps(nextProps) {
+    const { total } = nextProps.stateOrderStats;
     console.log(total);
-    if (prevProps.stateOrderStats.total !== total) {
+    if (nextProps.stateOrderStats.total !== this.props.total) {
       this.targets(total);
     }
   }
