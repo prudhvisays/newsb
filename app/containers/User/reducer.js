@@ -29,8 +29,8 @@ export const initialState = {
       coordinates: [ 78.4867, 17.3850 ],
     },
     geo_fence: {
-      type: 'Polygon',
-      coordinates: [],
+      type: 'MultiPolygon',
+      coordinates: [[[[0,0]]]],
     },
     registration_status: true,
     isOpen: false,
@@ -113,12 +113,13 @@ function userReducer(state = initialState, action) {
 
 function geoFence(state, action) {
   const cords = action.payload;
-  let geoCords = [];
+  let geoCords = [[[[]]]];
   if (cords[0] != null) {
-    cords[0].map((cord) => geoCords.push([cord.lng, cord.lat]));
+    cords[0].map((cord) => geoCords[0][0][0].push([cord.lng, cord.lat]));
+    geoCords[0][0][0].push([cords[0][0].lng, cords[0][0].lat])
     console.table(geoCords);
   } else {
-    geoCords = [];
+    geoCords = [[[[0,0]]]];
   }
 
   return {

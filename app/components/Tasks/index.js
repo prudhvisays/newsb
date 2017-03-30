@@ -70,6 +70,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
   pickDate(date) {
     const Date = moment(date[0]).format('YYYYMMDD');
     this.props.getTeamCustomers({fromDate: Date, toDate: Date });
+    this.props.getOrder(Date);
   }
   render() {
     const { expand, data } = this.state;

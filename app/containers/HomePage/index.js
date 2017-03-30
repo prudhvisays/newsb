@@ -128,7 +128,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getTeamCustomers={this.props.getTeamCustomers}
                         closeOrderDetails={this.closeOrderDetails}
                         stateOrders={this.props.orderList}
-                        getOrders={this.props.getOrders}
+                        getOrder={this.props.getOrder}
                         getOrderDetail={this.props.getOrderDetail}
                         isAdmin={isAdmin}
                         orderStats={this.props.orderStats}
