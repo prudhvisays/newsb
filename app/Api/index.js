@@ -33,7 +33,7 @@ const realData = {
   getTeamsApi() {
     const franchise = {
       franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
-    }
+    };
     const GET_TEAMS_API = `${API_URL}/teams`;
     return axios({
       method: 'GET',
