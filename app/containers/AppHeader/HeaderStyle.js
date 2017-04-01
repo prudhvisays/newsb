@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const AppHeaderStyle = styled.div`
-   height: 100%;
+const HeaderStyle = styled.div`
+  height: 100%;
   position: fixed;
   width: 50px;
   background-color: #333;
@@ -31,6 +31,7 @@ const AppHeaderStyle = styled.div`
   a:hover {
     color: rgb(81, 212, 255);
   }
+
 `;
 
-export default AppHeaderStyle;
+export default HeaderStyle;

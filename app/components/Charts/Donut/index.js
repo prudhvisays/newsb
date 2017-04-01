@@ -3,7 +3,7 @@ import './Donut.css';
 let donut;
 let Data =  [
     { label: 'Target', value: 100 },
-    { label: 'Total', value: 21 },
+    { label: 'Total', value: 0 },
 ];
 class DonutChart extends React.Component { //eslint-disable-line
   constructor(props) {
@@ -24,9 +24,9 @@ class DonutChart extends React.Component { //eslint-disable-line
   }
 
   componentWillReceiveProps(nextProps) {
-    const { total } = nextProps.stateOrderStats;
-    if (nextProps.stateOrderStats.total !== this.props.stateOrderStats.total) {
-      this.targets(total);
+    const { completed } = nextProps.stateOrderStats;
+    if (nextProps.stateOrderStats.completed !== this.props.stateOrderStats.completed) {
+      this.targets(completed);
     }
   }
   targets(total) {

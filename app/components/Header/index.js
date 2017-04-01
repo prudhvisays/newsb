@@ -19,6 +19,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
         <div>
           <Link to="/"><i className="fa fa-tachometer" aria-hidden="true" /></Link>
           <Link to="/user"><i className="fa fa-user-plus" aria-hidden="true" /></Link>
+          <Link to="/user"><i className="fa fa-user-plus" aria-hidden="true" /></Link>
           <a onClick={this.logout}><i className="fa fa-power-off" aria-hidden="true" /></a>
         </div>
       </HeaderStyle>

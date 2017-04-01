@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { API_URL, userRole } from './ApiConstants';
+import { API_URL, session, userRole, userRoleType } from './ApiConstants';
 const localStorage = global.window.localStorage;
 
 const realData = {
   getOrderStatsApi(statsDate) {
     const StatsDate = {
       date: statsDate,
+      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
       timeZone : 'Asia/Kolkata'
     };
     const GET_ORDER_STATS_API = `${API_URL}/orders/stats`;
@@ -19,6 +20,7 @@ const realData = {
   getPilotStatsApi(statsDate) {
     const StatsDate = {
       team: '*',
+      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
     };
     const GET_PILOT_STATS_API = `${API_URL}/pilots/stats`;
     return axios({
@@ -29,10 +31,14 @@ const realData = {
     }).then((response) => response.data);
   },
   getTeamsApi() {
+    const franchise = {
+      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+    }
     const GET_TEAMS_API = `${API_URL}/teams`;
     return axios({
       method: 'GET',
       url: GET_TEAMS_API,
+      data: franchise,
       responseType: 'json',
     }).then((response) => response.data);
   },
@@ -41,7 +47,11 @@ const realData = {
     return axios({
       method: 'POST',
       url: GET_TEAM_SALES_API,
-      data: salesDate,
+      data: {
+        fromDate: salesDate.fromDate,
+        toDate: salesDate.toDate,
+        franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+      },
       responseType: 'json',
     }).then((response) => response.data);
   },
@@ -50,7 +60,11 @@ const realData = {
     return axios({
       method: 'POST',
       url: GET_TEAM_CUSTOMERS_API,
-      data: salesDate,
+      data: {
+        fromDate: salesDate.fromDate,
+        toDate: salesDate.toDate,
+        franchise: userRoleType() === 'isFranchise' ? session().manager.franchise : null,
+      },
       responseType: 'json',
     }).then((response) => response.data);
   },

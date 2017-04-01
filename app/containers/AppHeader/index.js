@@ -1,38 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import SubHeader from './SubHeader';
 import { Link } from 'react-router';
 import * as actions from './actions';
+import { logout } from '../AuthPage/actions';
 import * as selectors from './selectors';
 import AppHeaderStyle from './AppHeaderStyle';
 
 class AppHeader extends React.Component {
   render() {
-    const { triggerCollapse } = this.props;
+    const { triggerCollapse, Logout } = this.props;
     return (
-      <div id="app-header">
-        <AppHeaderStyle>
-          <div className="container-fluid">
-            <div className="nav justify-content-between">
-              <div className="left-column">
-                <div className="d-flex flex-row">
-                  <div className="p-2" onClick={triggerCollapse}><i className="material-icons">menu</i></div>
-                  <div className="p-2">DashBoard</div>
-                  <div className="p-2">Activities</div>
-                </div>
-              </div>
-              <div className="right-column">
-                <div className="d-flex flex-row-reverse">
-                  <div className="p-2">Profile</div>
-                  <div className="p-2">Notifications</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AppHeaderStyle>
-        <SubHeader />
-      </div>
+      <AppHeaderStyle>
+        <div>
+          <Link to="/"><i className="fa fa-tachometer" aria-hidden="true" /></Link>
+          <a onClick={triggerCollapse}><i className="fa fa-paper-plane" aria-hidden="true" /></a>
+          <Link to="/user"><i className="fa fa-user-plus" aria-hidden="true" /></Link>
+          <a onClick={Logout}><i className="fa fa-power-off" aria-hidden="true" /></a>
+        </div>
+      </AppHeaderStyle>
     );
   }
 }
@@ -42,7 +28,8 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    triggerCollapse: () => { dispatch(actions.triggerCollapse())}
+    triggerCollapse: () => { dispatch(actions.triggerCollapse())},
+    Logout: () => { dispatch(logout()); },
   }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AppHeader);

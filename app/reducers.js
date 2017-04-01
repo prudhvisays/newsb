@@ -8,6 +8,7 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import headerReducer from './containers/AppHeader/reducer';
 /*
  * routeReducer
  *
@@ -50,6 +51,7 @@ export default function createReducer(asyncReducers) {
   const appReducer =  combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
+    header: headerReducer,
     ...asyncReducers,
   });
   return (state,action) => {

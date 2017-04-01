@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, userRole } from './ApiConstants';
+import { API_URL, userRole,userRoleType, session } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
 
@@ -9,7 +9,8 @@ const PilotApi = {
     const userId = Object.values(userRole())[0];
     const payload = {
       [user]: userId,
-      team: team ? team : ''
+      team: team ? team : '',
+      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
     };
     const GET_PILOTS_API = `${API_URL}/pilots/list`;
     return axios({

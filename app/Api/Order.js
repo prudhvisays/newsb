@@ -2,7 +2,7 @@
  * Created by akira on 26-02-2017.
  */
 import axios from 'axios';
-import { API_URL, userRole } from './ApiConstants';
+import { API_URL, userRole,userRoleType, session } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
 
@@ -13,6 +13,7 @@ const orderApi = {
     const payload = {
       date: date,
       [user]: userId,
+      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
       timeZone : 'Asia/Kolkata'
     };
     const GET_ORDERS_API = `${API_URL}/orders/list`;

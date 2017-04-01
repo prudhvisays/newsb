@@ -26,6 +26,7 @@ import Tabs from '../../components/Tabs';
 import GroupBlock from '../../components/GroupBlock';
 import AddTask from '../../components/AddTask';
 import auth from '../../Api/Auth';
+import { collapsed } from '../AppHeader/selectors';
 
 const socket = io('https://season-boy-api.herokuapp.com').connect();
 // const userRole = () => {
@@ -118,7 +119,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
               <div className="column-group quarter-horizontal-gutters margin">
                 <div className="all-60">
                   <div className="column-group quarter-horizontal-gutters">
-                      { isAdmin() && (<Targets stateOrderStats={this.props.stats.orderStats} />)}
+                      { isAdmin() && (<Targets stateOrderStats={this.props.orderStats} />)}
                       { isAdmin() && (<Tasks divTask={this.divTask}
                         orderDetails={this.orderDetails}
                         orderBlock={this.props.orderexpand}
@@ -138,8 +139,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         closePilotDrop={this.props.closePilotDrop}
                                              {...this.props}
                       />)}
-                      { !addTask && (<div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
-                        { !compressed && (<AddTask
+                      <div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
+                        { !compressed && ( !this.props.collapsed ? (<AddTask
                           pickupCord={this.props.pickupCord}
                           deliveryCord={this.props.deliveryCord}
                           pCord={this.props.pickupcord}
@@ -159,8 +160,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           stateOptedPilot={this.props.optedPilot}
                           pilotSelect={this.props.pilotSelect}
                           isAdmin={isAdmin}
-                        />)}
-                      </div>)}
+                          />) : (<div style={{ background: '#fff', height: '67vh' }}></div>))}
+                      </div>
                     { isAdmin() ? (compressed ? (<div className="all-65 marginTop">{ pilotState ? <UserInfo
                         statePilotInfo={this.props.pilotInfo}
                         statePilotStatus={this.props.pilotDetailStatus}
@@ -241,6 +242,7 @@ const mapStateToProps = createStructuredSelector({
     pilotInfo: selectors.pilotInfo(),
     pilotDetailStatus: selectors.pilotDetailStatus(),
     orderStats: selectors.orderStats(),
+    collapsed: collapsed(),
 });
 
 export function mapDispatchToProps(dispatch) {
