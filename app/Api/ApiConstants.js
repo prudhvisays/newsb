@@ -4,9 +4,8 @@ export const session = () => JSON.parse(localStorage.getItem('sessionData'));
 export const franchiseRole = (franchise) => userRoleType() === 'isFranchise' ? session().manager.franchise : franchise !== 'All' ? franchise : null;
 export const userRole = () => {
   if(auth.loggedIn()){
-    const session = JSON.parse(localStorage.getItem('sessionData'));
-    if(session.manager) {
-      return {manager:session['manager']['_id']};
+    if(session().manager) {
+      return {manager:session()['manager']['_id']};
     }
   };
 };

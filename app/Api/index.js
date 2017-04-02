@@ -96,6 +96,7 @@ const realData = {
       team: selection.teamSelect,
       createdByUserRole: Object.keys(userRole())[0].toUpperCase(),
       createdBy: Object.values(userRole())[0],
+      franchise: franchiseRole(),
     };
     const POST_ADD_TASK_API = `${API_URL}/orders`;
     return axios({
