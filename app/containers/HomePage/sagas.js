@@ -6,15 +6,16 @@ import pilotApi from '../../Api/Pilot';
 import orderApi from '../../Api/Order';
 import userApi from '../../Api/userApi';
 import * as actions from './actions';
-import { orderId, pilotId } from './selectors';
+import { orderId, pilotId, franchiseList } from './selectors';
 
 export function* fetchOrderStats() {
   const statsDate = moment().format('YYYYMMDD');
+  const { selectedFranchise } = yield select(franchiseList());
   yield put(actions.statsRequesting(true));
   try {
     const [orderData, pilotData] = yield [
-      call(realData.getOrderStatsApi, statsDate),
-      call(realData.getPilotStatsApi, statsDate),
+      call(realData.getOrderStatsApi, statsDate, selectedFranchise),
+      call(realData.getPilotStatsApi, statsDate, selectedFranchise),
     ];
     console.log(orderData);
     yield put(actions.getOrderStatsSuccess(orderData));
@@ -36,9 +37,9 @@ export function* fetchOrderStatsRoot() {
   yield cancel(main);
 }
 // TEAMS
-export function* fetchTeams() {
+export function* fetchTeams(franchiseId) {
   try {
-    const response = yield call(realData.getTeamsApi);
+    const response = yield call(realData.getTeamsApi,franchiseId);
     yield put(actions.getTeamsSuccess(response));
   } catch (error) {
     if (error.response) {
@@ -53,7 +54,8 @@ export function* loadTeamSales(teamsPanel) {
 export function* fetchTeamsFlow() {
   while(true) {
     yield take('GET_TEAMS');
-    yield call(fetchTeams);
+    const { selectedFranchise } = yield select(franchiseList());
+    yield call(fetchTeams, selectedFranchise);
   }
 }
 export const getState = () => (state) => state.get('home');
@@ -67,9 +69,10 @@ export const getDate = () => {
 
 export function* loadTeamCustomersFlow() {
   const salesDate = getDate();
+  const { selectedFranchise } = yield select(franchiseList());
   try {
     yield take('GET_TEAMS_SUCCESS');
-    const teamCustomers = yield call(realData.getTeamCustomersApi, salesDate);
+    const teamCustomers = yield call(realData.getTeamCustomersApi, salesDate, selectedFranchise);
     yield put(actions.getTeamCustomersSuccess({ response: teamCustomers, date: salesDate }));
   } catch (error) {
     if (error.response) {
@@ -83,7 +86,8 @@ export function* loadTeamSalesFlow() {
     yield take('GET_TEAM_CUSTOMERS_SUCCESS');
     const state = yield select(getState());
     const { date } = state.teamsPanel.teamCustomers
-    const teamSales = yield call(realData.getTeamSalesApi, date);
+    const { selectedFranchise } = yield select(franchiseList());
+    const teamSales = yield call(realData.getTeamSalesApi, date, selectedFranchise);
     yield put(actions.getTeamSalesSuccess({ response: teamSales, date}));
   } catch (error) {
     if (error.response) {
@@ -113,10 +117,10 @@ export function* fetchTeamsRoot() {
 }
 
 // TEAM CUSTOMERS AND SALES fromDate toDate
-export function* fetchTeamCustomers(Date) {
+export function* fetchTeamCustomers(Date, franchiseId) {
   console.info(Date);
   try {
-    const customers = yield call(realData.getTeamCustomersApi, Date);
+    const customers = yield call(realData.getTeamCustomersApi, Date, franchiseId);
     yield put(actions.getTeamCustomersSuccess({ response: customers, date: Date }));
   } catch (error) {
     if (error.response) {
@@ -128,7 +132,8 @@ export function* fetchTeamCustomersFlow() {
   while(true) {
     const request = yield take('GET_TEAM_CUSTOMERS');
     const salesDate = request.payload;
-    yield call(fetchTeamCustomers, salesDate);
+    const { selectedFranchise } = yield select(franchiseList());
+    yield call(fetchTeamCustomers, salesDate, selectedFranchise);
   }
 }
 export function* fetchTeamCustomersWatch() {
@@ -187,10 +192,10 @@ export function* postAddTaskRoot() {
 // End of Post Add Task
 
 // GET PILOTS
-export function* fetchPilots(team) {
-  console.log("fecth pilots" + team);
+export function* fetchPilots(team, franchiseId) {
+  console.log("fecth pilots" + franchiseId);
   try {
-    const response = yield call(pilotApi.getPilots, team);
+    const response = yield call(pilotApi.getPilots, team, franchiseId);
     yield put(actions.getPilotSuccess(response));
   } catch (error) {
     if (error.response) {
@@ -203,7 +208,8 @@ export function* fetchPilotsFlow() {
   while(true){
    const req = yield take('GET_PILOT');
    const team = req.payload;
-    yield call(fetchPilots, team);
+   const { selectedFranchise } = yield select(franchiseList());
+    yield call(fetchPilots, team, selectedFranchise);
   }
 }
 export function* fetchPilotsWatch() {
@@ -216,9 +222,9 @@ yield take('LOCATION_CHANGE');
 yield cancel(pilotsWatcher);
 }
 
-export function* fetchOrders(date) {
+export function* fetchOrders(date, franchiseId) {
   try {
-    const response = yield call(orderApi.getOrders, date);
+    const response = yield call(orderApi.getOrders, date, franchiseId);
     yield put(actions.getOrderSuccess({ response, date }));
   } catch (error) {
     if (error.response) {
@@ -230,8 +236,8 @@ export function* fetchOrdersFlow() {
   while (true) {
     const req = yield take('GET_ORDER');
     const date = req.payload ? req.payload : moment().format('YYYYMMDD');
-    console.log(date);
-    yield call(fetchOrders, date);
+    const { selectedFranchise } = yield select(franchiseList());
+    yield call(fetchOrders, date, selectedFranchise);
   }
 }
 export function* fetchOrdersWatch() {

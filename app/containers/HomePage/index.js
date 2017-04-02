@@ -65,8 +65,12 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
     this.addTask = this.addTask.bind(this);
     this.closeOrderDetails = this.closeOrderDetails.bind(this);
     this.closeDivPilot = this.closeDivPilot.bind(this);
+    this.getInfo = this.getInfo.bind(this);
   }
   componentDidMount() {
+    this.getInfo();
+  }
+  getInfo() {
     if(isAdmin()) {
       this.props.getStats();
       this.props.getTeams();
@@ -124,6 +128,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getFranchiseList={this.props.getFranchiseList}
                         franchiseList={this.props.franchiseList}
                         selectFranchise={this.props.selectFranchise}
+                        getInfo={this.getInfo}
                       />)}
                       { isAdmin() && (<Tasks divTask={this.divTask}
                         orderDetails={this.orderDetails}

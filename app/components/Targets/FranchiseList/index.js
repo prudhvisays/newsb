@@ -33,12 +33,11 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
   }
 
   onChange(value) {
-    console.log(value);
-    const { franchiseList } = this.props;
-    this.emitChanges({ ...franchiseList, selectedFranchise: value });
+    this.emitChanges(value);
   }
   emitChanges(data) {
     this.props.selectFranchise(data);
+    this.props.getInfo();
   }
   useAnim(e) {
     this.setState({
@@ -67,7 +66,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
         optionFilterProp="text"
         onChange={this.onChange}
       >
-        <Option key={null} title={'ALL'}>{'ALL'}</Option>
+        <Option key={null} title={'All Franchises'}>{'All Franchises'}</Option>
         {franchiseList}
       </Select>
     );

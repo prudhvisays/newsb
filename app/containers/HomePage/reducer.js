@@ -85,7 +85,7 @@ const initialState = {
   },
   franchiseList: {
     franchises: [],
-    selectedFranchise: '',
+    selectedFranchise: 'null',
     error: '',
     request: false,
   }

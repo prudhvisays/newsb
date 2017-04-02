@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { API_URL, session, userRole, userRoleType } from './ApiConstants';
+import { API_URL, session, userRole, userRoleType, franchiseRole } from './ApiConstants';
 const localStorage = global.window.localStorage;
 
 const realData = {
-  getOrderStatsApi(statsDate) {
+  getOrderStatsApi(statsDate, franchiseId) {
     const StatsDate = {
       date: statsDate,
-      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+      franchise: franchiseRole(franchiseId),
       timeZone : 'Asia/Kolkata'
     };
     const GET_ORDER_STATS_API = `${API_URL}/orders/stats`;
@@ -17,10 +17,10 @@ const realData = {
       responseType: 'json',
     }).then((response) => response.data);
   },
-  getPilotStatsApi(statsDate) {
+  getPilotStatsApi(statsDate, franchiseId) {
     const StatsDate = {
       team: '*',
-      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+      franchise: franchiseRole(franchiseId),
     };
     const GET_PILOT_STATS_API = `${API_URL}/pilots/stats`;
     return axios({
@@ -30,18 +30,18 @@ const realData = {
       responseType: 'json',
     }).then((response) => response.data);
   },
-  getTeamsApi() {
+  getTeamsApi(franchiseId) {
     const GET_TEAMS_API = `${API_URL}/teams/list`;
     return axios({
       method: 'POST',
       url: GET_TEAMS_API,
       data: {
-        franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+        franchise: franchiseRole(franchiseId),
       },
       responseType: 'json',
     }).then((response) => response.data);
   },
-  getTeamSalesApi(salesDate) {
+  getTeamSalesApi(salesDate, franchiseId) {
     const GET_TEAM_SALES_API = `${API_URL}/teams/sales`;
     return axios({
       method: 'POST',
@@ -49,12 +49,12 @@ const realData = {
       data: {
         fromDate: salesDate.fromDate,
         toDate: salesDate.toDate,
-        franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+        franchise: franchiseRole(franchiseId),
       },
       responseType: 'json',
     }).then((response) => response.data);
   },
-  getTeamCustomersApi(salesDate) {
+  getTeamCustomersApi(salesDate, franchiseId) {
     const GET_TEAM_CUSTOMERS_API = `${API_URL}/customers/sales`;
     return axios({
       method: 'POST',
@@ -62,7 +62,7 @@ const realData = {
       data: {
         fromDate: salesDate.fromDate,
         toDate: salesDate.toDate,
-        franchise: userRoleType() === 'isFranchise' ? session().manager.franchise : null,
+        franchise: franchiseRole(franchiseId),
       },
       responseType: 'json',
     }).then((response) => response.data);

@@ -2,18 +2,18 @@
  * Created by akira on 26-02-2017.
  */
 import axios from 'axios';
-import { API_URL, userRole,userRoleType, session } from './ApiConstants';
+import { API_URL, userRole,userRoleType, session, franchiseRole } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
 
 const orderApi = {
-  getOrders(date) {
+  getOrders(date, franchiseId) {
     const user = Object.keys(userRole())[0];
     const userId = Object.values(userRole())[0]
     const payload = {
       date: date,
       [user]: userId,
-      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+      franchise: franchiseRole(franchiseId),
       timeZone : 'Asia/Kolkata'
     };
     const GET_ORDERS_API = `${API_URL}/orders/list`;
