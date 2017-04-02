@@ -24,6 +24,7 @@ export const initialState = {
     transportType: '', // isPilot - true
     name: '', // isMerchant - true
     selectAdmin: false,
+    address: '',
     location: {
       type: 'Point',
       coordinates: [ 78.4867, 17.3850 ],

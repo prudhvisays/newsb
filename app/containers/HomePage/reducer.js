@@ -82,6 +82,12 @@ const initialState = {
     pilotInfo: {},
     error: '',
     request: false,
+  },
+  franchiseList: {
+    franchises: [],
+    selectedFranchise: '',
+    error: '',
+    request: false,
   }
 };
 
@@ -345,6 +351,22 @@ function homeReducer(state = initialState, action) {
           },
         },
       }
+    case 'GET_FRANCHISE_LIST_SUCCESS':
+      return {
+        ...state,
+        franchiseList: {
+          ...state.franchiseList,
+          franchises: action.payload,
+        },
+      };
+    case 'SELECT_FRANCHISE':
+      return {
+        ...state,
+        franchiseList: {
+          ...state.franchiseList,
+          selectedFranchise: action.payload,
+        },
+      };
     default:
       return state;
   }

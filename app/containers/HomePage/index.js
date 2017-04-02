@@ -119,7 +119,12 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
               <div className="column-group quarter-horizontal-gutters margin">
                 <div className="all-60">
                   <div className="column-group quarter-horizontal-gutters">
-                      { isAdmin() && (<Targets stateOrderStats={this.props.orderStats} />)}
+                      { isAdmin() && (<Targets
+                        stateOrderStats={this.props.orderStats}
+                        getFranchiseList={this.props.getFranchiseList}
+                        franchiseList={this.props.franchiseList}
+                        selectFranchise={this.props.selectFranchise}
+                      />)}
                       { isAdmin() && (<Tasks divTask={this.divTask}
                         orderDetails={this.orderDetails}
                         orderBlock={this.props.orderexpand}
@@ -242,6 +247,7 @@ const mapStateToProps = createStructuredSelector({
     pilotInfo: selectors.pilotInfo(),
     pilotDetailStatus: selectors.pilotDetailStatus(),
     orderStats: selectors.orderStats(),
+    franchiseList: selectors.franchiseList(),
     collapsed: collapsed(),
 });
 
@@ -271,6 +277,8 @@ export function mapDispatchToProps(dispatch) {
     teamSelect: (id) => { dispatch(actions.teamSelect(id)); },
     pilotSelect: (data) => { dispatch(actions.pilotSelect(data)); },
     getPilotDetail: (id) => { dispatch(actions.getPilotDetail(id)); },
+    getFranchiseList: () => { dispatch(actions.getFranchiseList()); },
+    selectFranchise: (data) => { dispatch(actions.selectFranchise(data)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -4,6 +4,7 @@ import moment from 'moment';
 import realData from '../../Api';
 import pilotApi from '../../Api/Pilot';
 import orderApi from '../../Api/Order';
+import userApi from '../../Api/userApi';
 import * as actions from './actions';
 import { orderId, pilotId } from './selectors';
 
@@ -294,6 +295,34 @@ export function* fetchPilotDetailsRoot(){
   yield take('LOCATION_CHANGE');
   yield cancel(pilotDetailWatcher);
 }
+
+// GET FRANCHISE LIST
+export function* fetchFranchiseList() {
+  try {
+    const response = yield call(userApi.getFranchisesApi);
+    yield put(actions.getFranchiseListSuccess(response));
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.getFranchiseListFailure(error.message));
+    }
+  }
+}
+export function* fetchFranchiseListFlow() {
+  while(true) {
+    const request = yield take('GET_FRANCHISE_LIST');
+    yield call(fetchFranchiseList);
+  }
+}
+export function* fetchFranchiseListWatch() {
+  yield fork(fetchFranchiseListFlow);
+}
+
+export function* fetchFranchiseListRoot() {
+  const FrachiseListWatcher = yield fork(fetchFranchiseListWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(FrachiseListWatcher);
+}
+// END OF FRANCHISE LIST
 export default [
   fetchOrderStatsWatch,
   fetchTeamsRoot,
@@ -303,4 +332,5 @@ export default [
   fetchOrdersRoot,
   fetchOrderDetailsRoot,
   fetchPilotDetailsRoot,
+  fetchFranchiseListRoot,
 ];

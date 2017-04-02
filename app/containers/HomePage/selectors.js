@@ -161,6 +161,11 @@ const pilotDetailStatus = () => createSelector(
   (pilot) => pilot.request,
 );
 
+const franchiseList = () => createSelector(
+  homeData(),
+  (state) => state.franchiseList,
+);
+
 export {
   homeData,
   orderExpand,
@@ -191,4 +196,5 @@ export {
   pilotInfo,
   pilotDetailStatus,
   orderStats,
+  franchiseList,
 };

@@ -326,3 +326,30 @@ export function pilotSelect(data) {
   };
 }
 
+// GET FRANCHISE LIST
+export function getFranchiseList() {
+  return {
+    type: 'GET_FRANCHISE_LIST',
+  };
+}
+
+export function getFranchiseListSuccess(data) {
+  return {
+    type: 'GET_FRANCHISE_LIST_SUCCESS',
+    payload: data,
+  };
+}
+
+export function getFranchiseListFailure(err) {
+  return {
+    type: 'GET_FRANCHISE_LIST_FAILURE',
+    payload: err,
+  };
+}
+
+export function selectFranchise(data) {
+  return {
+    type: 'SELECT_FRANCHISE',
+    payload: data,
+  };
+}
