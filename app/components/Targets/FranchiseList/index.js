@@ -67,7 +67,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
         optionFilterProp="text"
         onChange={this.onChange}
       >
-        <Option key={'All'} title={'All Franchises'}>{'All Franchises'}</Option>
+        <Option key={'All'} title={'Season Boy'}>{'Season Boy'}</Option>
         {franchiseList}
       </Select>
     );

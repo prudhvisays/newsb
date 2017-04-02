@@ -44,7 +44,7 @@ export default class UserMaps extends React.Component { //eslint-disable-line
     places.forEach((place) => {
       fLat = place.geometry.location.lat();
       fLng = place.geometry.location.lng();
-      address = place.vicinity;
+      address = place.name + ', ' + place.vicinity;
     });
     this.props.userCordsChange({ fLat: fLat, fLng: fLng, address: address });
     if (places.length === 0) {
