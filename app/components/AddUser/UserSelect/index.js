@@ -39,7 +39,7 @@ export default class UserSelect extends React.Component { //eslint-disable-line
     console.log(userRoleType());
     if(userRoleType() === 'isFranchise') {
       console.info("franchise ROLE");
-      this.props.onUserFormChange({ ...form, franchise: Object.values(userRole())[0], isAdmin: false });
+      this.props.onUserFormChange({ ...form, franchise: session().manager ? session().manager.franchise : null, isAdmin: false });
     } else {
       console.info("franchise ROle false")
       this.props.onUserFormChange(form);
