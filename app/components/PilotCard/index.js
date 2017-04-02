@@ -7,7 +7,7 @@ export default class PilotCard extends React.Component { //eslint-disable-line
     return (
       <a onClick={detailedInfo} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="trip-card pilot-boxShadow block-card-background marginBottom" style={{ fontSize: '0.7rem', padding: '1em' }}>
-          <div className="first-row ink-flex" style={{ paddingBottom: '0.3em' }}>
+          <div className="ink-flex" style={{ paddingBottom: '0.3em' }}>
             <div className="all-50 ink-flex push-left">
               <div className="trip-image">
                 <div className="trip-pic" style={{ width: '30px', height: '30px', borderRadius: '50%', overflow: 'hidden', margin: 0 }}>
@@ -21,7 +21,7 @@ export default class PilotCard extends React.Component { //eslint-disable-line
             </div>
             <div className="all-50 ink-flex push-right">
               <div className="trip-info">
-                <div>{pilotStatus}</div>
+                <div className={ pilotStatus !== 'Offline' ? 'ink-label green' : 'ink-label red' }>{pilotStatus}</div>
               </div>
             </div>
           </div>

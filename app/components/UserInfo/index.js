@@ -16,7 +16,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
   render() {
     const { statePilotInfo, statePilotStatus, closeDivPilot } = this.props
     const orders = this.props.statePilotInfo.orders && this.props.statePilotInfo.orders.map((order) => (
-        <PilotTripCard key={order._id} pilotStatus={`Ended on ${this.formatTime(order.pilot_completed_date_time)}`} customer={order.from_name} pilotDistance={order.distance_in_meters}/>
+        <PilotTripCard key={order._id} pilotStatus={`${order.id} - Completed at ${this.formatTime(order.pilot_completed_date_time)}`} customer={order.from_name} pilotDistance={`${order.distance_in_meters/1000}`}/>
       ));
     return (
       <div className="boxShadow user-scroll block-background" style={{ height: '67vh', position: 'relative' }}>
@@ -39,7 +39,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
             <div className="profile-status" style={{ fontSize: '0.8rem' }}>
               <div className="ink-flex push-center">
                 <div className="online-status">
-                  <span className={ statePilotInfo.pilot.isActive ? 'ink-label green' : 'ink-label red' }>{ statePilotInfo.pilot.isActive ? 'Active' : 'Offline' }</span>
+                  <span className={ statePilotInfo.pilot.isAvailable ? 'ink-label green' : 'ink-label red' }>{ statePilotInfo.pilot.isAvailable ? (statePilotInfo.pilot.isActive ? 'Active' : 'Idle') : 'Offline' }</span>
                 </div>
                 <div className="divider"><span> | </span></div>
                 <div className="battery-status">
@@ -71,7 +71,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
                 </div>
                 <div className="all-33 right-border">
                   <div className="ink-flex vertical push-middle profile-distance">
-                    <div>{ statePilotInfo.distanceInMeters }</div>
+                    <div>{ (statePilotInfo.distanceInMeters/1000) } Km</div>
                     <div className="sub-title">Distance</div>
                   </div>
                 </div>
@@ -84,11 +84,13 @@ export default class UserInfo extends React.Component { //eslint-disable-line
               </div>
             </div>
             <div className="trips">
-              <TripCard
+              { statePilotInfo.activeOrder && statePilotInfo.activeOrder.id &&
+               <TripCard
                 customerName={statePilotInfo.activeOrder.from_name}
                 orderStatus={statePilotInfo.activeOrder.status}
                 orderAddress={statePilotInfo.activeOrder.to_address}
                 orderTime={this.formatTime(statePilotInfo.activeOrder.createdAt)} />
+              }
               {orders}
             </div>
           </div>)
