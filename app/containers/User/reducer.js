@@ -113,10 +113,10 @@ function userReducer(state = initialState, action) {
 
 function geoFence(state, action) {
   const cords = action.payload;
-  let geoCords = [[[[]]]];
+  let geoCords = [[[]]];
   if (cords[0] != null) {
-    cords[0].map((cord) => geoCords[0][0][0].push([cord.lng, cord.lat]));
-    geoCords[0][0][0].push([cords[0][0].lng, cords[0][0].lat])
+    cords[0].map((cord) => geoCords[0][0].push([cord.lng, cord.lat]));
+    geoCords[0][0].push([cords[0][0].lng, cords[0][0].lat])
     console.table(geoCords);
   } else {
     geoCords = [[[[0,0]]]];

@@ -88,7 +88,7 @@ export function* postCreateUserFlow() {
    usertype = 'pilots';
    apires = yield call(postCreateUser, res, usertype);
  } else if(res.isMerchant) {
-   usertype = 'merchants';
+   usertype = 'customers';
    apires = yield call(postCreateUser, res, usertype);
  }else if(res.isTeam) {
    usertype = 'teams';

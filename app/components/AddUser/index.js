@@ -99,7 +99,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
               </div>
             </div>
             </div> }
-            { ((stateUserInfo.isTeam || stateUserInfo.isFranchiseAdmin ) && !(userRoleType() === 'isFranchise'))  && <div className="BottomMargin">
+            { stateUserInfo.isFranchiseAdmin  && <div className="BottomMargin">
               <div className="ink-flex">
                 <div className="all-100">
                   <div className="fw-700 sub-title">Select Franchise</div>

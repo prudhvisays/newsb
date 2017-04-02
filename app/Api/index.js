@@ -31,14 +31,13 @@ const realData = {
     }).then((response) => response.data);
   },
   getTeamsApi() {
-    const franchise = {
-      franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
-    };
-    const GET_TEAMS_API = `${API_URL}/teams`;
+    const GET_TEAMS_API = `${API_URL}/teams/list`;
     return axios({
-      method: 'GET',
+      method: 'POST',
       url: GET_TEAMS_API,
-      data: franchise,
+      data: {
+        franchise: userRoleType() === 'isFranchise' ? session().manager.franchise: null,
+      },
       responseType: 'json',
     }).then((response) => response.data);
   },
