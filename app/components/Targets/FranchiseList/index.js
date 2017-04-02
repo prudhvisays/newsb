@@ -57,6 +57,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
       ));
     return (
       <Select
+        value={selectedFranchise}
         placeholder="Select Franchise"
         dropdownMenuStyle={dropdownMenuStyle}
         style={{ width: '100%' }}
@@ -66,7 +67,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
         optionFilterProp="text"
         onChange={this.onChange}
       >
-        <Option key={null} title={'All Franchises'}>{'All Franchises'}</Option>
+        <Option key={'All'} title={'All Franchises'}>{'All Franchises'}</Option>
         {franchiseList}
       </Select>
     );

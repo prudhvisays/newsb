@@ -1,7 +1,7 @@
 import auth from './Auth';
 export const API_URL = 'https://season-boy-api.herokuapp.com/api';
 export const session = () => JSON.parse(localStorage.getItem('sessionData'));
-export const franchiseRole = (franchise) => userRoleType() === 'isFranchise' ? session().manager.franchise : franchise !== 'null' ? franchise : null;
+export const franchiseRole = (franchise) => userRoleType() === 'isFranchise' ? session().manager.franchise : franchise !== 'All' ? franchise : null;
 export const userRole = () => {
   if(auth.loggedIn()){
     const session = JSON.parse(localStorage.getItem('sessionData'));
