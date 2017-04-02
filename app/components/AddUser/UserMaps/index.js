@@ -39,12 +39,14 @@ export default class UserMaps extends React.Component { //eslint-disable-line
   searchBoxPlaces(searchbox) {
     let fLat;
     let fLng;
+    let address;
     const places = searchbox.getPlaces();
     places.forEach((place) => {
       fLat = place.geometry.location.lat();
       fLng = place.geometry.location.lng();
+      address = place.vicinity;
     });
-    this.props.userCordsChange({ fLat: fLat, fLng: fLng });
+    this.props.userCordsChange({ fLat: fLat, fLng: fLng, address: address });
     if (places.length === 0) {
       window.alert('We did not find any places matching that search!'); //eslint-disable-line
     }

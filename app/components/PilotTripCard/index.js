@@ -23,7 +23,7 @@ export default class PilotTripCard extends React.Component { //eslint-disable-li
             <div className="all-50 ink-flex push-right">
               <div className="trip-info ink-flex vertical" style={{ textAlign: 'right' }}>
                 <div className="sub-title">Travelled so far</div>
-                <div>{pilotDistance} M</div>
+                <div>{pilotDistance} Km</div>
               </div>
             </div>
           </div>

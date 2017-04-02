@@ -85,7 +85,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
               <div className="list-scroll">
                 { statePilots.map((pilot) => {
                   return (
-                    <PilotCard detailedInfo={() => { this.detailedInfo(pilot._id) }} key={pilot._id} pilotName={`${pilot.user.firstName} ${pilot.user.lastName}`} pilotStatus={pilot.isActive ? 'Active' : 'Offline' } totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
+                    <PilotCard detailedInfo={() => { this.detailedInfo(pilot._id) }} key={pilot._id} pilotName={`${pilot.user.firstName} ${pilot.user.lastName}`} pilotStatus={pilot.isAvailable ? (pilot.isActive ? 'Active' : 'Idle') : 'Offline' } totalTask={'5'} completedTask={'2'} pilotDistance={'20'}/>
                   )
                 })}
               </div>

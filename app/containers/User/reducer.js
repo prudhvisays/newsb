@@ -87,6 +87,7 @@ function userReducer(state = initialState, action) {
         ...state,
         userInfo: {
           ...state.userInfo,
+          address: action.payload.vicinity,
           location: {
             ...state.userInfo.location,
             coordinates: [action.payload.fLng, action.payload.fLat],
