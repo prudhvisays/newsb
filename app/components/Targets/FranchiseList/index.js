@@ -66,6 +66,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
         optionLabelProp="children"
         optionFilterProp="text"
         onChange={this.onChange}
+        onSelect={this.onSelect}
       >
         <Option key={'All'} title={'Season Boy'}>{'Season Boy'}</Option>
         {franchiseList}

@@ -14,8 +14,8 @@ export default class UserSelect extends React.Component { //eslint-disable-line
           key: 'isManager'
         },
         {
-          title: 'Customer',
-          key: 'isCustomer',
+          title: 'Merchant',
+          key: 'isMerchant',
         },
         {
           title: 'Pilot',
@@ -57,7 +57,7 @@ export default class UserSelect extends React.Component { //eslint-disable-line
     if (value === 'isManager') {
        form = { ...this.props.userInfo, selectAdmin: true, isAdmin: true, isPilot: false, isMerchant: false, isFranchiseAdmin: false, isManager: false, isTeam: false, isFranchise: false, };
         this.franchiseRole(form);
-    } else if(value === 'isCustomer') {
+    } else if(value === 'isMerchant') {
       form = { ...this.props.userInfo, selectAdmin: false, isMerchant: true, isAdmin: false, isPilot: false, isFranchiseAdmin: false, isManager: false, isTeam: false,isFranchise: false, };
       this.franchiseRole(form);
     } else if(value === 'isPilot') {
