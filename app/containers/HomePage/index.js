@@ -145,8 +145,6 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         orderStats={this.props.orderStats}
                         closeOrderExpand={this.props.closeOrderExpand}
                         closePilotExpand={this.props.closePilotExpand}
-                        closeOrderDrop={this.props.closeOrderDrop}
-                        closePilotDrop={this.props.closePilotDrop}
                                              {...this.props}
                       />)}
                       <div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
@@ -190,8 +188,6 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         closeDivPilot={this.closeDivPilot}
                         closeOrderExpand={this.props.closeOrderExpand}
                         closePilotExpand={this.props.closePilotExpand}
-                        closeOrderDrop={this.props.closeOrderDrop}
-                        closePilotDrop={this.props.closePilotDrop}
                         />) : (<Tasks divTask={this.divTask}
                                         orderDetails={this.orderDetails}
                                         orderBlock={this.props.orderexpand}

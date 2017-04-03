@@ -40,7 +40,6 @@ export default class Tasks extends React.Component { //eslint-disable-line
       closeTag.style.top = '-2px';
       this.props.orderClose(true);
       this.props.divTask();
-      this.props.closeOrderDrop(false);
     }
   }
   detailedInfo(data) {

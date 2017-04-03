@@ -44,7 +44,6 @@ export default class Pilots extends React.Component { //eslint-disable-line
     }
   }
   detailedInfo(id) {
-    this.props.closeOrderDrop(true);
     this.props.divPilot();
     this.props.getPilotDetail(id);
   }
