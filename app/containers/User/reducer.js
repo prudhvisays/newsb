@@ -45,10 +45,22 @@ export const initialState = {
     statusText: 'Sending',
     statusColor: '#6bc9c5',
   },
+  createUserResponse: {
+    error: '',
+    res: '',
+  },
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
+    case LOCATION_CHANGE:
+      return {
+        ...state,
+        createUserResponse: {
+          ...state.createUserResponse.res,
+          error: '',
+        }
+      }
     case 'POST_USER_CORD':
       return {
         ...state,
@@ -101,6 +113,14 @@ function userReducer(state = initialState, action) {
       ...state,
       request: action.payload,
     }
+    case 'CREATE_USER_FAILURE':
+      return {
+        ...state,
+          createUserResponse: {
+            ...state.createUserResponse,
+            error: action.payload,
+          }
+      }
     case 'CREATE_USER_STATUS':
     return {
       ...state,

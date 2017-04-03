@@ -120,6 +120,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
                 title={'Name'}
                 change={this.onChange}
                 value={stateUserInfo.name}
+                required="required"
               />
             </div> }
             { (stateUserInfo.isPilot || stateUserInfo.isMerchant || stateUserInfo.isManager || stateUserInfo.isAdmin || stateUserInfo.isFranchiseAdmin ) && ( <div> <div className="BottomMargin">

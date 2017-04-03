@@ -66,7 +66,7 @@ export function* postCreateUser(res, usertype) {
     return response;
   } catch (error) {
     if (error.response) {
-      yield put(actions.createUserFailure(error.message));
+      yield put(actions.createUserFailure(error.response.data.message));
       yield put(actions.createUserStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
     }
   } finally {
@@ -96,6 +96,7 @@ export function* postCreateUserFlow() {
  }
  if (apires) {
       yield put(actions.clearUserForm());
+      yield put(actions.createUserFailure(''));
       yield put(actions.createUserStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
     } else {
       yield put(actions.createUserStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));

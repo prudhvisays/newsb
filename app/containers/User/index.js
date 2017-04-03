@@ -14,6 +14,7 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
           <div className="column-group quarter-horizontal-gutters">
             <div className="all-50">
+              { this.props.userData.createUserResponse && <div className="ink-flex push-center" style={{ position: 'relative', top: '2rem', left: '0em', color: '#d9534f' }}>{this.props.userData.createUserResponse.error}</div>}
               <UserForm
                 stateUserTeams={this.props.userTeams}
                 stateUserInfo={this.props.userInfo}
@@ -41,6 +42,7 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
   }
 }
 const mapStateToProps = createStructuredSelector({
+  userData: selectors.userData(),
   userTeams: selectors.userTeams(),
   franchisesList: selectors.franchisesList(),
   userInfo: selectors.userInfo(),
