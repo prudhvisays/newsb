@@ -14,6 +14,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
     this.taskExpand = this.taskExpand.bind(this);
     this.detailedInfo = this.detailedInfo.bind(this);
     this.closePilot = this.closePilot.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   taskExpand() {
@@ -47,6 +48,9 @@ export default class Pilots extends React.Component { //eslint-disable-line
     this.props.divPilot();
     this.props.getPilotDetail(id);
   }
+  onSearch(e) {
+    this.props.onSearchPilotAttr(e.target.value);
+  }
   render() {
     const { data } = this.state;
     const { stats, statePilots } = this.props;
@@ -58,7 +62,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
               <div className="ink-flex">
                 <div className="all-100">
                   <div className="team-search" style={{ width: '100%' }}>
-                    <input type="text" placeholder="Search Pilots" />
+                    <input type="text" placeholder="Search Pilots" onChange={this.onSearch}/>
                   </div>
                 </div>
               </div>

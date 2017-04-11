@@ -14,7 +14,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
     return  moment(time).locale('en').format('YYYY-MM-DD HH:mm');
   }
   render() {
-    const { statePilotInfo, statePilotStatus, closeDivPilot } = this.props
+    const { statePilotInfo, statePilotStatus, closeDivPilot, pilotLocation } = this.props
     const orders = this.props.statePilotInfo.orders && this.props.statePilotInfo.orders.map((order) => (
         <PilotTripCard key={order._id} pilotStatus={`${order.id} - Completed at ${this.formatTime(order.pilot_completed_date_time)}`} customer={order.from_name} pilotDistance={`${order.distance_in_meters/1000}`}/>
       ));
@@ -47,6 +47,9 @@ export default class UserInfo extends React.Component { //eslint-disable-line
                 </div>
               </div>
             </div>
+              <div className="ink-flex push-center">
+                <div className="sub-title" style={{ textAlign: 'center' }}><i className="fa fa-map-marker" /> {pilotLocation ? pilotLocation.address : '...'}</div>
+              </div>
             <div className="profile-timeline boxShadow" style={{ fontSize: '1rem' }}>
               <div className="ink-flex push-center first-row">
                 <div className="all-50 right-border">

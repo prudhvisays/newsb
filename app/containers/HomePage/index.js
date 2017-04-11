@@ -134,7 +134,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         orderDetails={this.orderDetails}
                         orderBlock={this.props.orderexpand}
                         getStats={this.props.getStats}
-                        searchText={this.props.searchText}
+                        onSearchOrderAttr={this.props.onSearchOrderAttr}
                         stats={this.props.stats}
                         getTeamCustomers={this.props.getTeamCustomers}
                         closeOrderDetails={this.closeOrderDetails}
@@ -145,6 +145,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         orderStats={this.props.orderStats}
                         closeOrderExpand={this.props.closeOrderExpand}
                         closePilotExpand={this.props.closePilotExpand}
+                        orderId={this.props.orderId}
+                        clearOrderDetails={this.props.clearOrderDetails}
                                              {...this.props}
                       />)}
                       <div className={classnames('marginTop', { 'all-100': !compressed, 'all-35': compressed })} style={{ height: '67vh' }}>
@@ -172,6 +174,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                       </div>
                     { isAdmin() ? (compressed ? (<div className="all-65 marginTop">{ pilotState ? <UserInfo
                         statePilotInfo={this.props.pilotInfo}
+                        pilotLocation={this.props.pilotLocation}
                         statePilotStatus={this.props.pilotDetailStatus}
                         closeDivPilot={this.closeDivPilot}
                       /> : null }</div>) : null ) : null}
@@ -188,6 +191,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         closeDivPilot={this.closeDivPilot}
                         closeOrderExpand={this.props.closeOrderExpand}
                         closePilotExpand={this.props.closePilotExpand}
+                        onSearchPilotAttr={this.props.onSearchPilotAttr}
                         />) : (<Tasks divTask={this.divTask}
                                         orderDetails={this.orderDetails}
                                         orderBlock={this.props.orderexpand}
@@ -211,14 +215,27 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                       </div> : <Tabs
                           closeOrderDetails={this.closeOrderDetails}
                           stateOrderInfo={this.props.orderInfo}
-                          stateOrderStatus={this.props.orderInfoStatus} /> }
+                          stateOrderStatus={this.props.orderInfoStatus}
+                          re_order={this.props.re_order}
+                          reOrder={this.props.reOrder}
+                          stateTeamList={this.props.teamsList}
+                          reSelectedPilots={this.props.reSelectedPilots}
+                          orderOptions={this.props.orderOptions}
+                          orderAction={this.props.orderAction}
+                          reOrderClear={this.props.reOrderClear}
+                          clearOrderDetails={this.props.clearOrderDetails}
+                          updateOrder={this.props.updateOrder}
+                          /> }
                     </div>)}
                   </div>
                 </div>
               </div>
             </div>
             { isAdmin() && <div className="all-25" style={{ height: '100vh' }}>
-              <Map statePilotList={this.props.pilotList} />
+              <Map
+                  statePilotList={this.props.pilotList}
+                  stateOrderList={this.props.stateOrderList}
+              />
             </div> }
           </div>
         </div>
@@ -234,21 +251,26 @@ const mapStateToProps = createStructuredSelector({
     pickupcord: selectors.pickupCord(),
     deliverycord: selectors.deliveryCord(),
     stats: selectors.getStats(),
-    searchText: selectors.searchText(),
+    searchOrderAttr: selectors.searchOrderAttr(),
     addTask: selectors.addTask(),
     auto: selectors.auto(),
     teamsInfo: selectors.mergeTeamsInfo(),
     pilotList: selectors.pilotList(),
     orderList: selectors.orderList(),
     orderInfo: selectors.orderInfo(),
+    orderId: selectors.orderId(),
     orderInfoStatus: selectors.orderInfoStatus(),
     teamsList: selectors.getTeams(),
     selectedPilots: selectors.selectedPilots(),
     optedPilot: selectors.optedPilot(),
     pilotInfo: selectors.pilotInfo(),
+    pilotLocation: selectors.pilotLocation(),
     pilotDetailStatus: selectors.pilotDetailStatus(),
     orderStats: selectors.orderStats(),
     franchiseList: selectors.franchiseList(),
+    orderOptions: selectors.orderOptions(),
+    re_order: selectors.re_order(),
+    reSelectedPilots: selectors.reSelectedPilots(),
     collapsed: collapsed(),
 });
 
@@ -261,7 +283,8 @@ export function mapDispatchToProps(dispatch) {
     pickupCord: (value) => { dispatch(actions.pickupCord(value)); },
     deliveryCord: (value) => { dispatch(actions.deliveryCord(value)); },
     getStats: () => { dispatch(actions.getStats()); },
-    onSearch: (searchText) => { dispatch(actions.onSearch(searchText)); },
+    onSearchOrderAttr: (searchText) => { dispatch(actions.onSearchOrderAttr(searchText)); },
+    onSearchPilotAttr: (searchText) => { dispatch(actions.onSearchPilotAttr(searchText)); },
     getTeams: () => { dispatch(actions.getTeams()); },
     getTeamSales: (data) => { dispatch(actions.getTeamSales(data)); },
     pickupChange: (data) => { dispatch(actions.pickupChange(data)); },
@@ -275,11 +298,16 @@ export function mapDispatchToProps(dispatch) {
     getPilot: (team) => { dispatch(actions.getPilot(team)); },
     getOrder: (data) => { dispatch(actions.getOrder(data)); },
     getOrderDetail: (id) => { dispatch(actions.getOrderDetail(id)); },
+    clearOrderDetails: () => { dispatch(actions.clearOrderDetails()); },
     teamSelect: (id) => { dispatch(actions.teamSelect(id)); },
     pilotSelect: (data) => { dispatch(actions.pilotSelect(data)); },
     getPilotDetail: (id) => { dispatch(actions.getPilotDetail(id)); },
     getFranchiseList: () => { dispatch(actions.getFranchiseList()); },
     selectFranchise: (data) => { dispatch(actions.selectFranchise(data)); },
+    orderAction: (data) => { dispatch(actions.orderAction(data)); },
+    reOrder: (data) => { dispatch(actions.reOrder(data));},
+    reOrderClear: () => { dispatch(actions.reOrderClear());},
+    updateOrder: () => { dispatch(actions.updateOrder()); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -1,5 +1,7 @@
 import auth from './Auth';
 export const API_URL = 'https://season-boy-api.herokuapp.com/api';
+export const GMAP_KEY = 'AIzaSyC2jlDRTovbD3Pfpz_MkD1wre8yNqcA7AA';
+export const GEO_CODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng';
 export const session = () => JSON.parse(localStorage.getItem('sessionData'));
 export const franchiseRole = (franchise) => userRoleType() === 'isFranchise' ? session().manager.franchise : franchise !== 'All' ? franchise : null;
 export const userRole = () => {

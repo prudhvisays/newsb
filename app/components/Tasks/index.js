@@ -58,13 +58,14 @@ export default class Tasks extends React.Component { //eslint-disable-line
       this.props.orderExpand(false);
       this.props.divTask();
       this.props.closeOrderDetails();
+      this.props.clearOrderDetails();
     }
   }
   searchText(e) {
     this.emitSearch(e.target.value);
   }
   emitSearch(newSearch) {
-    this.props.onSearch(newSearch);
+    this.props.onSearchOrderAttr(newSearch);
   }
   pickDate(date) {
     const Date = moment(date[0]).format('YYYYMMDD');
@@ -73,7 +74,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
   }
   render() {
     const { expand, data } = this.state;
-    const { stats, stateOrders, isAdmin, orderStats } = this.props;
+    const { stats, stateOrders, isAdmin, orderStats, orderId } = this.props;
     const orderUser = {
       marginTop: '2.65em',
       display: isAdmin() ? 'none': 'block',
@@ -117,7 +118,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
               { stateOrders.map((order) => {
                 const date = moment(order.createdAt).format('YYYY-MM-DD HH:mm');
                 return (
-                  <TripCard key={order._id} detailedInfo={() => {this.detailedInfo(order._id)}} customerName={order.id} orderStatus={order.status} orderAddress={order.to_address} orderPilot={order.pilot ? order.pilot.user.firstName : '-'} orderTime={date} />
+                  <TripCard orderId={orderId} id={order._id} key={order._id} detailedInfo={() => {this.detailedInfo(order._id)}} customerName={order.id} orderStatus={order.status} orderAddress={order.to_address} orderPilot={order.pilot ? order.pilot.user.firstName : '-'} orderTime={date} />
                 );
               })}
             </div>

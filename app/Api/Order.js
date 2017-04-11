@@ -32,6 +32,21 @@ const orderApi = {
      responseType: 'json',
    }).then((response) => response.data);
   },
+  updateOrderDetails(id, data, type) {
+      const UPDATE_ORDER_DETAILS_API = `${API_URL}/orders/${id}`;
+      const payload = {
+          ...data,
+          createdByUserRole: Object.keys(userRole())[0].toUpperCase(),
+          createdBy: Object.values(userRole())[0],
+          franchise: franchiseRole(),
+      };
+      return axios({
+          method: type,
+          url: UPDATE_ORDER_DETAILS_API,
+          data: payload,
+          responseType: 'json',
+      }).then((response) => response.data);
+  }
 };
 
 export default orderApi;

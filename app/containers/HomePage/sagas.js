@@ -6,7 +6,7 @@ import pilotApi from '../../Api/Pilot';
 import orderApi from '../../Api/Order';
 import userApi from '../../Api/userApi';
 import * as actions from './actions';
-import { orderId, pilotId, franchiseList } from './selectors';
+import { orderId, pilotId, franchiseList, re_order, orderOptions, pilotInfo } from './selectors';
 
 export function* fetchOrderStats() {
   const statsDate = moment().format('YYYYMMDD');
@@ -293,13 +293,36 @@ export function* fetchPilotDetailsFlow() {
   const id = yield select(pilotId());
   yield call(fetchPilotDetails, Date, id);
 }
+
+export function* fetchPilotLocation(coordinates) {
+    try {
+        const response = yield call(pilotApi.getPilotLocation, coordinates);
+        yield put(actions.getPilotLocationSuccess(response.results[0].formatted_address));
+    } catch (error) {
+        if (error.response) {
+            yield put(actions.getPilotLocationFailure(error.message));
+        }
+    }
+}
+export function* fetchPilotLocationFlow() {
+    const pilotDetails = yield select(pilotInfo());
+    console.log(pilotDetails);
+    const { coordinates } = pilotDetails.pilot ? pilotDetails.pilot.location ? pilotDetails.pilot.location : '' : '';
+    yield call(fetchPilotLocation, coordinates);
+}
 export function* fetchPilotDetailsWatch() {
   yield fork(takeLatest,'GET_PILOT_DETAILS', fetchPilotDetailsFlow);
 }
+
+export function* fetchPilotLocationWatch() {
+    yield fork(takeLatest, 'GET_PILOT_DETAILS_SUCCESS', fetchPilotLocationFlow);
+}
 export function* fetchPilotDetailsRoot(){
   const pilotDetailWatcher = yield fork(fetchPilotDetailsWatch);
+  const pilotLocationWatcher = yield fork(fetchPilotLocationWatch);
   yield take('LOCATION_CHANGE');
   yield cancel(pilotDetailWatcher);
+  yield cancel(pilotLocationWatcher);
 }
 
 // GET FRANCHISE LIST
@@ -329,6 +352,42 @@ export function* fetchFranchiseListRoot() {
   yield cancel(FrachiseListWatcher);
 }
 // END OF FRANCHISE LIST
+
+// UPDATE ORDER
+export function* updateOrderDetails(id, data, type) {
+    yield put(actions.updateOrderReq(true));
+    try {
+        const response = yield call(orderApi.updateOrderDetails, id, data, type);
+        yield put(actions.updateOrderSuccess(response));
+    } catch (error) {
+        if (error.response) {
+            yield put(actions.updateOrderFailure(error.message));
+            yield put(actions.updateOrderStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
+        }
+    } finally {
+        yield call(delay, 4000);
+        yield put(actions.updateOrderReq(false));
+    }
+}
+export function* updateOrderDetailsFlow() {
+    let type;
+    const id = yield select(orderId());
+    const updateType = yield select(orderOptions());
+    const data = yield select(re_order());
+    if(updateType.reAssign) {
+        yield call(updateOrderDetails, id, data, type='PUT');
+    } else if(updateType.delete){
+        yield call(updateOrderDetails, id, data, type='DELETE');
+    }
+}
+export function* updateOrderDetailsWatch() {
+    yield fork(takeLatest,'UPDATE_ORDER', updateOrderDetailsFlow);
+}
+export function* updateOrderDetailsRoot(){
+    const updateWatcher = yield fork(updateOrderDetailsWatch);
+    yield take('LOCATION_CHANGE');
+    yield cancel(updateWatcher);
+}
 export default [
   fetchOrderStatsWatch,
   fetchTeamsRoot,
@@ -339,4 +398,5 @@ export default [
   fetchOrderDetailsRoot,
   fetchPilotDetailsRoot,
   fetchFranchiseListRoot,
+  updateOrderDetailsRoot,
 ];

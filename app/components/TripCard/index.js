@@ -3,11 +3,11 @@ import profileImage from '../../Assets/profile-image.gif';
 
 export default class TripCard extends React.Component { //eslint-disable-line
   render() {
-    const { detailedInfo, customerName, orderStatus, orderAddress, orderPilot, orderTime } = this.props;
+    const { detailedInfo, customerName, orderStatus, orderAddress, orderPilot, orderTime, orderId, id } = this.props;
     return (
       <a onClick={detailedInfo} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="marginBottom">
-          <div className="trip-card third-boxShadow block-card-background" style={{ fontSize: '0.7rem', padding: '1em' }}>
+          <div className={id === orderId ? "trip-card third-boxShadow block-card-background active" : "trip-card third-boxShadow block-card-background"} style={{ fontSize: '0.7rem', padding: '1em' }}>
             <div className="first-row ink-flex" style={{ paddingBottom: '0.3em' }}>
               <div className="all-70 ink-flex push-left">
                 <div className="trip-image">

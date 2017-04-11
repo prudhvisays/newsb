@@ -71,9 +71,16 @@ export function getStatsFailure(err) {
   };
 }
 
-export function onSearch(search) {
+export function onSearchOrderAttr(search) {
   return {
-    type: 'ON_SEARCH',
+    type: 'ON_SEARCH_ORDER_ATTR',
+    payload: search,
+  };
+}
+
+export function onSearchPilotAttr(search) {
+  return {
+    type: 'ON_SEARCH_PILOT_ATTR',
     payload: search,
   };
 }
@@ -283,6 +290,11 @@ export function getOrderDetailFailure(data) {
   };
 }
 
+export function clearOrderDetails() {
+    return {
+      type: 'CLEAR_ORDER_DETAILS',
+    };
+}
 // GET PILOT DETAILS
 export function requestPilotDetail(data) {
   return {
@@ -311,7 +323,21 @@ export function getPilotDetailFailure(data) {
     payload: data,
   };
 }
+// FETCH PILOT LOCATION
 
+export function getPilotLocationSuccess(data) {
+  return {
+    type: 'GET_PILOT_LOCATION_SUCCESS',
+    payload: data,
+  }
+}
+
+export function getPilotLocationFailure(data) {
+    return {
+      type: 'GET_PILOT_LOCATION_FAILURE',
+      payload: data,
+    }
+}
 // ADD TASK TEAM SELECTION
 export function teamSelect(id) {
   return {
@@ -352,4 +378,59 @@ export function selectFranchise(data) {
     type: 'SELECT_FRANCHISE',
     payload: data,
   };
+}
+
+// ORDER ACTIONS
+
+export function orderAction(data) {
+    return {
+      type: 'ORDER_ACTION',
+      payload: data,
+    };
+}
+
+export function reOrder(data) {
+    return {
+      type: 'RE_ORDER',
+      payload: data,
+    }
+}
+
+export function reOrderClear() {
+    return {
+      type: 'RE_ORDER_CLEAR',
+    }
+}
+
+// UPDATE ORDER
+export function updateOrderStatus(data) {
+    return {
+      type: 'UPDATE_ORDER_STATUS',
+      payload: data,
+    }
+}
+export function updateOrderReq(data) {
+    return {
+      type: 'UPDATE_ORDER_REQUEST',
+      payload: data,
+    }
+}
+export function updateOrder() {
+    return {
+      type: 'UPDATE_ORDER',
+    }
+}
+
+export function updateOrderSuccess(data) {
+  return {
+    type: 'UPDATE_ORDER_SUCCESS',
+    payload: data,
+  }
+}
+
+export function updateOrderFailure(data) {
+    return {
+      type: 'UPDATE_ORDER_FAILURE',
+      payload: data,
+    }
 }

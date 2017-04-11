@@ -59,7 +59,7 @@ export default class GMaps extends React.Component { //eslint-disable-line
   }
   render() {
     return (
-      <div id="locationField">
+      <div className="locationField">
         <input
           id="places-search"
           placeholder="Search address"

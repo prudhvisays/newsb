@@ -1,11 +1,11 @@
-#locationField, #controls {
+.locationField, #controls {
         width: 100%;
       }
       #places-search {
         width: 100%;
       }
-      .pac-container{
-        height: 18%;
+.pac-container{
+        height: 15%;
         overflow-y: scroll;
         /*background: rgb(31, 37, 61);*/
       }

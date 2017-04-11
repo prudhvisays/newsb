@@ -28,10 +28,6 @@ const getStats = () => createSelector(
   homeData(),
     (homeState) => homeState.stats,
 );
-const searchText = () => createSelector(
-  homeData(),
-    (homeState) => homeState.searchText,
-);
 const addTask = () => createSelector(
   homeData(),
     (homeState) => homeState.addTask,
@@ -75,15 +71,59 @@ const mergeTeamsInfo = () => createSelector(
       })
     );
 
-const pilotList = () => createSelector(
+const searchPilotAttr = () => createSelector(
+    homeData(),
+    (state) => state.searchPilotAttr
+);
+
+const pilotListNoFilter = () => createSelector(
   homeData(),
   (state) => state.pilotList.pilots,
 );
 
-const orderList = () => createSelector(
+const pilotList = () => createSelector(
+  [pilotListNoFilter(),
+   searchPilotAttr()],
+  (state, searchText) => state.filter((pilot) => {
+      const regex = new RegExp(searchText, 'gi');
+      if(searchText) {
+          return String(pilot.id).match(regex) ||
+                 String(pilot.user.firstName).match(regex) ||
+                 String(pilot.user.mobileNumber).match(regex);
+      } else {
+          return state;
+      }
+  }),
+);
+
+const searchOrderAttr = () => createSelector(
+    homeData(),
+    (homeState) => homeState.searchOrderAttr,
+);
+
+const orderListNoFilter = () => createSelector(
   homeData(),
   (state) => state.orderList.orders,
 );
+
+const orderList = () => createSelector(
+  [orderListNoFilter(),
+    searchOrderAttr()],
+  (state, searchText) => state.filter((order) => {
+      const regex = new RegExp(searchText, 'gi');
+      if(searchText) {
+          return String(order.id).match(regex) ||
+              String(order.status).match(regex) ||
+              String(order.to_name).match(regex) ||
+              String(order.to_phone).match(regex) ||
+              String(order.pilot.user.mobileNumber).match(regex) ||
+              String(order.pilot.user.firstName).match(regex);
+      } else {
+          return state;
+      }
+  }),
+);
+
 const statsLength = (lists, values, shouldNotMatch = false) => {
     if(lists.length > 0) {
         return lists.filter((list) => {
@@ -96,7 +136,7 @@ const statsLength = (lists, values, shouldNotMatch = false) => {
     return 0;
 }
 const orderStats = () => createSelector(
-    orderList(),
+    orderListNoFilter(),
     (oList) => {
         return {
             assigned: statsLength(oList, ['COMPLETED', 'PENDING', 'FAILED'], true),
@@ -141,6 +181,7 @@ const optedPilot = () => createSelector(
   addTask(),
   (task) => task.selection.pilots,
 )
+
 const pilotDetails = () => createSelector(
   homeData(),
   (state) => state.pilotDetails,
@@ -155,6 +196,10 @@ const pilotInfo = () => createSelector(
   pilotDetails(),
   (id, pilot) => pilot.pilotInfo,
 );
+const pilotLocation = () => createSelector(
+    pilotDetails(),
+    (state) => state.pilotLocation,
+);
 
 const pilotDetailStatus = () => createSelector(
   pilotDetails(),
@@ -166,6 +211,37 @@ const franchiseList = () => createSelector(
   (state) => state.franchiseList,
 );
 
+const orderOptions = () => createSelector(
+   homeData(),
+    (state) => state.orderOptions,
+);
+
+const re_order = () => createSelector(
+    homeData(),
+    (state) => state.reOrder,
+);
+
+const reSelectedTeam = () => createSelector(
+    homeData(),
+    (state) => state.reOrder.team,
+);
+
+const reSelectedPilots = () => createSelector(
+    [
+        reSelectedTeam(),
+        pilotList(),
+    ],
+    (teamId, pilots) => _.filter(pilots, (pilot) => {
+        let pilotId = ''
+        pilot.teams.map((pilotid) => pilotId = pilotid)
+        if(teamId !== undefined) {
+            return teamId === pilotId
+        } else {
+            return pilot.teams.length === 0;
+        }
+    }),
+);
+
 export {
   homeData,
   orderExpand,
@@ -174,7 +250,7 @@ export {
   pickupCord,
   deliveryCord,
   getStats,
-  searchText,
+  searchOrderAttr,
   addTask,
   auto,
   teamsPanel,
@@ -194,7 +270,12 @@ export {
   pilotId,
   pilotDetails,
   pilotInfo,
+  pilotLocation,
   pilotDetailStatus,
   orderStats,
   franchiseList,
+  orderOptions,
+  re_order,
+  reSelectedTeam,
+  reSelectedPilots,
 };

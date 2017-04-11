@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, userRole,userRoleType, session, franchiseRole } from './ApiConstants';
+import { API_URL, userRole,userRoleType, session, franchiseRole, GEO_CODE_URL, GMAP_KEY } from './ApiConstants';
 
 const localStorage = global.window.localStorage;
 
@@ -43,6 +43,14 @@ const PilotApi = {
       responseType: 'json',
     }).then((response) => response.data);
   },
+    getPilotLocation(data) {
+        const GEO_LOCATION_API = `${GEO_CODE_URL}=${data[1]},${data[0]}&location_type=ROOFTOP&result_type=street_address&key=${GMAP_KEY}`;
+        return axios({
+            method: 'GET',
+            url: GEO_LOCATION_API,
+            responseType: 'json',
+        }).then((response) => response.data);
+    },
 };
 
 export default PilotApi;

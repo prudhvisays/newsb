@@ -15,7 +15,8 @@ const initialState = {
     error: '',
     request: false,
   },
-  searchText: '',
+  searchOrderAttr: '',
+  searchPilotAttr: '',
   teamsPanel: {
     teams: [],
     teamSales: {
@@ -80,6 +81,10 @@ const initialState = {
   pilotDetails: {
     pilotId: '',
     pilotInfo: {},
+    pilotLocation: {
+      address: '',
+      error: '',
+    },
     error: '',
     request: false,
   },
@@ -88,6 +93,37 @@ const initialState = {
     selectedFranchise: 'All',
     error: '',
     request: false,
+  },
+  orderOptions: {
+    reAssign: false,
+    edit: false,
+    delete: false,
+  },
+  reOrder: {
+    title: '',
+    description: '',
+    from_name: '',
+    from_phone: '',
+    from_email: '',
+    from_address: '',
+    to_name: '',
+    to_phone: '',
+    to_email: '',
+    to_address: '',
+    paymentType: 'PREPAID',
+    status: 'PENDING',
+    to_date_time: '',
+    to_location: {
+      coordinates: [],
+      type: 'Point',
+    },
+    from_date_time: '',
+    from_location: {
+      coordinates: [],
+      type: 'Point',
+    },
+    pilot: '',
+    team: '',
   }
 };
 
@@ -137,9 +173,13 @@ function homeReducer(state = initialState, action) {
           ...state.stats,
           request: action.req,
         } };
-    case 'ON_SEARCH':
+    case 'ON_SEARCH_ORDER_ATTR':
       return { ...state,
-        searchText: action.payload,
+        searchOrderAttr: action.payload,
+      };
+     case 'ON_SEARCH_PILOT_ATTR':
+      return { ...state,
+        searchPilotAttr: action.payload,
       };
     case 'GET_TEAMS_SUCCESS':
       return { ...state,
@@ -305,6 +345,15 @@ function homeReducer(state = initialState, action) {
           request: action.payload,
         },
       };
+      case 'CLEAR_ORDER_DETAILS':
+        return {
+            ...state,
+            orderDetails: {
+                ...state.orderDetails,
+                orderId: initialState.orderDetails.orderId,
+                orderInfo: initialState.orderDetails.orderInfo,
+            }
+        }
       case 'GET_PILOT_DETAILS':
       return {
         ...state,
@@ -329,6 +378,28 @@ function homeReducer(state = initialState, action) {
           request: action.payload,
         },
       };
+      case 'GET_PILOT_LOCATION_SUCCESS':
+        return {
+            ...state,
+            pilotDetails: {
+                ...state.pilotDetails,
+                pilotLocation: {
+                    ...state.pilotDetails.pilotLocation,
+                    address: action.payload,
+                }
+            }
+        };
+        case 'GET_PILOT_LOCATION_FAILURE':
+        return {
+            ...state,
+            pilotDetails: {
+                ...state.pilotDetails,
+                pilotLocation: {
+                    ...state.pilotDetails.pilotLocation,
+                    error: action.payload,
+                }
+            }
+        };
     case 'TEAM_SELECT':
       return {
         ...state,
@@ -367,6 +438,21 @@ function homeReducer(state = initialState, action) {
           selectedFranchise: action.payload,
         },
       };
+      case 'RE_ORDER':
+        return {
+            ...state,
+            reOrder: action.payload,
+        };
+        case 'RE_ORDER_CLEAR':
+        return {
+            ...state,
+            reOrder: initialState.reOrder,
+        };
+      case 'ORDER_ACTION':
+        return {
+            ...state,
+            orderOptions: action.payload,
+        };
     default:
       return state;
   }
