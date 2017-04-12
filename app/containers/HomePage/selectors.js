@@ -116,8 +116,8 @@ const orderList = () => createSelector(
               String(order.status).match(regex) ||
               String(order.to_name).match(regex) ||
               String(order.to_phone).match(regex) ||
-              String(order.pilot.user.mobileNumber).match(regex) ||
-              String(order.pilot.user.firstName).match(regex);
+              String(order.pilot && order.pilot.user.mobileNumber).match(regex) ||
+              String(order.pilot && order.pilot.user.firstName).match(regex);
       } else {
           return state;
       }
@@ -168,7 +168,7 @@ const selectedTeam = () => createSelector(
 const selectedPilots = () => createSelector(
   [
     selectedTeam(),
-    pilotList(),
+    pilotListNoFilter(),
   ],
   (teamId, pilots) => _.filter(pilots, (pilot) => {
     let pilotId = ''
@@ -242,6 +242,16 @@ const reSelectedPilots = () => createSelector(
     }),
 );
 
+const reOrderStatus = () => createSelector(
+    homeData(),
+    (state) => state.reOrderStatus,
+);
+
+const reOrderRequest = () => createSelector(
+    homeData(),
+    (state) => state.reOrderReq,
+);
+
 export {
   homeData,
   orderExpand,
@@ -259,6 +269,8 @@ export {
   teamCustomers,
   mergeTeamSales,
   mergeTeamsInfo,
+  pilotListNoFilter,
+  orderListNoFilter,
   pilotList,
   orderList,
   orderId,
@@ -278,4 +290,6 @@ export {
   re_order,
   reSelectedTeam,
   reSelectedPilots,
+  reOrderStatus,
+  reOrderRequest,
 };

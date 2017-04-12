@@ -93,7 +93,7 @@ const realData = {
         type: 'Point',
       },
       pilot: selection.pilots ? selection.pilots : '',
-      team: selection.teamSelect,
+      team: selection.teamSelect ? selection.teamSelect : null,
       createdByUserRole: Object.keys(userRole())[0].toUpperCase(),
       createdBy: Object.values(userRole())[0],
       franchise: franchiseRole(),

@@ -62,6 +62,8 @@ export default class Tabs extends React.Component { //eslint-disable-line
       orderOptions,
       orderAction,
       updateOrder,
+      reOrderStatus,
+      reOrderRequest,
     } = this.props
       const { reAssign, edit } = orderOptions;
     console.log(reAssign);
@@ -150,6 +152,8 @@ export default class Tabs extends React.Component { //eslint-disable-line
                   orderAction={orderAction}
                   reOrderClear={this.props.reOrderClear}
                   updateOrder={updateOrder}
+                  reOrderStatus={reOrderStatus}
+                  reOrderRequest={reOrderRequest}
               /> }
       </div>
     );

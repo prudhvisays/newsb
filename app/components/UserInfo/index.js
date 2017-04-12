@@ -48,7 +48,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
               </div>
             </div>
               <div className="ink-flex push-center">
-                <div className="sub-title" style={{ textAlign: 'center' }}><i className="fa fa-map-marker" /> {pilotLocation ? pilotLocation.address : '...'}</div>
+                <div className="sub-title" style={{ textAlign: 'center' }}><i className="fa fa-map-marker" style={{ fontSize: '0.8rem' }}/> {pilotLocation ? pilotLocation.address : '...'}</div>
               </div>
             <div className="profile-timeline boxShadow" style={{ fontSize: '1rem' }}>
               <div className="ink-flex push-center first-row">

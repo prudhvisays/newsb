@@ -39,6 +39,7 @@ export default class PathHistory extends React.Component { // eslint-disable-lin
     }
     render() {
         const { stateOrderList, statePilotList } = this.props;
+        console.log(statePilotList);
         const myOrderIcon = L.divIcon({
             className: 'my-order-icon'
         })

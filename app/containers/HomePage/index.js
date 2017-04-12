@@ -164,7 +164,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           stateAuto={this.props.auto}
                           setSelection={this.props.setSelection}
                           stateTeamList={this.props.teamsList}
-                          statePilots={this.props.pilotList}
+                          statePilots={this.props.pilotListNoFilter}
                           teamSelect={this.props.teamSelect}
                           stateSelectedPilots={this.props.selectedPilots}
                           stateOptedPilot={this.props.optedPilot}
@@ -182,7 +182,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                 </div>
                 <div className="all-40">
                   <div className="column-group">
-                    { isAdmin() ? (<Pilots
+                    <Pilots
                         divPilot={this.openDivPilot}
                         groupDisplay={this.groupDisplay}
                         stats={stats}
@@ -192,20 +192,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         closeOrderExpand={this.props.closeOrderExpand}
                         closePilotExpand={this.props.closePilotExpand}
                         onSearchPilotAttr={this.props.onSearchPilotAttr}
-                        />) : (<Tasks divTask={this.divTask}
-                                        orderDetails={this.orderDetails}
-                                        orderBlock={this.props.orderexpand}
-                                        getStats={this.props.getStats}
-                                        searchText={this.props.searchText}
-                                        stats={this.props.stats}
-                                        getTeamCustomers={this.props.getTeamCustomers}
-                                        closeOrderDetails={this.closeOrderDetails}
-                                        stateOrders={this.props.orderList}
-                                        getOrders={this.props.getOrders}
-                                        getOrderDetail={this.props.getOrderDetail}
-                                        isAdmin={isAdmin}
-                                        {...this.props}
-                      />)}
+                        />
                     { isAdmin() && (<div className="all-100 marginTop" style={{ height: '67vh' }}>
                       {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>
                         { !groupDisplay ? <GroupBlock
@@ -225,6 +212,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           reOrderClear={this.props.reOrderClear}
                           clearOrderDetails={this.props.clearOrderDetails}
                           updateOrder={this.props.updateOrder}
+                          reOrderStatus={this.props.reOrderStatus}
+                          reOrderRequest={this.props.reOrderRequest}
                           /> }
                     </div>)}
                   </div>
@@ -234,7 +223,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
             { isAdmin() && <div className="all-25" style={{ height: '100vh' }}>
               <Map
                   statePilotList={this.props.pilotList}
-                  stateOrderList={this.props.stateOrderList}
+                  stateOrderList={this.props.orderList}
               />
             </div> }
           </div>
@@ -255,7 +244,9 @@ const mapStateToProps = createStructuredSelector({
     addTask: selectors.addTask(),
     auto: selectors.auto(),
     teamsInfo: selectors.mergeTeamsInfo(),
+    pilotListNoFilter: selectors.pilotListNoFilter(),
     pilotList: selectors.pilotList(),
+    orderListNoFilter: selectors.orderListNoFilter(),
     orderList: selectors.orderList(),
     orderInfo: selectors.orderInfo(),
     orderId: selectors.orderId(),
@@ -271,6 +262,8 @@ const mapStateToProps = createStructuredSelector({
     orderOptions: selectors.orderOptions(),
     re_order: selectors.re_order(),
     reSelectedPilots: selectors.reSelectedPilots(),
+    reOrderStatus: selectors.reOrderStatus(),
+    reOrderRequest: selectors.reOrderRequest(),
     collapsed: collapsed(),
 });
 

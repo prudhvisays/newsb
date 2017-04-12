@@ -221,6 +221,7 @@ const pilotsWatcher = yield fork(fetchPilotsWatch);
 yield take('LOCATION_CHANGE');
 yield cancel(pilotsWatcher);
 }
+// END of FETCH PILOTS
 
 export function* fetchOrders(date, franchiseId) {
   try {
@@ -359,13 +360,18 @@ export function* updateOrderDetails(id, data, type) {
     try {
         const response = yield call(orderApi.updateOrderDetails, id, data, type);
         yield put(actions.updateOrderSuccess(response));
+        yield put(actions.updateOrderStatus({ statusText: 'Successful', statusColor: 'rgb(81, 212, 255)' }));
+        if(type === 'PUT') {
+          yield put(actions.getOrderDetail(id));
+        }
+        return response;
     } catch (error) {
         if (error.response) {
             yield put(actions.updateOrderFailure(error.message));
             yield put(actions.updateOrderStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
         }
     } finally {
-        yield call(delay, 4000);
+        yield call(delay, 3000);
         yield put(actions.updateOrderReq(false));
     }
 }
@@ -374,10 +380,18 @@ export function* updateOrderDetailsFlow() {
     const id = yield select(orderId());
     const updateType = yield select(orderOptions());
     const data = yield select(re_order());
+    let res;
     if(updateType.reAssign) {
-        yield call(updateOrderDetails, id, data, type='PUT');
+        res = yield call(updateOrderDetails, id, data, type='PUT');
     } else if(updateType.delete){
-        yield call(updateOrderDetails, id, data, type='DELETE');
+        res = yield call(updateOrderDetails, id, data, type='DELETE');
+    }
+    if (res) {
+        yield put(actions.reOrderClear());
+        yield put(actions.orderAction({reAssign: false, edit: false, delete: false,}));
+        yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+    } else {
+        yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
     }
 }
 export function* updateOrderDetailsWatch() {

@@ -5,9 +5,6 @@ import FranchiseForm from '../../components/FranchiseForm';
 import * as actions from './actions';
 
 class Franchise extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    this.props.getPilots();
-  }
   render() {
     return (
       <section style={{ background: '#eee', color: '#fff' }}>

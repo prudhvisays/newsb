@@ -4,8 +4,6 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 const initialState = {
   orderexpand: false,
-  closeOrderDrop: false,
-  closePilotDrop: false,
   pickupcord: {},
   deliverycord: {},
   orderDisplay: '',
@@ -124,25 +122,22 @@ const initialState = {
     },
     pilot: '',
     team: '',
-  }
+  },
+  reOrderStatus: {
+        statusText: 'Sending',
+        statusColor: '#6bc9c5',
+    },
+  reOrderReq: false,
 };
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case 'ORDER_EXPAND':
       return { ...state,
-        orderexpand: action.value };
+        orderexpand: action.value, };
     case 'ORDER_CLOSE':
       return { ...state,
-        orderexpand: action.value };
-      case 'CLOSE_ORDER_DROP':
-        return { ...state,
-          closeOrderDrop: action.payload,
-        }
-      case  'CLOSE_PILOT_DROP':
-        return { ...state,
-          closePilotDrop: action.payload,
-        }
+        orderexpand: action.value, };
     case 'PICKUP_CORD':
       return { ...state,
         pickupcord: action.value };
@@ -421,7 +416,7 @@ function homeReducer(state = initialState, action) {
             pilots: action.payload,
           },
         },
-      }
+      };
     case 'GET_FRANCHISE_LIST_SUCCESS':
       return {
         ...state,
@@ -438,20 +433,30 @@ function homeReducer(state = initialState, action) {
           selectedFranchise: action.payload,
         },
       };
-      case 'RE_ORDER':
+    case 'RE_ORDER':
         return {
             ...state,
             reOrder: action.payload,
         };
-        case 'RE_ORDER_CLEAR':
+    case 'RE_ORDER_CLEAR':
         return {
             ...state,
             reOrder: initialState.reOrder,
         };
-      case 'ORDER_ACTION':
+    case 'ORDER_ACTION':
         return {
             ...state,
             orderOptions: action.payload,
+        };
+      case 'UPDATE_ORDER_STATUS':
+      return {
+          ...state,
+          reOrderStatus: action.payload,
+      };
+      case 'UPDATE_ORDER_REQUEST':
+        return {
+            ...state,
+            reOrderReq: action.payload,
         };
     default:
       return state;
