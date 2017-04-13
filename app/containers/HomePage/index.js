@@ -224,6 +224,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
               <Map
                   statePilotList={this.props.pilotList}
                   stateOrderList={this.props.orderList}
+                  pilotId={this.props.pilotId}
               />
             </div> }
           </div>
@@ -254,6 +255,7 @@ const mapStateToProps = createStructuredSelector({
     teamsList: selectors.getTeams(),
     selectedPilots: selectors.selectedPilots(),
     optedPilot: selectors.optedPilot(),
+    pilotId: selectors.pilotId(),
     pilotInfo: selectors.pilotInfo(),
     pilotLocation: selectors.pilotLocation(),
     pilotDetailStatus: selectors.pilotDetailStatus(),

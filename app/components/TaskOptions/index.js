@@ -61,7 +61,7 @@ class TaskOptions extends React.Component {
                                 optionSelected={this.state.optionSelected}
                                 onSelect={this.onSelect}
                                 data={this.state.data}
-                                icon={'fa-ellipsis-v'}
+                                icon={'fa-ellipsis-h'}
                                 orderAction={orderAction}
                                 orderOptions={orderOptions}
                             />
