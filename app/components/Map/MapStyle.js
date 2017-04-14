@@ -34,6 +34,9 @@ const MapStyle = styled(Map)`
   border-radius:50%;
   line-height:30px;
   }
+  .leaflet-popup-content-wrapper{
+    border-radius: 0 !important;
+  }
 `;
 
 export default MapStyle;
