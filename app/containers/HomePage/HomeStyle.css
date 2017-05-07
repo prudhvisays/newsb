@@ -230,10 +230,6 @@ color: #9099b7 !important;
   border-right: 1px solid #6bc9c5;
 }
 
-.fa.fa-battery-three-quarters{
-  color: #6bc9c5;
-}
-
 .sub-title{
   font-size: 0.65rem;
   color: #6bc9c5;
@@ -384,7 +380,7 @@ hr {
 
 .top-group-list {
   padding: 0.8em;
-  height: 54vh;
+  height: 52vh;
   overflow-y: scroll;
 }
 

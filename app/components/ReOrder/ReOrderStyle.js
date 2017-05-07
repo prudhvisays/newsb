@@ -47,6 +47,9 @@ const ReOrderStyle = styled.div`
         border-radius: 2px;
         }
     }
+   .rc-select-dropdown-menu.rc-select-dropdown-menu-vertical.rc-select-dropdown-menu-root{
+    height: 180px;
+    }
 `;
 
 export default ReOrderStyle;

@@ -51,6 +51,16 @@ const PilotApi = {
             responseType: 'json',
         }).then((response) => response.data);
     },
+    getReport(id, date, type) {
+      const payload = date;
+      const GET_REPORT_API = `${API_URL}/${type}/report/${id}`;
+      return axios({
+        method: 'POST',
+        url: GET_REPORT_API,
+        data: payload,
+        responseType: 'json',
+      }).then((response) => response.data);
+    }
 };
 
 export default PilotApi;

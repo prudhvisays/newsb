@@ -42,7 +42,7 @@ const realData = {
     }).then((response) => response.data);
   },
   getTeamSalesApi(salesDate, franchiseId) {
-    const GET_TEAM_SALES_API = `${API_URL}/teams/sales`;
+    const GET_TEAM_SALES_API = `${API_URL}/customers/sales`;
     return axios({
       method: 'POST',
       url: GET_TEAM_SALES_API,

@@ -47,16 +47,15 @@ export default class PathHistory extends React.Component { // eslint-disable-lin
     }
     render() {
         const { stateOrderList, statePilotList, pilotId } = this.props;
-        console.log(statePilotList);
         const myOrderIcon = L.divIcon({
             className: 'my-order-icon'
-        })
+        });
         const myOfflineIcon = L.divIcon({
             className: 'my-offline-icon'
-        })
+        });
         const myAvailableIcon = L.divIcon({
             className: 'my-available-icon'
-        })
+        });
         const orderMarkers = stateOrderList ? stateOrderList.map((list) => {
                 return ( list.status !== 'COMPLETED' && <Marker icon={myOrderIcon} key={list._id} position={list.pilot_movement.coordinates[0] ? list.pilot_movement.coordinates.slice(-1)[0].reverse() : [0,0]}>
                   <Popup>

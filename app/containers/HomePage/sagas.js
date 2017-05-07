@@ -6,7 +6,7 @@ import pilotApi from '../../Api/Pilot';
 import orderApi from '../../Api/Order';
 import userApi from '../../Api/userApi';
 import * as actions from './actions';
-import { orderId, pilotId, franchiseList, re_order, orderOptions, pilotInfo } from './selectors';
+import { orderId, pilotId, franchiseList, re_order, orderOptions, pilotInfo, dateRangePilot, dateRangeMerchant, merchantID} from './selectors';
 
 export function* fetchOrderStats() {
   const statsDate = moment().format('YYYYMMDD');
@@ -36,6 +36,7 @@ export function* fetchOrderStatsRoot() {
   yield take('LOCATION_CHANGE');
   yield cancel(main);
 }
+
 // TEAMS
 export function* fetchTeams(franchiseId) {
   try {
@@ -48,9 +49,6 @@ export function* fetchTeams(franchiseId) {
   }
 }
 
-export function* loadTeamSales(teamsPanel) {
-
-}
 export function* fetchTeamsFlow() {
   while(true) {
     yield take('GET_TEAMS');
@@ -59,61 +57,29 @@ export function* fetchTeamsFlow() {
   }
 }
 export const getState = () => (state) => state.get('home');
-export const getDate = () => {
+export const getDate = (value) => {
   const nowDate = moment().format('YYYYMMDD');
-  return {
-    fromDate: nowDate,
-    toDate: nowDate,
-  };
+  if(value.length > 0) {
+    return {
+      fromDate: value[0].format('YYYYMMDD'),
+      toDate: value[1].format('YYYYMMDD'),
+    }
+  } else {
+    return {
+      fromDate: nowDate,
+      toDate: nowDate,
+    };
+  }
 };
-
-export function* loadTeamCustomersFlow() {
-  const salesDate = getDate();
-  const { selectedFranchise } = yield select(franchiseList());
-  try {
-    yield take('GET_TEAMS_SUCCESS');
-    const teamCustomers = yield call(realData.getTeamCustomersApi, salesDate, selectedFranchise);
-    yield put(actions.getTeamCustomersSuccess({ response: teamCustomers, date: salesDate }));
-  } catch (error) {
-    if (error.response) {
-      yield put(actions.getTeamCustomersFailure(error.response.data));
-    }
-  }
-}
-
-export function* loadTeamSalesFlow() {
-  try {
-    yield take('GET_TEAM_CUSTOMERS_SUCCESS');
-    const state = yield select(getState());
-    const { date } = state.teamsPanel.teamCustomers
-    const { selectedFranchise } = yield select(franchiseList());
-    const teamSales = yield call(realData.getTeamSalesApi, date, selectedFranchise);
-    yield put(actions.getTeamSalesSuccess({ response: teamSales, date}));
-  } catch (error) {
-    if (error.response) {
-      yield put(actions.getTeamSalesFailure(error.response.data));
-    }
-  }
-}
 
 export function* fetchTeamsWatch() {
   yield fork(fetchTeamsFlow);
 }
-export function* loadTeamSalesWatch() {
-  yield fork(takeLatest, 'GET_TEAMS', loadTeamSalesFlow);
-}
-export function* loadTeamCustomersWatch() {
-  yield fork(takeLatest, 'GET_TEAMS', loadTeamCustomersFlow);
-}
 
 export function* fetchTeamsRoot() {
   const Teamwatcher = yield fork(fetchTeamsWatch);
-  const salesWatcher = yield fork(loadTeamSalesWatch);
-  const teamCustomers = yield fork(loadTeamCustomersWatch);
   yield take('LOCATION_CHANGE');
   yield cancel(Teamwatcher);
-  yield cancel(salesWatcher);
-  yield cancel(teamCustomers);
 }
 
 // TEAM CUSTOMERS AND SALES fromDate toDate
@@ -130,24 +96,21 @@ export function* fetchTeamCustomers(Date, franchiseId) {
 }
 export function* fetchTeamCustomersFlow() {
   while(true) {
-    const request = yield take('GET_TEAM_CUSTOMERS');
-    const salesDate = request.payload;
+    const request = yield take('GET_FRANCHISE_CUSTOMERS');
+    const salesDate = yield select(dateRangeMerchant());
+    const activeDate = salesDate && getDate(salesDate);
     const { selectedFranchise } = yield select(franchiseList());
-    yield call(fetchTeamCustomers, salesDate, selectedFranchise);
+    yield call(fetchTeamCustomers, activeDate, selectedFranchise);
   }
 }
 export function* fetchTeamCustomersWatch() {
   yield fork(fetchTeamCustomersFlow);
 }
-export function* fetchTeamSalesWatch() {
-  yield fork(takeLatest, 'GET_TEAM_CUSTOMERS', loadTeamSalesFlow);
-}
+
 export function* fetchTeamCustomersRoot() {
   const customersRoot = yield fork(fetchTeamCustomersWatch);
-  const salesWatch = yield fork(fetchTeamSalesWatch);
   yield take('LOCATION_CHANGE');
   yield cancel(customersRoot);
-  yield cancel(salesWatch);
 }
 // POST ADD TASK
 export function* postAddTask(taskData) {
@@ -402,6 +365,95 @@ export function* updateOrderDetailsRoot(){
     yield take('LOCATION_CHANGE');
     yield cancel(updateWatcher);
 }
+
+// GET PILOT and MERCHANT REPORTS
+
+export function* fetchPilotReports(id, data, type) {
+  yield put(actions.updateOrderReq(true));
+  try {
+    const response = yield call(pilotApi.getReport, id, data, type);
+    yield put(actions.updateOrderSuccess(response));
+    yield put(actions.updateOrderStatus({ statusText: 'Successful', statusColor: 'rgb(81, 212, 255)' }));
+    return response;
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.updateOrderFailure(error.message));
+      yield put(actions.updateOrderStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
+    }
+  } finally {
+    yield call(delay, 3000);
+    yield put(actions.updateOrderReq(false));
+  }
+}
+export function* fetchPilotReportsFlow() {
+  const value = yield select(dateRangePilot());
+  const formatValue='YYYYMMDD';
+  const formatDate = value && getDate(value)
+  const id = yield select(pilotId());
+  const res = yield call(fetchPilotReports, id, formatDate, 'pilots');
+  // if (res) {
+  //   yield put(actions.reOrderClear());
+  //   yield put(actions.orderAction({reAssign: false, edit: false, delete: false,}));
+  //   yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+  // } else {
+  //   yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+  // }
+}
+export function* fetchPilotReportsWatch() {
+  yield fork(takeLatest,'GET_PILOT_REPORTS', fetchPilotReportsFlow);
+}
+export function* fetchPilotReportsRoot(){
+  const reportWatcher = yield fork(fetchPilotReportsWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(reportWatcher);
+}
+
+// END of Reports
+
+// GET PILOT and MERCHANT REPORTS
+
+export function* fetchMerchantReports(id, data, type) {
+  yield put(actions.updateOrderReq(true));
+  try {
+    const response = yield call(pilotApi.getReport, id, data, type);
+    yield put(actions.updateOrderSuccess(response));
+    yield put(actions.updateOrderStatus({ statusText: 'Successful', statusColor: 'rgb(81, 212, 255)' }));
+    return response;
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.updateOrderFailure(error.message));
+      yield put(actions.updateOrderStatus({ statusText: 'Unsuccessful, Please try Again', statusColor: '#f44336' }));
+    }
+  } finally {
+    yield call(delay, 3000);
+    yield put(actions.updateOrderReq(false));
+  }
+}
+export function* fetchMerchantReportsFlow() {
+  const value = yield select(dateRangeMerchant());
+  const merId = yield select(merchantID());
+  const formatValue='YYYYMMDD';
+  const formatDate = value && getDate(value);
+  const res = yield call(fetchPilotReports, merId, formatDate, 'customers');
+  // if (res) {
+  //   yield put(actions.reOrderClear());
+  //   yield put(actions.orderAction({reAssign: false, edit: false, delete: false,}));
+  //   yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+  // } else {
+  //   yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+  // }
+}
+export function* fetchMerchantReportsWatch() {
+  yield fork(takeLatest,'GET_MERCHANT_REPORTS', fetchMerchantReportsFlow);
+}
+export function* fetchMerchantReportsRoot(){
+  const reportWatcher = yield fork(fetchMerchantReportsWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(reportWatcher);
+}
+
+// END of Reports
+
 export default [
   fetchOrderStatsWatch,
   fetchTeamsRoot,
@@ -413,4 +465,6 @@ export default [
   fetchPilotDetailsRoot,
   fetchFranchiseListRoot,
   updateOrderDetailsRoot,
+  fetchPilotReportsRoot,
+  fetchMerchantReportsRoot
 ];

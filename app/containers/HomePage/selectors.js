@@ -45,31 +45,31 @@ const getTeams = () => createSelector(
   teamsPanel(),
   (panel) => panel.teams,
 );
-const teamSales = () => createSelector(
-  teamsPanel(),
-  (panel) => panel.teamSales.sales,
-);
-const teamCustomers = () => createSelector(
+// const teamSales = () => createSelector(
+//   teamsPanel(),
+//   (panel) => panel.teamSales.sales,
+// );
+const franchiseMerchants = () => createSelector(
   teamsPanel(),
   (panel) => panel.teamCustomers.customers,
 );
 
-const mergeTeamSales = () => createSelector(
-  [getTeams(),
-    teamSales(),
-  ],
-  (teams, sales) => _.map(teams,(team) => {
-    return _.merge(team, _.find(sales, { _id: team._id}))
-  })
-);
-
-const mergeTeamsInfo = () => createSelector(
-    [mergeTeamSales(),
-      teamCustomers()],
-      (sales, customers) => _.map(sales, (sale) => {
-        return _.merge(sale, _.find(customers, { _id: sale['_id'] }))
-      })
-    );
+// const mergeTeamSales = () => createSelector(
+//   [getTeams(),
+//     teamSales(),
+//   ],
+//   (teams, sales) => _.map(teams,(team) => {
+//     return _.merge(team, _.find(sales, { _id: team._id}))
+//   })
+// );
+//
+// const mergeTeamsInfo = () => createSelector(
+//     [mergeTeamSales(),
+//       teamCustomers()],
+//       (sales, customers) => _.map(sales, (sale) => {
+//         return _.merge(sale, _.find(customers, { _id: sale['_id'] }))
+//       })
+//     );
 
 const searchPilotAttr = () => createSelector(
     homeData(),
@@ -252,6 +252,26 @@ const reOrderRequest = () => createSelector(
     (state) => state.reOrderReq,
 );
 
+const  detailsColToggle = () => createSelector(
+  homeData(),
+  (state) => state.userActions.getDetailsColumn,
+);
+
+const dateRangePilot = () => createSelector(
+  pilotDetails(),
+  (state) => state.dateRange
+);
+
+const dateRangeMerchant = () => createSelector(
+  teamsPanel(),
+  (state) => state.dateRange
+)
+
+const merchantID = () => createSelector(
+  teamsPanel(),
+  (state) => state.merchantId
+)
+
 export {
   homeData,
   orderExpand,
@@ -265,10 +285,7 @@ export {
   auto,
   teamsPanel,
   getTeams,
-  teamSales,
-  teamCustomers,
-  mergeTeamSales,
-  mergeTeamsInfo,
+  franchiseMerchants,
   pilotListNoFilter,
   orderListNoFilter,
   pilotList,
@@ -292,4 +309,8 @@ export {
   reSelectedPilots,
   reOrderStatus,
   reOrderRequest,
+  detailsColToggle,
+  dateRangePilot,
+  dateRangeMerchant,
+  merchantID,
 };

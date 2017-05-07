@@ -124,9 +124,10 @@ export function getTeamSalesFailure(data) {
     payload: data,
   };
 }
+
 export function getTeamCustomers(data) {
   return {
-    type: 'GET_TEAM_CUSTOMERS',
+    type: 'GET_FRANCHISE_CUSTOMERS',
     payload: data,
   };
 }
@@ -433,4 +434,55 @@ export function updateOrderFailure(data) {
       type: 'UPDATE_ORDER_FAILURE',
       payload: data,
     }
+}
+
+// USER ACTIONS
+export function getDetailsColToggle() {
+  return {
+    type: 'GET_DETAILS_COL_TOGGLE',
+  }
+}
+
+// GET PILOT REPORTS
+
+export function getPilotReports() {
+  return {
+    type: 'GET_PILOT_REPORTS',
+  }
+}
+
+export function pilotDateRange(data) {
+  return {
+    type: 'PILOT_DATE_RANGE',
+    payload: data
+  }
+}
+
+export function getPilotReportSuccess(data) {
+  return {
+    type: 'GET_PILOT_REPORTS_SUCCESS',
+    payload: data
+  }
+}
+
+// GET MERCHANT REPORTS
+export function getMerchantReports(data) {
+  return {
+    type: 'GET_MERCHANT_REPORTS',
+    payload: data
+  }
+}
+
+export function merchantDateRange(data) {
+  return {
+    type: 'MERCHANT_DATE_RANGE',
+    payload: data
+  }
+}
+
+export function getMerchantReportSuccess(data) {
+  return {
+    type: 'GET_MERCHANT_REPORTS_SUCCESS',
+    payload: data
+  }
 }

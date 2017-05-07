@@ -20,7 +20,11 @@ const AccordStyle = styled.li`
     margin: 0;
     padding: 0;
   }
-
+  button {
+    background: #6bc9c5;
+    color: #fff;
+    border-radius: 4px;
+  }
 `;
 
 export default AccordStyle;

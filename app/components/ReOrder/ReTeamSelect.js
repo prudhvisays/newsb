@@ -25,7 +25,7 @@ export default class ReTeamSelect extends React.Component { //eslint-disable-lin
     render() {
         const { stateData } = this.props;
         const select = this.props.stateTeamList && this.props.stateTeamList.map((team) => (
-                <Option key={team._id}  text={team.name}>{team.name}</Option>
+                <Option key={team._id}  text={team.name.toLowerCase()}>{team.name}</Option>
             ));
         return (
             <Select

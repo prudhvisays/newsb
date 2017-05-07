@@ -39,19 +39,22 @@ constructor(props) {
     this.props.openAccordion(id);
   }
 
+
 	render () {
+  const { getMerchantReports } = this.props;
     const sections = this.props.data.map((i) => (
       <div key={i._id}>
         <div
           className="title ink-flex"
           onClick={this.click.bind(null, i._id)}
         >
-         <span className="all-70 title-text">
-           {i.name}
+         <span className="all-60 title-text">
+           {i.name ? i.name : i._id}
          </span>
-         <span className="all-30">
+         <span className="all-40">
            <div className="ink-flex push-right">
-             <span className="sub-title">Sales {i.sales}</span>
+             <span className="sub-title">Rs{i.sales && i.sales.toFixed(2)} |&nbsp;</span>
+             <span className="sub-title">{i.distance/1000}Km</span>
            </div>
          </span>
        </div>
@@ -62,7 +65,9 @@ constructor(props) {
           <div className={i.open
             ? "content-text content-text-open"
             : "content-text"}
-          > {'There are no merchants present for this team'}
+          > {<div className="ink-flex push-right">
+            <button onClick={() => getMerchantReports(i._id)}>Download Report</button>
+          </div>}
           </div>
         </div>
       </div>

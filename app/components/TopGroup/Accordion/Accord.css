@@ -3,7 +3,6 @@
    width: 100%;
    background-color: transparent;
    margin: auto;
-   margin-top: 1em;
 }
 
 .title {
@@ -80,4 +79,11 @@
 .arrow-wrapper {
   position: absolute;
   margin-left: 375px;
+}
+
+.accordion button {
+  background: #6bc9c5;
+  color: #fff;
+  border-radius: 2px;
+  outline: none;
 }

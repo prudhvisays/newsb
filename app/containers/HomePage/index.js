@@ -74,6 +74,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
     if(isAdmin()) {
       this.props.getStats();
       this.props.getTeams();
+      this.props.getTeamCustomers();
       this.props.getPilot();
       this.props.getOrder();
     } else {
@@ -114,7 +115,6 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     const { compressed, pilotState, orderDetails, groupDisplay, addTask } = this.state;
     const { stats } = this.props;
-    console.log(this.props.orderAssignedStats);
     return (
       <section style={{ background: '#eee', color: '#333' }}>
         <div className="ink-grid" style={{ padding: 0, margin: '0 0 0 3.5em' }}>
@@ -172,11 +172,17 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                           isAdmin={isAdmin}
                           />) : (<div style={{ background: '#fff', height: '67vh' }}></div>))}
                       </div>
-                    { isAdmin() ? (compressed ? (<div className="all-65 marginTop">{ pilotState ? <UserInfo
+                    { isAdmin() ? (compressed ? (<div className="all-65 marginTop">
+                          { pilotState ? <UserInfo
                         statePilotInfo={this.props.pilotInfo}
                         pilotLocation={this.props.pilotLocation}
                         statePilotStatus={this.props.pilotDetailStatus}
                         closeDivPilot={this.closeDivPilot}
+                        getDetailsColToggle={this.props.getDetailsColToggle}
+                        detailsColToggle={this.props.detailsColToggle}
+                        getPilotReports={this.props.getPilotReports}
+                        pilotDateRange={this.props.pilotDateRange}
+                        dateRangePilot={this.props.dateRangePilot}
                       /> : null }</div>) : null ) : null}
                   </div>
                 </div>
@@ -196,8 +202,12 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                     { isAdmin() && (<div className="all-100 marginTop" style={{ height: '67vh' }}>
                       {!orderDetails ? <div className="boxShadow block-background" style={{ height: '67vh' }}>
                         { !groupDisplay ? <GroupBlock
-                          stateTeamsInfo={this.props.teamsInfo}
+                          franchiseMerchants={this.props.franchiseMerchants}
                           openAccordion={this.props.openAccordion}
+                          merchantDateRange={this.props.merchantDateRange}
+                          dateRangeMerchant={this.props.dateRangeMerchant}
+                          getTeamCustomers={this.props.getTeamCustomers}
+                          getMerchantReports={this.props.getMerchantReports}
                         /> : null }
                       </div> : <Tabs
                           closeOrderDetails={this.closeOrderDetails}
@@ -244,7 +254,7 @@ const mapStateToProps = createStructuredSelector({
     searchOrderAttr: selectors.searchOrderAttr(),
     addTask: selectors.addTask(),
     auto: selectors.auto(),
-    teamsInfo: selectors.mergeTeamsInfo(),
+    franchiseMerchants: selectors.franchiseMerchants(),
     pilotListNoFilter: selectors.pilotListNoFilter(),
     pilotList: selectors.pilotList(),
     orderListNoFilter: selectors.orderListNoFilter(),
@@ -266,6 +276,9 @@ const mapStateToProps = createStructuredSelector({
     reSelectedPilots: selectors.reSelectedPilots(),
     reOrderStatus: selectors.reOrderStatus(),
     reOrderRequest: selectors.reOrderRequest(),
+    detailsColToggle: selectors.detailsColToggle(),
+    dateRangePilot: selectors.dateRangePilot(),
+    dateRangeMerchant: selectors.dateRangeMerchant(),
     collapsed: collapsed(),
 });
 
@@ -303,6 +316,11 @@ export function mapDispatchToProps(dispatch) {
     reOrder: (data) => { dispatch(actions.reOrder(data));},
     reOrderClear: () => { dispatch(actions.reOrderClear());},
     updateOrder: () => { dispatch(actions.updateOrder()); },
+    getDetailsColToggle: () => { dispatch(actions.getDetailsColToggle()); },
+    getPilotReports: () => { dispatch(actions.getPilotReports()); },
+    pilotDateRange: (data) => { dispatch(actions.pilotDateRange(data)); },
+    merchantDateRange: (data) => { dispatch(actions.merchantDateRange(data)); },
+    getMerchantReports: (data) => { dispatch(actions.getMerchantReports(data)); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

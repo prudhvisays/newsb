@@ -18,15 +18,17 @@ const initialState = {
   teamsPanel: {
     teams: [],
     teamSales: {
-      sales: {},
+      sales: [],
       date: '',
     },
     teamCustomers: {
-      customers: {},
+      customers: [],
       date: '',
     },
     error: '',
     request: false,
+    dateRange: [],
+    merchantId: '',
   },
   addTask: {
     pickup: {
@@ -85,6 +87,7 @@ const initialState = {
     },
     error: '',
     request: false,
+    dateRange: [],
   },
   franchiseList: {
     franchises: [],
@@ -128,6 +131,12 @@ const initialState = {
         statusColor: '#6bc9c5',
     },
   reOrderReq: false,
+  userActions : {
+    active: '',
+    getDetailsColumn: false,
+    fromDate: '',
+    toDate: '',
+  },
 };
 
 function homeReducer(state = initialState, action) {
@@ -227,6 +236,22 @@ function homeReducer(state = initialState, action) {
         teamsPanel: {
           ...state.teamsPanel,
           error: action.payload,
+        },
+      };
+    case 'MERCHANT_DATE_RANGE':
+      return {
+        ...state,
+        teamsPanel: {
+          ...state.teamsPanel,
+          dateRange: action.payload,
+        },
+      };
+    case 'GET_MERCHANT_REPORTS':
+      return {
+        ...state,
+        teamsPanel: {
+          ...state.teamsPanel,
+          merchantId: action.payload,
         },
       };
     case 'PICKUP_CHANGE':
@@ -395,6 +420,14 @@ function homeReducer(state = initialState, action) {
                 }
             }
         };
+    case 'PILOT_DATE_RANGE':
+      return {
+        ...state,
+        pilotDetails: {
+          ...state.pilotDetails,
+          dateRange: action.payload
+        }
+      }
     case 'TEAM_SELECT':
       return {
         ...state,
@@ -458,18 +491,26 @@ function homeReducer(state = initialState, action) {
             ...state,
             reOrderReq: action.payload,
         };
+    case 'GET_DETAILS_COL_TOGGLE':
+      return {
+        ...state,
+        userActions: {
+          ...state.userActions,
+          getDetailsColumn: !state.userActions.getDetailsColumn,
+        },
+      };
     default:
       return state;
   }
 }
 
 function accordionOpen(state, action) {
-  const index = _.findIndex(state.teamsPanel.teams, {
+  const index = _.findIndex(state.teamsPanel.teamCustomers.customers, {
     _id: action.payload
   });
-  const newState = state.teamsPanel.teams.slice();
-  if (state.teamsPanel.teams[index]['open']) {
-    newState[index]['open'] = !state.teamsPanel.teams[index]['open'];
+  const newState = state.teamsPanel.teamCustomers.customers.slice();
+  if (state.teamsPanel.teamCustomers.customers[index]['open']) {
+    newState[index]['open'] = !state.teamsPanel.teamCustomers.customers[index]['open'];
   } else {
     newState.forEach((team) => team.open = false);
     newState[index]['open'] = true;
@@ -478,8 +519,11 @@ function accordionOpen(state, action) {
     ...state,
     teamsPanel: {
       ...state.teamsPanel,
-      teams: newState,
-    },
-  };
+      teamCustomers: {
+        ...state,
+        customers: newState,
+        }
+      },
+    }
 }
 export default homeReducer;
