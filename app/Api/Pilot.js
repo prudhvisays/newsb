@@ -62,8 +62,7 @@ const PilotApi = {
         crossDomain: true,
         responseType: 'json',
       }).then((response) => {
-        // window.open(`https://season-boy-api.herokuapp.com/${response.data.file}`)
-        window.location.href = `https://season-boy-api.herokuapp.com/${response.data.file}`
+        window.open(`https://season-boy-api.herokuapp.com/${response.data.file}`)
       });
     }
 };
