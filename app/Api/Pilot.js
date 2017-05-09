@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL, userRole,userRoleType, session, franchiseRole, GEO_CODE_URL, GMAP_KEY } from './ApiConstants';
+import fileSaver from 'file-saver';
 
 const localStorage = global.window.localStorage;
 
@@ -58,8 +59,12 @@ const PilotApi = {
         method: 'POST',
         url: GET_REPORT_API,
         data: payload,
+        crossDomain: true,
         responseType: 'json',
-      }).then((response) => response.data);
+      }).then((response) => {
+        // window.open(`https://season-boy-api.herokuapp.com/${response.data.file}`)
+        window.location.href = `https://season-boy-api.herokuapp.com/${response.data.file}`
+      });
     }
 };
 

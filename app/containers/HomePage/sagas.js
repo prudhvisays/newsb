@@ -17,7 +17,6 @@ export function* fetchOrderStats() {
       call(realData.getOrderStatsApi, statsDate, selectedFranchise),
       call(realData.getPilotStatsApi, statsDate, selectedFranchise),
     ];
-    console.log(orderData);
     yield put(actions.getOrderStatsSuccess(orderData));
     yield put(actions.getPilotStatsSuccess(pilotData));
   } catch (err) {
@@ -84,7 +83,6 @@ export function* fetchTeamsRoot() {
 
 // TEAM CUSTOMERS AND SALES fromDate toDate
 export function* fetchTeamCustomers(Date, franchiseId) {
-  console.info(Date);
   try {
     const customers = yield call(realData.getTeamCustomersApi, Date, franchiseId);
     yield put(actions.getTeamCustomersSuccess({ response: customers, date: Date }));
@@ -156,7 +154,6 @@ export function* postAddTaskRoot() {
 
 // GET PILOTS
 export function* fetchPilots(team, franchiseId) {
-  console.log("fecth pilots" + franchiseId);
   try {
     const response = yield call(pilotApi.getPilots, team, franchiseId);
     yield put(actions.getPilotSuccess(response));
@@ -270,7 +267,6 @@ export function* fetchPilotLocation(coordinates) {
 }
 export function* fetchPilotLocationFlow() {
     const pilotDetails = yield select(pilotInfo());
-    console.log(pilotDetails);
     const { coordinates } = pilotDetails.pilot ? pilotDetails.pilot.location ? pilotDetails.pilot.location : '' : '';
     yield call(fetchPilotLocation, coordinates);
 }

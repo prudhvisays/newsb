@@ -4,6 +4,7 @@ import { LOCATION_CHANGE, push } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import auth from '../../Api/Auth';
 import * as actions from '../HomePage/actions';
+import { userRoleType, session } from '../../Api/ApiConstants';
 
 export function* authorize({ username, password, userRole }) {
   yield put({ type: 'SENDING_REQUEST', sending: true });
@@ -48,7 +49,11 @@ export function* loginFlow() {
       yield put({ type: 'SET_AUTH', newAuthState: true });
       yield put({ type: 'CHANGE_FORM', newFormState: { username: '', password: '' } });
       const OneSignal = window.OneSignal || [];
-      OneSignal.push(['sendTags', { manager: 'ADMIN' }]);
+      if(userRoleType() === 'isFranchise') {
+        OneSignal.push(['sendTags', { manager: session().manager.franchise._id }]);
+      } else {
+        OneSignal.push(['sendTags', { manager: 'ADMIN' }]);
+      }
       yield put(push('/'));
     } else if (winner.logout) {
       yield put({ type: 'SET_AUTH', newAuthState: false });

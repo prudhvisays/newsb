@@ -53,7 +53,7 @@ constructor(props) {
          </span>
          <span className="all-40">
            <div className="ink-flex push-right">
-             <span className="sub-title">Rs{i.sales && i.sales.toFixed(2)} |&nbsp;</span>
+             <span className="sub-title"><span className="fa fa-inr"></span>&nbsp;{i.sales && i.sales.toFixed(2)} |&nbsp;</span>
              <span className="sub-title">{i.distance/1000}Km</span>
            </div>
          </span>
