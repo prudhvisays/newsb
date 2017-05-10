@@ -95,7 +95,7 @@ export default class PathHistory extends React.Component { // eslint-disable-lin
        return (
             <MapStyle
                 animate={true}
-                maxBounds={userRoleType() === 'isFranchise' ? this.getBounds() : [[85, -180],[-85, 180]]}
+                bounds={userRoleType() === 'isFranchise' ? this.getBounds() : [[85, -180],[-85, 180]]}
                 center={[this.state.lat, this.state.lng]}
                 zoom={this.state.zoom}
                 zoomControl={false}
