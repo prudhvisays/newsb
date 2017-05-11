@@ -235,6 +235,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                   statePilotList={this.props.pilotList}
                   stateOrderList={this.props.orderList}
                   pilotId={this.props.pilotId}
+                  pilotsBounds={this.props.pilotsBounds}
               />
             </div> }
           </div>
@@ -279,6 +280,7 @@ const mapStateToProps = createStructuredSelector({
     detailsColToggle: selectors.detailsColToggle(),
     dateRangePilot: selectors.dateRangePilot(),
     dateRangeMerchant: selectors.dateRangeMerchant(),
+    pilotsBounds: selectors.pilotsBounds(),
     collapsed: collapsed(),
 });
 

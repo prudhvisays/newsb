@@ -96,6 +96,12 @@ const pilotList = () => createSelector(
   }),
 );
 
+const pilotsBounds = () => createSelector(
+  pilotList(),
+  (state) => state.map((pilot) => pilot.location.coordinates.slice().reverse()
+ )
+)
+
 const searchOrderAttr = () => createSelector(
     homeData(),
     (homeState) => homeState.searchOrderAttr,
@@ -313,4 +319,5 @@ export {
   dateRangePilot,
   dateRangeMerchant,
   merchantID,
+  pilotsBounds,
 };
