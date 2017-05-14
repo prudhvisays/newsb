@@ -49,6 +49,7 @@ export const initialState = {
     error: '',
     res: '',
   },
+  timeZones: [],
 };
 
 function userReducer(state = initialState, action) {
@@ -127,7 +128,15 @@ function userReducer(state = initialState, action) {
       createUserStatus: action.payload,
     }
     case 'CLEAR_USER_FORM':
-    return initialState;
+    return {
+      ...state,
+      userInfo: initialState.userInfo
+    };
+    case 'GET_TIME_ZONES':
+      return {
+        ...state,
+        timeZones: action.payload
+      }
     default:
       return state;
   }

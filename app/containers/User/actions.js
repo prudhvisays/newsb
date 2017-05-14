@@ -96,3 +96,10 @@ export function clearUserForm() {
     type: 'CLEAR_USER_FORM',
   };
 }
+
+export function getTimeZones(data) {
+  return {
+    type: 'GET_TIME_ZONES',
+    payload: data,
+  }
+}

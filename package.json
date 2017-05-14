@@ -226,7 +226,7 @@
     "lodash": "4.17.2",
     "minimist": "1.2.0",
     "moment": "^2.17.1",
-    "moment-timezone": "^0.5.11",
+    "moment-timezone": "^0.5.13",
     "rc-calendar": "^8.1.0",
     "rc-select": "^6.7.3",
     "rc-time-picker": "^2.3.3",

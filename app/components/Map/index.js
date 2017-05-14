@@ -73,7 +73,7 @@ export default class PathHistory extends React.Component { // eslint-disable-lin
         const pilotMarkers = statePilotList ? statePilotList.map((list) => {
             pilotBounds[0][0].push(list.location.coordinates)
                 return ( <Marker selectedPilotId={pilotId} ref={(composed) => this[list._id] = composed} pilotId={list._id}
-                                         icon={list.isAvailable ? myAvailableIcon : myOfflineIcon} key={list._id} position={list.location && list.location.coordinates[0] ? list.location.coordinates.reverse() : [0,0]}>
+                                         icon={list.isAvailable ? myAvailableIcon : myOfflineIcon} key={list._id} position={list.location && list.location.coordinates[0] ? list.location.coordinates.slice().reverse() : [0,0]}>
                   <Popup>
                     <div className="ink-flex vertical">
                       <div>{list.user ? list.user.firstName ? list.user.firstName : '-' : '-'}</div>

@@ -6,8 +6,13 @@ import UserForm from '../../components/AddUser';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import { session } from '../../Api/ApiConstants';
+import moment from 'moment';
 
 class User extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    // const names = moment().tz.names()
+    // this.props.getTimeZones(names)
+  }
   render() {
     return (
       <section style={{ background: '#eee', color: '#fff' }}>
@@ -26,6 +31,7 @@ class User extends React.Component { // eslint-disable-line react/prefer-statele
                 getUserTeam={this.props.getUserTeam}
                 getFranchise={this.props.getFranchise}
                 stateFranchiseList={this.props.franchisesList}
+                getTimeZones={this.props.getTimeZones}
               />
             </div>
             <div className="all-50">
@@ -59,6 +65,7 @@ function mapDispatchToProps(dispatch) {
     userGeoFence: (data) => { dispatch(actions.userGeoFence(data)); },
     createUser: () => { dispatch(actions.createUser()); },
     clearUserForm: () => { dispatch(actions.clearUserForm()); },
+    getTimeZones: (data) => { dispatch(actions.getTimeZones(data)); },
   };
 }
 

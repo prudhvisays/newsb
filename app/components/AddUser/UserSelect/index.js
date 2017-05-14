@@ -39,7 +39,7 @@ export default class UserSelect extends React.Component { //eslint-disable-line
     console.log(userRoleType());
     if(userRoleType() === 'isFranchise') {
       console.info("franchise ROLE");
-      this.props.onUserFormChange({ ...form, franchise: session().manager ? session().manager.franchise : null, isAdmin: false });
+      this.props.onUserFormChange({ ...form, franchise: session().manager ? session().manager.franchise._id : null, isAdmin: false });
     } else {
       console.info("franchise ROle false")
       this.props.onUserFormChange(form);
@@ -55,8 +55,13 @@ export default class UserSelect extends React.Component { //eslint-disable-line
       value = e;
     }
     if (value === 'isManager') {
-       form = { ...this.props.userInfo, selectAdmin: true, isAdmin: true, isPilot: false, isMerchant: false, isFranchiseAdmin: false, isManager: false, isTeam: false, isFranchise: false, };
+      if(userRoleType() === 'isFranchise') {
+        form = { ...this.props.userInfo, selectAdmin: true, isAdmin: true, isPilot: false, isMerchant: false, isFranchiseAdmin: true, isManager: false, isTeam: false, isFranchise: false, };
         this.franchiseRole(form);
+      } else {
+        form = { ...this.props.userInfo, selectAdmin: true, isAdmin: true, isPilot: false, isMerchant: false, isFranchiseAdmin: false, isManager: false, isTeam: false, isFranchise: false, };
+        this.franchiseRole(form);
+      }
     } else if(value === 'isMerchant') {
       form = { ...this.props.userInfo, selectAdmin: false, isMerchant: true, isAdmin: false, isPilot: false, isFranchiseAdmin: false, isManager: false, isTeam: false,isFranchise: false, };
       this.franchiseRole(form);
