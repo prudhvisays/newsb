@@ -47,7 +47,7 @@ const PilotApi = {
     getPilotLocation(data) {
         const GEO_LOCATION_API = `${GEO_CODE_URL}=${data[1]},${data[0]}&location_type=ROOFTOP&result_type=street_address&key=${GMAP_KEY}`;
         return axios({
-            method: 'GET',
+            method: 'POST',
             url: GEO_LOCATION_API,
             responseType: 'json',
         }).then((response) => response.data);

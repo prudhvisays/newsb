@@ -19,15 +19,14 @@ const loading = keyframes`
   }
 `;
 const LoadingSpinner = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50vh;
+  //position: absolute;
+  //top: 0;
+  //left: 0;
+  //width: 100%;
   overflow: hidden;
 .cs-loader-inner {
   transform: translateY(-50%);
-  top: 62%;
+  top: 50%;
   position: absolute;
   width: calc(100% - 200px);
   color: ${(props) => props.color};

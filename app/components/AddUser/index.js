@@ -50,7 +50,7 @@ export default class UserForm extends React.Component { // eslint-disable-line r
         getFranchise,
     } = this.props
     return (
-      <CreateUserStyle className="formStyle" style={{ height: '78vh', position: 'relative' }}>
+      <CreateUserStyle className="formStyle" style={{ minHeight: '25vh', position: 'relative' }}>
     { !stateUserRequest ? (
         <form onSubmit={this.submitFranchise}>
           <div className="ink-flex vertical">

@@ -2,6 +2,7 @@ import React from 'react';
 import GroupStyle from '../GroupStyle';
 import AccordStyle from './AccordStyle';
 import './Accord.css';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class TopList extends React.Component { //eslint-disable-line
 constructor(props) {
@@ -75,7 +76,9 @@ constructor(props) {
 
     return (
       <div className="accordion">
+        <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
         {sections}
+        </ReactCSSTransitionGroup>
       </div>
     );
    }

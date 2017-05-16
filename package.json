@@ -231,6 +231,7 @@
     "rc-select": "^6.7.3",
     "rc-time-picker": "^2.3.3",
     "react": "15.4.1",
+    "react-addons-css-transition-group": "^15.5.2",
     "react-addons-shallow-compare": "^15.5.2",
     "react-dates": "^10.1.1",
     "react-dom": "15.4.1",
