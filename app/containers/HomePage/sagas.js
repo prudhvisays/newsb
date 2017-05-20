@@ -258,7 +258,11 @@ export function* fetchPilotDetailsFlow() {
 export function* fetchPilotLocation(coordinates) {
     try {
         const response = yield call(pilotApi.getPilotLocation, coordinates);
-        yield put(actions.getPilotLocationSuccess(response.results[0].formatted_address));
+        if(response.status === 'ZERO_RESULTS') {
+          yield put(actions.getPilotLocationSuccess('OOPS! Pilot location not available'));
+        } else {
+          yield put(actions.getPilotLocationSuccess(response.results[0].formatted_address));
+        }
     } catch (error) {
         if (error.response) {
             yield put(actions.getPilotLocationFailure(error.message));
