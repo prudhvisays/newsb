@@ -31,10 +31,10 @@ export const userRoleType = () => {
       } else if (session().manager.isAdmin) {
         return 'isAdmin';
       }
-    }
-  }else {
+    }else {
       if(session().customer) {
         return 'isCustomer';
       }
     }
   }
+}
