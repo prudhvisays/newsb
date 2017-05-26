@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import pilot from '../../Assets/pilot.jpg'
-import texture from '../../Assets/texture.png';
 
 const PrivacyStyle = styled.div`
  font-size: 1em;

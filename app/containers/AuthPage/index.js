@@ -25,8 +25,8 @@ class LoginPage extends React.Component { // eslint-disable-line react/prefer-st
               </LogoStyles>
               <AuthForm data={formState} onSubmit={this.props.login} stateError={error} userRole={'MANAGER'} />
             </AuthStyle>
-              <div style={{ textAlign: 'center', color: '#6bc9c5', fontSize: '0.7em'}}>
-                <Link to="/privacy-policy" style={{color: '#6bc9c5'}}><i className="fa fa-link" aria-hidden="true"></i>&nbsp;Privacy Policy</Link>
+              <div style={{ textAlign: 'center', color: 'rgb(50, 28, 15)', fontSize: '0.7em', fontWeight: '600' }}>
+                <Link to="/privacy-policy" style={{color: 'rgb(50, 28, 15)'}}><i className="fa fa-link" aria-hidden="true"></i>&nbsp;Privacy Policy</Link>
                 <div>Made with <i className="fa fa-heart" aria-hidden="true" style={{ color: 'hsl(3, 81.8%, 49.6%)'}}></i> by Season Boy</div>
               </div>
             </div>
