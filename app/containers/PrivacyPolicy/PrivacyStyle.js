@@ -9,13 +9,13 @@ const PrivacyStyle = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
- .header {
+ .pr-header {
  padding: 0 0 0 2em;
   img {
   width: 150px;
   }
  }
- .card {
+ .pr-card {
   padding: 1em 0 2em 0;
   overflow-y: scroll;
   height: 86.2vh;
@@ -33,28 +33,28 @@ const PrivacyStyle = styled.div`
     -webkit-box-shadow: inset 0 0 6px rgba(144, 153, 183, 1);
 }
  }
-  .content {
+  .pr-content {
   position: relative;
   padding: 1em 1em;
   box-shadow: 2px 4px 8px 0 rgba(46,61,73,.2);
   background: #fff;
   border-radius: 2px;
-  .main-title {
+  .pr-main-title {
    text-align: center;
    color: #6bc9c5;
    margin-bottom: 1em;
   }
-  .title {
+  .pr-title {
   color: #6bc9c5;
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 0.5em;
   }
-  .sub-title {
+  .pr-sub-title {
     font-size: 1em;
     font-weight: 600;
   }
-  .description {
+  .pr-description {
       margin-bottom: 0.8em;
       line-height: 2em;
       a {
