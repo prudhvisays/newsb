@@ -8,6 +8,23 @@ import userApi from '../../Api/userApi';
 import * as actions from './actions';
 import { orderId, pilotId, franchiseList, re_order, orderOptions, pilotInfo, dateRangePilot, dateRangeMerchant, merchantID} from './selectors';
 
+export function* initialiseDataFlow() {
+  yield put(actions.getStats());
+  yield put(actions.getTeams());
+  yield put(actions.getTeamCustomers());
+  yield put(actions.getPilot());
+  yield put(actions.getOrder());
+}
+export function* initialiseDataWatch() {
+  yield fork(takeLatest,'INITIALISE_DATA', initialiseDataFlow);
+}
+export function* initialiseDataRoot(){
+  const dataWatcher = yield fork(initialiseDataWatch);
+  yield take('LOCATION_CHANGE');
+  yield cancel(dataWatcher);
+}
+
+
 export function* fetchOrderStats() {
   const statsDate = moment().format('YYYYMMDD');
   const { selectedFranchise } = yield select(franchiseList());
@@ -455,6 +472,7 @@ export function* fetchMerchantReportsRoot(){
 // END of Reports
 
 export default [
+  initialiseDataRoot,
   fetchOrderStatsWatch,
   fetchTeamsRoot,
   fetchTeamCustomersRoot,

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const AuthStyle = styled.section`
 position: relative;
-margin: 10em auto;
+margin: 10em auto 1em auto;
 background: #fff;
 height: 315px;
 padding: 2em 0;

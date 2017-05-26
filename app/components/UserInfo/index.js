@@ -90,7 +90,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
               <div className="ink-flex push-center second-row">
                 <div className="all-33 right-border">
                   <div className="ink-flex vertical push-middle profile-time">
-                    <div>{ statePilotInfo.amount }</div>
+                    <div>{ statePilotInfo.amount.toFixed(3) }</div>
                     <div className="sub-title">Amount</div>
                   </div>
                 </div>

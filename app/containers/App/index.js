@@ -13,6 +13,7 @@
 
 import React from 'react';
 import AppHeader from '../AppHeader';
+import SubHeader from '../AppHeader/SubHeader';
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,8 +23,11 @@ export default class App extends React.PureComponent { // eslint-disable-line re
 
   render() {
     return (
-      <div style={{ background: '#eee', height: '100vh' }}>
-        {!!localStorage.token && <AppHeader /> }
+      <div style={{ background: '#fafafa', height: '100%' }}>
+        {!!localStorage.token && location.pathname !== '/privacy-policy' && <span>
+          <AppHeader />
+          <SubHeader/>
+        </span> }
         {React.Children.toArray(this.props.children)}
       </div>
     );

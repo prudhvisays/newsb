@@ -2,23 +2,38 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router';
-
+import  { selectFranchise, getFranchiseList, initialiseData} from '../../HomePage/actions';
+import { franchiseList } from '../../HomePage/selectors';
+import FranchiseList from '../../../components/Targets/FranchiseList';
+import { userRoleType } from '../../../Api/ApiConstants';
 
 class SubHeader extends React.Component {
   render() {
     return (
-      <div id="sub-header" className="container-fluid">
-        <div className="nav justify-content-left">
-          <div className="left-column">
-            <div className="d-flex flex-row">
-              <div className="p-2"><input type="text" className="form-control" placeholder="Search for..." /></div>
-              <div className="p-2">Activities</div>
-            </div>
-          </div>
-        </div>
+      <div
+        style={{ background: '#fff', height: '40px', padding: '0.3em 0.3em'}}
+      >
+        { userRoleType() === 'isAdmin' && <FranchiseList
+          franchiseList={this.props.franchiseList}
+          getFranchiseList={this.props.getFranchiseList}
+          selectFranchise={this.props.selectFranchise}
+          initialiseData={this.props.initialiseData}
+        />}
       </div>
     );
   }
 }
 
-export default SubHeader;
+const mapStateToProps = createStructuredSelector({
+  franchiseList: franchiseList(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    initialiseData: () => { dispatch(initialiseData());},
+    selectFranchise: (data) => { dispatch(selectFranchise(data)); },
+    getFranchiseList: () => { dispatch(getFranchiseList()); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(SubHeader);

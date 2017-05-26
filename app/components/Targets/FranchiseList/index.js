@@ -16,28 +16,26 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
     this.onChange = this.onChange.bind(this);
     this.useAnim = this.useAnim.bind(this);
     this.emitChanges = this.emitChanges.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.clearSelect = this.clearSelect.bind(this);
   }
 
   componentDidMount() {
     this.props.getFranchiseList();
   }
 
-  onSelect(arg) {
-    console.log(arguments);
-  }
-
-  clearSelect(value) {
-    console.log(value)
-  }
+  // onSelect(arg) {
+  //   console.log(arguments);
+  // }
+  //
+  // clearSelect(value) {
+  //   console.log(value)
+  // }
 
   onChange(value) {
     this.emitChanges(value);
   }
   emitChanges(data) {
     this.props.selectFranchise(data);
-    this.props.getInfo();
+    this.props.initialiseData();
   }
   useAnim(e) {
     this.setState({
@@ -60,7 +58,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
         value={selectedFranchise}
         placeholder="Select Franchise"
         dropdownMenuStyle={dropdownMenuStyle}
-        style={{ width: '100%' }}
+        style={{ width: '20%', marginLeft: '3em' }}
         animation="slide-up"
         showSearch={false}
         optionLabelProp="children"

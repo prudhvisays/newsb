@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import AuthStyle from './AuthStyle';
 import BackgrndStyle from './BackgrndStyle';
 import AuthForm from '../../components/AuthForm';
@@ -17,12 +18,18 @@ class LoginPage extends React.Component { // eslint-disable-line react/prefer-st
       <BackgrndStyle>
         <CurveStyle>
           { !currentlySending ? <div className="ink-flex push-center">
-            <AuthStyle className="all-50">
+            <div className="all-50">
+              <AuthStyle>
               <LogoStyles className="ink-flex push-center">
                 <img src={Logo} className="logo" alt="logo" />
               </LogoStyles>
               <AuthForm data={formState} onSubmit={this.props.login} stateError={error} userRole={'MANAGER'} />
             </AuthStyle>
+              <div style={{ textAlign: 'center', color: '#6bc9c5', fontSize: '0.7em'}}>
+                <Link to="/privacy-policy" style={{color: '#6bc9c5'}}><i className="fa fa-link" aria-hidden="true"></i>&nbsp;Privacy Policy</Link>
+                <div>Made with <i className="fa fa-heart" aria-hidden="true" style={{ color: 'hsl(3, 81.8%, 49.6%)'}}></i> by Season Boy</div>
+              </div>
+            </div>
           </div> : <LoadingStyle className="ink-flex push-center">
             <img src={Loading} alt="loading" />
           </LoadingStyle>}

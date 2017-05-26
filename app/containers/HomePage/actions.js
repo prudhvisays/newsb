@@ -1,3 +1,9 @@
+export function initialiseData() {
+  return {
+    type: 'INITIALISE_DATA'
+  }
+}
+
 export function orderExpand(value) {
   return {
     type: 'ORDER_EXPAND',

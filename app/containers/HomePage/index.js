@@ -72,11 +72,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   }
   getInfo() {
     if(isAdmin()) {
-      this.props.getStats();
-      this.props.getTeams();
-      this.props.getTeamCustomers();
-      this.props.getPilot();
-      this.props.getOrder();
+      this.props.initialiseData();
     } else {
       this.props.getOrder();
     }
@@ -230,7 +226,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                 </div>
               </div>
             </div>
-            { isAdmin() && <div className="all-25" style={{ height: '100vh' }}>
+            { isAdmin() && <div className="all-25" style={{ height: '94vh' }}>
               <Map
                   statePilotList={this.props.pilotList}
                   stateOrderList={this.props.orderList}
@@ -286,6 +282,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
+    initialiseData: () => { dispatch(actions.initialiseData())},
     orderExpand: (value) => { dispatch(actions.orderExpand(value)); },
     closeOrderDrop: (value) => { dispatch(actions.closeOrderDrop(value)); },
     closePilotDrop: (value) => { dispatch(actions.closePilotDrop(value)); },

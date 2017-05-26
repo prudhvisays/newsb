@@ -29,14 +29,17 @@ export default class TaskAddress extends React.Component { //eslint-disable-line
     this.emitChanges({ ...delivery, to_email: e.target.value });
   }
   toDate(date) {
-    const { delivery } = this.props.stateAddTask;
-    const Date = moment(date[0]).utc().format();
-    this.emitChanges({ ...delivery, to_date: Date });
+    if(date.length > 0) {
+      const { delivery } = this.props.stateAddTask;
+      const Date = moment(date[0]).utc().format();
+      this.emitChanges({ ...delivery, to_date: Date });
+    }
   }
   emitChanges(newFormState) {
     this.props.deliveryChange(newFormState);
   }
-  onOpen() {
+  onOpen(e) {
+    e.preventDefault();
     const { delivery } = this.props.stateAddTask;
     const Date = moment().add(45,'m').utc().format();
     this.emitChanges({ ...delivery, to_date: Date });

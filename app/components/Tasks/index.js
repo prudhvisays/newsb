@@ -34,7 +34,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     const listShow = document.querySelector('.listShow');
     const closeTag = document.querySelector('.closeTag');
     if (!this.props.orderBlock && this.props.isAdmin()) {
-      taskDiv.style.height = '98vh';
+      taskDiv.style.height = '92vh';
       listShow.style.opacity = '1';
       listShow.style.display = 'block';
       closeTag.style.top = '-2px';
@@ -51,7 +51,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
     const listShow = document.querySelector('.listShow');
     const closeTag = document.querySelector('.closeTag');
     if (this.props.orderBlock && this.props.isAdmin()) {
-      taskDiv.style.height = '30vh';
+      taskDiv.style.height = '24vh';
       listShow.style.opacity = '0';
       listShow.style.display = 'none';
       closeTag.style.top = '-20px';
@@ -81,7 +81,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
       transition: 'all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750)',
     }
     return (
-      <div className={ isAdmin() ? 'all-65 marginTop' : 'all-100 marginTop'} style={{ height: '30vh' }}>
+      <div className={ isAdmin() ? 'all-65 marginTop' : 'all-100 marginTop'} style={{ height: '24vh' }}>
         <OrderStyle className={classNames('boxShadow liner taskExpand block-background', { progressLiner: stats.request })} manager={isAdmin()} >
           <div className={classNames('orders-block', 'ink-flex', { indeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>

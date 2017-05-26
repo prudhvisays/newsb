@@ -23,7 +23,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
     const closeTag = document.querySelector('.closePilotTag');
     if (!this.state.expand) {
       this.props.groupDisplay();
-      taskDiv.style.height = '98vh';
+      taskDiv.style.height = '92vh';
       listShow.style.opacity = '1';
       listShow.style.display = 'block';
       closeTag.style.top = '-2px'
@@ -36,7 +36,7 @@ export default class Pilots extends React.Component { //eslint-disable-line
     const closeTag = document.querySelector('.closePilotTag');
     if(this.state.expand) {
         this.props.groupDisplay();
-        taskDiv.style.height = '30vh';
+        taskDiv.style.height = '24vh';
         listShow.style.opacity = '0';
         listShow.style.display = 'none';
         closeTag.style.top = '-20px';
@@ -55,8 +55,8 @@ export default class Pilots extends React.Component { //eslint-disable-line
     const { data } = this.state;
     const { stats, statePilots } = this.props;
     return (
-      <div className="all-100 marginTop" style={{ height: '30vh' }}>
-        <div className={classNames('boxShadow', 'TaskExpand', 'block-background', 'PilotLiner', { pilotProgress: stats.request })} style={{ height: '30vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
+      <div className="all-100 marginTop" style={{ height: '24vh' }}>
+        <div className={classNames('boxShadow', 'TaskExpand', 'block-background', 'PilotLiner', { pilotProgress: stats.request })} style={{ height: '24vh', position: 'relative', transition: 'height 0.5s linear 0s', overflow: 'hidden' }}>
           <div className={classNames('orders-block', 'ink-flex', { pilotIndeterminate: stats.request })}>
             <div className="all-100" style={{ padding: '0.5em 0.8em' }}>
               <div className="ink-flex">

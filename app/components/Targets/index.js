@@ -13,15 +13,15 @@ export default class Target extends React.Component { //eslint-disable-line
       getInfo,
     } = this.props;
     return (
-      <div className="all-35 marginTop" style={{ height: '30vh' }}>
-        <div className="boxShadow block-background" style={{ height: '30vh' }}>
+      <div className="all-35 marginTop" style={{ height: '24vh' }}>
+        <div className="boxShadow block-background" style={{ height: '24vh' }}>
           <DonutChart stateOrderStats={stateOrderStats} />
-          { userRoleType() === 'isAdmin' && <FranchiseList
-            getFranchiseList={getFranchiseList}
-            franchiseList={franchiseList}
-            selectFranchise={selectFranchise}
-            getInfo={getInfo}
-          />}
+          {/*{ userRoleType() === 'isAdmin' && <FranchiseList*/}
+            {/*getFranchiseList={getFranchiseList}*/}
+            {/*franchiseList={franchiseList}*/}
+            {/*selectFranchise={selectFranchise}*/}
+            {/*getInfo={getInfo}*/}
+          {/*/>}*/}
         </div>
       </div>
     );
