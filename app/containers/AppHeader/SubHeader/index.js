@@ -13,7 +13,7 @@ class SubHeader extends React.Component {
       <div
         style={{ background: '#fff', height: '40px', padding: '0.3em 0.3em'}}
       >
-        { userRoleType() === 'isAdmin' && <FranchiseList
+        { userRoleType() === 'isAdmin' && location.pathname !== '/user' && <FranchiseList
           franchiseList={this.props.franchiseList}
           getFranchiseList={this.props.getFranchiseList}
           selectFranchise={this.props.selectFranchise}

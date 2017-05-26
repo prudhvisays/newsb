@@ -26,7 +26,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
       <div style={{ background: '#fafafa', height: '100%' }}>
         {!!localStorage.token && location.pathname !== '/privacy-policy' && <span>
           <AppHeader />
-          <SubHeader/>
+          { location.pathname !== '/user' && <SubHeader/> }
         </span> }
         {React.Children.toArray(this.props.children)}
       </div>
