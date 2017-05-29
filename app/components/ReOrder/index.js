@@ -69,8 +69,8 @@ class ReOrder extends React.Component {
                             </div></div>) }
                     </div>
                     <div className="ink-flex fixedButtons">
-                        <button className="all-40 cancel" onClick={this.cancelAction}>Cancel</button>
-                        <button className="all-40" onClick={updateOrder}>{orderOptions.edit ? 'Update' : 'Re-assign'}</button>
+                        <button className="all-50 cancel" onClick={this.cancelAction}>Cancel</button>
+                        <button className="all-50" onClick={updateOrder}>{orderOptions.edit ? 'Update' : 'Re-assign'}</button>
                     </div>
                 </ReOrderStyle> : (<LoadingSpinner className="ink-flex push-center cs-loader" paddingOff color={reOrderStatus.statusColor}>
                     <div className="cs-loader-inner">

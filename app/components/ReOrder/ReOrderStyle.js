@@ -38,13 +38,12 @@ const ReOrderStyle = styled.div`
     bottom:0px;
     width:100%;
     color: #fff;
+    line-height: 2.2em;
     .cancel{
         background: #c1b944;
         }
     button {
         background: #6bc9c5;
-        margin: 1em 1em;
-        border-radius: 2px;
         }
     }
    .rc-select-dropdown-menu.rc-select-dropdown-menu-vertical.rc-select-dropdown-menu-root{
