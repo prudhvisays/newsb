@@ -22,11 +22,12 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   };
 
   render() {
+    const path = this.props.location.pathname;
     return (
       <div style={{ background: '#fafafa', height: '100%' }}>
-        {!!localStorage.token && location.pathname !== '/privacy-policy' && <span>
-          <AppHeader />
-          { location.pathname !== '/user' && <SubHeader/> }
+        {!!localStorage.token && path !== '/privacy-policy' && <span>
+          <AppHeader path={path}/>
+          { path !== '/user' && <SubHeader/> }
         </span> }
         {React.Children.toArray(this.props.children)}
       </div>

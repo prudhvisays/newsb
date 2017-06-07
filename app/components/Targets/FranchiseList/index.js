@@ -1,7 +1,6 @@
 import React from 'react';
 import Select, { Option } from 'rc-select';
-import 'rc-select/assets/index.css';
-
+import FranchiseSelectStyle from './FranchiseSelectStyle';
 
 function onDeselect() {
   console.log(arguments);
@@ -54,7 +53,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
         <Option key={list._id} title={list.name}>{list.name}</Option>
       ));
     return (
-      <Select
+      <FranchiseSelectStyle
         value={selectedFranchise}
         placeholder="Select Franchise"
         dropdownMenuStyle={dropdownMenuStyle}
@@ -68,7 +67,7 @@ export default class FranchiseUsers extends React.Component { //eslint-disable-l
       >
         <Option key={'All'} title={'Season Boy'}>{'Season Boy'}</Option>
         {franchiseList}
-      </Select>
+      </FranchiseSelectStyle>
     );
   }
 }

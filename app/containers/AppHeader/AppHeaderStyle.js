@@ -5,11 +5,17 @@ const AppHeaderStyle = styled.div`
   position: fixed;
   width: 50px;
   background-color: #333;
-  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.04);
   box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  div{
-    margin-top: 6em;
+  .logo-container {
+  padding: 0.1em 0.1em;
+  margin: 0.1em 0 0 0.1em;
+    img{
+      height: 42px;
+      width: 42px;
+    }
+  }
+  .links{
+    margin-top: 3em;
   }
   a {
     padding: 10px;
@@ -18,18 +24,34 @@ const AppHeaderStyle = styled.div`
     color: #FAFAFA;
     font-size: 1.5rem;
     position: relative;
+    &.select {
+      color: #6bc9c5;
+      &::before {
+        content : "";
+        position: absolute;
+        top: 12px;
+        left: 0;
+        height: 34px;
+        width: 10%;  /* or 100px */
+        border-left: 0.2em solid #6bc9c5;  
+      }
+    }
+    &.task-select, &.task-hover:hover{
+      transform: translateY(-3px);
+      color: #ded64d;
+    }
   }
-  a:hover::before{
+  a.path-hover:hover::before{
     content : "";
     position: absolute;
     top: 12px;
     left: 0;
     height: 34px;
     width: 10%;  /* or 100px */
-    border-left: 0.2em solid #18FFFF;
+    border-left: 0.2em solid #6bc9c5;
   }
-  a:hover {
-    color: rgb(81, 212, 255);
+  a.path-hover:hover {
+    color: #6bc9c5;
   }
 `;
 

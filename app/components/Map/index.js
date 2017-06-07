@@ -106,7 +106,7 @@ export default class PathHistory extends React.Component { // eslint-disable-lin
       zoom: this.state.zoom,
       zoomControl:false,
       className: 'pathMap',
-      style:{ height: '94vh' }
+      style:{ height: '93vh' }
       }
       if(userRoleType() === 'isFranchise') {
          userRoleType() === 'isFranchise' ? mapProps.bounds = this.getBounds() : null;

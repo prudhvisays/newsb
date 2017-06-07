@@ -6,16 +6,20 @@ import * as actions from './actions';
 import { logout } from '../AuthPage/actions';
 import * as selectors from './selectors';
 import AppHeaderStyle from './AppHeaderStyle';
+import Logo from '../../Assets/sidelogo.png';
 
 class AppHeader extends React.Component {
   render() {
-    const { triggerCollapse, Logout } = this.props;
+    const { triggerCollapse, Logout, path, collapsed } = this.props;
     return (
       <AppHeaderStyle>
-        <div>
-          <Link to="/"><i className="fa fa-tachometer" aria-hidden="true" /></Link>
-          <a onClick={triggerCollapse}><i className="fa fa-paper-plane" aria-hidden="true" /></a>
-          <Link to="/user"><i className="fa fa-user-plus" aria-hidden="true" /></Link>
+        <div className="logo-container">
+          <img src={Logo}/>
+        </div>
+        <div className="links">
+          <Link to="/" className={path === '/' ? 'select' : 'path-hover'}><i className="fa fa-tachometer" aria-hidden="true" /></Link>
+          <a onClick={triggerCollapse} className={collapsed === false ? 'task-select' : 'task-hover'}><i className="fa fa-paper-plane" aria-hidden="true" /></a>
+          <Link to="/user" className={path === '/user' ? 'select' : 'path-hover'}><i className="fa fa-user-plus" aria-hidden="true" /></Link>
           <a onClick={Logout}><i className="fa fa-power-off" aria-hidden="true" /></a>
         </div>
       </AppHeaderStyle>

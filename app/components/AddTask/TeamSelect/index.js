@@ -1,6 +1,5 @@
 import React from 'react';
 import Select, { Option } from 'rc-select';
-import 'rc-select/assets/index.css';
 
 export default class TeamSelect extends React.Component { //eslint-disable-line
   constructor(props) {

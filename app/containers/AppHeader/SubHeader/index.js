@@ -11,7 +11,7 @@ class SubHeader extends React.Component {
   render() {
     return (
       <div
-        style={{ background: '#fff', height: '40px', padding: '0.3em 0.3em'}}
+        style={{ background: '#333', height: '45px', padding: '0.4em 0.4em'}}
       >
         { userRoleType() === 'isAdmin' && location.pathname !== '/user' && <FranchiseList
           franchiseList={this.props.franchiseList}
