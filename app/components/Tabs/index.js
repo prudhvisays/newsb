@@ -86,14 +86,14 @@ export default class Tabs extends React.Component { //eslint-disable-line
                   <div className="fw-500 sub-title">Progress</div>
                   <div><span style={{ color: 'green' }}>{stateOrderInfo.status}</span></div>
                 </div>
-               <TaskOptions
+                { stateOrderInfo.status && stateOrderInfo.status.toLowerCase() !== 'completed' && <TaskOptions
                    orderAction={orderAction}
                    orderOptions={orderOptions}
                    reOrder={reOrder}
                    stateData={re_order}
                    stateOrderInfo={stateOrderInfo}
                    deleteOrder={updateOrder}
-               />
+               />}
               </div>
               <div className="ink-flex second-boxShadow tab-second-row">
                 <div className="all-50">
