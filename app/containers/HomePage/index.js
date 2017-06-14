@@ -186,6 +186,8 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                         getPilotReports={this.props.getPilotReports}
                         pilotDateRange={this.props.pilotDateRange}
                         dateRangePilot={this.props.dateRangePilot}
+                        pilotForceLogout={this.props.pilotForceLogout}
+                        pilotLogoutStatus={this.props.pilotLogoutStatus}
                       /> : null }</div>) : null ) : null}
                   </div>
                 </div>
@@ -285,6 +287,7 @@ const mapStateToProps = createStructuredSelector({
     dateRangeMerchant: selectors.dateRangeMerchant(),
     pilotsBounds: selectors.pilotsBounds(),
     collapsed: collapsed(),
+    pilotLogoutStatus: selectors.pilotLogoutStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -327,6 +330,7 @@ export function mapDispatchToProps(dispatch) {
     pilotDateRange: (data) => { dispatch(actions.pilotDateRange(data)); },
     merchantDateRange: (data) => { dispatch(actions.merchantDateRange(data)); },
     getMerchantReports: (data) => { dispatch(actions.getMerchantReports(data)); },
+    pilotForceLogout: () => { dispatch(actions.pilotForceLogout()); },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

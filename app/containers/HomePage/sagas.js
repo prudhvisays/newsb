@@ -471,6 +471,48 @@ export function* fetchMerchantReportsRoot(){
 
 // END of Reports
 
+// PILOT FORCE LOGOUT
+
+export function* pilotForceLogout(id) {
+  try {
+    const response = yield call(pilotApi.forceLogout, id);
+    yield put(actions.pilotForceLogoutSuccess());
+    return response;
+  } catch (error) {
+    if (error.response) {
+      yield put(actions.pilotForceLogoutFail());
+    }
+  }
+}
+export function* pilotForceLogoutFlow() {
+  const id = yield select(pilotId());
+  const res = yield call(pilotForceLogout, id);
+  // if (res) {
+  //   yield put(actions.reOrderClear());
+  //   yield put(actions.orderAction({reAssign: false, edit: false, delete: false,}));
+  //   yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+  // } else {
+  //   yield put(actions.updateOrderStatus({ statusText: 'Sending', statusColor: '#6bc9c5' }));
+  // }
+}
+export function* pilotForceLogoutWatch() {
+  yield fork(takeLatest,'PILOT_FORCE_LOGOUT', pilotForceLogoutFlow);
+}
+
+export function* fetchPilotDetailsAfterLogout() {
+  yield fork(takeLatest, 'PILOT_FORCE_LOGOUT_SUCCESS', fetchPilotDetailsFlow);
+}
+
+export function* pilotForceLogoutRoot(){
+  const watcher1 = yield fork(pilotForceLogoutWatch);
+  const watcher2 = yield fork(fetchPilotDetailsAfterLogout)
+  yield take('LOCATION_CHANGE');
+  yield cancel(watcher1);
+  yield cancel(watcher2);
+}
+
+// END of Force Logout
+
 export default [
   initialiseDataRoot,
   fetchOrderStatsWatch,
@@ -484,5 +526,6 @@ export default [
   fetchFranchiseListRoot,
   updateOrderDetailsRoot,
   fetchPilotReportsRoot,
-  fetchMerchantReportsRoot
+  fetchMerchantReportsRoot,
+  pilotForceLogoutRoot
 ];

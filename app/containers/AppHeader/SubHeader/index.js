@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router';
+import Actions from '../actions';
 import  { selectFranchise, getFranchiseList, initialiseData} from '../../HomePage/actions';
 import { franchiseList } from '../../HomePage/selectors';
 import FranchiseList from '../../../components/Targets/FranchiseList';
 import { userRoleType } from '../../../Api/ApiConstants';
+import DateRange from '../../../components/DateRange';
 
 class SubHeader extends React.Component {
   render() {
@@ -19,6 +21,9 @@ class SubHeader extends React.Component {
           selectFranchise={this.props.selectFranchise}
           initialiseData={this.props.initialiseData}
         />}
+        {/*<DateRange*/}
+         {/**/}
+        {/*/>*/}
       </div>
     );
   }
@@ -30,7 +35,8 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    initialiseData: () => { dispatch(initialiseData());},
+    selectDateRange: () => { dispatch(Actions.selectDateRange()); },
+    initialiseData: () => { dispatch(initialiseData()); },
     selectFranchise: (data) => { dispatch(selectFranchise(data)); },
     getFranchiseList: () => { dispatch(getFranchiseList()); }
   }

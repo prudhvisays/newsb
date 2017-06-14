@@ -137,6 +137,7 @@ const initialState = {
     fromDate: '',
     toDate: '',
   },
+  pilotLogoutStatus: false
 };
 
 function homeReducer(state = initialState, action) {
@@ -498,6 +499,21 @@ function homeReducer(state = initialState, action) {
           ...state.userActions,
           getDetailsColumn: !state.userActions.getDetailsColumn,
         },
+      };
+    case 'PILOT_FORCE_LOGOUT':
+      return {
+        ...state,
+        pilotLogoutStatus: true
+      };
+    case 'PILOT_FORCE_LOGOUT_SUCCESS':
+      return {
+        ...state,
+        pilotLogoutStatus: false
+      };
+    case 'PILOT_FORCE_LOGOUT_FAIL':
+      return {
+        ...state,
+        pilotLogoutStatus: false
       };
     default:
       return state;

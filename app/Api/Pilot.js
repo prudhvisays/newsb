@@ -64,7 +64,19 @@ const PilotApi = {
       }).then((response) => {
         window.open(`https://season-boy-api.herokuapp.com/${response.data.file}`)
       });
-    }
+    },
+  forceLogout(id) {
+    const payload = {
+      isAvailable: false
+    };
+    const FORCE_LOGOUT_API = `${API_URL}/pilots/updateAvailability/${id}`;
+    return axios({
+      method: 'POST',
+      url: FORCE_LOGOUT_API,
+      data: payload,
+      responseType: 'json',
+    }).then((response) => response);
+  }
 };
 
 export default PilotApi;

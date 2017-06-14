@@ -278,6 +278,11 @@ const merchantID = () => createSelector(
   (state) => state.merchantId
 )
 
+const pilotLogoutStatus = () => createSelector(
+  homeData(),
+  (state) => state.pilotLogoutStatus
+)
+
 export {
   homeData,
   orderExpand,
@@ -320,4 +325,5 @@ export {
   dateRangeMerchant,
   merchantID,
   pilotsBounds,
+  pilotLogoutStatus
 };

@@ -449,6 +449,24 @@ export function getDetailsColToggle() {
   }
 }
 
+export function pilotForceLogout() {
+  return {
+    type: 'PILOT_FORCE_LOGOUT'
+  }
+}
+
+export function pilotForceLogoutSuccess() {
+  return {
+    type: 'PILOT_FORCE_LOGOUT_SUCCESS'
+  }
+}
+
+export function pilotForceLogoutFail() {
+  return {
+    type: 'PILOT_FORCE_LOGOUT_FAIL'
+  }
+}
+
 // GET PILOT REPORTS
 
 export function getPilotReports() {

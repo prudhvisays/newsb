@@ -1,5 +1,6 @@
 const initialState = {
  collapsed: true,
+  dateRange:[]
 };
 
 function headerReducer(state = initialState, action) {
@@ -9,6 +10,11 @@ function headerReducer(state = initialState, action) {
         ...state,
         collapsed: !state.collapsed,
       };
+    case 'SELECT_DATE_RANGE':
+      return {
+        ...state,
+        dateRange: action.payload
+      }
     default:
       return state;
   }

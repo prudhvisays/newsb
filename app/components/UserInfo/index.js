@@ -5,6 +5,7 @@ import moment from 'moment';
 import UserInfoStyle from './UserInfoStyle';
 import profileImage from '../../Assets/profile-image.gif';
 import ToggleButton from '../ToggleButton';
+import Spinner from '../Spinner';
 
 export default class UserInfo extends React.Component { //eslint-disable-line
   constructor(props) {
@@ -16,7 +17,14 @@ export default class UserInfo extends React.Component { //eslint-disable-line
   }
   render() {
     const { statePilotInfo, statePilotStatus, closeDivPilot, detailsColToggle, dateRangePilot } = this.props
-    const { getDetailsColToggle, pilotLocation, getPilotReports, pilotDateRange } = this.props
+    const {
+      getDetailsColToggle,
+      pilotLocation,
+      getPilotReports,
+      pilotDateRange,
+      pilotForceLogout,
+      pilotLogoutStatus
+    } = this.props
     const orders = this.props.statePilotInfo.orders && this.props.statePilotInfo.orders.map((order) => (
         <PilotTripCard key={order._id} pilotStatus={`${order.id} - Completed at ${this.formatTime(order.pilot_completed_date_time)}`} customer={order.from_name} pilotDistance={`${order.distance_in_meters/1000}`}/>
       ));
@@ -65,6 +73,8 @@ export default class UserInfo extends React.Component { //eslint-disable-line
                     getPilotReports={getPilotReports}
                     pilotDateRange={pilotDateRange}
                     dateRangePilot={dateRangePilot}
+                    pilotForceLogout={pilotForceLogout}
+                    pilotLogoutStatus={pilotLogoutStatus}
                   />
                   </div>
                 </div>
@@ -119,7 +129,7 @@ export default class UserInfo extends React.Component { //eslint-disable-line
               {orders}
             </div>
           </div>)
-         : (<p style={{ textAlign : 'center', top : '50%', left : '40%', position : 'absolute' }}>LOADING...</p>)}
+         : (<p style={{ textAlign : 'center', top : '50%', left : '40%', position : 'absolute' }}><Spinner/></p>)}
       </UserInfoStyle>
     );
   }

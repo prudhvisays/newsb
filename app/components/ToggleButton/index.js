@@ -4,6 +4,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import ToggleStyle from './ToggleStyle';
 import moment from "moment";
 import DateRange from '../DateRange';
+import ButtonSpinner from '../ButtonSpinner';
 
 var SelectedStartDate = moment('2017-05-05');
 var SelectedEndDate = moment('2017-05-09');
@@ -19,6 +20,7 @@ class ToggleButton extends React.Component {
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.closeAction = this.closeAction.bind(this);
+    this.forceLogout = this.forceLogout.bind(this);
   }
 
   onDatesChange({ startDate, endDate }) {
@@ -30,12 +32,18 @@ class ToggleButton extends React.Component {
     this.setState({ focusedInput });
   }
 
+  forceLogout() {
+    if(this.props.isAvailable) {
+      this.props.pilotForceLogout()
+    }
+  }
+
   closeAction() {
     this.props.getDetailsColToggle();
     this.props.pilotDateRange([]);
   }
   render(){
-    const { isAvailable, detailsColToggle, dateRangePilot} = this.props;
+    const { isAvailable, detailsColToggle, dateRangePilot, pilotLogoutStatus} = this.props;
     const { getDetailsColToggle, getPilotReports, pilotDateRange} = this.props;
     const { focusedInput, startDate, endDate } = this.state;
     const Style = {
@@ -48,7 +56,7 @@ class ToggleButton extends React.Component {
     }
     return (
       <ToggleStyle className="switch">
-        { !detailsColToggle ? (<div><div className="active">{isAvailable ? 'Force Logout' : 'Active'}</div>
+        { !detailsColToggle ? (<div>{ isAvailable && <div className="active" onClick={this.forceLogout}>{pilotLogoutStatus === true ? <ButtonSpinner/> : isAvailable && 'Force Logout' }</div>}
           <div className="get-details" onClick={getDetailsColToggle}>Get Details</div></div>) : (
           <div className="row">
             <div className="all-100">
