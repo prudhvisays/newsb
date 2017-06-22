@@ -68,8 +68,9 @@ export default class Tasks extends React.Component { //eslint-disable-line
     this.props.onSearchOrderAttr(newSearch);
   }
   pickDate(date) {
-    const Date = moment(date[0]).format('YYYYMMDD');
-    this.props.getOrder(Date);
+    const selectedDate = moment(date[0]).format('YYYYMMDD');
+    this.props.setDateRange({ fromDate: selectedDate, toDate: null });
+    this.props.getOrder();
   }
   render() {
     const { expand, data } = this.state;

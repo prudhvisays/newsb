@@ -6,7 +6,8 @@ import pilotApi from '../../Api/Pilot';
 import orderApi from '../../Api/Order';
 import userApi from '../../Api/userApi';
 import * as actions from './actions';
-import { orderId, pilotId, franchiseList, re_order, orderOptions, pilotInfo, dateRangePilot, dateRangeMerchant, merchantID} from './selectors';
+import { orderId, pilotId, franchiseList, re_order, orderOptions, pilotInfo, fromDate, toDate,
+  dateRangePilot, dateRangeMerchant, merchantID} from './selectors';
 
 export function* initialiseDataFlow() {
   yield put(actions.getStats());
@@ -213,9 +214,9 @@ export function* fetchOrders(date, franchiseId) {
 export function* fetchOrdersFlow() {
   while (true) {
     const req = yield take('GET_ORDER');
-    const date = req.payload ? req.payload : moment().format('YYYYMMDD');
+    const date = yield select(fromDate());
     const { selectedFranchise } = yield select(franchiseList());
-    yield call(fetchOrders, date, selectedFranchise);
+    yield call(fetchOrders, date || moment().format('YYYYMMDD'), selectedFranchise);
   }
 }
 export function* fetchOrdersWatch() {
