@@ -70,7 +70,7 @@ export default class Tasks extends React.Component { //eslint-disable-line
   pickDate(date) {
     const selectedDate = moment(date[0]).format('YYYYMMDD');
     this.props.setDateRange({ fromDate: selectedDate, toDate: null });
-    this.props.getOrder();
+    this.props.getOrder({ isDateSelected: true });
   }
   render() {
     const { expand, data } = this.state;
