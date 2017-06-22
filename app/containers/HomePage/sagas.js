@@ -201,22 +201,30 @@ yield cancel(pilotsWatcher);
 }
 // END of FETCH PILOTS
 
-export function* fetchOrders(date, franchiseId) {
+export function* fetchOrders(date, franchiseId, isDateSelected) {
   try {
+
+    if (isDateSelected) {
+      yield put(actions.statsRequesting(true));
+    }
+
     const response = yield call(orderApi.getOrders, date, franchiseId);
     yield put(actions.getOrderSuccess({ response, date }));
   } catch (error) {
     if (error.response) {
       yield put(actions.getOrderFailure({ error: error.message, date }));
     }
+  } finally {
+    yield put(actions.statsRequesting(false));
   }
 }
 export function* fetchOrdersFlow() {
   while (true) {
     const req = yield take('GET_ORDER');
     const date = yield select(fromDate());
+    const isDateSelected = req.payload && req.payload.isDateSelected ? true : false;
     const { selectedFranchise } = yield select(franchiseList());
-    yield call(fetchOrders, date || moment().format('YYYYMMDD'), selectedFranchise);
+    yield call(fetchOrders, date || moment().format('YYYYMMDD'), selectedFranchise, isDateSelected);
   }
 }
 export function* fetchOrdersWatch() {
