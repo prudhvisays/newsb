@@ -7,6 +7,8 @@ const initialState = {
   pickupcord: {},
   deliverycord: {},
   orderDisplay: '',
+  fromDate: null,
+  toDate: null,
   stats: {
     orderStats: {},
     pilotStats: {},
@@ -142,6 +144,10 @@ const initialState = {
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
+    case 'SET_DATE_RANGE':
+      return {...state,
+        fromDate: action.payload.fromDate,
+        toDate: action.payload.toDate };
     case 'ORDER_EXPAND':
       return { ...state,
         orderexpand: action.value, };

@@ -107,6 +107,16 @@ const searchOrderAttr = () => createSelector(
     (homeState) => homeState.searchOrderAttr,
 );
 
+const fromDate = () => createSelector(
+  homeData(),
+  (state) => state.fromDate
+);
+
+const toDate = () => createSelector(
+  homeData(),
+  (state) => state.toDate
+);
+
 const orderListNoFilter = () => createSelector(
   homeData(),
   (state) => state.orderList.orders,
@@ -325,5 +335,7 @@ export {
   dateRangeMerchant,
   merchantID,
   pilotsBounds,
-  pilotLogoutStatus
+  pilotLogoutStatus,
+  fromDate,
+  toDate
 };

@@ -70,7 +70,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
   }
   componentDidMount() {
     this.getInfo();
-    this.timerId = setInterval(this.props.getOrder, 10000);
+    this.timerId = setInterval(this.props.getOrder, 30000);
   }
   componentWillUnmount(){
     if (this.timerId) {
@@ -135,6 +135,7 @@ class HomePage extends React.Component { // eslint-disable-line react/prefer-sta
                       />)}
                       { isAdmin() && (<Tasks divTask={this.divTask}
                         orderDetails={this.orderDetails}
+                        setDataRange={this.props.setDateRange}
                         orderBlock={this.props.orderexpand}
                         getStats={this.props.getStats}
                         onSearchOrderAttr={this.props.onSearchOrderAttr}
@@ -314,6 +315,7 @@ export function mapDispatchToProps(dispatch) {
     getTeamCustomers: (data) => { dispatch(actions.getTeamCustomers(data)); },
     getPilot: (team) => { dispatch(actions.getPilot(team)); },
     getOrder: (data) => { dispatch(actions.getOrder(data)); },
+    setDateRange: (data) => { dispatch(actions.setDateRange(data)); },
     getOrderDetail: (id) => { dispatch(actions.getOrderDetail(id)); },
     clearOrderDetails: () => { dispatch(actions.clearOrderDetails()); },
     teamSelect: (id) => { dispatch(actions.teamSelect(id)); },

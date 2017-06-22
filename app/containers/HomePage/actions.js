@@ -247,6 +247,13 @@ export function getPilotFailure(data) {
   };
 }
 
+export function setDateRange(data) {
+  return {
+    type: 'SET_DATE_RANGE',
+    payload: data
+  }
+}
+
 // GET ORDERS
 
 export function getOrder(data) {
